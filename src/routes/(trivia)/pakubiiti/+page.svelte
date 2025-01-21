@@ -8,16 +8,10 @@
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 
-	let { data, form }: { data: PageData; form: FormData } = $props();
+	let { data }: { data: PageData; form: FormData } = $props();
 
-	let loading = $state(true);
+	let loading = $state(false);
 	let oldAlbums: SpotifyApi.AlbumObjectSimplified[] = $state([]);
-
-	$effect(() => {
-		// this is a hack to disable grayscale, please ignore
-		// eslint-disable-next-line no-constant-binary-expression
-		loading = false && form?.success;
-	});
 
 	// Used when user answers wrong and no new data comes in
 	$effect(() => {
@@ -44,7 +38,34 @@
 	</div>
 {/snippet}
 
-<AlertDialog.Root open={form?.solved === false}>
+{#snippet playArea(albums, placeholder = false)}
+	{#if placeholder}
+		{#each { length: 2 } as _}
+			<section class="grid grid-cols-3 items-center gap-14">
+				{#each { length: 3 } as _}
+					<Skeleton class="h-[5.25rem] w-full rounded-xl " />
+				{/each}
+			</section>
+			<Separator />
+		{/each}
+
+		<section class="grid grid-cols-3 items-center gap-14">
+			{#each { length: 3 } as _}
+				<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
+			{/each}
+		</section>
+	{:else}
+		<DndGroup items={albums.names} type="names"></DndGroup>
+		<Separator />
+		<DndGroup items={albums.artists} type="artists"></DndGroup>
+		<Separator />
+		<DndGroup items={albums.images} image type="images"></DndGroup>
+	{/if}
+
+	{@render footer(placeholder)}
+{/snippet}
+
+<AlertDialog.Root open={data.playing === false}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
 			<AlertDialog.Title>
@@ -83,43 +104,16 @@
 		action="?/submit"
 		method="POST"
 		use:enhance
-		class="grid w-full gap-6 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
+		class="grid w-full gap-4 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
 	>
 		{#if data?.streamed?.albums}
 			{#await data.streamed.albums}
-				{#each { length: 2 } as _}
-					<section class="grid grid-cols-3 items-center gap-14">
-						{#each { length: 3 } as _}
-							<Skeleton class="h-[5.25rem] w-full rounded-xl " />
-						{/each}
-					</section>
-					<Separator />
-				{/each}
-
-				<section class="grid grid-cols-3 items-center gap-14">
-					{#each { length: 3 } as _}
-						<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
-					{/each}
-				</section>
-
-				{@render footer(true)}
+				{@render playArea({}, true)}
 			{:then albums}
-				<DndGroup items={albums.names} type="names"></DndGroup>
-				<Separator />
-				<DndGroup items={albums.artists} type="artists"></DndGroup>
-				<Separator />
-				<DndGroup items={albums.images} image type="images"></DndGroup>
-
-				{@render footer(false)}
+				{@render playArea(albums)}
 			{/await}
 		{:else}
-			<DndGroup items={oldAlbums.names} type="names"></DndGroup>
-			<Separator />
-			<DndGroup items={oldAlbums.artists} type="artists"></DndGroup>
-			<Separator />
-			<DndGroup items={oldAlbums.images} image type="images"></DndGroup>
-
-			{@render footer(false)}
+			{@render playArea(oldAlbums)}
 		{/if}
 	</form>
 </main>
