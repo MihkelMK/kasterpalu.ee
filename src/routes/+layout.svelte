@@ -25,7 +25,6 @@
 			theme = 'dark';
 			setMode('dark');
 		}
-		console.log(theme);
 	};
 </script>
 
