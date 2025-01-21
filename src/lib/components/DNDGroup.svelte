@@ -26,17 +26,17 @@
 	}}
 	onconsider={handleDndConsider}
 	onfinalize={handleDndFinalize}
-	class="grid grid-cols-3 items-center gap-14"
+	class="grid grid-cols-3 items-center gap-4 sm:gap-8 md:gap-10 lg:gap-14"
 >
 	{#each items as item, i (item.id)}
 		<div animate:flip={{ duration: flipDurationMs, easing: expoOut }}>
 			<Card.Root
 				class="overflow-hidden rounded-xl border bg-card text-card-foreground shadow {type ===
 				'names'
-					? 'border-orange-300'
+					? 'border-red-400 '
 					: type === 'artists'
-						? 'border-cyan-300'
-						: 'border-purple-300'}"
+						? 'border-purple-400 '
+						: 'border-blue-400'}"
 			>
 				{#if image}
 					<Card.Content class="p-0">
@@ -45,7 +45,13 @@
 					</Card.Content>
 				{:else}
 					<Card.Content>
-						<p class="text-center">
+						<p
+							class="text-center {type === 'names'
+								? 'text-red-900 dark:text-red-200'
+								: type === 'artists'
+									? 'text-purple-900 dark:text-purple-200'
+									: ''}"
+						>
 							{#if type === 'artists'}
 								{truncate(item.value, 30)}
 							{:else}

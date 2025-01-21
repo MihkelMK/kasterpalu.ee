@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/smooch-sans':
+        specifier: ^5.1.1
+        version: 5.1.1
       better-sqlite3:
         specifier: ^11.8.0
         version: 11.8.1
@@ -17,6 +20,9 @@ importers:
       lucide-svelte:
         specifier: ^0.473.0
         version: 0.473.0(svelte@5.19.0)
+      mode-watcher:
+        specifier: ^0.5.0
+        version: 0.5.0(svelte@5.19.0)
       nanoid:
         specifier: ^5.0.9
         version: 5.0.9
@@ -598,6 +604,9 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@fontsource-variable/smooch-sans@5.1.1':
+    resolution: {integrity: sha512-ADcY3Pjkvu74x4T+p2gNIo8Ba7DGrX1IhQgJFefztWB8Tf5nX7Qb+tqAbtW7O/KYWJi4EjzrxCefHBM1PfOOsg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1692,6 +1701,11 @@ packages:
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
 
+  mode-watcher@0.5.0:
+    resolution: {integrity: sha512-5E6fh/aXhAVv+U+DbeM0hCmskQE9u7WSmvnCRijJB/MJu7HtB73sjiCaZ9n1M8QHmzLrBFo8XBAUcWXkDm8Z9A==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -2611,6 +2625,8 @@ snapshots:
       '@floating-ui/utils': 0.2.9
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@fontsource-variable/smooch-sans@5.1.1': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -3643,6 +3659,10 @@ snapshots:
   minipass@7.1.2: {}
 
   mkdirp-classic@0.5.3: {}
+
+  mode-watcher@0.5.0(svelte@5.19.0):
+    dependencies:
+      svelte: 5.19.0
 
   mri@1.2.0: {}
 

@@ -48,9 +48,11 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"@fontsource-variable/smooch-sans": "^5.1.1",
 		"better-sqlite3": "^11.8.0",
 		"drizzle-orm": "^0.38.4",
 		"lucide-svelte": "^0.473.0",
+		"mode-watcher": "^0.5.0",
 		"nanoid": "^5.0.9",
 		"spotify-web-api-node": "^5.0.2",
 		"svelte-kit-sessions": "^0.4.0"

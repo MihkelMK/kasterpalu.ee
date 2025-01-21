@@ -30,17 +30,17 @@
 </script>
 
 {#snippet footer(loading: boolean)}
-	<div class="flex justify-evenly">
-		<p class="text-lg font-semibold">Skoor: {data.stage}</p>
+	<div class="mt-8 flex items-center justify-evenly">
+		<p class="font-title text-lg font-semibold">Skoor: {data.stage}</p>
 		{#if loading}
-			<Button disabled>
+			<Button disabled class="min-w-[4.5rem]">
 				<LoaderCircle class="animate-spin" />
-				Oota korra
+				Oota
 			</Button>
 		{:else}
-			<Button type="submit">Saada</Button>
+			<Button type="submit" class="min-w-[4.5rem]">Saada</Button>
 		{/if}
-		<p class="text-lg font-semibold">Parim: {data.highscore}</p>
+		<p class="font-title text-lg font-semibold">Parim: {data.highscore}</p>
 	</div>
 {/snippet}
 
@@ -74,16 +74,14 @@
 	action="?/submit"
 	method="POST"
 	use:enhance
-	class="grid w-full gap-6 px-8 transition-all {loading || data?.playing === false
-		? 'grayscale'
-		: ''}"
+	class="grid w-full gap-6 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
 >
 	{#if data?.streamed?.albums}
 		{#await data.streamed.albums}
 			{#each { length: 2 } as _}
 				<section class="grid grid-cols-3 items-center gap-14">
 					{#each { length: 3 } as _}
-						<Skeleton class="h-[6rem] w-full rounded-xl " />
+						<Skeleton class="h-[5.25rem] w-full rounded-xl " />
 					{/each}
 				</section>
 				<Separator />

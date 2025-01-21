@@ -17,7 +17,6 @@ class SpotifyAPI {
 
     return await this.api.clientCredentialsGrant().then(
       (data) => {
-        console.log(data.body);
         if (!data.body['expires_in'] || !data.body['access_token']) {
           return false;
         }
