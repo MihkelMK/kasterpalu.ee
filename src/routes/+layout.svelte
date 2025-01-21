@@ -30,7 +30,7 @@
 
 <ModeWatcher />
 
-<header class="container absolute top-0 flex justify-between py-6">
+<header class="absolute top-0 flex w-full justify-between px-8 py-6">
 	<a href="/">
 		<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-10" />
 	</a>
