@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+// https://perryjanssen.medium.com/getting-random-tracks-using-the-spotify-api-61889b0c0c27
 export function getRandomSearch() {
 	// A list of all characters that can be chosen.
 	const characters = 'abcdefghijklmnopqrstuvwxyz';
@@ -26,6 +27,7 @@ export function getRandomSearch() {
 	return randomSearch;
 }
 
+// Created using Claude 3.5 Sonett
 export function shuffleObjectValues<T extends object>(arr: Array<T>): Array<T> {
 	// Create a copy of the array
 	const copy = structuredClone(arr);
@@ -52,6 +54,7 @@ export function shuffleObjectValues<T extends object>(arr: Array<T>): Array<T> {
 	return copy;
 }
 
+// https://stackoverflow.com/a/12646864
 export function shuffleArray<T>(array: T[]): T[] {
 	for (let i = array.length - 1; i >= 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -61,6 +64,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 	return array;
 }
 
+// Created using Claude 3.5 Sonett
 export function truncate(text: string, maxLength: number): string {
 	// Return original text if it's shorter than or equal to maxLength
 	if (text.length <= maxLength) {
