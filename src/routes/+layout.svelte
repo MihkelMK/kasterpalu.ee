@@ -36,7 +36,7 @@
 			<span class="text-blue-600 dark:text-blue-400">pildid</span>.
 		</p>
 	</header>
-	<main class="w-full max-w-3xl">
+	<main class="w-full max-w-4xl">
 		{@render children()}
 	</main>
 </div>
