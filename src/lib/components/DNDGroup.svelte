@@ -22,11 +22,11 @@
 		items,
 		flipDurationMs,
 		type: type,
-		dropTargetStyle: { outline: 'none' }
+		dropTargetStyle: {}
 	}}
 	onconsider={handleDndConsider}
 	onfinalize={handleDndFinalize}
-	class="grid grid-cols-3 items-center gap-16"
+	class="grid grid-cols-3 items-center gap-14"
 >
 	{#each items as item, i (item.id)}
 		<div animate:flip={{ duration: flipDurationMs, easing: expoOut }}>
