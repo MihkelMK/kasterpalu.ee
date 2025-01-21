@@ -36,7 +36,7 @@
 					? 'border-orange-300'
 					: type === 'artists'
 						? 'border-cyan-300'
-						: ''}"
+						: 'border-purple-300'}"
 			>
 				{#if image}
 					<Card.Content class="p-0">
