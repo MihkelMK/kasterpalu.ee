@@ -7,12 +7,6 @@ WORKDIR /app
 # Install packages
 RUN yarn global add pnpm
 
-ARG CLIENT_ID
-ARG CLIENT_SECRET
-ARG SESH_SECRET
-
-RUN printf "CLIENT_ID=%s\nCLIENT_SECRET=%s\nSESH_SECRET=%s\n" "${CLIENT_ID}" "${CLIENT_SECRET}" "${SESH_SECRET}" > .env
-
 COPY package.json .
 RUN pnpm i
 
