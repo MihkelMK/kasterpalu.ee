@@ -31,7 +31,7 @@
 	{#each items as item, i (item.id)}
 		<div animate:flip={{ duration: flipDurationMs, easing: expoOut }}>
 			<Card.Root
-				class="overflow-hidden rounded-xl border bg-card text-card-foreground shadow {type ===
+				class="select-none overflow-hidden rounded-xl border bg-card text-card-foreground shadow shadow-foreground/15 transition-shadow hover:shadow-foreground/25 {type ===
 				'names'
 					? 'border-red-400 '
 					: type === 'artists'

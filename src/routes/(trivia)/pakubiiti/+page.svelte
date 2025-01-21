@@ -70,46 +70,56 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<form
-	action="?/submit"
-	method="POST"
-	use:enhance
-	class="grid w-full gap-6 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
->
-	{#if data?.streamed?.albums}
-		{#await data.streamed.albums}
-			{#each { length: 2 } as _}
+<header class="mb-24 flex flex-col items-center font-title">
+	<h1 class="mb-1 scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">Paku biiti</h1>
+	<p class="text-2xl font-semibold text-muted-foreground">
+		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
+		<span class="text-purple-600 dark:text-purple-400">artistid</span> ja
+		<span class="text-blue-600 dark:text-blue-400">pildid</span>.
+	</p>
+</header>
+<main class="w-full max-w-4xl">
+	<form
+		action="?/submit"
+		method="POST"
+		use:enhance
+		class="grid w-full gap-6 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
+	>
+		{#if data?.streamed?.albums}
+			{#await data.streamed.albums}
+				{#each { length: 2 } as _}
+					<section class="grid grid-cols-3 items-center gap-14">
+						{#each { length: 3 } as _}
+							<Skeleton class="h-[5.25rem] w-full rounded-xl " />
+						{/each}
+					</section>
+					<Separator />
+				{/each}
+
 				<section class="grid grid-cols-3 items-center gap-14">
 					{#each { length: 3 } as _}
-						<Skeleton class="h-[5.25rem] w-full rounded-xl " />
+						<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
 					{/each}
 				</section>
+
+				{@render footer(true)}
+			{:then albums}
+				<DndGroup items={albums.names} type="names"></DndGroup>
 				<Separator />
-			{/each}
+				<DndGroup items={albums.artists} type="artists"></DndGroup>
+				<Separator />
+				<DndGroup items={albums.images} image type="images"></DndGroup>
 
-			<section class="grid grid-cols-3 items-center gap-14">
-				{#each { length: 3 } as _}
-					<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
-				{/each}
-			</section>
-
-			{@render footer(true)}
-		{:then albums}
-			<DndGroup items={albums.names} type="names"></DndGroup>
+				{@render footer(false)}
+			{/await}
+		{:else}
+			<DndGroup items={oldAlbums.names} type="names"></DndGroup>
 			<Separator />
-			<DndGroup items={albums.artists} type="artists"></DndGroup>
+			<DndGroup items={oldAlbums.artists} type="artists"></DndGroup>
 			<Separator />
-			<DndGroup items={albums.images} image type="images"></DndGroup>
+			<DndGroup items={oldAlbums.images} image type="images"></DndGroup>
 
 			{@render footer(false)}
-		{/await}
-	{:else}
-		<DndGroup items={oldAlbums.names} type="names"></DndGroup>
-		<Separator />
-		<DndGroup items={oldAlbums.artists} type="artists"></DndGroup>
-		<Separator />
-		<DndGroup items={oldAlbums.images} image type="images"></DndGroup>
-
-		{@render footer(false)}
-	{/if}
-</form>
+		{/if}
+	</form>
+</main>

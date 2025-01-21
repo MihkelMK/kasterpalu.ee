@@ -8,12 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/kode-mono':
+        specifier: ^5.1.1
+        version: 5.1.1
       '@fontsource-variable/smooch-sans':
         specifier: ^5.1.1
         version: 5.1.1
-      lucide-svelte:
-        specifier: ^0.473.0
-        version: 0.473.0(svelte@5.19.0)
       mode-watcher:
         specifier: ^0.5.0
         version: 0.5.0(svelte@5.19.0)
@@ -72,6 +72,9 @@ importers:
       globals:
         specifier: ^15.14.0
         version: 15.14.0
+      lucide-svelte:
+        specifier: ^0.473.0
+        version: 0.473.0(svelte@5.19.0)
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -311,6 +314,9 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@fontsource-variable/kode-mono@5.1.1':
+    resolution: {integrity: sha512-lS06Ow0N3YEFnSxr886WJPA2be0ndCm6mZFvCPYkTfv4BLxoiISNhPFL4M17jatKQ3/MoGbs95mjQv+YGkGcDg==}
 
   '@fontsource-variable/smooch-sans@5.1.1':
     resolution: {integrity: sha512-ADcY3Pjkvu74x4T+p2gNIo8Ba7DGrX1IhQgJFefztWB8Tf5nX7Qb+tqAbtW7O/KYWJi4EjzrxCefHBM1PfOOsg==}
@@ -1948,6 +1954,8 @@ snapshots:
       '@floating-ui/utils': 0.2.9
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@fontsource-variable/kode-mono@5.1.1': {}
 
   '@fontsource-variable/smooch-sans@5.1.1': {}
 

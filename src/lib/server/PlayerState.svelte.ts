@@ -1,5 +1,4 @@
 import type { Player } from '$lib/types';
-import { getContext, setContext } from 'svelte';
 
 export class PlayerState {
 	players = $state<Player[]>([]);

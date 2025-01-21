@@ -33,17 +33,20 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
 		};
 	}
 
-	const albumData = fetch(`/api/getAlbums/${count}`)
+	const albumData = fetch(`/api/pakubiiti/getAlbums/${count}`)
 		.then((res) => {
 			return res.json();
 		})
 		.then((data) => {
-			const albumNames = data.albums.map((album) => ({ id: nanoid(), value: album.name }));
-			const albumImages = data.albums.map((album) => ({
+			const albumNames = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
 				id: nanoid(),
-				value: album.images.at(0).url
+				value: album.name
 			}));
-			const albumArtists = data.albums.map((album) => ({
+			const albumImages = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
+				id: nanoid(),
+				value: album.images.at(0)?.url || ''
+			}));
+			const albumArtists = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
 				id: nanoid(),
 				value: album.artists.map((artist) => artist.name).join(', ')
 			}));
