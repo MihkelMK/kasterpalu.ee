@@ -1,0 +1,15 @@
+---
+name: 'stuff.kasterpalu'
+services:
+  web:
+    container_name: 'stuff.kasterpalu-web'
+    build:
+      context: .
+      args:
+        ENV CLIENT_ID: $CLIENT_ID
+        ENV CLIENT_SECRET: $CLIENT_SECRET
+        ENV SESH_SECRET: $SESH_SECRET
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - 9005:3000
