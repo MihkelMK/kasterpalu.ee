@@ -8,4 +8,5 @@ export type Player = {
   id: string;
   stage: number;
   highscore: number;
+  playing: boolean;
 };

@@ -60,3 +60,48 @@ export function shuffleArray<T>(array: T[]): T[] {
 
 	return array;
 }
+
+export function truncate(text: string, maxLength: number): string {
+	// Return original text if it's shorter than or equal to maxLength
+	if (text.length <= maxLength) {
+		return text;
+	}
+
+	const ellipsis = '…';
+	const tolerance = 5;
+	const targetLength = maxLength - 1; // Account for ellipsis
+
+	// Look for spaces within the tolerance range before targetLength
+	let spaceBeforeIdx = -1;
+	for (let i = targetLength; i >= targetLength - tolerance; i--) {
+		if (text[i] === ' ') {
+			spaceBeforeIdx = i;
+			break;
+		}
+	}
+
+	// Look for spaces within the tolerance range after targetLength
+	let spaceAfterIdx = -1;
+	for (let i = targetLength; i <= targetLength + tolerance && i < text.length; i++) {
+		if (text[i] === ' ') {
+			spaceAfterIdx = i;
+			break;
+		}
+	}
+
+	// Determine the best cutoff point
+	let cutoffIndex = targetLength;
+	if (spaceBeforeIdx !== -1 && spaceAfterIdx !== -1) {
+		// If we found spaces both before and after, use the closest one
+		cutoffIndex =
+			targetLength - spaceBeforeIdx <= spaceAfterIdx - targetLength
+				? spaceBeforeIdx
+				: spaceAfterIdx;
+	} else if (spaceBeforeIdx !== -1) {
+		cutoffIndex = spaceBeforeIdx;
+	} else if (spaceAfterIdx !== -1) {
+		cutoffIndex = spaceAfterIdx;
+	}
+
+	return text.slice(0, cutoffIndex).trim() + ellipsis;
+}

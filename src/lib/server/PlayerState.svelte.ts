@@ -2,59 +2,91 @@ import type { Player } from '$lib/types';
 import { getContext, setContext } from 'svelte';
 
 export class PlayerState {
-  players = $state<Player[]>([]);
+	players = $state<Player[]>([]);
 
-  newPlayer(id: string) {
-    this.players.push({ id: id, stage: 0, highscore: 0 });
-  }
+	newPlayer(id: string) {
+		this.players.push({ id: id, stage: 0, highscore: 0, playing: true });
+	}
 
-  getStage(id: string) {
-    const player = this.players.find((player) => player.id === id);
+	getStage(id: string) {
+		const player = this.players.find((player) => player.id === id);
 
-    if (!player) {
-      return undefined;
-    }
+		if (!player) {
+			return undefined;
+		}
 
-    return player.stage;
-  }
+		return player.stage;
+	}
 
-  nextStage(id: string) {
-    const player = this.players.find((player) => player.id === id);
+	nextStage(id: string) {
+		const player = this.players.find((player) => player.id === id);
 
-    if (!player) {
-      return;
-    }
+		if (!player) {
+			return;
+		}
 
-    player.stage += 1;
-  }
+		player.stage += 1;
+	}
 
-  score(id: string, win: boolean) {
-    const player = this.players.find((player) => player.id === id);
+	restart(id: string) {
+		const player = this.players.find((player) => player.id === id);
 
-    if (!player) {
-      return;
-    }
+		if (!player) {
+			return;
+		}
 
-    if (win) {
-      player.stage += 1;
+		player.stage = 0;
+		player.playing = true;
+	}
 
-      if (player.stage > player.highscore) {
-        player.highscore = player.stage;
-      }
-    } else {
-      player.stage = 0;
-    }
-  }
+	score(id: string, won: boolean) {
+		const player = this.players.find((player) => player.id === id);
 
-  getHighscore(id: string) {
-    const player = this.players.find((player) => player.id === id);
+		if (!player) {
+			return;
+		}
 
-    if (!player) {
-      return undefined;
-    }
+		if (won) {
+			player.stage += 1;
+			return;
+		}
 
-    return player.highscore;
-  }
+		player.playing = false;
+
+		if (player.stage > player.highscore) {
+			player.highscore = player.stage;
+		}
+	}
+
+	getHighscore(id: string) {
+		const player = this.players.find((player) => player.id === id);
+
+		if (!player) {
+			return undefined;
+		}
+
+		return player.highscore;
+	}
+
+	getPlaying(id: string) {
+		const player = this.players.find((player) => player.id === id);
+
+		if (!player) {
+			return undefined;
+		}
+
+		return player.playing;
+	}
+
+	setPlaying(id: string, playing: boolean) {
+		const player = this.players.find((player) => player.id === id);
+
+		if (!player) {
+			return;
+		}
+
+		player.playing = playing;
+	}
 }
 
 export const playerState = new PlayerState();
