@@ -10,20 +10,13 @@
 	import type { AlbumData } from '$lib/types';
 	import { fade } from 'svelte/transition';
 	import { expoIn, expoOut } from 'svelte/easing';
+	import { getAlbumClientState } from '$lib/client/AlbumClientState.svelte';
 
 	let { data }: { data: PageData; form: FormData } = $props();
 
 	let loading = $state(false);
-	let oldAlbums: AlbumData | undefined = $state();
 
-	// Used when user answers wrong and no new data comes in
-	$effect(() => {
-		if (data.streamed?.albums) {
-			data.streamed.albums.then((data) => {
-				oldAlbums = data as AlbumData;
-			});
-		}
-	});
+	const clientState = getAlbumClientState();
 </script>
 
 {#snippet footer(loading: boolean)}
@@ -93,7 +86,7 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="font-title mb-12 flex flex-col items-center">
+<header class="mb-12 flex flex-col items-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
 	<p class="text-xl font-semibold text-muted-foreground">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
@@ -126,7 +119,7 @@
 			{/await}
 		{:else}
 			<div class="grid w-full gap-4" out:fade={{ duration: 150, easing: expoOut }}>
-				{@render playArea(oldAlbums)}
+				{@render playArea(clientState.albums)}
 			</div>
 			{@render footer(false)}
 		{/if}

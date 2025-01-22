@@ -11,16 +11,20 @@
 		type Item
 	} from 'svelte-dnd-action';
 	import * as Card from '$lib/components/ui/card/index.js';
+	import { getAlbumClientState } from '$lib/client/AlbumClientState.svelte';
+	import { onMount } from 'svelte';
 
-	let { items = $bindable(), image = false, type = 'default' } = $props();
+	let { items, image = false, type = 'default' } = $props();
 
 	const flipDurationMs = 300;
+	const clientState = getAlbumClientState();
 
 	function handleDndConsider(e: CustomEvent<DndEvent<Item>>) {
 		items = e.detail.items;
 	}
 	function handleDndFinalize(e: CustomEvent<DndEvent<Item>>) {
 		items = e.detail.items;
+		clientState.update(e.detail.items as AlbumDataField[], type);
 	}
 	function transformDraggedElement(draggedEl: HTMLElement | undefined) {
 		if (!draggedEl) {
@@ -44,6 +48,10 @@
 					: 'border-blue-400'
 		}`
 	);
+
+	onMount(() => {
+		clientState.update(items as AlbumDataField[], type);
+	});
 </script>
 
 {#snippet card(item: AlbumDataField, i: number)}
