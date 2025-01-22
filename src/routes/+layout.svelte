@@ -51,4 +51,6 @@
 	</Button>
 </header>
 
-{@render children()}
+<div class="container mt-24 flex flex-col items-center py-4">
+	{@render children()}
+</div>

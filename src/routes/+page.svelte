@@ -12,7 +12,7 @@
 	<meta property="og:image" content={baseURL + '/favicon.svg'} />
 </svelte:head>
 
-<header class="mb-24 flex flex-col items-center font-title">
+<header class="font-title mb-24 flex flex-col items-center">
 	<h1 class="mb-1 scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">
 		stuff.kasterpalu.ee
 	</h1>
