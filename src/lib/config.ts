@@ -16,7 +16,7 @@ export const games: GamesObj = {
 		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
 	},
 	'': {
-		name: 'More soonTM',
+		name: 'Rohkem mänge soon™',
 		image: '',
 		description: ''
 	}
