@@ -34,23 +34,23 @@
 
 <ModeWatcher />
 
-<header class="absolute top-0 flex w-full justify-between px-8 py-6">
+<header class="container flex w-full items-center justify-between px-8 py-6">
 	<a href="/">
-		<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-10" />
+		<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
 	</a>
-	<Button onclick={() => cycleTheme()} variant="outline" size="icon">
+	<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 		{#if theme === 'dark'}
-			<Moon class="absolute h-[1.2rem] w-[1.2rem]" />
+			<Moon class="!h-6 !w-6" />
 		{:else if theme === 'light'}
-			<Sun class="h-[1.2rem] w-[1.2rem] " />
+			<Sun class="!h-6 !w-6" />
 		{:else}
-			<LaptopMinimal class="h-[1.2rem] w-[1.2rem]" />
+			<LaptopMinimal class="!h-6 !w-6" />
 		{/if}
 
 		<span class="sr-only">Toggle theme</span>
 	</Button>
 </header>
 
-<div class="container mt-24 flex flex-col items-center py-4">
+<div class="container flex flex-col items-center">
 	{@render children()}
 </div>

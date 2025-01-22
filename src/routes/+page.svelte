@@ -13,12 +13,12 @@
 </svelte:head>
 
 <header class="font-title mb-24 flex flex-col items-center">
-	<h1 class="mb-1 scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">
+	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
 		stuff.kasterpalu.ee
 	</h1>
-	<p class="text-2xl font-semibold text-muted-foreground">Minimängud ja muud huvitavat</p>
+	<p class="text-xl font-semibold text-muted-foreground">Minimängud ja muud huvitavat</p>
 </header>
-<main class="grid w-full max-w-4xl justify-items-center">
+<main class="grid w-full max-w-4xl justify-items-center gap-y-8 lg:grid-cols-2">
 	{#each Object.entries(games) as [href, { image, name }]}
 		<a
 			class="shadow-sharp flex aspect-[4/1] w-full max-w-sm items-center justify-center rounded-xl border-2 border-current bg-contain bg-no-repeat transition-all"
