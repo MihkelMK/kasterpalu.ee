@@ -112,7 +112,7 @@
 			{#await data.streamed.albums}
 				<div
 					class="grid w-full gap-4"
-					in:fade={{ duration: 150, delay: 150, easing: expoIn }}
+					in:fade={{ duration: 150, easing: expoIn }}
 					out:fade={{ duration: 150, easing: expoOut }}
 				>
 					{@render playArea(undefined, true)}
