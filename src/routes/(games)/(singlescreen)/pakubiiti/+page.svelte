@@ -8,6 +8,8 @@
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	import type { AlbumData } from '$lib/types';
+	import { fade } from 'svelte/transition';
+	import { expoIn, expoOut } from 'svelte/easing';
 
 	let { data }: { data: PageData; form: FormData } = $props();
 
@@ -25,36 +27,37 @@
 </script>
 
 {#snippet footer(loading: boolean)}
-	<div class="mt-8 flex items-center justify-evenly">
+	<footer class="mt-8 flex items-center justify-evenly">
 		<p class="font-title text-lg font-semibold">Skoor: {data.stage}</p>
 		{#if loading}
-			<Button disabled class="min-w-[4.5rem]">
+			<Button disabled class="min-w-[4.4rem]">
 				<LoaderCircle class="animate-spin" />
-				Oota
 			</Button>
 		{:else}
-			<Button type="submit" class="min-w-[4.5rem]">Saada</Button>
+			<Button type="submit" class="min-w-[4.4rem]">Saada</Button>
 		{/if}
 		<p class="font-title text-lg font-semibold">Parim: {data.highscore}</p>
-	</div>
+	</footer>
 {/snippet}
 
 {#snippet playArea(albums: AlbumData | undefined, placeholder = false)}
 	{#if placeholder}
-		{#each { length: 2 }}
-			<section class="grid grid-cols-3 items-center gap-14">
+		{#each { length: 3 } as _, i}
+			<section
+				class="grid grid-cols-3 gap-2 rounded-xl p-2 px-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14"
+			>
 				{#each { length: 3 }}
-					<Skeleton class="h-[5.25rem] w-full rounded-xl " />
+					{#if i < 2}
+						<Skeleton class="h-[6rem] w-full rounded-xl border border-primary/5" />
+					{:else}
+						<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
+					{/if}
 				{/each}
 			</section>
-			<Separator />
+			{#if i < 2}
+				<Separator />
+			{/if}
 		{/each}
-
-		<section class="grid grid-cols-3 items-center gap-14">
-			{#each { length: 3 }}
-				<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
-			{/each}
-		</section>
 	{:else if albums}
 		<DndGroup items={albums.names} type="names"></DndGroup>
 		<Separator />
@@ -62,8 +65,6 @@
 		<Separator />
 		<DndGroup items={albums.images} image type="images"></DndGroup>
 	{/if}
-
-	{@render footer(placeholder)}
 {/snippet}
 
 <AlertDialog.Root open={data.playing === false}>
@@ -92,7 +93,7 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="mb-24 flex flex-col items-center font-title">
+<header class="font-title mb-24 flex flex-col items-center">
 	<h1 class="mb-1 scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">Paku biiti</h1>
 	<p class="text-2xl font-semibold text-muted-foreground">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
@@ -105,16 +106,38 @@
 		action="?/submit"
 		method="POST"
 		use:enhance
-		class="grid w-full gap-4 transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
+		class="grid w-full transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
 	>
 		{#if data?.streamed?.albums}
 			{#await data.streamed.albums}
-				{@render playArea(undefined, true)}
+				<div
+					class="grid w-full gap-4"
+					in:fade={{ duration: 150, delay: 150, easing: expoIn }}
+					out:fade={{ duration: 150, easing: expoOut }}
+				>
+					{@render playArea(undefined, true)}
+				</div>
+				{@render footer(true)}
 			{:then albums}
-				{@render playArea(albums as AlbumData)}
+				<div class="grid w-full gap-4" in:fade={{ duration: 150, delay: 150, easing: expoOut }}>
+					{@render playArea(albums as AlbumData)}
+				</div>
+				{@render footer(false)}
 			{/await}
 		{:else}
-			{@render playArea(oldAlbums)}
+			<div class="grid w-full gap-4" out:fade={{ duration: 150, easing: expoOut }}>
+				{@render playArea(oldAlbums)}
+			</div>
+			{@render footer(false)}
 		{/if}
 	</form>
 </main>
+
+<style>
+	form > div {
+		grid-area: 1/1;
+	}
+	form > footer {
+		grid-area: 2/1;
+	}
+</style>
