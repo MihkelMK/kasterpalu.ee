@@ -1,6 +1,11 @@
 import type { GamesObj } from './types';
 
-export const siteName = 'Stuff.Kasterpalu';
+export const site = {
+	name: 'Stuff.Kasterpalu',
+	author: 'Mihkel Martin Kasterpalu',
+	description: 'Minimängud ja muud huvitavat.',
+	image: '/web-app-manifest-512x512.png'
+};
 
 export const baseURL = 'https://stuff.kasterpalu.ee';
 

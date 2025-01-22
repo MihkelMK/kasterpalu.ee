@@ -1,5 +1,5 @@
 import type { LayoutServerData } from './$types';
-import { games } from '$lib/config';
+import { games, site } from '$lib/config';
 
 export const load: LayoutServerData = async ({ url }) => {
 	if (!url?.pathname) {
@@ -14,7 +14,7 @@ export const load: LayoutServerData = async ({ url }) => {
 
 	return {
 		name: game.name,
-		description: game.description,
-		image: game.image
+		description: game.description || site.description,
+		image: game.image || site.image
 	};
 };

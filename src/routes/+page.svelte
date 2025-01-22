@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { games, siteName, baseURL } from '$lib/config';
+	import { games, site, baseURL } from '$lib/config';
 </script>
 
 <svelte:head>
-	<title>{siteName}</title>
-	<meta property="og:title" content={siteName} />
+	<title>{site.name}</title>
+	<meta property="og:title" content={site.name} />
 
-	<meta name="description" content="Minimängud ja muud huvitavat." />
-	<meta property="og:description" content="Minimängud ja muud huvitavat." />
+	<meta name="description" content={site.description} />
+	<meta property="og:description" content={site.description} />
 
-	<meta property="og:image" content={baseURL + '/favicon.svg'} />
+	<meta property="og:image" content={baseURL + site.image} />
 </svelte:head>
 
-<header class="font-title mb-24 flex flex-col items-center">
+<header class="mb-24 flex flex-col items-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
 		stuff.kasterpalu.ee
 	</h1>

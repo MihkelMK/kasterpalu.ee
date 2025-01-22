@@ -9,6 +9,7 @@
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
 	import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
+	import { site } from '$lib/config';
 
 	let { children } = $props();
 
@@ -29,7 +30,7 @@
 </script>
 
 <svelte:head>
-	<meta name="author" content="Mihkel Martin Kasterpalu" />
+	<meta name="author" content={site.author} />
 </svelte:head>
 
 <ModeWatcher />
