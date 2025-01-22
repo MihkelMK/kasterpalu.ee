@@ -1,7 +1,7 @@
 export type AlbumData = {
-  name: AlbumDataField;
-  artists: AlbumDataField;
-  image: AlbumDataField;
+  names: AlbumDataField[];
+  artists: AlbumDataField[];
+  images: AlbumDataField[];
 };
 
 export type AlbumDataField = {

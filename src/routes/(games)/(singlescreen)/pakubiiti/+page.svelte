@@ -7,17 +7,18 @@
 	import DndGroup from '$lib/components/DNDGroup.svelte';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
+	import type { AlbumData } from '$lib/types';
 
 	let { data }: { data: PageData; form: FormData } = $props();
 
 	let loading = $state(false);
-	let oldAlbums: SpotifyApi.AlbumObjectSimplified[] = $state([]);
+	let oldAlbums: AlbumData | undefined = $state();
 
 	// Used when user answers wrong and no new data comes in
 	$effect(() => {
 		if (data.streamed?.albums) {
 			data.streamed.albums.then((data) => {
-				oldAlbums = data;
+				oldAlbums = data as AlbumData;
 			});
 		}
 	});
@@ -38,11 +39,11 @@
 	</div>
 {/snippet}
 
-{#snippet playArea(albums, placeholder = false)}
+{#snippet playArea(albums: AlbumData | undefined, placeholder = false)}
 	{#if placeholder}
-		{#each { length: 2 } as _}
+		{#each { length: 2 }}
 			<section class="grid grid-cols-3 items-center gap-14">
-				{#each { length: 3 } as _}
+				{#each { length: 3 }}
 					<Skeleton class="h-[5.25rem] w-full rounded-xl " />
 				{/each}
 			</section>
@@ -50,11 +51,11 @@
 		{/each}
 
 		<section class="grid grid-cols-3 items-center gap-14">
-			{#each { length: 3 } as _}
+			{#each { length: 3 }}
 				<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
 			{/each}
 		</section>
-	{:else}
+	{:else if albums}
 		<DndGroup items={albums.names} type="names"></DndGroup>
 		<Separator />
 		<DndGroup items={albums.artists} type="artists"></DndGroup>
@@ -91,7 +92,7 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="font-title mb-24 flex flex-col items-center">
+<header class="mb-24 flex flex-col items-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">Paku biiti</h1>
 	<p class="text-2xl font-semibold text-muted-foreground">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
@@ -108,9 +109,9 @@
 	>
 		{#if data?.streamed?.albums}
 			{#await data.streamed.albums}
-				{@render playArea({}, true)}
+				{@render playArea(undefined, true)}
 			{:then albums}
-				{@render playArea(albums)}
+				{@render playArea(albums as AlbumData)}
 			{/await}
 		{:else}
 			{@render playArea(oldAlbums)}

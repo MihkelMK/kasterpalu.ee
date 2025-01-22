@@ -1,4 +1,4 @@
-import type { AlbumData, AlbumSolveState } from '$lib/types';
+import type { AlbumSolveState } from '$lib/types';
 
 class AlbumState {
   private albums: AlbumSolveState[] | undefined = undefined;

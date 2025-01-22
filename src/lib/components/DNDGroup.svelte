@@ -1,19 +1,25 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card/index.js';
-	import { dndzone, SHADOW_ITEM_MARKER_PROPERTY_NAME } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
-	import { truncate } from '$lib/utils';
 	import { fade } from 'svelte/transition';
+	import { truncate } from '$lib/utils';
+	import type { AlbumDataField } from '$lib/types';
+	import {
+		dndzone,
+		SHADOW_ITEM_MARKER_PROPERTY_NAME,
+		type DndEvent,
+		type Item
+	} from 'svelte-dnd-action';
+	import * as Card from '$lib/components/ui/card/index.js';
 
 	let { items = $bindable(), image = false, type = 'default' } = $props();
 
 	const flipDurationMs = 300;
 
-	function handleDndConsider(e: CustomEvent<any>) {
+	function handleDndConsider(e: CustomEvent<DndEvent<Item>>) {
 		items = e.detail.items;
 	}
-	function handleDndFinalize(e: CustomEvent<any>) {
+	function handleDndFinalize(e: CustomEvent<DndEvent<Item>>) {
 		items = e.detail.items;
 	}
 	function transformDraggedElement(draggedEl: HTMLElement | undefined) {
@@ -40,7 +46,7 @@
 	);
 </script>
 
-{#snippet card(item, i)}
+{#snippet card(item: AlbumDataField, i: number)}
 	{#if image}
 		<img class="aspect-square w-full object-cover" alt="Album Art" src={item.value} />
 		<input type="hidden" name="{type}_{i}" value={item.value} />
