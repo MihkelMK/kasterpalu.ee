@@ -1,7 +1,18 @@
+export type AlbumData = {
+  name: AlbumDataField;
+  artists: AlbumDataField;
+  image: AlbumDataField;
+};
+
+export type AlbumDataField = {
+  id: string;
+  value: string;
+};
+
 export type AlbumSolveState = {
   name: string;
-  artists: string[];
-  imageUrl: string;
+  artists: string;
+  image: string;
 };
 
 export type Player = {

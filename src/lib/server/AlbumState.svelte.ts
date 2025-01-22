@@ -1,9 +1,9 @@
-import type { AlbumSolveState } from '$lib/types';
+import type { AlbumData, AlbumSolveState } from '$lib/types';
 
 class AlbumState {
-  private albums: SpotifyApi.AlbumObjectSimplified[] | undefined = undefined;
+  private albums: AlbumSolveState[] | undefined = undefined;
 
-  setAlbums(data: SpotifyApi.AlbumObjectSimplified[]) {
+  setAlbums(data: AlbumSolveState[]) {
     if (!data) {
       return;
     }
@@ -29,14 +29,12 @@ class AlbumState {
         return false;
       }
 
-      if (matching.images.at(0)?.url !== solve.imageUrl) {
+      if (matching.image !== solve.image) {
         return false;
       }
 
-      for (const artistName of solve.artists) {
-        if (!matching.artists.find((artist) => artist.name === artistName)) {
-          return false;
-        }
+      if (matching.artists !== solve.artists) {
+        return false;
       }
     }
 

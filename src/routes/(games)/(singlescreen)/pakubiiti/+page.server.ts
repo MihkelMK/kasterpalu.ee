@@ -1,7 +1,7 @@
 import { shuffleArray } from '$lib/utils';
 import { nanoid } from 'nanoid';
 import type { PageServerLoad } from './$types';
-import type { AlbumSolveState } from '$lib/types';
+import type { AlbumData, AlbumSolveState } from '$lib/types';
 import { albumState } from '$lib/server/AlbumState.svelte';
 import { playerState } from '$lib/server/PlayerState.svelte';
 
@@ -38,17 +38,17 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
 			return res.json();
 		})
 		.then((data) => {
-			const albumNames = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
+			const albumNames = data.albums.map((album: AlbumData) => ({
 				id: nanoid(),
 				value: album.name
 			}));
-			const albumImages = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
+			const albumImages = data.albums.map((album: AlbumData) => ({
 				id: nanoid(),
-				value: album.images.at(0)?.url || ''
+				value: album.image
 			}));
-			const albumArtists = data.albums.map((album: SpotifyApi.AlbumObjectSimplified) => ({
+			const albumArtists = data.albums.map((album: AlbumData) => ({
 				id: nanoid(),
-				value: album.artists.map((artist) => artist.name).join(', ')
+				value: album.artists
 			}));
 
 			return {
@@ -84,9 +84,7 @@ export const actions = {
 			const image = data.get(`images_${i}`);
 			const artists = data.get(`artists_${i}`);
 
-			const artistList = artists.split(', ');
-
-			state.push({ name: name, imageUrl: image, artists: artistList });
+			state.push({ name: name, image: image, artists: artists });
 		}
 
 		const solved = albumState.checkSolve(state);
