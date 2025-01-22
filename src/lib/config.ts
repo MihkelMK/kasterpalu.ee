@@ -9,5 +9,10 @@ export const games: GamesObj = {
 		name: 'Paku biiti',
 		image: '',
 		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
+	},
+	'': {
+		name: 'More soonTM',
+		image: '',
+		description: ''
 	}
 };
