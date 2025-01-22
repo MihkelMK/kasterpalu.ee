@@ -28,6 +28,10 @@
 	};
 </script>
 
+<svelte:head>
+	<meta name="author" content="Mihkel Martin Kasterpalu" />
+</svelte:head>
+
 <ModeWatcher />
 
 <header class="absolute top-0 flex w-full justify-between px-8 py-6">

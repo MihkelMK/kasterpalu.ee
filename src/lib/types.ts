@@ -10,3 +10,11 @@ export type Player = {
   highscore: number;
   playing: boolean;
 };
+
+export type Game = {
+  name: string;
+  image: string;
+  description: string;
+};
+
+export type GamesObj = Record<string, Game>;
