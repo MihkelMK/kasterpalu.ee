@@ -29,3 +29,12 @@ export type Game = {
 };
 
 export type GamesObj = Record<string, Game>;
+
+export interface TimeRemaining {
+	years: number;
+	months: number;
+	days: number;
+	hours: number;
+	minutes: number;
+	seconds: number;
+}

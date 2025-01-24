@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import type { TimeRemaining } from './types';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -108,4 +109,56 @@ export function truncate(text: string, maxLength: number): string {
 	}
 
 	return text.slice(0, cutoffIndex).trim() + ellipsis;
+}
+
+// Created using Claude 3.5 Sonett
+export function getTimeRemaining(currentTime: Date, targetTime: Date): TimeRemaining {
+	// Convert both dates to milliseconds and get the difference
+	let delta = targetTime.getTime() - currentTime.getTime();
+
+	// If target is in the past, return all zeros
+	if (delta < 0) {
+		return {
+			years: 0,
+			months: 0,
+			days: 0,
+			hours: 0,
+			minutes: 0,
+			seconds: 0
+		};
+	}
+
+	// Calculate each unit
+	const millisecondsPerSecond = 1000;
+	const millisecondsPerMinute = millisecondsPerSecond * 60;
+	const millisecondsPerHour = millisecondsPerMinute * 60;
+	const millisecondsPerDay = millisecondsPerHour * 24;
+	const millisecondsPerMonth = millisecondsPerDay * 30.436875; // Average month length
+	const millisecondsPerYear = millisecondsPerDay * 365.2425; // Average year length
+
+	const years = Math.floor(delta / millisecondsPerYear);
+	delta -= years * millisecondsPerYear;
+
+	const months = Math.floor(delta / millisecondsPerMonth);
+	delta -= months * millisecondsPerMonth;
+
+	const days = Math.floor(delta / millisecondsPerDay);
+	delta -= days * millisecondsPerDay;
+
+	const hours = Math.floor(delta / millisecondsPerHour);
+	delta -= hours * millisecondsPerHour;
+
+	const minutes = Math.floor(delta / millisecondsPerMinute);
+	delta -= minutes * millisecondsPerMinute;
+
+	const seconds = Math.floor(delta / millisecondsPerSecond);
+
+	return {
+		years,
+		months,
+		days,
+		hours,
+		minutes,
+		seconds
+	};
 }

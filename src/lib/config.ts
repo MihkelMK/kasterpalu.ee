@@ -15,6 +15,11 @@ export const games: GamesObj = {
 		image: '',
 		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
 	},
+	'/epochalypse': {
+		name: 'Epochalypse',
+		image: '',
+		description: 'Varsti veel üks Y2K. Kui nostalgiline!'
+	},
 	'': {
 		name: 'Rohkem mänge soon™',
 		image: '',
