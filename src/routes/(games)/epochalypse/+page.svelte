@@ -37,7 +37,11 @@
 		<p class="text-sm text-muted-foreground">{title}</p>
 	</div>
 	{#if divider}
-		<p class="text-lg font-semibold text-muted-foreground">:</p>
+		<p class="block text-center text-lg font-semibold text-muted-foreground">:</p>
+	{:else}
+		<p
+			class="invisible hidden text-center text-lg font-semibold text-muted-foreground md:visible md:block"
+		></p>
 	{/if}
 {/snippet}
 
@@ -47,12 +51,12 @@
 </header>
 <main class="w-full max-w-4xl">
 	<div
-		class="mx-auto flex w-full flex-wrap items-center justify-center gap-4 rounded-md bg-muted p-12"
+		class="mx-auto grid w-full grid-cols-[auto_auto_auto] items-center justify-center gap-4 rounded-md bg-muted p-12 md:flex"
 	>
 		{@render clockStage(13, timeUntil.years, 'aastat')}
-		{@render clockStage(13, timeUntil.months, 'kuud')}
+		{@render clockStage(13, timeUntil.months, 'kuud', false)}
 		{@render clockStage(31, timeUntil.days, 'päeva')}
-		{@render clockStage(24, timeUntil.hours, 'tundi')}
+		{@render clockStage(24, timeUntil.hours, 'tundi', false)}
 		{@render clockStage(60, timeUntil.minutes, 'minutit')}
 		{@render clockStage(60, timeUntil.seconds, 'sekundit', false)}
 	</div>
