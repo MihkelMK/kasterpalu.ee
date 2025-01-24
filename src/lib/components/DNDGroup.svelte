@@ -60,7 +60,7 @@
 		<input type="hidden" name="{type}_{i}" value={item.value} />
 	{:else}
 		<p
-			class="p-6 text-center {type === 'names'
+			class="p-2 text-center text-sm md:p-6 md:text-base {type === 'names'
 				? 'text-red-900 dark:text-red-200'
 				: type === 'artists'
 					? 'text-purple-900 dark:text-purple-200'
