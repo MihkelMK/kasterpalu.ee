@@ -35,23 +35,38 @@
 
 <ModeWatcher />
 
-<header class="container flex w-full items-center justify-between px-8 py-6">
-	<a href="/">
-		<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
-	</a>
-	<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
-		{#if theme === 'dark'}
-			<Moon class="!h-6 !w-6" />
-		{:else if theme === 'light'}
-			<Sun class="!h-6 !w-6" />
-		{:else}
-			<LaptopMinimal class="!h-6 !w-6" />
-		{/if}
+<div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
+	<header class="container flex w-full items-center justify-between px-8 py-6">
+		<a href="/">
+			<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
+		</a>
+		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
+			{#if theme === 'dark'}
+				<Moon class="!h-6 !w-6" />
+			{:else if theme === 'light'}
+				<Sun class="!h-6 !w-6" />
+			{:else}
+				<LaptopMinimal class="!h-6 !w-6" />
+			{/if}
 
-		<span class="sr-only">Toggle theme</span>
-	</Button>
-</header>
+			<span class="sr-only">Toggle theme</span>
+		</Button>
+	</header>
 
-<div class="container flex flex-col items-center">
-	{@render children()}
+	<div class="container flex flex-col items-center">
+		{@render children()}
+	</div>
+
+	<footer class="container flex w-full justify-center px-8 py-6 text-center">
+		<p class="text-muted-foreground">
+			Vaata
+			<a
+				href="https://koodi.lenn.uk/mihkelmk/minigames"
+				target="_blank"
+				class=" underline underline-offset-4"
+			>
+				saidi koodi
+			</a>
+		</p>
+	</footer>
 </div>
