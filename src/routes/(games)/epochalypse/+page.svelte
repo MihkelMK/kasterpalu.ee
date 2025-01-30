@@ -48,7 +48,7 @@
 	{/if}
 {/snippet}
 
-<header class="mb-24 flex flex-col items-center font-title">
+<header class="mb-24 flex flex-col items-center text-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Epochalypse</h1>
 	<p class="text-xl font-semibold text-muted-foreground">Ära muretse! Sul on veel aega:</p>
 </header>
