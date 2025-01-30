@@ -58,15 +58,12 @@
 	</div>
 
 	<footer class="container flex w-full justify-center px-8 py-6 text-center">
-		<p class="text-muted-foreground">
-			Vaata
-			<a
-				href="https://koodi.lenn.uk/mihkelmk/minigames"
-				target="_blank"
-				class=" underline underline-offset-4"
-			>
-				saidi koodi
-			</a>
-		</p>
+		<a
+			href="https://koodi.lenn.uk/mihkelmk/minigames"
+			target="_blank"
+			class="text-muted-foreground underline underline-offset-4"
+		>
+			saidi kood
+		</a>
 	</footer>
 </div>
