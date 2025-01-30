@@ -25,7 +25,10 @@
 			class="card h-[2.75rem] overflow-hidden rounded-xl bg-muted font-mono text-xl ring ring-foreground/25 drop-shadow-md"
 		>
 			<div
-				style="translate: 0 calc({index} * -2rem); transition-duration: 500ms;"
+				style="translate: 0 calc({index} * -2rem); transition-timing-function: cubic-bezier(.65,.01,.04,.97); transition-duration: {index ===
+				count - 1
+					? '600ms'
+					: '300ms'};"
 				class="flex flex-col gap-1 px-4 py-2 transition-all"
 			>
 				{#each { length: count } as _, i}
@@ -37,7 +40,7 @@
 		<p class="text-sm text-muted-foreground">{title}</p>
 	</div>
 	{#if divider}
-		<p class="block text-center text-lg font-semibold text-muted-foreground">:</p>
+		<p class="mb-7 block text-center text-lg font-semibold text-muted-foreground">:</p>
 	{:else}
 		<p
 			class="invisible hidden text-center text-lg font-semibold text-muted-foreground md:visible md:block"
@@ -61,10 +64,10 @@
 		{@render clockStage(60, timeUntil.seconds, 'sekundit', false)}
 	</div>
 
-	<Accordion.Root type="single" class="mt-4 pb-4">
+	<Accordion.Root type="single" class="mx-auto mt-12 max-w-prose pb-4">
 		<Accordion.Item value="item-1">
 			<Accordion.Trigger>Mis asi see on??</Accordion.Trigger>
-			<Accordion.Content class="text-md max-w-prose">
+			<Accordion.Content class="text-md">
 				<p class="leading-7 [&:not(:first-child)]:mt-6">
 					Epochalypse nimeline probleem on sarnane 1990 lõpus toimunud <a
 						href="https://en.wikipedia.org/wiki/Year_2000_problem"
