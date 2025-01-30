@@ -10,15 +10,15 @@ export const site = {
 export const baseURL = 'https://stuff.kasterpalu.ee';
 
 export const games: GamesObj = {
-	'/pakubiiti': {
-		name: 'Paku biiti',
-		image: '',
-		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
-	},
 	'/epochalypse': {
 		name: 'Epochalypse',
 		image: '',
 		description: 'Varsti veel üks Y2K. Kui nostalgiline!'
+	},
+	'/pakubiiti': {
+		name: 'Paku biiti',
+		image: '',
+		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
 	},
 	'': {
 		name: 'Rohkem mänge soon™',
