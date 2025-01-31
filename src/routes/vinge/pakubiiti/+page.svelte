@@ -86,9 +86,9 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="mb-12 flex flex-col items-center text-center font-title">
+<header class="mb-16 flex flex-col items-center text-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
-	<p class="text-xl font-semibold text-muted-foreground">
+	<p class="text-xl font-semibold leading-7 text-muted-foreground">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
 		<span class="text-purple-600 dark:text-purple-400">artistid</span> ja
 		<span class="text-blue-600 dark:text-blue-400">pildid</span>.
