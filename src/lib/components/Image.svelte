@@ -31,7 +31,7 @@
 		<Link class={className} />
 	{/if}
 
-	<span>
+	<span class="underline underline-offset-4">
 		{author}
 	</span>
 {/snippet}
@@ -49,7 +49,10 @@
 			{#each tags as { name, description }}
 				<HoverCard.Root>
 					<HoverCard.Trigger>
-						<Badge class="transition-none" variant={badgeVariant}>{name}</Badge>
+						<Badge
+							class="font-title text-base font-semibold leading-relaxed tracking-wide"
+							variant={badgeVariant}>{name}</Badge
+						>
 					</HoverCard.Trigger>
 					<HoverCard.Content>
 						{description}
@@ -65,7 +68,7 @@
 				class="flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold text-secondary/80 dark:text-primary/80"
 			>
 				{#if image.credit.href}
-					<a class="w-full transition-colors hover:text-white" href={image.credit.href}>
+					<a class="w-full" href={image.credit.href}>
 						{@render creditText(
 							image.credit.author,
 							image.credit.type,
