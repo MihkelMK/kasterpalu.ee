@@ -16,7 +16,7 @@
 	tags: Tag[],
 	link: string
 )}
-	<div class="mb-10 w-80 space-y-3 md:w-60">
+	<div class="mb-10 w-72 space-y-3 md:w-60">
 		<Image {image} {tags} class="aspect-[4/5] object-cover" />
 		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
 			<div class="mt-1 pr-4">
