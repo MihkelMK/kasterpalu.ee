@@ -1,4 +1,4 @@
-import type { GamesObj } from './types';
+import type { GamesObj, TagsObj } from './types';
 
 export const site = {
 	name: 'Stuff.Kasterpalu',
@@ -25,4 +25,10 @@ export const games: GamesObj = {
 		image: '',
 		description: ''
 	}
+};
+
+export const badges: TagsObj = {
+	muusika: { name: 'Muusika', description: 'Tegelen siin muusikaga' },
+	veeb: { name: 'Veebileht', description: 'Disainisin/kirjutasin veebilehe' },
+	asutaja: { name: 'Asutaja', description: 'Olin osa selle loomisest' }
 };

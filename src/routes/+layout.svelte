@@ -53,7 +53,7 @@
 		</Button>
 	</header>
 
-	<div class="container flex flex-col items-center">
+	<div class="container relative flex flex-col items-center">
 		{@render children()}
 	</div>
 

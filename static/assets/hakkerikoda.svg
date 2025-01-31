@@ -1,0 +1,14 @@
+<svg width="346.78" height="346.78" viewBox="0 0 91.752 91.752" xml:space="preserve"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath clipPathUnits="userSpaceOnUse" id="a">
+      <path style="fill:#fff;fill-opacity:1;stroke:none;stroke-width:3.65559" class="powerclip" d="M88.155 24.485h47.08v38.311h-47.08zm23.94 10.547a1.921 1.862 0 0 0-1.92-1.862 1.921 1.862 0 0 0-1.922 1.862 1.921 1.862 0 0 0 1.921 1.863 1.921 1.862 0 0 0 1.921-1.863z"/>
+    </clipPath>
+  </defs>
+  <path style="font-variation-settings:'wght' 400;fill:#fff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:.953998;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" d="M93.155 35.764s.411-.483 3.384-2.885c10.366-8.375 20.53 1.35 21.315 1.642.785.29 5.138 1.673 7.97 3.026 3.141 1.499 4.176 3.065 4.412 4.11-5.624.32-11.536.193-13.252.615-5.289 1.302-8.731 4.666-10.785 6.854-2.053 2.189-7.124 8.67-7.124 8.67-5.28-7.017-5.92-13.823-5.92-22.032z" clip-path="url(#a)" transform="matrix(2.163 0 0 2.163 -195.72 -54.569)"/>
+  <path style="font-variation-settings:'wght' 679,'YOPQ' 276;fill:#fff;fill-opacity:1;fill-rule:evenodd;stroke-width:1.95121;stroke-linecap:round;stroke-linejoin:round;paint-order:markers stroke fill" d="M121.886 44.093a.825.825 0 0 0-1.022.569l-3.447 12.088a.826.826 0 0 0 .568 1.022l.535.152c-.003.007-.006.014-.007.02l-.999 3.502a.825.825 0 0 0 .568 1.022l3.123.89a.825.825 0 0 0 1.022-.568l.999-3.501c.003-.007.002-.014.006-.021l.534.152a.825.825 0 0 0 1.022-.568l3.448-12.088a.825.825 0 0 0-.569-1.023zm2.417 2.484a1.003 1.003 0 1 1-.55 1.93 1.003 1.003 0 0 1 .55-1.93zm-5.327 12.287.705.201-.844 2.96-.705-.202zm2.666.76.705.202-.844 2.959-.704-.201zm-1.816-.37.705.201-.766 2.686-.705-.201zm.889.254.704.2-.766 2.686-.704-.2z" transform="matrix(2.163 0 0 2.163 -195.72 -54.569)"/>
+  <path style="font-variation-settings:'wght' 400;fill:none;fill-rule:evenodd;stroke:#fff;stroke-width:1.058;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" d="M124.614 38.947s-3.263 7.383-.306 8.011c2.957.628 2.17-8.088 2.17-8.088" transform="matrix(2.163 0 0 2.163 -195.72 -54.569)"/>
+  <path style="fill:none;stroke-width:.264583" d="M20.79-4.773h91.752v91.752H20.79z" transform="translate(-20.79 4.773)"/>
+ <style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+  @media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }</style>
+</svg>
