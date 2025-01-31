@@ -68,7 +68,7 @@
 
 	<footer class="container flex w-full justify-between px-9 py-6">
 		<a
-			href="https://koodi.lenn.uk/mihkelmk/minigames"
+			href="https://koodi.lenn.uk/mihkelmk/portfolio_site"
 			target="_blank"
 			class="text-sm text-muted-foreground underline underline-offset-4"
 		>

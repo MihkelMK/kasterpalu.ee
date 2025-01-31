@@ -2,7 +2,7 @@
 name: 'stuff.kasterpalu'
 services:
   web:
-    container_name: 'stuff.kasterpalu-web'
+    container_name: 'kasterpalu-web'
     build: .
     restart: unless-stopped
     ports:
