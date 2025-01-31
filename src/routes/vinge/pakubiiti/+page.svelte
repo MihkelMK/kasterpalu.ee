@@ -41,7 +41,7 @@
 			>
 				{#each { length: 3 }}
 					{#if i < 2}
-						<Skeleton class="border-primary/5 h-[5rem] w-full rounded-xl border" />
+						<Skeleton class="h-[5rem] w-full rounded-xl border border-primary/5" />
 					{:else}
 						<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
 					{/if}
@@ -86,9 +86,9 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="font-title mb-12 flex flex-col items-center text-center">
+<header class="mb-12 flex flex-col items-center text-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
-	<p class="text-muted-foreground text-xl font-semibold">
+	<p class="text-xl font-semibold text-muted-foreground">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
 		<span class="text-purple-600 dark:text-purple-400">artistid</span> ja
 		<span class="text-blue-600 dark:text-blue-400">pildid</span>.
