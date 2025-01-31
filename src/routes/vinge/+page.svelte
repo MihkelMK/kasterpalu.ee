@@ -16,12 +16,12 @@
 	<meta property="og:image" content={baseURL + site.image} />
 </svelte:head>
 
-<header class="mb-24 flex flex-col items-center text-center font-title">
+<header class="font-title mb-12 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Vinge värk</h1>
-	<p class="font-sans text-base leading-7 text-muted-foreground">
+	<p class="text-muted-foreground font-sans text-base leading-7">
 		Minu loodud minimängud ja muud huvitavat.
 	</p>
-	<p class="font-sans text-base leading-7 text-muted-foreground">
+	<p class="text-muted-foreground font-sans text-base leading-7">
 		Aitäh
 		<a href="https://neal.fun" class="font-medium underline underline-offset-4">neal.fun</a> inspo eest
 		:)
@@ -29,7 +29,7 @@
 </header>
 
 <div
-	class="mx-auto mb-24 flex w-full flex-wrap items-center justify-center justify-items-center gap-4 gap-x-8 gap-y-8 lg:grid-cols-2"
+	class="mx-auto flex w-full flex-wrap items-center justify-center justify-items-center gap-4 gap-x-8 gap-y-8 lg:grid-cols-2"
 >
 	{#each Object.entries(games) as [href, { image, name }]}
 		<a
@@ -41,7 +41,7 @@
 			draggable="false"
 			href="/vinge/{href}"
 		>
-			<span class="relative block select-none rounded font-mono text-lg font-semibold lg:text-xl">
+			<span class="relative block rounded font-mono text-lg font-semibold select-none lg:text-xl">
 				{name}
 			</span>
 		</a>

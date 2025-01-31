@@ -56,7 +56,7 @@
 		</Button>
 	</header>
 
-	<div class="container relative mt-8 flex flex-col items-center">
+	<div class="relative container mt-14 flex flex-col items-center">
 		{@render children()}
 	</div>
 

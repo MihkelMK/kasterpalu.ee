@@ -20,8 +20,8 @@
 		<Image {image} {tags} class="aspect-[4/5] object-cover" />
 		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
 			<div class="mt-1 pr-4">
-				<h3 class="text-lg font-medium leading-none">{name}</h3>
-				<p class="mt-1.5 text-sm leading-5 text-muted-foreground">{description}</p>
+				<h3 class="text-lg leading-none font-medium">{name}</h3>
+				<p class="text-muted-foreground mt-1.5 text-sm leading-5">{description}</p>
 			</div>
 			<Button target="_blank" href={link} variant="secondary" size="icon">
 				<SquareArrowOutUpRight />
@@ -40,11 +40,11 @@
 	<meta property="og:image" content={baseURL + site.image} />
 </svelte:head>
 
-<header class="mb-24 flex flex-col items-center text-center font-title">
+<header class="font-title mb-12 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
 		Hei! Mina olen Mihkel
 	</h1>
-	<p class="font-sans text-base text-muted-foreground">
+	<p class="text-muted-foreground font-sans text-base">
 		Peale selle toreda saidi on mul veel palju hobisid
 	</p>
 </header>
