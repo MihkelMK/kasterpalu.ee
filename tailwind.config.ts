@@ -3,17 +3,9 @@ import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config: Config = {
-	darkMode: ['class'],
+	darkMode: ['class', 'dark'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-	safelist: ['dark'],
 	theme: {
-		container: {
-			center: true,
-			padding: '2rem',
-			screens: {
-				'2xl': '1400px'
-			}
-		},
 		extend: {
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
@@ -91,7 +83,11 @@ const config: Config = {
 				'caret-blink': 'caret-blink 1.25s ease-out infinite'
 			},
 			transitionTimingFunction: {
-				default: 'cubic-bezier(0.16, 1, 0.3, 1)'
+				default: 'cubic-bezier(0.16, 1, 0.3, 1)',
+				in: 'cubic-bezier(0.7, 0, 0.84, 0)',
+				out: 'cubic-bezier(0.16, 1, 0.3, 1)',
+				'in-out': 'cubic-bezier(0.87, 0, 0.13, 1)',
+				bouncy: 'cubic-bezier(.65,.01,.04,.97)'
 			}
 		}
 	},

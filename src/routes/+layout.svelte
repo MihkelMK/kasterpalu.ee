@@ -45,11 +45,11 @@
 
 		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 			{#if theme === 'dark'}
-				<Moon class="!h-6 !w-6" />
+				<Moon class="h-6! w-6!" />
 			{:else if theme === 'light'}
-				<Sun class="!h-6 !w-6" />
+				<Sun class="h-6! w-6!" />
 			{:else}
-				<LaptopMinimal class="!h-6 !w-6" />
+				<LaptopMinimal class="h-6! w-6!" />
 			{/if}
 
 			<span class="sr-only">Toggle theme</span>

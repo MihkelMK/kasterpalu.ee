@@ -17,7 +17,7 @@
 	link: string
 )}
 	<div class="mb-16 w-80 space-y-3 md:w-64">
-		<Image {image} {tags} class="aspect-[4/5] object-cover" />
+		<Image {image} {tags} class="aspect-4/5 object-cover" />
 		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
 			<div class="mt-1 pr-4">
 				<h3 class="text-lg font-medium leading-none">{name}</h3>

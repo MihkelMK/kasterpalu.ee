@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../tailwind.config.ts';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+}
+
+@utility shadow-sharp {
+	box-shadow: hsl(var(--primary)) 4px 3px 0px;
+
+	&:hover {
+		box-shadow: hsl(var(--primary)) 2px 1px 0px;
+		translate: 2px 1px;
+	}
+	&.pressed {
+		box-shadow: hsl(var(--primary)) 2px 1px 0px;
+		translate: 2px 1px;
+	}
+}
+
+@utility container {
+	margin-inline: auto;
+	padding-inline: 2rem;
+}
 
 @layer base {
 	:root {
@@ -71,22 +107,5 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-	}
-}
-
-@layer components {
-	.shadow-sharp {
-		box-shadow: hsl(var(--primary)) 4px 3px 0px;
-	}
-	button.shadow-sharp,
-	a.shadow-sharp {
-		&:hover {
-			box-shadow: hsl(var(--primary)) 2px 1px 0px;
-			translate: 2px 1px;
-		}
-		&.pressed {
-			box-shadow: hsl(var(--primary)) 2px 1px 0px;
-			translate: 2px 1px;
-		}
 	}
 }
