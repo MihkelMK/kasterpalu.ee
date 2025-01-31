@@ -40,6 +40,9 @@
 		<a href="/">
 			<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
 		</a>
+
+		<a class="font-mono font-medium underline underline-offset-4" href="/vinge"> vinge värk </a>
+
 		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 			{#if theme === 'dark'}
 				<Moon class="!h-6 !w-6" />
@@ -53,7 +56,7 @@
 		</Button>
 	</header>
 
-	<div class="container relative flex flex-col items-center">
+	<div class="container relative mt-8 flex flex-col items-center">
 		{@render children()}
 	</div>
 

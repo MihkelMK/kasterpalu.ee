@@ -1,6 +1,34 @@
 <script lang="ts">
-	import { site, baseURL, games } from '$lib/config';
+	import type { EnhancedImage, Tag } from '$lib/types';
+	import { site, baseURL } from '$lib/config';
+
+	import SquareArrowOutUpRight from 'lucide-svelte/icons/square-arrow-out-up-right';
+
+	import { Button } from '$lib/components/ui/button/index.js';
+	import Image from '$lib/components/Image.svelte';
+	import projects from '$lib/data/projects';
 </script>
+
+{#snippet projectCard(
+	name: string,
+	description: string,
+	image: EnhancedImage,
+	tags: Tag[],
+	link: string
+)}
+	<div class="mb-16 w-80 space-y-3 md:w-64">
+		<Image {image} {tags} class="aspect-[4/5] object-cover" />
+		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
+			<div class="mt-1 pr-4">
+				<h3 class="text-lg font-medium leading-none">{name}</h3>
+				<p class="mt-1.5 text-sm leading-5 text-muted-foreground">{description}</p>
+			</div>
+			<Button target="_blank" href={link} variant="secondary" size="icon">
+				<SquareArrowOutUpRight />
+			</Button>
+		</div>
+	</div>
+{/snippet}
 
 <svelte:head>
 	<title>{site.name}</title>
@@ -16,31 +44,13 @@
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
 		Hei! Mina olen Mihkel
 	</h1>
-	<p class="text-xl font-semibold text-muted-foreground">
-		Siin saidil on mu loodud minimängud ja muud huvitavat. Aitäh <a
-			href="https://neal.fun"
-			class="font-medium underline underline-offset-4">neal.fun</a
-		> inspo eest :]
-	</p>
-	<p class="text-xl font-semibold text-muted-foreground">
-		Vaata ka mu
-		<a href="/projektid" class="text-primary underline underline-offset-4">teisi projekte</a>.
+	<p class="font-sans text-base text-muted-foreground">
+		Peale selle toreda saidi on mul veel palju hobisid
 	</p>
 </header>
-<main class="grid w-full max-w-4xl justify-items-center gap-y-8 lg:grid-cols-2">
-	{#each Object.entries(games) as [href, { image, name }]}
-		<a
-			class="shadow-sharp flex aspect-[4/1] w-full max-w-sm items-center justify-center rounded-xl border-2 border-current bg-contain bg-no-repeat transition-all {href ===
-			''
-				? 'pressed pointer-events-none'
-				: ''}"
-			style="background-image: url('{image}')"
-			draggable="false"
-			{href}
-		>
-			<span class="relative block select-none rounded font-mono text-2xl font-semibold lg:text-3xl">
-				{name}
-			</span>
-		</a>
+
+<main class="flex w-full flex-wrap justify-center gap-x-8">
+	{#each projects as { name, description, image, tags, link }}
+		{@render projectCard(name, description, image, tags, link)}
 	{/each}
 </main>

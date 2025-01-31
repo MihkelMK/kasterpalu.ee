@@ -1,34 +1,16 @@
-import type { GamesObj, TagsObj } from './types';
-
 export const site = {
-	name: 'Stuff.Kasterpalu',
+	name: 'Mihkel Martin Kasterpalu',
 	author: 'Mihkel Martin Kasterpalu',
-	description: 'Minimängud ja muud huvitavat.',
+	description: 'Portfoolio - Arendaja, Disainer, Muusik, DJ, Ettevõtja.',
 	image: '/web-app-manifest-512x512.png'
 };
 
-export const baseURL = 'https://stuff.kasterpalu.ee';
-
-export const games: GamesObj = {
-	'/epochalypse': {
-		name: 'Epochalypse',
-		image: '',
-		description: 'Varsti veel üks Y2K. Kui nostalgiline!'
-	},
-	'/pakubiiti': {
-		name: 'Paku biiti',
-		image: '',
-		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
-	},
-	'': {
-		name: 'Rohkem mänge soon™',
-		image: '',
-		description: ''
-	}
+export const stuffSite = {
+	name: 'Kasterpalu Stuff',
+	author: 'Mihkel Martin Kasterpalu',
+	description:
+		'Minimängud ja muud huvitavat. Kui mul tekkis lahe idee ja suutsin sellest midagi lahedat arendada siis näed seda ka siin.',
+	image: '/web-app-manifest-512x512.png'
 };
 
-export const badges: TagsObj = {
-	muusika: { name: 'Muusika', description: 'Tegelen siin muusikaga' },
-	veeb: { name: 'Veebileht', description: 'Disainisin/kirjutasin veebilehe' },
-	asutaja: { name: 'Asutaja', description: 'Olin osa selle loomisest' }
-};
+export const baseURL = 'https://kasterpalu.ee';
