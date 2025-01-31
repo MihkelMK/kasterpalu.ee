@@ -6,4 +6,10 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - 9005:3000
+      - 9000:3000
+    labels:
+      - homepage.group=Websites
+      - homepage.name=Portfolio site
+      - homepage.icon=https://kasterpalu.ee/favicon-96x96.png
+      - homepage.href=https://kasterpalu.ee
+      - homepage.siteMonitor=https://kasterpalu.ee
