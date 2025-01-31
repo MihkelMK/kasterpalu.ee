@@ -10,10 +10,12 @@
 	import Moon from 'lucide-svelte/icons/moon';
 	import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
 	import { site } from '$lib/config';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
 	let theme: string = $state('system');
+	let email: string | undefined = $state(undefined);
 
 	const cycleTheme = () => {
 		if (theme === 'dark') {
@@ -27,6 +29,10 @@
 			setMode('dark');
 		}
 	};
+
+	onMount(() => {
+		email = site.email;
+	});
 </script>
 
 <svelte:head>
@@ -60,13 +66,27 @@
 		{@render children()}
 	</div>
 
-	<footer class="container flex w-full justify-center px-8 py-6 text-center">
+	<footer class="container flex w-full justify-between px-9 py-6">
 		<a
 			href="https://koodi.lenn.uk/mihkelmk/minigames"
 			target="_blank"
-			class="text-muted-foreground underline underline-offset-4"
+			class="text-sm text-muted-foreground underline underline-offset-4"
 		>
 			saidi kood
 		</a>
+
+		{#if email}
+			<a
+				href="mailto://{email}"
+				target="_blank"
+				class="text-right text-sm text-muted-foreground underline underline-offset-4"
+			>
+				{email}
+			</a>
+		{:else}
+			<p class="text-sm text-muted-foreground">
+				{'<email_protected>'}
+			</p>
+		{/if}
 	</footer>
 </div>
