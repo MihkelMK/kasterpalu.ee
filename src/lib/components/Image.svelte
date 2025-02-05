@@ -13,9 +13,9 @@
 
 	let {
 		image,
-		tags = [],
+		tags,
 		class: className
-	}: { image: EnhancedImage; tags: Tag[]; class: string } = $props();
+	}: { image: EnhancedImage | undefined; tags?: Tag[]; class?: string } = $props();
 
 	let badgeVariant: BadgeVariant = $derived($mode == 'dark' ? 'secondary' : 'default');
 </script>
@@ -36,52 +36,58 @@
 	</span>
 {/snippet}
 
-<div
-	class="projectCardImage grid justify-items-center overflow-hidden rounded-md bg-primary shadow-lg"
->
-	{#if typeof image.src === 'string'}
-		<img src={image.src} alt={image.alt} class={className} />
-	{:else}
-		<enhanced:img src={image.src} alt={image.alt} class={className} />
-	{/if}
-	{#if tags}
-		<div class="space-x-4 self-start p-4">
-			{#each tags as { name, description }}
-				<HoverCard.Root>
-					<HoverCard.Trigger>
-						<Badge
-							class="font-title text-base font-semibold leading-relaxed tracking-wide"
-							variant={badgeVariant}>{name}</Badge
-						>
-					</HoverCard.Trigger>
-					<HoverCard.Content>
-						{description}
-					</HoverCard.Content>
-				</HoverCard.Root>
-			{/each}
-		</div>
-	{/if}
+{#if image}
+	<div
+		class="projectCardImage grid justify-items-center overflow-hidden rounded-md bg-primary shadow-lg"
+	>
+		{#if typeof image.src === 'string'}
+			<img src={image.src} alt={image.alt} class={className} />
+		{:else}
+			<enhanced:img src={image.src} alt={image.alt} class={className} />
+		{/if}
+		{#if tags}
+			<div class="space-x-4 self-start p-4">
+				{#each tags as { name, description }}
+					<HoverCard.Root>
+						<HoverCard.Trigger>
+							<Badge
+								class="font-title text-base font-semibold leading-relaxed tracking-wide"
+								variant={badgeVariant}>{name}</Badge
+							>
+						</HoverCard.Trigger>
+						<HoverCard.Content>
+							{description}
+						</HoverCard.Content>
+					</HoverCard.Root>
+				{/each}
+			</div>
+		{/if}
 
-	{#if image.credit}
-		<div class="w-full self-end bg-black/50 text-center shadow-lg backdrop-blur-md">
-			<p
-				class="flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold text-secondary/80 dark:text-primary/80"
-			>
-				{#if image.credit.href}
-					<a class="w-full" href={image.credit.href}>
+		{#if image.credit}
+			<div class="w-full self-end bg-black/50 text-center shadow-lg backdrop-blur-md">
+				<p
+					class="flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold text-secondary/80 dark:text-primary/80"
+				>
+					{#if image.credit.href}
+						<a class="w-full" href={image.credit.href}>
+							{@render creditText(
+								image.credit.author,
+								image.credit.type,
+								'w-4 inline align-[-0.65em]'
+							)}
+						</a>
+					{:else}
 						{@render creditText(
 							image.credit.author,
 							image.credit.type,
 							'w-4 inline align-[-0.65em]'
 						)}
-					</a>
-				{:else}
-					{@render creditText(image.credit.author, image.credit.type, 'w-4 inline align-[-0.65em]')}
-				{/if}
-			</p>
-		</div>
-	{/if}
-</div>
+					{/if}
+				</p>
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.projectCardImage > * {
