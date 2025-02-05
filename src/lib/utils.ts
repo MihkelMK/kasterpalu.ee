@@ -124,7 +124,8 @@ export function getTimeRemaining(currentTime: Date, targetTime: Date): TimeRemai
 			days: 0,
 			hours: 0,
 			minutes: 0,
-			seconds: 0
+			seconds: 0,
+			milliseconds: 0
 		};
 	}
 
@@ -152,6 +153,9 @@ export function getTimeRemaining(currentTime: Date, targetTime: Date): TimeRemai
 	delta -= minutes * millisecondsPerMinute;
 
 	const seconds = Math.floor(delta / millisecondsPerSecond);
+	delta -= seconds * millisecondsPerSecond;
+
+	const milliseconds = Math.floor(delta);
 
 	return {
 		years,
@@ -159,6 +163,7 @@ export function getTimeRemaining(currentTime: Date, targetTime: Date): TimeRemai
 		days,
 		hours,
 		minutes,
-		seconds
+		seconds,
+		milliseconds
 	};
 }
