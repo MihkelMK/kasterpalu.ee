@@ -19,3 +19,16 @@
 </svelte:head>
 
 {@render children()}
+
+{#if data?.name === 'Vau kui vali'}
+	<style global>
+		html {
+			--scrollbar-color-thumb: transparent;
+			--scrollbar-color-track: transparent;
+			--scrollbar-width: none;
+			--scrollbar-width-legacy: 0px;
+
+			-ms-overflow-style: none; /* Internet Explorer 10+ */
+		}
+	</style>
+{/if}

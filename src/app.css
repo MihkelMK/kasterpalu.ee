@@ -90,3 +90,26 @@
 		}
 	}
 }
+
+/* Modern browsers with `scrollbar-*` support */
+@supports (scrollbar-width: auto) {
+	html {
+		scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+		scrollbar-width: var(--scrollbar-width);
+	}
+}
+
+/* Legacy browsers with `::-webkit-scrollbar-*` support */
+@supports selector(::-webkit-scrollbar) {
+	html::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-color-thumb);
+	}
+	html::-webkit-scrollbar-track {
+		background: var(--scrollbar-color-track);
+	}
+	html::-webkit-scrollbar {
+		display: none;
+		max-width: var(--scrollbar-width-legacy);
+		max-height: var(--scrollbar-width-legacy);
+	}
+}
