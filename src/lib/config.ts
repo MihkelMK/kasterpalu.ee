@@ -7,7 +7,7 @@ export const site = {
 };
 
 export const stuffSite = {
-	name: 'Kasterpalu Stuff',
+	name: 'Vinge Värk',
 	author: 'Mihkel Martin Kasterpalu',
 	email: 'mihkel@kasterpalu.ee',
 	description:
