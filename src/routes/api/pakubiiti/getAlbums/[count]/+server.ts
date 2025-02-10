@@ -1,5 +1,5 @@
-import { albumState } from '$lib/server/AlbumState.svelte';
-import { spotifyAPI } from '$lib/server/Spotify.svelte';
+import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
+import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
 import type { AlbumSolveState } from '$lib/types';
 import { error, json } from '@sveltejs/kit';
 

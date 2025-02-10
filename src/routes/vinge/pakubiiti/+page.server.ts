@@ -2,8 +2,8 @@ import { shuffleArray } from '$lib/utils';
 import { nanoid } from 'nanoid';
 import type { PageServerLoad } from './$types';
 import type { AlbumSolveState } from '$lib/types';
-import { albumState } from '$lib/server/AlbumState.svelte';
-import { playerState } from '$lib/server/PlayerState.svelte';
+import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
+import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
 
 const count = 3;
 

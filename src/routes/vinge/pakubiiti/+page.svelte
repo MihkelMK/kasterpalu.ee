@@ -10,7 +10,7 @@
 	import type { AlbumData } from '$lib/types';
 	import { fade } from 'svelte/transition';
 	import { expoIn, expoOut } from 'svelte/easing';
-	import { getAlbumClientState } from '$lib/client/AlbumClientState.svelte';
+	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
 
 	let { data }: { data: PageData; form: FormData } = $props();
 
