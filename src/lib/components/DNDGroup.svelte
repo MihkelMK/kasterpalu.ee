@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { flip } from 'svelte/animate';
-	import { expoOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
-	import { truncate } from '$lib/utils';
 	import type { AlbumDataField } from '$lib/types';
+
+	import { onMount } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
+	import { expoOut } from 'svelte/easing';
+
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -11,8 +13,9 @@
 		type Item
 	} from 'svelte-dnd-action';
 	import * as Card from '$lib/components/ui/card/index.js';
+
+	import { truncate } from '$lib/utils';
 	import { getAlbumClientState } from '$lib/client/AlbumClientState.svelte';
-	import { onMount } from 'svelte';
 
 	let { items, image = false, type = 'default' } = $props();
 

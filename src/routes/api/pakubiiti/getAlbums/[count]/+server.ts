@@ -1,7 +1,8 @@
+import type { AlbumSolveState } from '$lib/types';
+
+import { error, json } from '@sveltejs/kit';
 import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
 import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
-import type { AlbumSolveState } from '$lib/types';
-import { error, json } from '@sveltejs/kit';
 
 const maxTries = 10;
 

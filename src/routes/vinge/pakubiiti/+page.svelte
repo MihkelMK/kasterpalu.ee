@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { Separator } from '$lib/components/ui/separator/index.js';
-	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
-	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
-	import DndGroup from '$lib/components/DNDGroup.svelte';
 	import type { PageData } from './$types';
-	import { enhance } from '$app/forms';
 	import type { AlbumData } from '$lib/types';
+
+	import { enhance } from '$app/forms';
 	import { fade } from 'svelte/transition';
 	import { expoIn, expoOut } from 'svelte/easing';
+
+	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
+
+	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
+
+	import DndGroup from '$lib/components/DNDGroup.svelte';
 	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
 
 	let { data }: { data: PageData; form: FormData } = $props();

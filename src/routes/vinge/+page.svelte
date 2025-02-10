@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { site, baseURL } from '$lib/config';
 	import games from '$lib/data/games';
-
-	let { data } = $props();
-	$inspect(data);
 </script>
 
 <svelte:head>

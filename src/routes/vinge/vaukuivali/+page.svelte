@@ -1,15 +1,18 @@
 <script lang="ts">
-	import History from 'lucide-svelte/icons/history';
-	import { expoOut } from 'svelte/easing';
-	import { Tween } from 'svelte/motion';
-	import { fade } from 'svelte/transition';
-	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
-	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
-	import ArrowUpToLine from 'lucide-svelte/icons/arrow-up-to-line';
 	import { onMount } from 'svelte';
-	import { getTimeRemaining } from '$lib/utils';
+	import { Tween } from 'svelte/motion';
+	import { expoOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
+
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import Image from '$lib/components/Image.svelte';
+	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
+	import ArrowUpToLine from 'lucide-svelte/icons/arrow-up-to-line';
+	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
+
+	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
+	import { getTimeRemaining } from '$lib/utils';
 
 	import roomImg from '$lib/assets/vaukuivali/roomtone.jpg?enhanced';
 	import watchImg from '$lib/assets/vaukuivali/oldwatch.jpg?enhanced';
@@ -23,8 +26,6 @@
 	import chainsawImg from '$lib/assets/vaukuivali/chainsaw.jpg?enhanced';
 	import jetImg from '$lib/assets/vaukuivali/fighters.jpg?enhanced';
 	import hearingaidImg from '$lib/assets/vaukuivali/eardamage.jpg?enhanced';
-	import Image from '$lib/components/Image.svelte';
-	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
 
 	interface SoundCheckpoint {
 		db: number;

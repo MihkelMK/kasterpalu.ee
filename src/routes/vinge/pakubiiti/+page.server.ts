@@ -1,7 +1,9 @@
-import { shuffleArray } from '$lib/utils';
-import { nanoid } from 'nanoid';
 import type { PageServerLoad } from './$types';
 import type { AlbumSolveState } from '$lib/types';
+
+import { nanoid } from 'nanoid';
+import { shuffleArray } from '$lib/utils';
+
 import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
 import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
 

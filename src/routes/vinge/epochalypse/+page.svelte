@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { getTimeRemaining } from '$lib/utils';
-	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { onMount } from 'svelte';
+
+	import * as Accordion from '$lib/components/ui/accordion/index.js';
+	import { getTimeRemaining } from '$lib/utils';
 
 	const epochalypse = new Date(2038, 0, 19, 3, 14, 7);
 	let currentTime = $state(new Date());

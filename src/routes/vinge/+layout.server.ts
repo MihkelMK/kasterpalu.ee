@@ -1,4 +1,5 @@
 import type { LayoutServerData } from './$types';
+
 import { site } from '$lib/config';
 import games from '$lib/data/games';
 

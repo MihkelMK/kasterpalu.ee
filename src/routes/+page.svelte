@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { EnhancedImage, Tag } from '$lib/types';
-	import { site, baseURL } from '$lib/config';
-
-	import SquareArrowOutUpRight from 'lucide-svelte/icons/square-arrow-out-up-right';
 
 	import { Button } from '$lib/components/ui/button/index.js';
+	import SquareArrowOutUpRight from 'lucide-svelte/icons/square-arrow-out-up-right';
+
 	import Image from '$lib/components/Image.svelte';
+
+	import { site, baseURL } from '$lib/config';
 	import projects from '$lib/data/projects';
 </script>
 

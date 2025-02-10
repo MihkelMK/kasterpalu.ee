@@ -3,14 +3,16 @@
 	import '@fontsource-variable/smooch-sans';
 	import '@fontsource-variable/kode-mono';
 
-	import { ModeWatcher, resetMode, setMode } from 'mode-watcher';
+	import { onMount } from 'svelte';
+
 	import { Button } from '$lib/components/ui/button/index.js';
 
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
 	import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
+
 	import { site } from '$lib/config';
-	import { onMount } from 'svelte';
+	import { ModeWatcher, resetMode, setMode } from 'mode-watcher';
 
 	let { children } = $props();
 
