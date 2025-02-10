@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setAlbumClientState } from '$lib/client/AlbumClientState.svelte';
+	import { setAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
 
 	let { children } = $props();
 
