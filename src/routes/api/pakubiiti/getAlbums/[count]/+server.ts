@@ -1,15 +1,19 @@
 import { albumState } from '$lib/server/AlbumState.svelte';
 import { spotifyAPI } from '$lib/server/Spotify.svelte';
 import type { AlbumSolveState } from '$lib/types';
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
+
+const maxTries = 10;
 
 export async function GET({ params }) {
-	const count = params.count || 1;
+	const count = Number(params.count) || 1;
 
 	const albums: AlbumSolveState[] = [];
+	let tries = 0;
 
-	for (let i = 0; i < count; i++) {
+	while (albums.length < count && tries++ < maxTries) {
 		const album = await spotifyAPI.getRandomAlbum();
+
 		if (album) {
 			const image = album.images.at(0);
 			if (!image?.url) {
@@ -22,6 +26,12 @@ export async function GET({ params }) {
 				image: image.url
 			});
 		}
+	}
+
+	if (albums.length !== count) {
+		albumState.setAlbums([]);
+
+		return error(500, "Couldn't get albums from Spotify.");
 	}
 
 	albumState.setAlbums(albums);

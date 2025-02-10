@@ -56,6 +56,11 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
 				images: shuffleArray(albumImages),
 				artists: shuffleArray(albumArtists)
 			};
+		})
+		.catch((err) => {
+			console.log(err);
+
+			return undefined;
 		});
 
 	return {

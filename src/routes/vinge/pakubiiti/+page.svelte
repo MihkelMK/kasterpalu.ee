@@ -112,10 +112,20 @@
 				</div>
 				{@render footer(true)}
 			{:then albums}
-				<div class="grid w-full gap-4" in:fade={{ duration: 150, delay: 150, easing: expoOut }}>
-					{@render playArea(albums as AlbumData)}
-				</div>
-				{@render footer(false)}
+				{#if albums}
+					<div class="grid w-full gap-4" in:fade={{ duration: 150, delay: 150, easing: expoOut }}>
+						{@render playArea(albums as AlbumData)}
+					</div>
+					{@render footer(false)}
+				{:else}
+					<p class="mx-auto mt-16 max-w-prose text-center text-lg text-red-500">
+						<strong>Serveris tekkis mingi error.</strong>
+						<br />No clue miks see katki on, sorry.
+					</p>
+					<p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">
+						Proovi uuesti või kirjuta mulle.
+					</p>
+				{/if}
 			{/await}
 		{:else}
 			<div class="grid w-full gap-4" out:fade={{ duration: 150, easing: expoOut }}>
