@@ -15,7 +15,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 
 	import { truncate } from '$lib/utils';
-	import { getAlbumClientState } from '$lib/client/AlbumClientState.svelte';
+	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
 
 	let { items, image = false, type = 'default' } = $props();
 
