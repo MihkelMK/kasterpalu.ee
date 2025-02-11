@@ -1,7 +1,10 @@
 import { json } from '@sveltejs/kit';
+
+import { eq, sql } from 'drizzle-orm';
+
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
-import { eq, sql } from 'drizzle-orm';
+import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
 
 const maxAnswers = 5;
 
@@ -29,17 +32,17 @@ export async function POST({ locals, request }) {
 			.limit(1);
 
 		if (!question.length) {
-			return json({ error: 'Question not found' }, { status: 400 });
+			return json({ error: 'Seda küsimust ei leitud' }, { status: 400 });
 		}
 
 		const [questionData] = question;
 
-		// if (questionData.creator === user) {
-		// 	return json({ error: 'Cannot answer own question' }, { status: 400 });
-		// }
+		if (questionData.creator === user) {
+			return json({ error: 'Iseendale vastamine ei ole produktiivne' }, { status: 400 });
+		}
 
 		if (questionData.answerCount >= maxAnswers) {
-			return json({ error: 'No more answers needed' }, { status: 400 });
+			return json({ error: 'Sellel küsimusel on juba piisavalt küsimusi' }, { status: 400 });
 		}
 
 		// Insert answer and update count atomically
@@ -56,6 +59,9 @@ export async function POST({ locals, request }) {
 			.update(questions)
 			.set({ answerCount: sql`${questions.answerCount} + 1` })
 			.where(eq(questions.id, questionId));
+
+		// Valid answer, allow this user to ask one question
+		questionBalanceStore.addQuestions(user);
 
 		return json(newAnswer);
 	});

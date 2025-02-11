@@ -1,7 +1,10 @@
 import { json } from '@sveltejs/kit';
+
+import { eq, and, not, sql, exists, lt, gt } from 'drizzle-orm';
+
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
-import { eq, and, not, sql, exists, lt, gt } from 'drizzle-orm';
+import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
 
 export async function GET({ locals }) {
 	const { session } = locals;
@@ -19,6 +22,7 @@ export async function GET({ locals }) {
 		.from(questions)
 		.where(
 			and(
+				not(eq(questions.creator, user)),
 				lt(questions.answerCount, 5),
 				not(
 					exists(
@@ -34,7 +38,7 @@ export async function GET({ locals }) {
 		.limit(1);
 
 	if (!eligibleQuestions.length) {
-		return json({ error: 'No questions available' }, { status: 404 });
+		return json({ error: '' }, { status: 404 });
 	}
 
 	return json(eligibleQuestions[0]);
@@ -52,7 +56,7 @@ export async function POST({ locals, request }) {
 	}
 
 	if (!content?.trim()) {
-		return json({ error: 'Content is required' }, { status: 400 });
+		return json({ error: 'Küsimustel on sisu vaja' }, { status: 400 });
 	}
 
 	// Normalize content
@@ -71,7 +75,7 @@ export async function POST({ locals, request }) {
 				.limit(1);
 
 			if (existingQuestion.length > 0) {
-				throw new Error('Question already exists');
+				throw new Error('Seda on juba küsitud');
 			}
 
 			// Check user's recent questions (optional rate limiting)
@@ -86,7 +90,11 @@ export async function POST({ locals, request }) {
 				);
 
 			if (recentQuestions[0].count >= 10) {
-				throw new Error('Too many questions in the last hour');
+				throw new Error('Rahu rahu! Oled tunni aja jooksul liiga palju küsimusi esitanud');
+			}
+
+			if (!questionBalanceStore.useQuestion(user)) {
+				throw new Error('Pead vastama teistele enne küsimist');
 			}
 
 			// Insert the new question
@@ -103,7 +111,7 @@ export async function POST({ locals, request }) {
 
 		return json(newQuestion);
 	} catch (e) {
-		const error = e instanceof Error ? e.message : 'Failed to create question';
+		const error = e instanceof Error ? e.message : 'Küsimine põrus';
 		return json({ error }, { status: 400 });
 	}
 }

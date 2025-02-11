@@ -16,7 +16,7 @@
 	const siblingCount = $derived(isDesktop.current ? 1 : 0);
 </script>
 
-<header class="mb-12 mt-32 flex flex-col items-center text-center font-title">
+<header class="mb-12 mt-24 flex flex-col items-center text-center font-title">
 	<h1 class="mb-1 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 		Mida rahvas teab?
 	</h1>

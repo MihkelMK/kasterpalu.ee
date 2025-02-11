@@ -9,7 +9,7 @@ import { fail } from '@sveltejs/kit';
 const pageSize = 5;
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
-	const page = Number(url.searchParams.get('leht')) || 0;
+	const page = Number(url.searchParams.get('leht')) || 1;
 
 	const archiveRes = fetch(`/api/rahvatarkus/archive/${pageSize}/${(page - 1) * pageSize}`)
 		.then((res) => {
@@ -63,12 +63,12 @@ export const actions: Actions = {
 			});
 
 		if (!response.ok) {
-			const errorMessage = response.data?.error;
-
-			if (form.errors.answer) {
-				form.errors.answer.push(errorMessage);
-			} else {
-				form.errors.answer = [errorMessage];
+			if (response.data?.error) {
+				if (form.errors.answer) {
+					form.errors.answer.push(response.data.error);
+				} else {
+					form.errors.answer = [response.data.error];
+				}
 			}
 
 			return fail(400, {
@@ -111,13 +111,11 @@ export const actions: Actions = {
 			});
 
 		if (!response.ok) {
-			if (response.data?.error?.code === 'SQLITE_CONSTRAINT_UNIQUE') {
-				const errorMessage = 'Sellel küsimusel on juba vastus.';
-
+			if (response.data?.error) {
 				if (form.errors.question) {
-					form.errors.question.push(errorMessage);
+					form.errors.question.push(response.data.error);
 				} else {
-					form.errors.question = [errorMessage];
+					form.errors.question = [response.data.error];
 				}
 			}
 

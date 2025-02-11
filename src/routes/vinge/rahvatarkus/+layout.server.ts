@@ -6,6 +6,7 @@ import { formSchema as answerSchema } from './answer-schema';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { nanoid } from 'nanoid';
+import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
 
 export const load: LayoutServerLoad = async ({ fetch, locals }) => {
 	const { session } = locals;
@@ -16,6 +17,8 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
 	}
 
 	const user = session.data.userId;
+
+	const userBalance = questionBalanceStore.getBalance(user);
 
 	let question: Question | undefined = undefined;
 
@@ -43,7 +46,10 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
 	}
 
 	return {
-		user: user,
+		user: {
+			id: user,
+			balance: userBalance
+		},
 		question: question,
 		poolSize,
 		question_form: await superValidate(zod(questionSchema)),

@@ -9,6 +9,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
+	import { Textarea } from '$lib/components/ui/textarea/index.js';
 
 	let {
 		data
@@ -28,30 +29,25 @@
 		}
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, constraints } = form;
 </script>
 
 <Card.Root>
 	<Card.Header>
-		<Card.Title>Vasta vajajale</Card.Title>
-		<Card.Description>
-			{#if !data.question}
-				{#if data.poolSize === 0}
-					Rahval said kõik küsimused otsa!
-				{:else}
-					Oled kõigile vastanud, kuid enda küsimustel vastused puudu.
-				{/if}
-			{:else}
-				Tänutäheks saad vastu ühe küsimuse küsida.
-			{/if}
-		</Card.Description>
+		{#if !data.question}
+			<Card.Title>Kõik vastatud</Card.Title>
+			<Card.Description>Rahval said kõik küsimused otsa!</Card.Description>
+		{:else}
+			<Card.Title>Vasta vajajale</Card.Title>
+			<Card.Description>Tänutäheks saad vastu ühe küsimuse küsida.</Card.Description>
+		{/if}
 	</Card.Header>
 	{#if !data.question}
 		<Card.Content>
 			{#if data.poolSize === 0}
 				<p class="text-sm leading-6">Sellise erandjuhuga saad ühe korra niisama küsida!</p>
 			{:else}
-				<p class="text-sm leading-6">Äkki tahaksid su sõbrad vastata või on meil mingi küsimus?</p>
+				<p class="text-sm leading-6">Äkki tahaksid su sõbrad vastata või on neil küsimusi?</p>
 			{/if}
 		</Card.Content>
 	{:else}
@@ -61,7 +57,7 @@
 					<Form.Control>
 						{#snippet children({ props })}
 							<Form.Label>{data.question.content}?</Form.Label>
-							<Input {...props} bind:value={$formData.answer} />
+							<Textarea {...props} bind:value={$formData.answer} class="resize-none" />
 						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
@@ -72,6 +68,9 @@
 							<Input type="hidden" {...props} bind:value={$formData.questionId} />
 						{/snippet}
 					</Form.Control>
+					<Form.Description class="text-right">
+						{$formData.answer.length}/{$constraints.answer?.maxlength}
+					</Form.Description>
 					<Form.FieldErrors />
 				</Form.Field>
 			</Card.Content>

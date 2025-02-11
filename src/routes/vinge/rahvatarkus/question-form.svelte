@@ -17,12 +17,15 @@
 			question_form: SuperValidated<Infer<FormSchema>>;
 			question: Question;
 			poolSize: number;
+			user: {
+				id: string;
+				balance: number;
+			};
 		};
 	} = $props();
 
 	const form = superForm(data.question_form, {
 		validators: zodClient(formSchema),
-		invalidateAll: false,
 		resetForm: true,
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
@@ -33,28 +36,40 @@
 		}
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, constraints } = form;
 </script>
 
 <Card.Root>
 	<Card.Header>
 		<Card.Title>Küsi rahvalt</Card.Title>
-		<Card.Description>Sul on alles 0 küsimust. Vasta teistele kõigepealt!</Card.Description>
+		<Card.Description>Iga vastus annab võimaluse küsida ühe küsimuse.</Card.Description>
 	</Card.Header>
-	<form method="POST" use:enhance action="?/question">
+	{#if data.user.balance === 0 && (!data.question || data.poolSize > 0)}
 		<Card.Content>
-			<Form.Field {form} name="question">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label>Küsimus rahvale</Form.Label>
-						<Input {...props} bind:value={$formData.question} />
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
+			<p class="text-sm leading-6">Enne küsimist pead kõigepealt vastama teistele!</p>
 		</Card.Content>
-		<Card.Footer>
-			<Form.Button>Küsi</Form.Button>
-		</Card.Footer>
-	</form>
+	{:else}
+		<form method="POST" use:enhance action="?/question">
+			<Card.Content>
+				<Form.Field {form} name="question">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Küsimus rahvale</Form.Label>
+							<Input {...props} bind:value={$formData.question} />
+						{/snippet}
+					</Form.Control>
+					<Form.Description class="flex justify-between">
+						<p>
+							Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.
+						</p>
+						<p>{$formData.question.length}/{$constraints.question?.maxlength}</p>
+					</Form.Description>
+					<Form.FieldErrors />
+				</Form.Field>
+			</Card.Content>
+			<Card.Footer>
+				<Form.Button>Küsi</Form.Button>
+			</Card.Footer>
+		</form>
+	{/if}
 </Card.Root>
