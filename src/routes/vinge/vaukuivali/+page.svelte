@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { SoundCheckpoint } from '$lib/types';
+
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
 	import { expoOut } from 'svelte/easing';
@@ -11,220 +13,11 @@
 	import ArrowUpToLine from 'lucide-svelte/icons/arrow-up-to-line';
 	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
 
-	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
+	import { watch } from 'runed';
 	import { getTimeRemaining } from '$lib/utils';
 
-	import roomImg from '$lib/assets/vaukuivali/roomtone.jpg?enhanced';
-	import watchImg from '$lib/assets/vaukuivali/oldwatch.jpg?enhanced';
-	import convoImg from '$lib/assets/vaukuivali/conversation.jpg?enhanced';
-	import gennImg from '$lib/assets/vaukuivali/genn.webp?enhanced';
-	import tvImg from '$lib/assets/vaukuivali/tv.jpg?enhanced';
-	import trafficImg from '$lib/assets/vaukuivali/kaubamaja.jpg?enhanced';
-	import harleyImg from '$lib/assets/vaukuivali/harley.jpg?enhanced';
-	import landingImg from '$lib/assets/vaukuivali/landing.jpg?enhanced';
-	import carCrashImg from '$lib/assets/vaukuivali/carcrash.jpg?enhanced';
-	import chainsawImg from '$lib/assets/vaukuivali/chainsaw.jpg?enhanced';
-	import jetImg from '$lib/assets/vaukuivali/fighters.jpg?enhanced';
-	import hearingaidImg from '$lib/assets/vaukuivali/eardamage.jpg?enhanced';
-	import { ImageCreditType, type EnhancedImage } from '$lib/types';
-
-	interface SoundCheckpoint {
-		db: number;
-		title: string;
-		description: string;
-		crossedTime: undefined | Date;
-		image: EnhancedImage | undefined;
-	}
-
-	const soundCheckpoints: SoundCheckpoint[] = $state([
-		{
-			db: 0,
-			title: '',
-			description: 'Kesket metsa mingis koopas, kedagi pole ümber',
-			image: undefined,
-			crossedTime: undefined
-		},
-		{
-			db: 30,
-			title: '"Vaikus"',
-			description: 'ehk elutoa pasiivne müra',
-			image: {
-				src: roomImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Kam Idris',
-					href: 'https://unsplash.com/@ka_idris'
-				},
-				alt: 'Modernse ja minimalistliku disainiga siseruum.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 40,
-			title: 'Tikk takk',
-			description: 'Mehaanilise kella tiksumine (va täistundidel)',
-			image: {
-				src: watchImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'János Venczák',
-					href: 'https://unsplash.com/@venczakjanos'
-				},
-				alt: 'Lahti võetud vanamoodne käekell. Näha on kella sisemust, hammasrattaid.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 50,
-			title: 'Tava jutt',
-			description: 'Rahulik vestlus kodus',
-			image: {
-				src: convoImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Toa Heftiba',
-					href: 'https://unsplash.com/@heftiba'
-				},
-				alt: 'Noor paar köögis. Mees lõikab taldriku peal pannkooki, naine istub ta kõrval pliidi peal ja vaatab.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 60,
-			title: 'Ma sain nurgad täis',
-			description: 'Bingo õhtu Gennis (keset mängu)',
-			image: {
-				src: gennImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Laila Kaasik',
-					href: 'https://tartu.postimees.ee/8154041/lallavad-pidutsejad-panid-tartu-otsima-tasakaalu-ooelu-ja-oorahu-vahel'
-				},
-				alt: 'Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesti klubi välialal.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 70,
-			title: 'Pult on kadunud',
-			description: 'Telekas, mis mängib natuke liiga valjult',
-			image: {
-				src: tvImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Jonas Leupe',
-					href: 'https://unsplash.com/@jonasleupe'
-				},
-				alt: 'Keegi vaatab televiisorist filmi. Esiplaanil fookuses teleka pult, tagaplaanil udune tuba, mille seina vastas on telekas.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 80,
-			title: 'USAs oleks hullem',
-			description: 'Riia mäe liiklus (ootad bussi Kaubamaja ees)',
-			image: {
-				src: trafficImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Google Street View',
-					href: 'https://maps.app.goo.gl/ZfADP4LnUid7d571A'
-				},
-				alt: 'Aastal 2012 tehtud Google Street View pilt. Näha on Tartu Kaubamaja ning selle Riia tänava küljel olevat bussipeatust.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 90,
-			title: 'USAs oleks rohkem',
-			description: 'Harley sõidab sinust mööda',
-			image: {
-				src: harleyImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Harley-Davidson',
-					href: 'https://unsplash.com/@harleydavidson'
-				},
-				alt: 'Uue välimusega Harley-Davidson mootorrattas sõidab kiiresti mööda sirget maanteed.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 100,
-			title: 'Põgenesid terminalist',
-			description: 'Boeing 707 1 meremiil enne maandumist',
-			image: {
-				src: landingImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Scott Fillmer',
-					href: 'https://unsplash.com/@scottfillmer'
-				},
-				alt: 'Continental Airlines Boeing 777 maandub uduses Houston IAH lennujaamas.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 110,
-			title: 'Maanteeraev',
-			description: 'Autosignaal 1m kauguselt',
-			image: {
-				src: carCrashImg,
-				credit: {
-					type: ImageCreditType.instagram,
-					author: 'Jordan Besson',
-					href: 'https://www.instagram.com/mr.blue.photographie'
-				},
-				alt: 'Dramaatiline auto trikk filmi jaoks. Kahe auto kokkupõrge.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 120,
-			title: 'Mootorsaag',
-			description: 'Nüüd on juba valus. Soovitan kanda kõrvatroppe.',
-			image: {
-				src: chainsawImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Benjamin Jopen',
-					href: 'https://unsplash.com/@benjopen'
-				},
-				alt: 'Oranži ja musta värvi mootorsega lõigatakse langenud puud väiksemateks tükkideks.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 130,
-			title: 'Kuidas sa nii lähedale said?',
-			description: 'Turboreaktiivmootoriga hävitaja lendutõus 15m kauguselt',
-			image: {
-				src: jetImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Colin Lloyd',
-					href: 'https://unsplash.com/@onthesearchforpineapples'
-				},
-				alt: 'Kaheksa F-16 hävitajat lendavad koos formatsioonis taevas.'
-			},
-			crossedTime: undefined
-		},
-		{
-			db: 150,
-			title: 'Aia mu kõrvad',
-			description: 'Tubli töö! Su trummikile rebenes!',
-			image: {
-				src: hearingaidImg,
-				credit: {
-					type: ImageCreditType.web,
-					author: 'Mark Paton',
-					href: 'https://unsplash.com/@heftiba'
-				},
-				alt: 'Lähivõte inimesest sisestamas oma kõrva kuuldeaparaati.'
-			},
-			crossedTime: undefined
-		}
-	]);
+	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
+	import { soundCheckpoints } from './checkpoints';
 
 	// Source: Claude 3.5 Sonnet
 	function scrollToDecibels(scroll: number) {
@@ -237,11 +30,11 @@
 	}
 
 	// Source: Claude 3.5 Sonnet
-	function getCurrentCheckpoint(arr: SoundCheckpoint[], current: number) {
+	function getCurrentCheckpoint(arr: number[], current: number) {
 		return (
 			arr.reduce(
 				(prev: SoundCheckpoint | undefined, item) =>
-					item.db <= current && (!prev || item.db > prev.db) ? item : prev,
+					item <= current && (!prev || item > prev) ? item : prev,
 				undefined
 			) || arr.at(0)
 		);
@@ -262,7 +55,9 @@
 
 	let innerHeight = $state(0);
 	let innerWidth = $state(0);
-	let prevCheckpoint: SoundCheckpoint | undefined = $state(undefined);
+
+	let startTime: Date | undefined = $state();
+	let firstScroll: Date | undefined = $state();
 
 	let scrollScale = $derived(innerHeight * 0.1);
 	let containerHeight = $derived(decibelsToScroll(150) + innerHeight + innerHeight);
@@ -272,7 +67,10 @@
 
 	let currentDecibel = $derived(scrollToDecibels(scrollY.target));
 	let currentDecibelTweened = $derived(scrollToDecibels(scrollY.current));
-	let currentCheckpoint = $derived(getCurrentCheckpoint(soundCheckpoints, currentDecibel));
+
+	let checkpointDecibels = $derived(Object.keys(soundCheckpoints).map((value) => Number(value)));
+	let currentCheckpoint = $derived(getCurrentCheckpoint(checkpointDecibels, currentDecibel));
+	let checkpointTimes: Record<number, Date> = $state({});
 
 	let decibelMeter = $derived.by(() => {
 		const clampedValue = Math.min(999.99, Math.max(0, currentDecibel));
@@ -293,19 +91,64 @@
 		}
 	}
 
-	$effect(() => {
-		if (
-			currentCheckpoint?.title &&
-			currentCheckpoint != prevCheckpoint &&
-			!currentCheckpoint?.crossedTime
-		) {
-			currentCheckpoint.crossedTime = new Date();
+	watch.pre(
+		() => currentCheckpoint,
+		(curr, prev) => {
+			if (curr === prev) return;
+
+			if (checkpointTimes[curr]) return;
+
+			checkpointTimes[curr] = new Date();
+
+			// We reached the end
+			// Fill out any checkpoint times we missed with crude predictions
+			if (curr === checkpointDecibels.at(-1) && checkpointDecibels.length > 1) {
+				for (let i = 0; i < checkpointDecibels.length; i++) {
+					const db = checkpointDecibels[i];
+					const capturedTime = checkpointTimes[db];
+
+					if (!capturedTime) {
+						// If the next closest previous time is page load
+						// use first scroll for a more accurate prediction (if possible)
+						const prevDb = checkpointDecibels[Math.max(i - 1, 0)];
+						const prevTime = prevDb === 0 && firstScroll ? firstScroll : checkpointTimes[prevDb];
+
+						if (!prevTime) {
+							checkpointTimes[db] = firstScroll ? firstScroll : checkpointTimes[0];
+							continue;
+						}
+
+						const nextDb = checkpointDecibels[Math.min(i + 1, checkpointDecibels.length - 1)];
+						const nextTime = checkpointTimes[nextDb];
+
+						if (!nextTime) {
+							checkpointTimes[db] = prevTime;
+							continue;
+						}
+
+						checkpointTimes[db] = new Date((prevTime.getTime() + nextTime.getTime()) / 2);
+					}
+				}
+			}
 		}
-	});
+	);
+
+	// Get the time of first scroll
+	watch.pre(
+		() => scrollY.current,
+		() => {
+			if (!startTime) return;
+			if (firstScroll) return;
+
+			firstScroll = new Date();
+			checkpointTimes[checkpointDecibels[0]] = firstScroll;
+		}
+	);
 
 	onMount(() => {
-		soundCheckpoints[0].crossedTime = new Date();
-		scrollY.target = 0;
+		scrollY.set(0, { duration: 0 });
+
+		startTime = new Date();
 	});
 </script>
 
@@ -321,11 +164,11 @@
 	</div>
 {/snippet}
 
-{#snippet timeCard(point: SoundCheckpoint)}
+{#snippet timeCard(db: number | undefined)}
 	<div class="rounded-md border px-4 py-3 font-mono text-sm">
 		<p class="leading-7">
-			<strong>{point.db}dBA</strong> -
-			<span>{getElapsedTime(soundCheckpoints.at(0)?.crossedTime, point.crossedTime)}</span>
+			<strong>{db}dBA</strong> -
+			<span>{getElapsedTime(firstScroll, db ? checkpointTimes[db] : firstScroll)}</span>
 		</p>
 	</div>
 {/snippet}
@@ -367,7 +210,7 @@
 					<div
 						class="relative h-[70svh] w-4 bg-gradient-to-b from-lime-300 via-yellow-400 to-red-500 dark:from-lime-500 dark:via-yellow-400 dark:to-red-500"
 					>
-						{#each soundCheckpoints as { db }}
+						{#each checkpointDecibels as db}
 							<div
 								transition:fade
 								style="top: calc({(db / 150) * 70}svh - 0.5rem)"
@@ -386,18 +229,21 @@
 			<div
 				class="mx-auto flex w-full max-w-2xl flex-col-reverse items-center gap-8 self-center px-12 md:grid md:gap-0 md:*:[grid-area:1/1/2/2]"
 			>
-				<Image image={currentCheckpoint?.image} class="aspect-square object-cover " />
+				<Image
+					image={soundCheckpoints[currentCheckpoint]?.image}
+					class="aspect-square object-cover "
+				/>
 				<header
 					class="flex flex-col items-center py-4 text-center font-title backdrop-blur-sm backdrop-grayscale md:bg-background/75 dark:md:bg-background/90"
 				>
 					<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-						{#if currentCheckpoint?.db === 0}
+						{#if currentCheckpoint === 0}
 							Vau kui vali!
 						{:else}
-							{currentCheckpoint?.title}
+							{soundCheckpoints[currentCheckpoint]?.title}
 						{/if}
 					</h1>
-					{#if currentCheckpoint?.db === 0}
+					{#if currentCheckpoint === 0}
 						<p class="max-w-prose text-2xl font-semibold leading-7 text-muted-foreground">
 							Nagu paljud võivad teada, on detsibellide skaala logaritmiline.<br /> 60dB on 2x valjem,
 							kui 50dB.
@@ -410,7 +256,7 @@
 						</p>
 					{:else}
 						<p class="max-w-prose text-2xl font-semibold leading-7 text-primary/80">
-							{currentCheckpoint?.description}
+							{soundCheckpoints[currentCheckpoint]?.description}
 						</p>
 					{/if}
 				</header>
@@ -430,10 +276,10 @@
 				{/snippet}
 			</Collapsible.Trigger>
 		</div>
-		{@render timeCard(soundCheckpoints.at(-1) as SoundCheckpoint)}
+		{@render timeCard(checkpointDecibels.at(-1))}
 		<Collapsible.Content class="space-y-2">
-			{#each soundCheckpoints.slice(1, -1).reverse() as point}
-				{@render timeCard(point)}
+			{#each checkpointDecibels.slice(1, -1).reverse() as db}
+				{@render timeCard(db)}
 			{/each}
 		</Collapsible.Content>
 	</Collapsible.Root>
@@ -450,7 +296,7 @@
 					<a
 						href="https://www.chem.purdue.edu/chemsafety/Training/PPETrain/dblevels.htm"
 						target="_blank"
-						class=" underline underline-offset-4">Purdue University PPE training materials</a
+						class="underline underline-offset-4">Purdue University PPE training materials</a
 					>
 				</li>
 			</ul>

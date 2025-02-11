@@ -80,3 +80,9 @@ export type TagsObj = Record<string, Tag>;
 
 export type Answer = typeof answers.$inferSelect;
 export type Question = typeof questions.$inferSelect & { answers: Answer[] };
+
+export interface SoundCheckpoint {
+	title: string;
+	description: string;
+	image: EnhancedImage | undefined;
+}
