@@ -1,4 +1,5 @@
 import type { Picture } from 'vite-imagetools';
+import type { answers, questions } from './server/db/schema';
 
 export type EnhancedImage = {
 	src: string | Picture;
@@ -75,3 +76,6 @@ export type Tag = {
 };
 
 export type TagsObj = Record<string, Tag>;
+
+export type Answer = typeof answers.$inferSelect;
+export type Question = typeof questions.$inferSelect & { answers: Answer[] };

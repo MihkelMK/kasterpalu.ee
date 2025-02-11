@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { baseURL, stuffSite } from '$lib/config.js';
 
+	import { Toaster } from '$lib/components/ui/sonner/index.js';
+
 	let { children, data } = $props();
 
 	const title = data?.name ? `${data.name} | ${stuffSite.name}` : stuffSite.name;
@@ -17,6 +19,8 @@
 
 	<meta property="og:image" content={baseURL + ogImage} />
 </svelte:head>
+
+<Toaster />
 
 {@render children()}
 
