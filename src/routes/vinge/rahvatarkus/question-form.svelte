@@ -12,6 +12,8 @@
 
 	const form = superForm(data.question_form, {
 		validators: zodClient(formSchema),
+		invalidateAll: false,
+		resetForm: true,
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
 				toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);

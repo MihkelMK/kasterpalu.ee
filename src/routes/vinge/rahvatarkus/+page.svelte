@@ -4,17 +4,12 @@
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
 
-	import QuestionForm from './question-form.svelte';
-	import AnswerForm from './answer-form.svelte';
-	import SuperDebug from 'sveltekit-superforms';
+	import { goto } from '$app/navigation';
 
 	let { data }: { data: PageData } = $props();
 
 	$inspect(data);
 </script>
-
-<QuestionForm {data} />
-<AnswerForm {data} />
 
 {#await data.streamed.archive}
 	<p>loading</p>
@@ -35,7 +30,14 @@
 			</Accordion.Item>
 		{/each}
 	</Accordion.Root>
-	<Pagination.Root count={archive.meta.total} perPage={data.perPage}>
+	<Pagination.Root
+		onPageChange={(value: number) => {
+			goto(`?leht=${value}`);
+		}}
+		count={archive.meta.total}
+		perPage={data.pageSize}
+		page={data.page}
+	>
 		{#snippet children({ pages, currentPage })}
 			<Pagination.Content>
 				<Pagination.Item>

@@ -1,67 +1,109 @@
 import { json } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
-import { eq, count, and, not, sql } from 'drizzle-orm';
+import { eq, and, not, sql, exists, lt, gt } from 'drizzle-orm';
 
 export async function GET({ locals }) {
 	const { session } = locals;
-
-	if (!session?.data?.userId) {
-		return;
-	}
+	if (!session?.data?.userId) return;
 
 	const user = session.data.userId;
 
-	const questionWithAnswerCount = await db
+	// Use the answerCount field and avoid joins
+	const eligibleQuestions = await db
 		.select({
 			id: questions.id,
 			content: questions.content,
-			answerCount: count(answers.id)
+			answerCount: questions.answerCount
 		})
 		.from(questions)
-		.leftJoin(answers, eq(questions.id, answers.questionId))
-		.groupBy(questions.id)
-		.having(and(sql`${count(answers.id)} < 5`, not(eq(questions.creator, user))))
+		.where(
+			and(
+				lt(questions.answerCount, 5),
+				not(
+					exists(
+						db
+							.select()
+							.from(answers)
+							.where(and(eq(answers.questionId, questions.id), eq(answers.creator, user)))
+					)
+				)
+			)
+		)
 		.orderBy(sql`RANDOM()`)
 		.limit(1);
 
-	if (!questionWithAnswerCount.length) {
+	if (!eligibleQuestions.length) {
 		return json({ error: 'No questions available' }, { status: 404 });
 	}
 
-	return json(questionWithAnswerCount[0]);
+	return json(eligibleQuestions[0]);
 }
 
 export async function POST({ locals, request }) {
 	const { userId, content }: { userId: string; content: string } = await request.json();
 	const { session } = locals;
 
-	if (!session?.data?.userId) {
-		return;
-	}
-
+	if (!session?.data?.userId) return;
 	const user = session.data.userId;
 
 	if (!user || !userId || user !== userId) {
-		console.log(user, userId);
 		return json({ error: 'Unauthorized' }, { status: 401 });
 	}
 
-	if (!content) {
+	if (!content?.trim()) {
 		return json({ error: 'Content is required' }, { status: 400 });
 	}
 
+	// Normalize content
+	const normalizedContent = content.trim();
+	const finalContent =
+		normalizedContent.at(-1) === '?' ? normalizedContent.slice(0, -1) : normalizedContent;
+
 	try {
-		const [newQuestion] = await db
-			.insert(questions)
-			.values({
-				content: content.at(-1) === '?' ? content.slice(0, -1) : content,
-				creator: userId
-			})
-			.returning();
+		// Use transaction to ensure data consistency
+		const [newQuestion] = await db.transaction(async (tx) => {
+			// Check for duplicate questions first
+			const existingQuestion = await tx
+				.select({ id: questions.id })
+				.from(questions)
+				.where(eq(questions.content, finalContent))
+				.limit(1);
+
+			if (existingQuestion.length > 0) {
+				throw new Error('Question already exists');
+			}
+
+			// Check user's recent questions (optional rate limiting)
+			const recentQuestions = await tx
+				.select({ count: sql`count(*)` })
+				.from(questions)
+				.where(
+					and(
+						eq(questions.creator, userId),
+						gt(questions.createdAt, sql`datetime('now', '-1 hour')`)
+					)
+				);
+
+			if (recentQuestions[0].count >= 10) {
+				throw new Error('Too many questions in the last hour');
+			}
+
+			// Insert the new question
+			return await tx
+				.insert(questions)
+				.values({
+					content: finalContent,
+					creator: userId,
+					answerCount: 0,
+					createdAt: new Date()
+				})
+				.returning();
+		});
 
 		return json(newQuestion);
 	} catch (e) {
-		return json({ error: e }, { status: 400 });
+		const error = e instanceof Error ? e.message : 'Failed to create question';
+		return json({ error }, { status: 400 });
 	}
 }
