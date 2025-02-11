@@ -1,7 +1,6 @@
 import type { AlbumSolveState } from '$lib/types';
 
 import { error, json } from '@sveltejs/kit';
-import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
 import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
 
 const maxTries = 10;
@@ -30,12 +29,8 @@ export async function GET({ params }) {
 	}
 
 	if (albums.length !== count) {
-		albumState.setAlbums([]);
-
 		return error(500, "Couldn't get albums from Spotify.");
 	}
-
-	albumState.setAlbums(albums);
 
 	return json({ albums: albums });
 }

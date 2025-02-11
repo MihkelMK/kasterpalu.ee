@@ -4,7 +4,6 @@ import type { AlbumSolveState } from '$lib/types';
 import { nanoid } from 'nanoid';
 import { shuffleArray } from '$lib/utils';
 
-import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
 import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
 import { ratelimit } from '$lib/server/redis';
 
@@ -92,6 +91,8 @@ export const load: PageServerLoad = async (event) => {
 				value: album.artists
 			}));
 
+			playerState.setAlbums(user, data.albums);
+
 			return {
 				names: shuffleArray(albumNames),
 				images: shuffleArray(albumImages),
@@ -133,9 +134,7 @@ export const actions = {
 			state.push({ name: name, image: image, artists: artists });
 		}
 
-		const solved = albumState.checkSolve(state);
-
-		playerState.score(user, solved);
+		const solved = playerState.score(user, state);
 
 		return { solved: solved };
 	},

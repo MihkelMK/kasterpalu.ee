@@ -41,6 +41,7 @@ export type Player = {
 	stage: number;
 	highscore: number;
 	playing: boolean;
+	albums: AlbumSolveState[];
 };
 
 export interface TimeRemaining {
