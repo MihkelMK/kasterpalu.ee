@@ -5,7 +5,7 @@ import { eq, sql } from 'drizzle-orm';
 import type { Question } from '$lib/types';
 
 export async function GET({ params }) {
-	const limit = parseInt(params.limit) || 10;
+	const limit = Math.min(parseInt(params.limit) || 10, 10);
 	const offset = parseInt(params.offset) || 0;
 
 	// Get total count
