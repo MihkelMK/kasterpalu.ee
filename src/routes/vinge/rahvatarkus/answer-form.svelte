@@ -74,7 +74,7 @@
 					<Form.FieldErrors />
 				</Form.Field>
 			</Card.Content>
-			<Card.Footer>
+			<Card.Footer class="justify-center">
 				<Form.Button>Vasta</Form.Button>
 			</Card.Footer>
 		</form>
