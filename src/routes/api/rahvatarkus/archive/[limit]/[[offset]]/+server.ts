@@ -1,8 +1,7 @@
 import { json } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
-import { eq, gt, sql } from 'drizzle-orm';
-import type { Question } from '$lib/types';
+import { desc, eq, gt, sql } from 'drizzle-orm';
 
 export async function GET({ params }) {
 	const limit = Math.min(parseInt(params.limit) || 10, 10);
@@ -30,6 +29,7 @@ export async function GET({ params }) {
       ))`
 		})
 		.from(questions)
+		.orderBy(desc(questions.createdAt))
 		.innerJoin(answers, eq(questions.id, answers.questionId))
 		.where(gt(questions.answerCount, 0))
 		.groupBy(questions.id)
