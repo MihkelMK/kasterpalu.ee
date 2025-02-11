@@ -5,12 +5,22 @@ import { eq, and, not, sql, exists, lt, gt } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
 import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
+import { ratelimit } from '$lib/server/redis';
 
 export async function GET({ locals }) {
 	const { session } = locals;
 	if (!session?.data?.userId) return;
 
 	const user = session.data.userId;
+
+	const { success, reset } = await ratelimit.rahvaQuestionAPI.limit(user);
+
+	if (!success) {
+		const timeRemaining = Math.floor((reset - Date.now()) / 1000);
+		const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+
+		return json({ error: message }, { status: 429 });
+	}
 
 	// Use the answerCount field and avoid joins
 	const eligibleQuestions = await db
@@ -53,6 +63,15 @@ export async function POST({ locals, request }) {
 
 	if (!user || !userId || user !== userId) {
 		return json({ error: 'Unauthorized' }, { status: 401 });
+	}
+
+	const { success, reset } = await ratelimit.rahvaQuestion.limit(user);
+
+	if (!success) {
+		const timeRemaining = Math.floor((reset - Date.now()) / 1000);
+		const message = `Võta veits rahulikumalt. API Proovi ${timeRemaining}s pärast uuesti.`;
+
+		return json({ error: message }, { status: 429 });
 	}
 
 	if (!content?.trim()) {

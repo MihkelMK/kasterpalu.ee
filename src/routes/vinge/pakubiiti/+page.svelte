@@ -64,29 +64,35 @@
 	{/if}
 {/snippet}
 
-<AlertDialog.Root open={data.playing === false}>
+<AlertDialog.Root open={data.playing === false || data.error}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
 			<AlertDialog.Title>
-				{#if data?.highscore && data?.stage && data.highscore === data.stage}
+				{#if data.error}
+					{data.error.title}
+				{:else if data?.highscore && data?.stage && data.highscore === data.stage}
 					Uus parim tulemus!
 				{:else}
 					Seekord ei vedanud
 				{/if}
 			</AlertDialog.Title>
 			<AlertDialog.Description>
-				{#if data.stage === 0}
+				{#if data.error}
+					{data.error.message}
+				{:else if data.stage === 0}
 					Põrusid esimesel katsel.
 				{:else}
 					Vastasid õigesti <strong>{data.stage} korda.</strong>
 				{/if}
 			</AlertDialog.Description>
 		</AlertDialog.Header>
-		<AlertDialog.Footer>
-			<form action="?/restart" method="POST" use:enhance>
-				<AlertDialog.Action type="submit">Uuesti</AlertDialog.Action>
-			</form>
-		</AlertDialog.Footer>
+		{#if !data.error}
+			<AlertDialog.Footer>
+				<form action="?/restart" method="POST" use:enhance>
+					<AlertDialog.Action type="submit">Uuesti</AlertDialog.Action>
+				</form>
+			</AlertDialog.Footer>
+		{/if}
 	</AlertDialog.Content>
 </AlertDialog.Root>
 

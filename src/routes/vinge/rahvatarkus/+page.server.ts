@@ -5,6 +5,7 @@ import { formSchema as answerSchema } from './answer-schema';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
+import { ratelimit } from '$lib/server/redis';
 
 const pageSize = 5;
 
@@ -41,6 +42,47 @@ export const actions: Actions = {
 
 		if (!form.valid) {
 			return fail(400, {
+				form
+			});
+		}
+
+		const useragent = event.request.headers.get('user-agent') || '';
+		const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+
+		const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaAnswer.limit(user, {
+			userAgent: useragent,
+			ip: ip
+		});
+
+		const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaAnswerIP.limit(ip, {
+			userAgent: useragent,
+			ip: ip
+		});
+
+		if (!seshSuccess) {
+			const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
+			const message = `Võta veits rahulikumalt. Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+
+			if (form.errors.answer) {
+				form.errors.answer.push(message);
+			} else {
+				form.errors.answer = [message];
+			}
+			return fail(429, {
+				form
+			});
+		}
+
+		if (!ipSuccess) {
+			const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
+			const message = `Võta veits rahulikumalt. IP Proovi ${timeRemaining}s pärast uuesti.`;
+
+			if (form.errors.answer) {
+				form.errors.answer.push(message);
+			} else {
+				form.errors.answer = [message];
+			}
+			return fail(429, {
 				form
 			});
 		}
@@ -93,6 +135,47 @@ export const actions: Actions = {
 
 		if (!form.valid) {
 			return fail(400, {
+				form
+			});
+		}
+
+		const useragent = event.request.headers.get('user-agent') || '';
+		const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+
+		const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaQuestion.limit(user, {
+			userAgent: useragent,
+			ip: ip
+		});
+
+		const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaQuestionIP.limit(ip, {
+			userAgent: useragent,
+			ip: ip
+		});
+
+		if (!seshSuccess) {
+			const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
+			const message = `Võta veits rahulikumalt. Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+
+			if (form.errors.question) {
+				form.errors.question.push(message);
+			} else {
+				form.errors.question = [message];
+			}
+			return fail(429, {
+				form
+			});
+		}
+
+		if (!ipSuccess) {
+			const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
+			const message = `Võta veits rahulikumalt. IP Proovi ${timeRemaining}s pärast uuesti.`;
+
+			if (form.errors.question) {
+				form.errors.question.push(message);
+			} else {
+				form.errors.question = [message];
+			}
+			return fail(429, {
 				form
 			});
 		}

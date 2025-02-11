@@ -6,11 +6,12 @@ import { shuffleArray } from '$lib/utils';
 
 import { albumState } from '$lib/server/pakubiiti/AlbumState.svelte';
 import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
+import { ratelimit } from '$lib/server/redis';
 
 const count = 3;
 
-export const load: PageServerLoad = async ({ fetch, locals }) => {
-	const { session } = locals;
+export const load: PageServerLoad = async (event) => {
+	const { session } = event.locals;
 
 	if (!session?.data?.userId) {
 		await session.setData({ userId: nanoid() });
@@ -35,7 +36,45 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
 		};
 	}
 
-	const albumData = fetch(`/api/pakubiiti/getAlbums/${count}`)
+	const useragent = event.request.headers.get('user-agent') || '';
+	const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+
+	const { success: seshSuccess, reset: seshReset } = await ratelimit.pakubiiti.limit(user, {
+		userAgent: useragent,
+		ip: ip
+	});
+
+	const { success: ipSuccess, reset: ipReset } = await ratelimit.pakubiitiIP.limit(ip, {
+		userAgent: useragent,
+		ip: ip
+	});
+
+	if (!seshSuccess) {
+		const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
+		const message = `Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+
+		return {
+			stage: stage,
+			highscore: highscore,
+			playing: true,
+			error: { title: 'Võta veits rahulikumalt', message }
+		};
+	}
+
+	if (!ipSuccess) {
+		const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
+		const message = `IP Proovi ${timeRemaining}s pärast uuesti.`;
+
+		return {
+			stage: stage,
+			highscore: highscore,
+			playing: true,
+			error: { title: 'Võta veits rahulikumalt', message }
+		};
+	}
+
+	const albumData = event
+		.fetch(`/api/pakubiiti/getAlbums/${count}`)
 		.then((res) => {
 			return res.json();
 		})

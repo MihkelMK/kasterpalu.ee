@@ -14,7 +14,7 @@
 	});
 </script>
 
-<Tabs.Root value={firstTab} class="flex w-full max-w-md flex-col items-center gap-1">
+<Tabs.Root bind:value={firstTab} class="flex w-full max-w-md flex-col items-center gap-1">
 	<Tabs.List class="grid w-full grid-cols-2">
 		<Tabs.Trigger value="answer">Vasta</Tabs.Trigger>
 		<Tabs.Trigger value="question">Küsi</Tabs.Trigger>

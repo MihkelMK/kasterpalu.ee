@@ -5,6 +5,7 @@ import { eq, sql } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
 import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
+import { ratelimit } from '$lib/server/redis';
 
 const maxAnswers = 5;
 
@@ -17,6 +18,15 @@ export async function POST({ locals, request }) {
 
 	if (!user || !userId || user !== userId) {
 		return json({ error: 'Unauthorized' }, { status: 401 });
+	}
+
+	const { success, reset } = await ratelimit.rahvaAnswer.limit(user);
+
+	if (!success) {
+		const timeRemaining = Math.floor((reset - Date.now()) / 1000);
+		const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+
+		return json({ error: message }, { status: 429 });
 	}
 
 	// Start transaction
