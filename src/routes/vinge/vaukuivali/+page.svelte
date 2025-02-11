@@ -26,12 +26,14 @@
 	import chainsawImg from '$lib/assets/vaukuivali/chainsaw.jpg?enhanced';
 	import jetImg from '$lib/assets/vaukuivali/fighters.jpg?enhanced';
 	import hearingaidImg from '$lib/assets/vaukuivali/eardamage.jpg?enhanced';
+	import { ImageCreditType, type EnhancedImage } from '$lib/types';
 
 	interface SoundCheckpoint {
 		db: number;
 		title: string;
 		description: string;
 		crossedTime: undefined | Date;
+		image: EnhancedImage | undefined;
 	}
 
 	const soundCheckpoints: SoundCheckpoint[] = $state([
@@ -49,7 +51,7 @@
 			image: {
 				src: roomImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Kam Idris',
 					href: 'https://unsplash.com/@ka_idris'
 				},
@@ -64,7 +66,7 @@
 			image: {
 				src: watchImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'János Venczák',
 					href: 'https://unsplash.com/@venczakjanos'
 				},
@@ -79,7 +81,7 @@
 			image: {
 				src: convoImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Toa Heftiba',
 					href: 'https://unsplash.com/@heftiba'
 				},
@@ -94,7 +96,7 @@
 			image: {
 				src: gennImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Laila Kaasik',
 					href: 'https://tartu.postimees.ee/8154041/lallavad-pidutsejad-panid-tartu-otsima-tasakaalu-ooelu-ja-oorahu-vahel'
 				},
@@ -109,7 +111,7 @@
 			image: {
 				src: tvImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Jonas Leupe',
 					href: 'https://unsplash.com/@jonasleupe'
 				},
@@ -124,7 +126,7 @@
 			image: {
 				src: trafficImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Google Street View',
 					href: 'https://maps.app.goo.gl/ZfADP4LnUid7d571A'
 				},
@@ -139,7 +141,7 @@
 			image: {
 				src: harleyImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Harley-Davidson',
 					href: 'https://unsplash.com/@harleydavidson'
 				},
@@ -154,7 +156,7 @@
 			image: {
 				src: landingImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Scott Fillmer',
 					href: 'https://unsplash.com/@scottfillmer'
 				},
@@ -169,7 +171,7 @@
 			image: {
 				src: carCrashImg,
 				credit: {
-					type: 'instagram',
+					type: ImageCreditType.instagram,
 					author: 'Jordan Besson',
 					href: 'https://www.instagram.com/mr.blue.photographie'
 				},
@@ -184,7 +186,7 @@
 			image: {
 				src: chainsawImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Benjamin Jopen',
 					href: 'https://unsplash.com/@benjopen'
 				},
@@ -199,7 +201,7 @@
 			image: {
 				src: jetImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Colin Lloyd',
 					href: 'https://unsplash.com/@onthesearchforpineapples'
 				},
@@ -214,7 +216,7 @@
 			image: {
 				src: hearingaidImg,
 				credit: {
-					type: 'web',
+					type: ImageCreditType.web,
 					author: 'Mark Paton',
 					href: 'https://unsplash.com/@heftiba'
 				},

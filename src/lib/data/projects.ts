@@ -1,4 +1,4 @@
-import type { Project } from '$lib/types';
+import { ImageCreditType, type Project } from '$lib/types';
 import badges from './badges';
 
 import skpImg from '$lib/assets/skp.jpg?enhanced';
@@ -12,7 +12,7 @@ const projects: Project[] = [
     image: {
       src: skpImg,
       credit: {
-        type: 'instagram',
+        type: ImageCreditType.instagram,
         author: 'Mimmu',
         href: 'https://www.instagram.com/musamimmu/'
       },
@@ -27,7 +27,7 @@ const projects: Project[] = [
     image: {
       src: dysasterImg,
       credit: {
-        type: 'instagram',
+        type: ImageCreditType.instagram,
         author: 'Mattias Mägi',
         href: 'https://www.instagram.com/mattias.mix/'
       },
@@ -42,7 +42,7 @@ const projects: Project[] = [
     image: {
       src: monospaceeImg,
       credit: {
-        type: 'instagram',
+        type: ImageCreditType.instagram,
         author: 'Liisa Jõhvik',
         href: 'https://www.instagram.com/liisajohvik.photo/'
       },
@@ -67,7 +67,7 @@ const projects: Project[] = [
     image: {
       src: '/assets/hakkerikoda.svg',
       credit: {
-        type: 'web',
+        type: ImageCreditType.web,
         author: 'treierxyz',
         href: 'https://treier.xyz'
       },
