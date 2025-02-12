@@ -12,8 +12,9 @@ RUN pnpm i
 
 COPY . .
 
-RUN pnpm run db:push \
-  && pnpm build 
+RUN pnpm drizzle-kit generate \
+  && pnpm drizzle-kit push \
+  && pnpm build
 
 
 FROM node:20
@@ -23,6 +24,7 @@ WORKDIR /app
 COPY --from=build /app/build /app/build
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/local.db /app/local.db
+COPY --from=build /app/drizzle /app/drizzle
 
 RUN npm install --omit=dev --legacy-peer-deps
 
