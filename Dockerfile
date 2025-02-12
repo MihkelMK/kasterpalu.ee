@@ -10,14 +10,11 @@ RUN yarn global add pnpm
 COPY package.json .
 RUN pnpm i
 
-COPY .env .env
-
-RUN pnpm run db:push
-
 COPY . .
 
-# Build SvelteKit app
-RUN pnpm build
+RUN pnpm run db:push \
+  && pnpm build 
+
 
 FROM node:20
 
