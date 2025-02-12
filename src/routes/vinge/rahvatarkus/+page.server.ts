@@ -61,7 +61,7 @@ export const actions: Actions = {
 
 		if (!seshSuccess) {
 			const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-			const message = `Võta veits rahulikumalt. Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+			const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
 
 			if (form.errors.answer) {
 				form.errors.answer.push(message);
@@ -75,7 +75,7 @@ export const actions: Actions = {
 
 		if (!ipSuccess) {
 			const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-			const message = `Võta veits rahulikumalt. IP Proovi ${timeRemaining}s pärast uuesti.`;
+			const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
 
 			if (form.errors.answer) {
 				form.errors.answer.push(message);
@@ -177,7 +177,7 @@ export const actions: Actions = {
 
 		if (!seshSuccess) {
 			const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-			const message = `Võta veits rahulikumalt. Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+			const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
 
 			if (form.errors.question) {
 				form.errors.question.push(message);
@@ -191,7 +191,7 @@ export const actions: Actions = {
 
 		if (!ipSuccess) {
 			const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-			const message = `Võta veits rahulikumalt. IP Proovi ${timeRemaining}s pärast uuesti.`;
+			const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
 
 			if (form.errors.question) {
 				form.errors.question.push(message);

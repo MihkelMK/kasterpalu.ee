@@ -69,7 +69,7 @@ export async function POST({ locals, request }) {
 
 	if (!success) {
 		const timeRemaining = Math.floor((reset - Date.now()) / 1000);
-		const message = `Võta veits rahulikumalt. API Proovi ${timeRemaining}s pärast uuesti.`;
+		const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
 
 		return json({ error: message }, { status: 429 });
 	}

@@ -50,7 +50,7 @@ export const load: PageServerLoad = async (event) => {
 
 	if (!seshSuccess) {
 		const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-		const message = `Sesh Proovi ${timeRemaining}s pärast uuesti.`;
+		const message = `Proovi ${timeRemaining}s pärast uuesti.`;
 
 		return {
 			stage: stage,
@@ -62,7 +62,7 @@ export const load: PageServerLoad = async (event) => {
 
 	if (!ipSuccess) {
 		const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-		const message = `IP Proovi ${timeRemaining}s pärast uuesti.`;
+		const message = `Proovi ${timeRemaining}s pärast uuesti.`;
 
 		return {
 			stage: stage,
