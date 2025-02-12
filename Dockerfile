@@ -10,6 +10,10 @@ RUN yarn global add pnpm
 COPY package.json .
 RUN pnpm i
 
+COPY .env .env
+
+RUN pnpm run db:push
+
 COPY . .
 
 # Build SvelteKit app
@@ -21,6 +25,7 @@ WORKDIR /app
 
 COPY --from=build /app/build /app/build
 COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/local.db /app/local.db
 
 RUN npm install --omit=dev --legacy-peer-deps
 
