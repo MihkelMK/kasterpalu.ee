@@ -30,10 +30,7 @@
 >
 	{#each Object.entries(games) as [href, { image, name }]}
 		<a
-			class="shadow-sharp flex aspect-[4/1] h-16 max-w-sm items-center justify-center rounded-xl border-2 border-current bg-contain bg-no-repeat transition-all md:h-20 {href ===
-			''
-				? 'pressed pointer-events-none'
-				: ''}"
+			class="shadow-sharp flex aspect-[4/1] h-16 max-w-sm items-center justify-center rounded-xl border-2 border-current bg-contain bg-no-repeat transition-all md:h-20"
 			style="background-image: url('{image}')"
 			draggable="false"
 			href="/vinge/{href}"

@@ -1,6 +1,11 @@
 import type { GamesObj } from '$lib/types';
 
 const games: GamesObj = {
+	rahvatarkus: {
+		name: 'Rahva tarkus',
+		image: '',
+		description: 'Rahvas teab, sest pitu pead on mitu pead - hajusintelligents'
+	},
 	vaukuivali: {
 		name: 'Vau kui vali',
 		image: '',
@@ -15,11 +20,6 @@ const games: GamesObj = {
 		name: 'Paku biiti',
 		image: '',
 		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
-	},
-	'': {
-		name: 'Rohkem mänge soon™',
-		image: '',
-		description: ''
 	}
 };
 
