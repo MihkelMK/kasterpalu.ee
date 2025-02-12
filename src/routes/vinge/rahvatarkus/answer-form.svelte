@@ -10,6 +10,7 @@
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
+	import Altcha from '$lib/components/Altcha.svelte';
 
 	let {
 		data
@@ -22,9 +23,9 @@
 		invalidateAll: 'force',
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
-				toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+				toast.success('Vastus saadetud.');
 			} else {
-				toast.error('Please fix the errors in the form.');
+				toast.error('Vastamine nurjus, palun paranda vead.');
 			}
 		}
 	});
@@ -56,11 +57,20 @@
 				<Form.Field {form} name="answer">
 					<Form.Control>
 						{#snippet children({ props })}
-							<Form.Label>{data.question.content}?</Form.Label>
-							<Textarea {...props} bind:value={$formData.answer} class="resize-none" />
+							<Form.Label class="transition-colors">{data.question.content}?</Form.Label>
+							<Textarea
+								{...props}
+								bind:value={$formData.answer}
+								class="resize-none transition-colors"
+							/>
 						{/snippet}
 					</Form.Control>
-					<Form.FieldErrors />
+					<div class="flex justify-between">
+						<Form.FieldErrors />
+						<Form.Description>
+							{$formData.answer.length}/{$constraints.answer?.maxlength}
+						</Form.Description>
+					</div>
 				</Form.Field>
 				<Form.Field {form} name="questionId">
 					<Form.Control>
@@ -68,10 +78,13 @@
 							<Input type="hidden" {...props} bind:value={$formData.questionId} />
 						{/snippet}
 					</Form.Control>
-					<Form.Description class="text-right">
-						{$formData.answer.length}/{$constraints.answer?.maxlength}
-					</Form.Description>
-					<Form.FieldErrors />
+				</Form.Field>
+				<Form.Field {form} name="altcha" class="mx-auto mt-3 w-[var(--altcha-max-width)]">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Altcha {...props} bind:value={$formData.altcha} />
+						{/snippet}
+					</Form.Control>
 				</Form.Field>
 			</Card.Content>
 			<Card.Footer class="justify-center">

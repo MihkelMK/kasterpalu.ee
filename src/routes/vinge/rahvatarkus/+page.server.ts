@@ -87,6 +87,29 @@ export const actions: Actions = {
 			});
 		}
 
+		const altchaValid = await event
+			.fetch('/api/altcha', { method: 'POST', body: JSON.stringify({ payload: form.data.altcha }) })
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				return data;
+			});
+
+		if (!altchaValid) {
+			const message =
+				'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
+
+			if (form.errors.answer) {
+				form.errors.answer.push(message);
+			} else {
+				form.errors.answer = [message];
+			}
+			return fail(429, {
+				form
+			});
+		}
+
 		const response = await event
 			.fetch('/api/rahvatarkus/answer', {
 				method: 'POST',
@@ -169,6 +192,29 @@ export const actions: Actions = {
 		if (!ipSuccess) {
 			const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
 			const message = `Võta veits rahulikumalt. IP Proovi ${timeRemaining}s pärast uuesti.`;
+
+			if (form.errors.question) {
+				form.errors.question.push(message);
+			} else {
+				form.errors.question = [message];
+			}
+			return fail(429, {
+				form
+			});
+		}
+
+		const altchaValid = await event
+			.fetch('/api/altcha', { method: 'POST', body: JSON.stringify({ payload: form.data.altcha }) })
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				return data;
+			});
+
+		if (!altchaValid) {
+			const message =
+				'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
 
 			if (form.errors.question) {
 				form.errors.question.push(message);

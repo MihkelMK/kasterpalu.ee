@@ -9,6 +9,7 @@
 	import * as Form from '$lib/components/ui/form/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
+	import Altcha from '$lib/components/Altcha.svelte';
 
 	let {
 		data
@@ -29,9 +30,9 @@
 		resetForm: true,
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
-				toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+				toast.success('Küsimus esitatud.');
 			} else {
-				toast.error('Please fix the errors in the form.');
+				toast.error('Küsimine nurjus, palun paranda vead.');
 			}
 		}
 	});
@@ -42,7 +43,9 @@
 <Card.Root>
 	<Card.Header>
 		<Card.Title>Küsi rahvalt</Card.Title>
-		<Card.Description>Iga vastus annab võimaluse küsida ühe küsimuse.</Card.Description>
+		<Card.Description
+			>Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.</Card.Description
+		>
 	</Card.Header>
 	{#if data.user.balance === 0 && (!data.question || data.poolSize > 0)}
 		<Card.Content>
@@ -54,16 +57,21 @@
 				<Form.Field {form} name="question">
 					<Form.Control>
 						{#snippet children({ props })}
-							<Form.Label>Küsimus rahvale</Form.Label>
-							<Input {...props} bind:value={$formData.question} />
+							<Form.Label class="transition-colors">Küsimus rahvale</Form.Label>
+							<Input {...props} bind:value={$formData.question} class="transition-colors" />
 						{/snippet}
 					</Form.Control>
 					<Form.Description class="flex justify-between">
-						<p>
-							Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.
-						</p>
+						<Form.FieldErrors />
 						<p>{$formData.question.length}/{$constraints.question?.maxlength}</p>
 					</Form.Description>
+				</Form.Field>
+				<Form.Field {form} name="altcha" class="mx-auto  mt-3  w-[var(--altcha-max-width)]">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Altcha {...props} bind:value={$formData.altcha} />
+						{/snippet}
+					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 			</Card.Content>
