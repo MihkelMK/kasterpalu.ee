@@ -24,10 +24,8 @@
 
 <Input type="hidden" bind:value {...props} />
 
-<!-- Configure your `challengeurl` and remove the `test` attribute, see docs: https://altcha.org/docs/website-integration/#using-altcha-widget -->
 <altcha-widget
 	strings={JSON.stringify(estonianStrings)}
-	debug
 	challengeurl="/api/altcha"
 	spamfilter
 	blockspam
