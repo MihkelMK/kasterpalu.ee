@@ -4,7 +4,7 @@ const games: GamesObj = {
 	rahvatarkus: {
 		name: 'Rahva tarkus',
 		image: '',
-		description: 'Rahvas teab, sest pitu pead on mitu pead - hajusintelligents'
+		description: 'Rahvas teab, sest mitu pead on mitu pead - hajusintelligents'
 	},
 	vaukuivali: {
 		name: 'Vau kui vali',
