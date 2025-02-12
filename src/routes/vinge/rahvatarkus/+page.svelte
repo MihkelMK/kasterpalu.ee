@@ -5,6 +5,7 @@
 
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
+	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
 	import { goto } from '$app/navigation';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
@@ -24,7 +25,12 @@
 
 <div class="h-full w-full max-w-prose">
 	{#await data.streamed.archive}
-		<p>loading</p>
+		<div class="space-y-6">
+			{#each { length: 5 }}
+				<Skeleton class="h-[3.25rem] w-full rounded-lg" />
+			{/each}
+			<Skeleton class="mx-auto !mt-8 h-12 w-2/3 rounded-lg" />
+		</div>
 	{:then archive}
 		<Accordion.Root type="multiple" class="space-y-6">
 			{#each archive.data as question}
