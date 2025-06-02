@@ -17,7 +17,7 @@ export async function GET({ params }) {
 		if (album) {
 			const image = album.images.at(0);
 			if (!image?.url) {
-				return;
+				continue;
 			}
 
 			albums.push({

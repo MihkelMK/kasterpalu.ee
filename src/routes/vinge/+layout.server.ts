@@ -10,6 +10,10 @@ export const load: LayoutServerData = async ({ url }) => {
 
 	const gameSlug = url.pathname.split('/').at(-1);
 
+	if (!gameSlug) {
+		return;
+	}
+
 	const game = games[gameSlug];
 
 	if (!game) {

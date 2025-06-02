@@ -13,7 +13,7 @@ export async function POST({ locals, request }) {
 	const { userId, questionId, content } = await request.json();
 	const { session } = locals;
 
-	if (!session?.data?.userId) return;
+	if (!session?.data?.userId) return json({ error: 'Unauthorized' }, { status: 401 });
 	const user = session.data.userId;
 
 	if (!user || !userId || user !== userId) {

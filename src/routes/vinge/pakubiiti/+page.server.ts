@@ -127,9 +127,9 @@ export const actions = {
 		const state: AlbumSolveState[] = [];
 
 		for (let i = 0; i < count; i++) {
-			const name = data.get(`names_${i}`);
-			const image = data.get(`images_${i}`);
-			const artists = data.get(`artists_${i}`);
+			const name = data.get(`names_${i}`) as string;
+			const image = data.get(`images_${i}`) as string;
+			const artists = data.get(`artists_${i}`) as string;
 
 			state.push({ name: name, image: image, artists: artists });
 		}

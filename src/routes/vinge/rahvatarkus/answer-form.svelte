@@ -15,7 +15,11 @@
 	let {
 		data
 	}: {
-		data: { answer_form: SuperValidated<Infer<FormSchema>>; question: Question; poolSize: number };
+		data: {
+			answer_form: SuperValidated<Infer<FormSchema>>;
+			question: Question | undefined;
+			poolSize: number;
+		};
 	} = $props();
 
 	const form = superForm(data.answer_form, {
@@ -57,7 +61,9 @@
 				<Form.Field {form} name="answer">
 					<Form.Control>
 						{#snippet children({ props })}
-							<Form.Label class="transition-colors">{data.question.content}?</Form.Label>
+							{#if data.question}
+								<Form.Label class="transition-colors">{data.question.content}?</Form.Label>
+							{/if}
 							<Textarea
 								{...props}
 								bind:value={$formData.answer}

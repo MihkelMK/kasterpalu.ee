@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { SoundCheckpoint } from '$lib/types';
-
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
 	import { expoOut } from 'svelte/easing';
@@ -33,7 +31,7 @@
 	function getCurrentCheckpoint(arr: number[], current: number) {
 		return (
 			arr.reduce(
-				(prev: SoundCheckpoint | undefined, item) =>
+				(prev: number | undefined, item) =>
 					item <= current && (!prev || item > prev) ? item : prev,
 				undefined
 			) || arr.at(0)
@@ -94,7 +92,7 @@
 	watch.pre(
 		() => currentCheckpoint,
 		(curr, prev) => {
-			if (curr === prev) return;
+			if (!curr || curr === prev) return;
 
 			if (checkpointTimes[curr]) return;
 

@@ -5,7 +5,7 @@ import { desc, eq, gt, sql } from 'drizzle-orm';
 
 export async function GET({ params }) {
 	const limit = Math.min(parseInt(params.limit) || 10, 10);
-	const offset = parseInt(params.offset) || 0;
+	const offset = params.offset ? parseInt(params.offset) : 0;
 
 	// Get total in parallel with data
 	const totalPromise = db
@@ -41,7 +41,7 @@ export async function GET({ params }) {
 	return json({
 		data: curr_questions.map((q) => ({
 			...q,
-			answers: JSON.parse(q.answers)
+			answers: JSON.parse(q.answers as string)
 		})),
 		meta: { limit, offset, total: total[0].count }
 	});

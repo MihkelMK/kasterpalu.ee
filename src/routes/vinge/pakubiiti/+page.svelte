@@ -39,7 +39,7 @@
 
 {#snippet playArea(albums: AlbumData | undefined, placeholder = false)}
 	{#if placeholder}
-		{#each { length: 3 } as _, i}
+		{#each { length: 3 }, i}
 			<section
 				class="grid grid-cols-3 gap-2 rounded-xl p-2 px-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14"
 			>
@@ -64,7 +64,7 @@
 	{/if}
 {/snippet}
 
-<AlertDialog.Root open={data.playing === false || data.error}>
+<AlertDialog.Root open={data.playing === false || !!data.error}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
 			<AlertDialog.Title>
@@ -96,9 +96,9 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<header class="mb-16 flex flex-col items-center text-center font-title">
+<header class="font-title mb-16 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
-	<p class="text-xl font-semibold leading-7 text-muted-foreground">
+	<p class="text-muted-foreground text-xl leading-7 font-semibold">
 		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
 		<span class="text-purple-600 dark:text-purple-400">artistid</span> ja
 		<span class="text-blue-600 dark:text-blue-400">pildid</span>.

@@ -16,7 +16,7 @@
 	}: {
 		data: {
 			question_form: SuperValidated<Infer<FormSchema>>;
-			question: Question;
+			question: Question | undefined;
 			poolSize: number;
 			user: {
 				id: string;

@@ -9,7 +9,7 @@ import { ratelimit } from '$lib/server/redis';
 
 export async function GET({ locals }) {
 	const { session } = locals;
-	if (!session?.data?.userId) return;
+	if (!session?.data?.userId) return json({ error: 'Unauthorized' }, { status: 401 });
 
 	const user = session.data.userId;
 
@@ -58,7 +58,7 @@ export async function POST({ locals, request }) {
 	const { userId, content }: { userId: string; content: string } = await request.json();
 	const { session } = locals;
 
-	if (!session?.data?.userId) return;
+	if (!session?.data?.userId) return json({ error: 'Unauthorized' }, { status: 401 });
 	const user = session.data.userId;
 
 	if (!user || !userId || user !== userId) {
@@ -98,7 +98,7 @@ export async function POST({ locals, request }) {
 			}
 
 			// Check user's recent questions (optional rate limiting)
-			const recentQuestions = await tx
+			const recentQuestions = (await tx
 				.select({ count: sql`count(*)` })
 				.from(questions)
 				.where(
@@ -106,7 +106,7 @@ export async function POST({ locals, request }) {
 						eq(questions.creator, userId),
 						gt(questions.createdAt, sql`datetime('now', '-1 hour')`)
 					)
-				);
+				)) as { count: number }[];
 
 			if (recentQuestions[0].count >= 10) {
 				throw new Error('Rahu rahu! Oled tunni aja jooksul liiga palju küsimusi esitanud');
