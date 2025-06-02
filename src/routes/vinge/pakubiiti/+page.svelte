@@ -19,6 +19,7 @@
 	let { data }: { data: PageData; form: FormData } = $props();
 
 	let loading = $state(false);
+	let submitting = $state(false);
 
 	const clientState = getAlbumClientState();
 </script>
@@ -26,7 +27,7 @@
 {#snippet footer(loading: boolean)}
 	<footer class="mt-8 flex items-center justify-evenly">
 		<p class="font-title text-lg font-semibold">Skoor: {data.stage}</p>
-		{#if loading}
+		{#if loading || submitting}
 			<Button disabled class="min-w-[4.4rem]">
 				<LoaderCircle class="animate-spin" />
 			</Button>
@@ -108,8 +109,16 @@
 	<form
 		action="?/submit"
 		method="POST"
-		use:enhance
-		class="grid w-full transition-all {loading || data?.playing === false ? 'grayscale' : ''}"
+		use:enhance={() => {
+			submitting = true;
+			return async ({ update }) => {
+				await update();
+				submitting = false;
+			};
+		}}
+		class="grid w-full transition-all {loading || data?.playing === false
+			? 'grayscale'
+			: ''} transition-colors"
 	>
 		{#if data?.streamed?.albums}
 			{#await data.streamed.albums}
