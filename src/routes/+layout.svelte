@@ -12,11 +12,13 @@
 	import Moon from '@lucide/svelte/icons/moon';
 	import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
 	import { m } from '$lib/paraglide/messages';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 
 	let { children } = $props();
 	let theme: string = $state('system');
 	let email: string | undefined = $state(undefined);
+	let otherLocale: 'en' | 'et' = $derived(getLocale() === 'en' ? 'et' : 'en');
+	const localeText = (locale: 'en' | 'et') => (locale === 'en' ? 'english' : 'estonian');
 
 	const cycleTheme = () => {
 		if (theme === 'dark') {
@@ -43,7 +45,7 @@
 <ModeWatcher />
 
 <div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
-	<header class="container flex w-full items-center justify-between px-8 py-6">
+	<header class="container grid w-full grid-cols-[1fr_auto_1fr] items-center px-8 py-6">
 		<a href={localizeHref('/')}>
 			<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
 		</a>
@@ -52,17 +54,24 @@
 			{m['navigaton.vinge']()}
 		</a>
 
-		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
-			{#if theme === 'dark'}
-				<Moon class="h-6! w-6!" />
-			{:else if theme === 'light'}
-				<Sun class="h-6! w-6!" />
-			{:else}
-				<LaptopMinimal class="h-6! w-6!" />
-			{/if}
+		<div class="flex justify-self-end">
+			<Button onclick={() => setLocale(otherLocale)} variant="ghost" size="icon" class="h-12 w-12">
+				<p>{getLocale()}</p>
 
-			<span class="sr-only">Toggle theme</span>
-		</Button>
+				<span class="sr-only">Change language to {localeText(otherLocale)}</span>
+			</Button>
+			<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
+				{#if theme === 'dark'}
+					<Moon class="h-6! w-6!" />
+				{:else if theme === 'light'}
+					<Sun class="h-6! w-6!" />
+				{:else}
+					<LaptopMinimal class="h-6! w-6!" />
+				{/if}
+
+				<span class="sr-only">Toggle theme</span>
+			</Button>
+		</div>
 	</header>
 
 	<div class="relative container mt-16 flex flex-col items-center">
