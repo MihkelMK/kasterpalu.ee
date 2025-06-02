@@ -11,6 +11,8 @@
 	import Sun from '@lucide/svelte/icons/sun';
 	import Moon from '@lucide/svelte/icons/moon';
 	import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
+	import { m } from '$lib/paraglide/messages';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	let { children } = $props();
 	let theme: string = $state('system');
@@ -42,11 +44,13 @@
 
 <div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
 	<header class="container flex w-full items-center justify-between px-8 py-6">
-		<a href="/">
+		<a href={localizeHref('/')}>
 			<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
 		</a>
 
-		<a class="font-mono font-medium underline underline-offset-4" href="/vinge">vinge värk</a>
+		<a class="font-mono font-medium underline underline-offset-4" href={localizeHref('/vinge')}>
+			{m['navigaton.vinge']()}
+		</a>
 
 		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 			{#if theme === 'dark'}
@@ -67,10 +71,10 @@
 
 	<footer class="container flex w-full justify-between px-9 py-6">
 		<a
-			href="https://koodi.lenn.uk/mihkelmk/portfolio_site"
+			href="https://github.com/MihkelMK/kasterpalu.ee"
 			target="_blank"
 			class="text-muted-foreground text-sm underline underline-offset-4">
-			saidi kood
+			{m['navigaton.sourcecode']()}
 		</a>
 
 		{#if email}

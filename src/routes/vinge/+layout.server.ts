@@ -2,6 +2,7 @@ import type { LayoutServerData } from './$types';
 
 import { site } from '$lib/config';
 import games from '$lib/data/games';
+import { m } from '$lib/paraglide/messages';
 
 export const load: LayoutServerData = async ({ url }) => {
 	if (!url?.pathname) {
@@ -21,8 +22,8 @@ export const load: LayoutServerData = async ({ url }) => {
 	}
 
 	return {
-		name: game.name,
-		description: game.description || site.description,
+		name: game.name(),
+		description: game.description() || site.description,
 		image: game.image || site.image
 	};
 };

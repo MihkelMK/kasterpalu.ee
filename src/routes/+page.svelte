@@ -8,6 +8,7 @@
 
 	import { site, baseURL } from '$lib/config';
 	import projects from '$lib/data/projects';
+	import { m } from '$lib/paraglide/messages';
 </script>
 
 {#snippet projectCard(
@@ -48,10 +49,10 @@
 
 <header class="font-title mb-16 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-		Hei! Mina olen Mihkel
+		{m['landing.title']()}
 	</h1>
 	<p class="text-muted-foreground text-xl leading-7 font-semibold">
-		Peale selle toreda saidi on mul veel palju hobisid
+		{m['landing.subtitle']()}
 	</p>
 </header>
 

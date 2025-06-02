@@ -1,3 +1,4 @@
+import type { MessageFunction } from '@inlang/paraglide-js';
 import type { answers, questions } from './server/db/schema';
 
 // Workaround untill enhanced-img exports this type
@@ -77,9 +78,9 @@ export interface TimeRemaining {
 }
 
 export type Game = {
-	name: string;
+	name: MessageFunction;
+	description: MessageFunction;
 	image: string;
-	description: string;
 };
 
 // the key is the link href for the game

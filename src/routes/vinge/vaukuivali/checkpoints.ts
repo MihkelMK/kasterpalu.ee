@@ -12,16 +12,17 @@ import carCrashImg from '$lib/assets/vaukuivali/carcrash.jpg?enhanced';
 import chainsawImg from '$lib/assets/vaukuivali/chainsaw.jpg?enhanced';
 import jetImg from '$lib/assets/vaukuivali/fighters.jpg?enhanced';
 import hearingaidImg from '$lib/assets/vaukuivali/eardamage.jpg?enhanced';
+import { m } from '$lib/paraglide/messages';
 
 export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 	0: {
-		title: '',
-		description: 'Kesket metsa mingis koopas, kedagi pole ümber',
+		title: m['games.vaukuivali.checkpoints.0.title'](),
+		description: m['games.vaukuivali.checkpoints.0.description'](),
 		image: undefined
 	},
 	30: {
-		title: '"Vaikus"',
-		description: 'ehk elutoa pasiivne müra',
+		title: m['games.vaukuivali.checkpoints.30.title'](),
+		description: m['games.vaukuivali.checkpoints.30.description'](),
 		image: {
 			src: roomImg,
 			credit: {
@@ -29,12 +30,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Kam Idris',
 				href: 'https://unsplash.com/@ka_idris'
 			},
-			alt: 'Modernse ja minimalistliku disainiga siseruum.'
+			alt: m['games.vaukuivali.checkpoints.30.alt']()
 		}
 	},
 	40: {
-		title: 'Tikk takk',
-		description: 'Mehaanilise kella tiksumine (va täistundidel)',
+		title: m['games.vaukuivali.checkpoints.40.title'](),
+		description: m['games.vaukuivali.checkpoints.40.description'](),
 		image: {
 			src: watchImg,
 			credit: {
@@ -42,12 +43,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'János Venczák',
 				href: 'https://unsplash.com/@venczakjanos'
 			},
-			alt: 'Lahti võetud vanamoodne käekell. Näha on kella sisemust, hammasrattaid.'
+			alt: m['games.vaukuivali.checkpoints.40.alt']()
 		}
 	},
 	50: {
-		title: 'Tava jutt',
-		description: 'Rahulik vestlus kodus',
+		title: m['games.vaukuivali.checkpoints.50.title'](),
+		description: m['games.vaukuivali.checkpoints.50.description'](),
 		image: {
 			src: convoImg,
 			credit: {
@@ -55,12 +56,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Toa Heftiba',
 				href: 'https://unsplash.com/@heftiba'
 			},
-			alt: 'Noor paar köögis. Mees lõikab taldriku peal pannkooki, naine istub ta kõrval pliidi peal ja vaatab.'
+			alt: m['games.vaukuivali.checkpoints.50.alt']()
 		}
 	},
 	60: {
-		title: 'Ma sain nurgad täis',
-		description: 'Bingo õhtu Gennis (keset mängu)',
+		title: m['games.vaukuivali.checkpoints.60.title'](),
+		description: m['games.vaukuivali.checkpoints.60.description'](),
 		image: {
 			src: gennImg,
 			credit: {
@@ -68,12 +69,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Laila Kaasik',
 				href: 'https://tartu.postimees.ee/8154041/lallavad-pidutsejad-panid-tartu-otsima-tasakaalu-ooelu-ja-oorahu-vahel'
 			},
-			alt: 'Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesti klubi välialal.'
+			alt: m['games.vaukuivali.checkpoints.60.alt']()
 		}
 	},
 	70: {
-		title: 'Pult on kadunud',
-		description: 'Telekas, mis mängib natuke liiga valjult',
+		title: m['games.vaukuivali.checkpoints.70.title'](),
+		description: m['games.vaukuivali.checkpoints.70.description'](),
 		image: {
 			src: tvImg,
 			credit: {
@@ -81,12 +82,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Jonas Leupe',
 				href: 'https://unsplash.com/@jonasleupe'
 			},
-			alt: 'Keegi vaatab televiisorist filmi. Esiplaanil fookuses teleka pult, tagaplaanil udune tuba, mille seina vastas on telekas.'
+			alt: m['games.vaukuivali.checkpoints.70.alt']()
 		}
 	},
 	80: {
-		title: 'USAs oleks hullem',
-		description: 'Riia mäe liiklus (ootad bussi Kaubamaja ees)',
+		title: m['games.vaukuivali.checkpoints.80.title'](),
+		description: m['games.vaukuivali.checkpoints.80.description'](),
 		image: {
 			src: trafficImg,
 			credit: {
@@ -94,12 +95,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Google Street View',
 				href: 'https://maps.app.goo.gl/ZfADP4LnUid7d571A'
 			},
-			alt: 'Aastal 2012 tehtud Google Street View pilt. Näha on Tartu Kaubamaja ning selle Riia tänava küljel olevat bussipeatust.'
+			alt: m['games.vaukuivali.checkpoints.80.alt']()
 		}
 	},
 	90: {
-		title: 'USAs oleks rohkem',
-		description: 'Harley sõidab sinust mööda',
+		title: m['games.vaukuivali.checkpoints.90.title'](),
+		description: m['games.vaukuivali.checkpoints.90.description'](),
 		image: {
 			src: harleyImg,
 			credit: {
@@ -107,12 +108,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Harley-Davidson',
 				href: 'https://unsplash.com/@harleydavidson'
 			},
-			alt: 'Uue välimusega Harley-Davidson mootorrattas sõidab kiiresti mööda sirget maanteed.'
+			alt: m['games.vaukuivali.checkpoints.90.alt']()
 		}
 	},
 	100: {
-		title: 'Põgenesid terminalist',
-		description: 'Boeing 707 1 meremiil enne maandumist',
+		title: m['games.vaukuivali.checkpoints.100.title'](),
+		description: m['games.vaukuivali.checkpoints.100.description'](),
 		image: {
 			src: landingImg,
 			credit: {
@@ -120,12 +121,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Scott Fillmer',
 				href: 'https://unsplash.com/@scottfillmer'
 			},
-			alt: 'Continental Airlines Boeing 777 maandub uduses Houston IAH lennujaamas.'
+			alt: m['games.vaukuivali.checkpoints.100.alt']()
 		}
 	},
 	110: {
-		title: 'Maanteeraev',
-		description: 'Autosignaal 1m kauguselt',
+		title: m['games.vaukuivali.checkpoints.110.title'](),
+		description: m['games.vaukuivali.checkpoints.110.description'](),
 		image: {
 			src: carCrashImg,
 			credit: {
@@ -133,12 +134,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Jordan Besson',
 				href: 'https://www.instagram.com/mr.blue.photographie'
 			},
-			alt: 'Dramaatiline auto trikk filmi jaoks. Kahe auto kokkupõrge.'
+			alt: m['games.vaukuivali.checkpoints.110.alt']()
 		}
 	},
 	120: {
-		title: 'Mootorsaag',
-		description: 'Nüüd on juba valus. Soovitan kanda kõrvatroppe.',
+		title: m['games.vaukuivali.checkpoints.120.title'](),
+		description: m['games.vaukuivali.checkpoints.120.description'](),
 		image: {
 			src: chainsawImg,
 			credit: {
@@ -146,12 +147,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Benjamin Jopen',
 				href: 'https://unsplash.com/@benjopen'
 			},
-			alt: 'Oranži ja musta värvi mootorsega lõigatakse langenud puud väiksemateks tükkideks.'
+			alt: m['games.vaukuivali.checkpoints.120.alt']()
 		}
 	},
 	130: {
-		title: 'Kuidas sa nii lähedale said?',
-		description: 'Turboreaktiivmootoriga hävitaja lendutõus 15m kauguselt',
+		title: m['games.vaukuivali.checkpoints.130.title'](),
+		description: m['games.vaukuivali.checkpoints.130.description'](),
 		image: {
 			src: jetImg,
 			credit: {
@@ -159,12 +160,12 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Colin Lloyd',
 				href: 'https://unsplash.com/@onthesearchforpineapples'
 			},
-			alt: 'Kaheksa F-16 hävitajat lendavad koos formatsioonis taevas.'
+			alt: m['games.vaukuivali.checkpoints.130.alt']()
 		}
 	},
 	150: {
-		title: 'Aia mu kõrvad',
-		description: 'Tubli töö! Su trummikile rebenes!',
+		title: m['games.vaukuivali.checkpoints.150.title'](),
+		description: m['games.vaukuivali.checkpoints.150.description'](),
 		image: {
 			src: hearingaidImg,
 			credit: {
@@ -172,7 +173,7 @@ export const soundCheckpoints: Record<number, SoundCheckpoint> = {
 				author: 'Mark Paton',
 				href: 'https://unsplash.com/@heftiba'
 			},
-			alt: 'Lähivõte inimesest sisestamas oma kõrva kuuldeaparaati.'
+			alt: m['games.vaukuivali.checkpoints.150.alt']()
 		}
 	}
 };

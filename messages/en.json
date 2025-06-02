@@ -1,4 +1,264 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from en!"
+	"general": {
+		"and": "and",
+		"is": "is",
+		"at": "at"
+	},
+	"buttons": {
+		"submit": "Submit",
+		"ask": "Ask",
+		"answer": "Answer"
+	},
+	"time": {
+		"year": {
+			"single": "year",
+			"multiple": "years"
+		},
+		"month": {
+			"single": "month",
+			"multiple": "months"
+		},
+		"day": {
+			"single": "day",
+			"multiple": "days"
+		},
+		"hour": {
+			"single": "hour",
+			"multiple": "hours"
+		},
+		"minute": {
+			"single": "minute",
+			"multiple": "minutes"
+		},
+		"second": {
+			"single": "second",
+			"multiple": "seconds"
+		}
+	},
+	"landing": {
+		"title": "Hi! I'm Mihkel",
+		"subtitle": "I have many hobbies beside this fantastic site"
+	},
+	"projects": {
+		"SUPIKÖÖGIPOISID": {
+			"image": {
+				"credit": {
+					"author": "Mimmu",
+					"href": "https://www.instagram.com/musamimmu/"
+				},
+				"alt": "Picture of a four-member rap band SUPIKÖÖGIPOISID. The picture is taken outdoors on a cloudy day. In the picture are 4 men wearing dress shirts with black ties and black pants."
+			},
+			"description": "Rap Collective. Started in 2019.",
+			"link": "https://skpoisid.bandcamp.com/"
+		},
+		"Dysaster Collective": {
+			"image": {
+				"credit": {
+					"author": "Mattias Mägi",
+					"href": "https://www.instagram.com/mattias.mix/"
+				},
+				"alt": "Bluish digital collage of Dysaster Collective members."
+			},
+			"description": "Multifaceted collective of creatives founded in 2022.",
+			"link": "https://dysaster.ee"
+		},
+		"monospac.ee": {
+			"image": {
+				"credit": {
+					"author": "Liisa Jõhvik",
+					"href": "https://www.instagram.com/liisajohvik.photo/"
+				},
+				"alt": "DJ duo monospacee at their Silent Disco set in Tartu New Theatre hall in 2024. The picture is taken from the side, with DJ Mimmu in the foreground and DJ Rx visible behind her. They are lit with red light, with a third DJ blurrily visible in blue light in the background."
+			},
+			"description": "DJ duo with Rx.",
+			"link": "https://monospac.ee"
+		},
+		"Saueaugu Teatritalu": {
+			"image": {
+				"alt": "Summer view of Saueaugu theatre building. Green grass is visible below and blue sky with a few clouds can be seen behind the roof."
+			},
+			"description": "Small theater in Läänemaa. I wrote the webpage.",
+			"link": "https://saueaugu.ee"
+		},
+		"Tartu Häkkerikoda": {
+			"image": {
+				"src": "/assets/hakkerikoda.svg",
+				"credit": {
+					"author": "treierxyz",
+					"href": "https://treier.xyz"
+				},
+				"alt": "Logo for Tartu Häkkerikoda"
+			},
+			"description": "Makerspace in Tartu. Member and part of the web team.",
+			"link": "https://hakkerikoda.ee/en"
+		}
+	},
+	"badges": {
+		"music": { "name": "Music", "description": "I perform and create music here" },
+		"web": { "name": "Web", "description": "Designed/wrote the web page" },
+		"founder": { "name": "Founder", "description": "I was part of the founders" }
+	},
+	"navigaton": {
+		"sourcecode": "source code",
+		"vinge": "vinge värk"
+	},
+	"vinge": {
+		"title": "Vinge värk",
+		"subtitle": "Minigames and other interesting stuff.",
+		"credit": {
+			"prefix": "Thank you",
+			"suffix": "for the inspiration :)"
+		}
+	},
+	"games": {
+		"score": {
+			"best": "Best",
+			"score": "Score"
+		},
+		"pakubiiti": {
+			"name": "Paku biiti",
+			"description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
+			"title": "Guess the album",
+			"instructions": {
+				"main": "Correctly rearange the album",
+				"names": "names",
+				"artists": "artists",
+				"pictures": "pictures",
+				"and": "and"
+			}
+		},
+		"epochalypse": {
+			"name": "Epochalypse",
+			"description": "Soon we'll have another Y2K. How nostalgic!",
+			"title": "Epochalypse",
+			"subtitle": "Don't worry! You still have time:",
+			"explainer": {
+				"title": "What is this??",
+				"y2k": {
+					"intro": "Epochalypse is similar to the the hysteria at the end of the 1990s called",
+					"linkText": "Y2K",
+					"outro": "The system used to track time and date just",
+					"emphasis": "runs out."
+				},
+				"unix": {
+					"intro": "Most Operating Systems based on Linux use",
+					"linkText": "UNIX time",
+					"outro": "how many seconds have past from the UNIX",
+					"epoch": "epoch"
+				},
+				"integer": {
+					"intro": {
+						"part1": "These seconds are stored as a",
+						"32bit": "signed 32-bit",
+						"part2": "integer. The maximum value this type of integer can hold is"
+					},
+					"lastDate": "Therefore the last date"
+				},
+				"overflow": {
+					"intro": "Adding one more second to this last date will trigger an",
+					"linkText": "integer overflow",
+					"middle": "and the integer will be set to",
+					"outro": {
+						"part1": "the earliest possible moment for",
+						"linkText": "UNIX time",
+						"part2": "."
+					}
+				},
+				"aftermath": {
+					"intro": "Computers will then read that as",
+					"outro": "and suddenly go 137 years back in time."
+				}
+			}
+		},
+		"rahvatarkus": {
+			"name": "Rahva tarkus",
+			"description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
+		},
+		"vaukuivali": {
+			"name": "Vau kui vali",
+			"description": "Get an intuitive understanding for the loudness of everyday life.",
+			"title": "Wow, that's loud!",
+			"intro": {
+				"explainer": {
+					"body": "As many know, the decibel scale is logarythmic.",
+					"footer": "60db is 2x louder compared to 50db."
+				},
+				"problem": {
+					"body": "That didn't really make sense to me.",
+					"footer": "So I created this page to understand it more intuitively."
+				},
+				"cta": "Try it, scroll down."
+			},
+			"sources": "Sources for loudness measurements:",
+			"speedrun": "You took your time...",
+			"checkpoints": {
+				"0": {
+					"title": "",
+					"description": "",
+					"alt": ""
+				},
+				"30": {
+					"title": "\"Silence\"",
+					"description": "aka passive noise in the living room",
+					"alt": "Modern and minimalist design interior room."
+				},
+				"40": {
+					"title": "Tick tock",
+					"description": "Ticking sounds from a mechanical watch",
+					"alt": "Disassembled old-fashioned wristwatch. The inside of the watch is visible, showing gears."
+				},
+				"50": {
+					"title": "Normal conversation",
+					"description": "Quiet conversation at home",
+					"alt": "Young couple in the kitchen. Man is cutting pancakes on a plate, woman sits next to him on the stove and watches."
+				},
+				"60": {
+					"title": "Bingo!",
+					"description": "Bingo night at a bar (in the middle of the game)",
+					"alt": "The Genialists club operates in Tartu on Magasini street. The picture is from evening time, with many people in the club's outdoor area."
+				},
+				"70": {
+					"title": "Where's the remote?",
+					"description": "TV that's playing a bit too loud",
+					"alt": "Someone is watching a movie on television. In the foreground in focus is the TV remote, in the background is a blurry room with a TV against the wall."
+				},
+				"80": {
+					"title": "It'd be worse in the USA",
+					"description": "Traffic on Riia hill (waiting for the bus in front of Kaubamaja)",
+					"alt": "Google Street View picture taken in 2012. Shows Tartu Kaubamaja and the bus stop on its Riia street side."
+				},
+				"90": {
+					"title": "It'd be in the USA",
+					"description": "A Harley driving past you",
+					"alt": "New-looking Harley-Davidson motorcycle quickly driving past on a highway."
+				},
+				"100": {
+					"title": "Terminal escape",
+					"description": "Boeing 707 1 nautical mile before landing",
+					"alt": "Continental Airlines Boeing 777 lands in foggy Houston IAH airport."
+				},
+				"110": {
+					"title": "Road rage",
+					"description": "Car horn 1m away",
+					"alt": "Dramatic car stunt for a movie. Collision between two cars."
+				},
+				"120": {
+					"title": "Chainsaw",
+					"description": "We reached the pain threshold. I recommend wearing earplugs.",
+					"alt": "Orange and black chainsaw is cutting a fallen tree into smaller pieces."
+				},
+				"130": {
+					"title": "How did you get so close?",
+					"description": "Turbojet fighter takeoff from 15m distance",
+					"alt": "Eight F-16 fighters fly together in formation in the sky."
+				},
+				"150": {
+					"title": "Ouch! My ears!",
+					"description": "Good job! Your eardrum burst!",
+					"alt": "Close-up of a person inserting a hearing aid into their ear."
+				}
+			}
+		}
+	}
 }

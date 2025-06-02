@@ -1,25 +1,26 @@
+import { m } from '$lib/paraglide/messages';
 import type { GamesObj } from '$lib/types';
 
 const games: GamesObj = {
 	rahvatarkus: {
-		name: 'Rahva tarkus',
-		image: '',
-		description: 'Rahvas teab, sest mitu pead on mitu pead - hajusintelligents'
+		name: m['games.rahvatarkus.name'],
+		description: m['games.rahvatarkus.description'],
+		image: ''
 	},
 	vaukuivali: {
-		name: 'Vau kui vali',
-		image: '',
-		description: 'Intuitiivsem arusaam igapäevahelide tõelisest valjudusest.'
+		name: m['games.vaukuivali.name'],
+		description: m['games.vaukuivali.description'],
+		image: ''
 	},
 	epochalypse: {
-		name: 'Epochalypse',
-		image: '',
-		description: 'Varsti veel üks Y2K. Kui nostalgiline!'
+		name: m['games.epochalypse.name'],
+		description: m['games.epochalypse.description'],
+		image: ''
 	},
 	pakubiiti: {
-		name: 'Paku biiti',
-		image: '',
-		description: 'Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.'
+		name: m['games.pakubiiti.name'],
+		description: m['games.pakubiiti.description'],
+		image: ''
 	}
 };
 

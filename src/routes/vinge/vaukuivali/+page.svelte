@@ -16,6 +16,7 @@
 
 	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
 	import { soundCheckpoints } from './checkpoints';
+	import { m } from '$lib/paraglide/messages';
 
 	// Source: Claude 3.5 Sonnet
 	function scrollToDecibels(scroll: number) {
@@ -242,23 +243,25 @@
 						class="font-title md:bg-background/75 dark:md:bg-background/90 flex flex-col items-center py-4 text-center backdrop-blur-sm backdrop-grayscale">
 						<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
 							{#if currentCheckpoint === 0}
-								Vau kui vali!
+								{m['games.vaukuivali.title']()}
 							{:else}
 								{soundCheckpoints[currentCheckpoint]?.title}
 							{/if}
 						</h1>
 						{#if currentCheckpoint === 0}
 							<p class="text-muted-foreground max-w-prose text-2xl leading-7 font-semibold">
-								Nagu paljud võivad teada, on detsibellide skaala logaritmiline.
+								{m['games.vaukuivali.intro.explainer.body']()}
 								<br />
-								 60dB on 2x valjem, kui 50dB.
+								{m['games.vaukuivali.intro.explainer.footer']()}
 							</p>
 							<p
 								class="text-muted-foreground max-w-prose text-2xl leading-7 font-semibold not-first:mt-6">
-								See info ei jõudnud mulle eriti kohale. <br />
-								Intuitiivsemaks arusaamiseks tegin selle lehe.
+								{m['games.vaukuivali.intro.problem.body']()}
 								<br />
-								<strong>Proovi, keri alla.</strong>
+								{m['games.vaukuivali.intro.problem.footer']()}
+
+								<br />
+								<strong>{m['games.vaukuivali.intro.cta']()}</strong>
 							</p>
 						{:else}
 							<p class="text-primary/80 max-w-prose text-2xl leading-7 font-semibold">
@@ -278,7 +281,7 @@
 
 	<Collapsible.Root class="w-full max-w-xs space-y-2">
 		<div class="flex items-center justify-between px-4">
-			<h4 class="text-sm font-semibold">Sul läks ikka kaua...</h4>
+			<h4 class="text-sm font-semibold">{m['games.vaukuivali.speedrun']()}</h4>
 			<Collapsible.Trigger>
 				{#snippet child({ props })}
 					<Button variant="ghost" size="sm" class="w-9 p-0" {...props}>
@@ -298,7 +301,7 @@
 
 	<div class="mt-24 flex w-full justify-between">
 		<div>
-			<small class="text-sm leading-none font-medium">Helitugevuste allikad:</small>
+			<small class="text-sm leading-none font-medium">{m['games.vaukuivali.sources']()}</small>
 			<ul class="my-4 ml-6 list-disc [&>li]:mt-2">
 				<li class="text-muted-foreground max-w-prose text-sm leading-4">
 					Fastl, H., & Florentine, M. (2010). Loudness in Daily Environments. Springer Handbook of
