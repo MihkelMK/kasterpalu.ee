@@ -102,7 +102,7 @@
 					{@render card(item, i)}
 				</div>
 			{:else}
-				<Card.Root class={cardClass}>
+				<Card.Root class="{cardClass} p-0">
 					<Card.Content class="p-0">
 						{@render card(item, i)}
 					</Card.Content>
