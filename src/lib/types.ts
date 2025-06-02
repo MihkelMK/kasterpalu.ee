@@ -1,5 +1,15 @@
-import type { Picture } from 'vite-imagetools';
 import type { answers, questions } from './server/db/schema';
+
+// Workaround untill enhanced-img exports this type
+// https://github.com/sveltejs/kit/issues/13811
+export type Picture = {
+	sources: Record<string, string>;
+	img: {
+		src: string;
+		w: number;
+		h: number;
+	};
+};
 
 export type EnhancedImage = {
 	src: string | Picture;

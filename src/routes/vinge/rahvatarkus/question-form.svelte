@@ -66,7 +66,7 @@
 						<p>{$formData.question.length}/{$constraints.question?.maxlength}</p>
 					</Form.Description>
 				</Form.Field>
-				<Form.Field {form} name="altcha" class="mx-auto  mt-3  w-[var(--altcha-max-width)]">
+				<Form.Field {form} name="altcha" class="mx-auto  mt-3  w-(--altcha-max-width)">
 					<Form.Control>
 						{#snippet children({ props })}
 							<Altcha {...props} bind:value={$formData.altcha} />

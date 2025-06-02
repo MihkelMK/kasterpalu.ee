@@ -9,9 +9,9 @@
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Image from '$lib/components/Image.svelte';
-	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
-	import ArrowUpToLine from 'lucide-svelte/icons/arrow-up-to-line';
-	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
+	import LoaderCircle from '@lucide/svelte/icons/loader-circle';
+	import ArrowUpToLine from '@lucide/svelte/icons/arrow-up-to-line';
+	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 
 	import { watch } from 'runed';
 	import { getTimeRemaining } from '$lib/utils';
@@ -193,11 +193,11 @@
 		class="relative mb-24 w-full"
 		in:fade={{ duration: 300, easing: expoOut }}
 	>
-		<div class="sticky left-4 top-24 flex items-start rounded-xl">
+		<div class="sticky top-24 left-4 flex items-start rounded-xl">
 			<div class="flex flex-col items-start">
 				<div
-					class="ring-3 flex gap-2 rounded-md bg-stone-800 px-3 py-1 shadow shadow-black/15 ring-4 ring-inset ring-stone-900 {!displayDecimals
-						? '-ml-1.5 mb-4 scale-90'
+					class="flex gap-2 rounded-md bg-stone-800 px-3 py-1 shadow ring-3 shadow-black/15 ring-stone-900 ring-inset {!displayDecimals
+						? 'mb-4 -ml-1.5 scale-90'
 						: 'mb-6'}"
 				>
 					{#each decibelMeter as digit, i}
@@ -208,7 +208,7 @@
 				</div>
 				<div class="flex flex-col items-center gap-4">
 					<div
-						class="relative h-[70svh] w-4 bg-gradient-to-b from-lime-300 via-yellow-400 to-red-500 dark:from-lime-500 dark:via-yellow-400 dark:to-red-500"
+						class="relative h-[70svh] w-4 bg-linear-to-b from-lime-300 via-yellow-400 to-red-500 dark:from-lime-500 dark:via-yellow-400 dark:to-red-500"
 					>
 						{#each checkpointDecibels as db}
 							<div
@@ -286,13 +286,13 @@
 
 	<div class="mt-24 flex w-full justify-between">
 		<div>
-			<small class="text-sm font-medium leading-none"> Helitugevuste allikad: </small>
+			<small class="text-sm leading-none font-medium"> Helitugevuste allikad: </small>
 			<ul class="my-4 ml-6 list-disc [&>li]:mt-2">
-				<li class="max-w-prose text-sm leading-4 text-muted-foreground">
+				<li class="text-muted-foreground max-w-prose text-sm leading-4">
 					Fastl, H., & Florentine, M. (2010). Loudness in Daily Environments. Springer Handbook of
 					Auditory Research, 199–221. doi:10.1007/978-1-4419-6712-1_8
 				</li>
-				<li class="max-w-prose text-sm leading-4 text-muted-foreground">
+				<li class="text-muted-foreground max-w-prose text-sm leading-4">
 					<a
 						href="https://www.chem.purdue.edu/chemsafety/Training/PPETrain/dblevels.htm"
 						target="_blank"

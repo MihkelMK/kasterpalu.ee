@@ -1,21 +1,18 @@
 <script lang="ts">
 	import '../app.css';
+
 	import '@fontsource-variable/smooch-sans';
 	import '@fontsource-variable/kode-mono';
 
 	import { onMount } from 'svelte';
-
-	import { Button } from '$lib/components/ui/button/index.js';
-
-	import Sun from 'lucide-svelte/icons/sun';
-	import Moon from 'lucide-svelte/icons/moon';
-	import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
-
 	import { site } from '$lib/config';
 	import { ModeWatcher, resetMode, setMode } from 'mode-watcher';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import Sun from '@lucide/svelte/icons/sun';
+	import Moon from '@lucide/svelte/icons/moon';
+	import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
 
 	let { children } = $props();
-
 	let theme: string = $state('system');
 	let email: string | undefined = $state(undefined);
 
@@ -53,18 +50,18 @@
 
 		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 			{#if theme === 'dark'}
-				<Moon class="!h-6 !w-6" />
+				<Moon class="h-6! w-6!" />
 			{:else if theme === 'light'}
-				<Sun class="!h-6 !w-6" />
+				<Sun class="h-6! w-6!" />
 			{:else}
-				<LaptopMinimal class="!h-6 !w-6" />
+				<LaptopMinimal class="h-6! w-6!" />
 			{/if}
 
 			<span class="sr-only">Toggle theme</span>
 		</Button>
 	</header>
 
-	<div class="container relative mt-16 flex flex-col items-center">
+	<div class="relative container mt-16 flex flex-col items-center">
 		{@render children()}
 	</div>
 
@@ -72,7 +69,7 @@
 		<a
 			href="https://koodi.lenn.uk/mihkelmk/portfolio_site"
 			target="_blank"
-			class="text-sm text-muted-foreground underline underline-offset-4"
+			class="text-muted-foreground text-sm underline underline-offset-4"
 		>
 			saidi kood
 		</a>
@@ -81,14 +78,12 @@
 			<a
 				href="mailto://{email}"
 				target="_blank"
-				class="text-right text-sm text-muted-foreground underline underline-offset-4"
+				class="text-muted-foreground text-right text-sm underline underline-offset-4"
 			>
 				{email}
 			</a>
 		{:else}
-			<p class="text-sm text-muted-foreground">
-				{'<email_protected>'}
-			</p>
+			<p class="text-muted-foreground text-sm">&lt;email_protected&gt;</p>
 		{/if}
 	</footer>
 </div>

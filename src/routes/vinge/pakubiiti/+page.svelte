@@ -11,7 +11,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
-	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
+	import LoaderCircle from '@lucide/svelte/icons/loader-circle';
 
 	import DndGroup from '$lib/components/DNDGroup.svelte';
 	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
@@ -45,7 +45,7 @@
 			>
 				{#each { length: 3 }}
 					{#if i < 2}
-						<Skeleton class="h-[5rem] w-full rounded-xl border border-primary/5" />
+						<Skeleton class="border-primary/5 h-20 w-full rounded-xl border" />
 					{:else}
 						<Skeleton class="aspect-square h-auto max-w-full rounded-xl object-cover" />
 					{/if}

@@ -8,8 +8,8 @@
 	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
 	import { goto } from '$app/navigation';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
+	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 
 	let { data }: { data: PageData } = $props();
 
@@ -17,7 +17,7 @@
 	const siblingCount = $derived(isDesktop.current ? 1 : 0);
 </script>
 
-<header class="mb-12 mt-24 flex flex-col items-center text-center font-title">
+<header class="font-title mt-24 mb-12 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 		Mida rahvas teab?
 	</h1>
@@ -27,9 +27,9 @@
 	{#await data.streamed.archive}
 		<div class="space-y-6">
 			{#each { length: 5 }}
-				<Skeleton class="h-[3.25rem] w-full rounded-lg" />
+				<Skeleton class="h-13 w-full rounded-lg" />
 			{/each}
-			<Skeleton class="mx-auto !mt-8 h-12 w-2/3 rounded-lg" />
+			<Skeleton class="mx-auto mt-8! h-12 w-2/3 rounded-lg" />
 		</div>
 	{:then archive}
 		<Accordion.Root type="multiple" class="space-y-6">
@@ -38,9 +38,7 @@
 					<Accordion.Trigger>{question.content}?</Accordion.Trigger>
 					<Accordion.Content>
 						{#each question.answers as answer}
-							<blockquote
-								class="border-l-2 bg-muted/25 pl-4 italic leading-7 [&:not(:first-child)]:mt-3"
-							>
+							<blockquote class="bg-muted/25 border-l-2 pl-4 leading-7 italic not-first:mt-3">
 								{answer.content}
 							</blockquote>
 						{/each}
@@ -62,7 +60,7 @@
 				<Pagination.Content class="flex items-center">
 					<Pagination.Item>
 						<Pagination.PrevButton
-							class="hover:bg-dark-10 active:scale-98 inline-flex size-6 items-center justify-center rounded-lg bg-transparent disabled:cursor-not-allowed disabled:text-muted-foreground hover:disabled:bg-transparent sm:size-10 md:mr-4"
+							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:mr-4"
 						>
 							<ChevronLeft class="size-4 sm:size-6" />
 						</Pagination.PrevButton>
@@ -74,7 +72,7 @@
 									<Pagination.Ellipsis />
 								</Pagination.Item>
 							{:else}
-								<Pagination.Item isVisible={currentPage === page.value}>
+								<Pagination.Item>
 									<Pagination.Link {page} isActive={currentPage === page.value}>
 										{page.value}
 									</Pagination.Link>
@@ -84,7 +82,7 @@
 					</div>
 					<Pagination.Item>
 						<Pagination.NextButton
-							class="hover:bg-dark-10 active:scale-98 inline-flex size-6 items-center justify-center rounded-lg bg-transparent disabled:cursor-not-allowed disabled:text-muted-foreground hover:disabled:bg-transparent sm:size-10 md:ml-4"
+							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:ml-4"
 						>
 							<ChevronRight class="size-4 sm:size-6" />
 						</Pagination.NextButton>
