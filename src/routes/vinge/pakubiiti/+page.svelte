@@ -15,6 +15,7 @@
 
 	import DndGroup from '$lib/components/DNDGroup.svelte';
 	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
+	import { m } from '$lib/paraglide/messages';
 
 	let { data }: { data: PageData; form: FormData } = $props();
 
@@ -26,15 +27,15 @@
 
 {#snippet footer(loading: boolean)}
 	<footer class="mt-8 flex items-center justify-evenly">
-		<p class="font-title text-lg font-semibold">Skoor: {data.stage}</p>
+		<p class="font-title text-lg font-semibold">{m['games.score.score']()}: {data.stage}</p>
 		{#if loading || submitting}
 			<Button disabled class="min-w-[4.4rem]">
 				<LoaderCircle class="animate-spin" />
 			</Button>
 		{:else}
-			<Button type="submit" class="min-w-[4.4rem]">Saada</Button>
+			<Button type="submit" class="min-w-[4.4rem]">{m['buttons.submit']()}</Button>
 		{/if}
-		<p class="font-title text-lg font-semibold">Parim: {data.highscore}</p>
+		<p class="font-title text-lg font-semibold">{m['games.score.best']()}: {data.highscore}</p>
 	</footer>
 {/snippet}
 
@@ -97,14 +98,27 @@
 </AlertDialog.Root>
 
 <header class="font-title mb-16 flex flex-col items-center text-center">
-	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
+	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
+		{m['games.pakubiiti.title']()}
+	</h1>
 	<p class="text-muted-foreground text-xl leading-7 font-semibold">
-		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>
-		,
-		<span class="text-purple-600 dark:text-purple-400">artistid</span>
-		ja
-		<span class="text-blue-600 dark:text-blue-400">pildid</span>
-		.
+		{m['games.pakubiiti.instructions.main']()}
+		<span class="text-[0px]">
+			<span class="text-xl text-red-600 dark:text-red-400">
+				{m['games.pakubiiti.instructions.names']()}
+			</span>
+			<span class="text-xl">,</span>
+		</span>
+		<span class="text-purple-600 dark:text-purple-400">
+			{m['games.pakubiiti.instructions.artists']()}
+		</span>
+		{m['games.pakubiiti.instructions.and']()}
+		<span class="text-[0px]">
+			<span class="text-xl text-blue-600 dark:text-blue-400">
+				{m['games.pakubiiti.instructions.pictures']()}
+			</span>
+			<span class="text-xl">.</span>
+		</span>
 	</p>
 </header>
 <main class="w-full max-w-4xl">

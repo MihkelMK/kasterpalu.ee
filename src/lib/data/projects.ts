@@ -5,21 +5,22 @@ import skpImg from '$lib/assets/skp.jpg?enhanced';
 import dysasterImg from '$lib/assets/dysaster.jpg?enhanced';
 import monospaceeImg from '$lib/assets/monospacee.jpg?enhanced';
 import saueauguImg from '$lib/assets/saueaugu.jpg?enhanced';
+import { m } from '$lib/paraglide/messages';
 
 const projects: Project[] = [
 	{
-		name: 'SUPIKÖÖGIPOSID',
+		name: 'SUPIKÖÖGIPOISID',
 		image: {
 			src: skpImg,
 			credit: {
 				type: ImageCreditType.instagram,
-				author: 'Mimmu',
-				href: 'https://www.instagram.com/musamimmu/'
+				author: m['projects.SUPIKÖÖGIPOISID.image.credit.author'](),
+				href: m['projects.SUPIKÖÖGIPOISID.image.credit.href']()
 			},
-			alt: 'Pilt neljaliikmeliseslt räpibändist SUPIKÖÖGIPOISID. Pilt on tehtud pilves ilmaga õues. Pildil on 4 mees valgete triiksärkide, mustade lipsude ja mustade tagidega.'
+			alt: m['projects.SUPIKÖÖGIPOISID.image.alt']()
 		},
-		description: 'Räpikollektiiv. Alustasime 2019.',
-		link: 'https://skpoisid.bandcamp.com/',
+		description: m['projects.SUPIKÖÖGIPOISID.description'](),
+		link: m['projects.SUPIKÖÖGIPOISID.link'](),
 		tags: [badges['muusika']]
 	},
 	{
@@ -28,13 +29,13 @@ const projects: Project[] = [
 			src: dysasterImg,
 			credit: {
 				type: ImageCreditType.instagram,
-				author: 'Mattias Mägi',
-				href: 'https://www.instagram.com/mattias.mix/'
+				author: m['projects.Dysaster Collective.image.credit.author'](),
+				href: m['projects.Dysaster Collective.image.credit.href']()
 			},
-			alt: 'Sinakas digitaalne kollaž Dysaster Collective liigetest.'
+			alt: m['projects.Dysaster Collective.image.alt']()
 		},
-		description: '2022 asutatud mitmekülgne loomekollektiiv.',
-		link: 'https://dysaster.ee',
+		description: m['projects.Dysaster Collective.description'](),
+		link: m['projects.Dysaster Collective.link'](),
 		tags: [badges['asutaja'], badges['veeb']]
 	},
 	{
@@ -43,23 +44,23 @@ const projects: Project[] = [
 			src: monospaceeImg,
 			credit: {
 				type: ImageCreditType.instagram,
-				author: 'Liisa Jõhvik',
-				href: 'https://www.instagram.com/liisajohvik.photo/'
+				author: m['projects.monospac.ee.image.credit.author'](),
+				href: m['projects.monospac.ee.image.credit.href']()
 			},
-			alt: 'DJ duo monospacee nende Silent Disco setil Tartu Uus Teater saalis aastal 2024. Pilt on külje pealt, esiplaanil DJ Mimmu ja ta tagant paistab DJ Rx. Nad on valgustatud punasesega, taustal häguselt näha siniselt valgustatud kolmandat DJd.'
+			alt: m['projects.monospac.ee.image.alt']()
 		},
-		description: 'DJ duo kaasliikmega Rx.',
-		link: 'https://monospac.ee',
+		description: m['projects.monospac.ee.description'](),
+		link: m['projects.monospac.ee.link'](),
 		tags: [badges['muusika'], badges['veeb']]
 	},
 	{
-		name: 'Saueagu Teatritalu',
+		name: 'Saueaugu Teatritalu',
 		image: {
 			src: saueauguImg,
-			alt: 'Suvine Saueaugu teatrihoone. All paistab roheline muru ja katuse tagant paistab paari pilvega sinine taevas.'
+			alt: m['projects.Saueaugu Teatritalu.image.alt']()
 		},
-		description: 'Taluteater Läänemaal. Tegin veebilehe.',
-		link: 'https://saueaugu.ee',
+		description: m['projects.Saueaugu Teatritalu.description'](),
+		link: m['projects.Saueaugu Teatritalu.link'](),
 		tags: [badges['veeb']]
 	},
 	{
@@ -68,13 +69,13 @@ const projects: Project[] = [
 			src: '/assets/hakkerikoda.svg',
 			credit: {
 				type: ImageCreditType.web,
-				author: 'treierxyz',
-				href: 'https://treier.xyz'
+				author: m['projects.Tartu Häkkerikoda.image.credit.author'](),
+				href: m['projects.Tartu Häkkerikoda.image.credit.href']()
 			},
-			alt: 'Tartu Häkkerikoda logo'
+			alt: m['projects.Tartu Häkkerikoda.image.alt']()
 		},
-		description: 'Makerspace Tartus. Liige ning osa veebilehe loojatest.',
-		link: 'https://hakkerikoda.ee',
+		description: m['projects.Tartu Häkkerikoda.description'](),
+		link: m['projects.Tartu Häkkerikoda.link'](),
 		tags: [badges['veeb']]
 	}
 ];

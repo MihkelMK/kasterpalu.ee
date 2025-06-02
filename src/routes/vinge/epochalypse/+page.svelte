@@ -3,6 +3,7 @@
 
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import { getTimeRemaining } from '$lib/utils';
+	import { m } from '$lib/paraglide/messages';
 
 	const epochalypse = new Date(2038, 0, 19, 3, 14, 7);
 	let currentTime = $state(new Date());
@@ -30,7 +31,7 @@
 					? '600ms'
 					: '300ms'};"
 				class="flex flex-col gap-1 px-4 py-2 transition-all">
-				{#each { length: count } as _, i (title + i)}
+				{#each { length: count }, i}
 					{@render clockDigit(i)}
 				{/each}
 			</div>
@@ -48,86 +49,102 @@
 {/snippet}
 
 <header class="font-title mb-24 flex flex-col items-center text-center">
-	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Epochalypse</h1>
+	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
+		{m['games.epochalypse.title']()}
+	</h1>
 	<p class="text-muted-foreground text-xl leading-7 font-semibold">
-		Ära muretse! Sul on veel aega:
+		{m['games.epochalypse.subtitle']()}
 	</p>
 </header>
 <main class="w-full max-w-4xl">
 	<div
 		class="bg-muted mx-auto grid w-full grid-cols-[auto_auto_auto] items-center justify-center gap-4 rounded-md p-12 md:flex">
-		{@render clockStage(13, timeUntil.years, 'aastat')}
-		{@render clockStage(13, timeUntil.months, 'kuud', false)}
-		{@render clockStage(31, timeUntil.days, 'päeva')}
-		{@render clockStage(24, timeUntil.hours, 'tundi', false)}
-		{@render clockStage(60, timeUntil.minutes, 'minutit')}
-		{@render clockStage(60, timeUntil.seconds, 'sekundit', false)}
+		{@render clockStage(13, timeUntil.years, m['time.year.multiple']())}
+		{@render clockStage(13, timeUntil.months, m['time.month.multiple'](), false)}
+		{@render clockStage(31, timeUntil.days, m['time.day.multiple']())}
+		{@render clockStage(24, timeUntil.hours, m['time.hour.multiple'](), false)}
+		{@render clockStage(60, timeUntil.minutes, m['time.minute.multiple']())}
+		{@render clockStage(60, timeUntil.seconds, m['time.second.multiple'](), false)}
 	</div>
 
 	<Accordion.Root type="single" class="mx-auto mt-12 max-w-prose pb-4">
 		<Accordion.Item value="item-1">
-			<Accordion.Trigger>Mis asi see on??</Accordion.Trigger>
+			<Accordion.Trigger>{m['games.epochalypse.explainer.title']()}</Accordion.Trigger>
 			<Accordion.Content class="text-md">
 				<p class="leading-7 not-first:mt-6">
-					Epochalypse nimeline probleem on sarnane 1990 lõpus toimunud <a
+					{m['games.epochalypse.explainer.y2k.intro']()}
+					<a
 						href="https://en.wikipedia.org/wiki/Year_2000_problem"
 						class="text-primary font-medium underline underline-offset-4">
-						Y2K
+						{m['games.epochalypse.explainer.y2k.linkText']()}
 					</a>
-					-le
+					.
 					<br />
-					Laialdaselt kasutatud süsteem aja ja kuupäeva märkimiseks
-					<strong>saab otsa.</strong>
+					{m['games.epochalypse.explainer.y2k.outro']()}
+					<strong>
+						{m['games.epochalypse.explainer.y2k.emphasis']()}
+					</strong>
 				</p>
 				<p class="leading-7 not-first:mt-6">
-					Enamus Linuxi baasiga Operatsioonisüsteeme kasutab aja märkimiseks <a
+					{m['games.epochalypse.explainer.unix.intro']()}
+					<a
 						href="https://en.wikipedia.org/wiki/Unix_time"
 						class="text-primary font-medium underline underline-offset-4">
-						UNIX aega
+						{m['games.epochalypse.explainer.unix.linkText']()}
 					</a>
-					- mitu sekundit on möödunud UNIX
-					<i>epoch</i>
-					-ist 00:00:00 19.01.1970 UTC.
+					- {m['games.epochalypse.explainer.unix.outro']()}
+					<i>{m['games.epochalypse.explainer.unix.epoch']()}</i>
+					{m['general.at']()}
+					00:00:00 19.01.1970 UTC.
 				</p>
 				<p class="leading-7 not-first:mt-6">
-					Neid sekundeid hoitaks <i>signed 32-bit</i>
-					täisarvuna. Selle andmetüübi maksimaalne väärtus on
+					{m['games.epochalypse.explainer.integer.intro.part1']()}
+					<i>{m['games.epochalypse.explainer.integer.intro.32bit']()}</i>
+					{m['games.epochalypse.explainer.integer.intro.part2']()}
 					<code
 						class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
 						2
 						<sup>31</sup>
 						-1
 					</code>
-					. Viimane kuupäev (
+					.
+					<br />
+					{m['games.epochalypse.explainer.integer.lastDate']()}
+					{m['general.is']()} 03:14:07 19.01.2038 UTC (
 					<code
 						class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
 						UNIX epoch + 2
 						<sup>31</sup>
 						-1
 					</code>
-					) on 03:14:07 19.01.2038 UTC.
+					).
 				</p>
 				<p class="leading-7 not-first:mt-6">
-					Sekund pärast seda, kui arvutid lisavad ajale sekundi juurde, juhtub <a
+					{m['games.epochalypse.explainer.overflow.intro']()}
+					<a
 						href="https://en.wikipedia.org/wiki/Integer_overflow"
 						class="text-primary font-medium underline underline-offset-4">
-						täisarvu ületäitumine
+						{m['games.epochalypse.explainer.overflow.linkText']()}
 					</a>
-					ja aja väärtuseks saab
+					{m['games.epochalypse.explainer.overflow.middle']()}
 					<code
 						class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
 						-2
 						<sup>31</sup>
 					</code>
-					.
-					<br />
-					Arvutid loevad seda kui 20:45:52 13.12.1901 UTC, ehk varaseim võimalik aeg
+					-
+					{m['games.epochalypse.explainer.overflow.outro.part1']()}
 					<a
 						href="https://en.wikipedia.org/wiki/Unix_time"
 						class="text-primary font-medium underline underline-offset-4">
-						UNIX aja
+						{m['games.epochalypse.explainer.overflow.outro.linkText']()}
 					</a>
-					 järgi.
+					{m['games.epochalypse.explainer.overflow.outro.part2']()}
+
+					<br />
+					{m['games.epochalypse.explainer.aftermath.intro']()} 20:45:52 13.12.1901 UTC {m[
+						'games.epochalypse.explainer.aftermath.outro'
+					]()}
 				</p>
 			</Accordion.Content>
 		</Accordion.Item>

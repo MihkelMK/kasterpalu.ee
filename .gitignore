@@ -25,3 +25,7 @@ vite.config.ts.timestamp-*
 # SQLite
 *.db
 drizzle
+
+# Paraglide
+src/lib/paraglide
+project.inlang
