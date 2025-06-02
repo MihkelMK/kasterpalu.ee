@@ -33,11 +33,11 @@
 		</div>
 	{:then archive}
 		<Accordion.Root type="multiple" class="space-y-6">
-			{#each archive.data as question}
+			{#each archive.data as question (question.id)}
 				<Accordion.Item disabled={!(question.answers?.length > 0)} value={question.id}>
 					<Accordion.Trigger>{question.content}?</Accordion.Trigger>
 					<Accordion.Content>
-						{#each question.answers as answer}
+						{#each question.answers as answer (answer.id)}
 							<blockquote class="bg-muted/25 border-l-2 pl-4 leading-7 italic not-first:mt-3">
 								{answer.content}
 							</blockquote>

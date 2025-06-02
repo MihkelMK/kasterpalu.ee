@@ -32,7 +32,7 @@
 					: '300ms'};"
 				class="flex flex-col gap-1 px-4 py-2 transition-all"
 			>
-				{#each { length: count } as _, i}
+				{#each { length: count } as _, i (title + i)}
 					{@render clockDigit(i)}
 				{/each}
 			</div>

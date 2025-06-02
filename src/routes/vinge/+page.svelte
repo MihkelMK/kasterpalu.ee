@@ -28,7 +28,7 @@
 <div
 	class="mx-auto mt-20 flex w-full flex-wrap items-center justify-center justify-items-center gap-4 gap-x-8 gap-y-8 lg:grid-cols-2"
 >
-	{#each Object.entries(games) as [href, { image, name }]}
+	{#each Object.entries(games) as [href, { image, name }] (name)}
 		<a
 			class="shadow-sharp flex aspect-4/1 h-16 max-w-sm items-center justify-center rounded-xl border-2 border-current bg-contain bg-no-repeat transition-all md:h-20"
 			style="background-image: url('{image}')"

@@ -198,7 +198,7 @@
 						? 'mb-4 -ml-1.5 scale-90'
 						: 'mb-6'}"
 				>
-					{#each decibelMeter as digit, i}
+					{#each decibelMeter as digit, i ('meterdigit-' + i)}
 						<div class="py-2 shadow-sm">
 							<SevenSegmentDigit {digit} decimal={displayDecimals && i == 2} />
 						</div>
@@ -208,7 +208,7 @@
 					<div
 						class="relative h-[70svh] w-4 bg-linear-to-b from-lime-300 via-yellow-400 to-red-500 dark:from-lime-500 dark:via-yellow-400 dark:to-red-500"
 					>
-						{#each checkpointDecibels as db}
+						{#each checkpointDecibels as db ('checkpoint-' + db)}
 							<div
 								transition:fade
 								style="top: calc({(db / 150) * 70}svh - 0.5rem)"
