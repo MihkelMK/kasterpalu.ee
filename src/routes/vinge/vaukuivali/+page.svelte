@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
 	import { expoOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -11,7 +11,7 @@
 	import ArrowUpToLine from '@lucide/svelte/icons/arrow-up-to-line';
 	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 
-	import { watch } from 'runed';
+	import { Previous, watch } from 'runed';
 	import { getTimeRemaining } from '$lib/utils';
 
 	import SevenSegmentDigit from './SevenSegmentDigit.svelte';
@@ -62,6 +62,8 @@
 	let displayDecimals = $derived(innerWidth > 1000);
 
 	let scrollY = new Tween(0, { duration: 150, easing: expoOut });
+	let lastScroll = new Previous(() => scrollY.current);
+	let lastScrollWasUp = $derived(lastScroll?.current && scrollY.current <= lastScroll.current);
 
 	let currentDecibel = $derived(scrollToDecibels(scrollY.target));
 	let currentDecibelTweened = $derived(scrollToDecibels(scrollY.current));
@@ -150,6 +152,19 @@
 	});
 </script>
 
+{#snippet scrollUpArrow()}
+	<Button
+		onclick={() => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}}
+		size="default"
+		variant="secondary"
+		class="h-10 w-10"
+	>
+		<ArrowUpToLine class="h-6! w-6!" />
+	</Button>
+{/snippet}
+
 {#snippet checkpoint(db: number, passed: boolean)}
 	<div
 		class="rounded-r-lg transition-colors {passed
@@ -227,38 +242,45 @@
 			<div
 				class="mx-auto flex w-full max-w-2xl flex-col-reverse items-center gap-8 self-center px-12 md:grid md:gap-0 md:*:[grid-area:1/1/2/2]"
 			>
-				<Image
-					image={soundCheckpoints[currentCheckpoint]?.image}
-					class="aspect-square object-cover "
-				/>
-				<header
-					class="flex flex-col items-center py-4 text-center font-title backdrop-blur-sm backdrop-grayscale md:bg-background/75 dark:md:bg-background/90"
-				>
-					<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
+				{#if typeof currentCheckpoint === 'number'}
+					<Image
+						image={soundCheckpoints[currentCheckpoint]?.image}
+						class="aspect-square object-cover"
+					/>
+					<header
+						class="font-title md:bg-background/75 dark:md:bg-background/90 flex flex-col items-center py-4 text-center backdrop-blur-sm backdrop-grayscale"
+					>
+						<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
+							{#if currentCheckpoint === 0}
+								Vau kui vali!
+							{:else}
+								{soundCheckpoints[currentCheckpoint]?.title}
+							{/if}
+						</h1>
 						{#if currentCheckpoint === 0}
-							Vau kui vali!
+							<p class="text-muted-foreground max-w-prose text-2xl leading-7 font-semibold">
+								Nagu paljud võivad teada, on detsibellide skaala logaritmiline.<br /> 60dB on 2x valjem,
+								kui 50dB.
+							</p>
+							<p
+								class="text-muted-foreground max-w-prose text-2xl leading-7 font-semibold not-first:mt-6"
+							>
+								See info ei jõudnud mulle eriti kohale. <br />Intuitiivsemaks arusaamiseks tegin
+								selle lehe. <br /><strong>Proovi, keri alla.</strong>
+							</p>
 						{:else}
-							{soundCheckpoints[currentCheckpoint]?.title}
+							<p class="text-primary/80 max-w-prose text-2xl leading-7 font-semibold">
+								{soundCheckpoints[currentCheckpoint]?.description}
+							</p>
 						{/if}
-					</h1>
-					{#if currentCheckpoint === 0}
-						<p class="max-w-prose text-2xl font-semibold leading-7 text-muted-foreground">
-							Nagu paljud võivad teada, on detsibellide skaala logaritmiline.<br /> 60dB on 2x valjem,
-							kui 50dB.
-						</p>
-						<p
-							class="max-w-prose text-2xl font-semibold leading-7 text-muted-foreground [&:not(:first-child)]:mt-6"
-						>
-							See info ei jõudnud mulle eriti kohale. <br />Intuitiivsemaks arusaamiseks tegin selle
-							lehe. <br /><strong>Proovi, keri alla.</strong>
-						</p>
-					{:else}
-						<p class="max-w-prose text-2xl font-semibold leading-7 text-primary/80">
-							{soundCheckpoints[currentCheckpoint]?.description}
-						</p>
-					{/if}
-				</header>
+					</header>
+				{/if}
 			</div>
+			{#if currentCheckpoint && currentCheckpoint > 1 && lastScrollWasUp}
+				<div transition:fly={{ y: 200, easing: expoOut }} class="absolute right-8 -bottom-15">
+					{@render scrollUpArrow()}
+				</div>
+			{/if}
 		</div>
 	</div>
 
@@ -276,7 +298,7 @@
 		</div>
 		{@render timeCard(checkpointDecibels.at(-1))}
 		<Collapsible.Content class="space-y-2">
-			{#each checkpointDecibels.slice(1, -1).reverse() as db}
+			{#each checkpointDecibels.slice(1, -1).reverse() as db ('timecard-' + db)}
 				{@render timeCard(db)}
 			{/each}
 		</Collapsible.Content>
@@ -299,15 +321,8 @@
 				</li>
 			</ul>
 		</div>
-		<Button
-			onclick={() => {
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			}}
-			size="default"
-			variant="secondary"
-			class="h-10 w-10"
-		>
-			<ArrowUpToLine class="!h-6 !w-6" />
-		</Button>
+		<div class="mr-8">
+			{@render scrollUpArrow()}
+		</div>
 	</div>
 {/if}
