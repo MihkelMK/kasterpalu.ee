@@ -6,7 +6,7 @@
 
 	import { onMount } from 'svelte';
 	import { site } from '$lib/config';
-	import { ModeWatcher, resetMode, setMode } from 'mode-watcher';
+	import { ModeWatcher, setMode, mode } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Sun from '@lucide/svelte/icons/sun';
 	import Moon from '@lucide/svelte/icons/moon';
@@ -15,20 +15,16 @@
 	import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
 
 	let { children } = $props();
-	let theme: string = $state('system');
 	let email: string | undefined = $state(undefined);
 	let otherLocale: 'en' | 'et' = $derived(getLocale() === 'en' ? 'et' : 'en');
 	const localeText = (locale: 'en' | 'et') => (locale === 'en' ? 'english' : 'estonian');
 
 	const cycleTheme = () => {
-		if (theme === 'dark') {
-			theme = 'light';
+		if (mode.current === 'dark') {
 			setMode('light');
-		} else if (theme === 'light') {
-			theme = 'system';
-			resetMode();
+		} else if (mode.current === 'light') {
+			setMode('system');
 		} else {
-			theme = 'dark';
 			setMode('dark');
 		}
 	};
@@ -61,9 +57,9 @@
 				<span class="sr-only">Change language to {localeText(otherLocale)}</span>
 			</Button>
 			<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
-				{#if theme === 'dark'}
+				{#if mode.current === 'dark'}
 					<Moon class="h-6! w-6!" />
-				{:else if theme === 'light'}
+				{:else if mode.current === 'light'}
 					<Sun class="h-6! w-6!" />
 				{:else}
 					<LaptopMinimal class="h-6! w-6!" />

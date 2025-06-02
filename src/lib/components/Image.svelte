@@ -25,7 +25,7 @@
 		sizes?: string;
 	} = $props();
 
-	let badgeVariant: BadgeVariant = $derived(mode.current == 'dark' ? 'secondary' : 'default');
+	let badgeVariant: BadgeVariant = $derived(mode.current === 'light' ? 'default' : 'secondary');
 	let loading: 'lazy' | 'eager' = $derived(eager ? 'eager' : 'lazy');
 	let fetchpriority: 'low' | 'high' | 'auto' = $derived(eager ? 'high' : 'auto');
 </script>
@@ -66,7 +66,7 @@
 					<HoverCard.Root>
 						<HoverCard.Trigger>
 							<Badge
-								class="font-title text-base leading-relaxed font-semibold tracking-wide"
+								class="font-title text-base leading-relaxed font-semibold tracking-wide transition-none"
 								variant={badgeVariant}>
 								{name}
 							</Badge>
