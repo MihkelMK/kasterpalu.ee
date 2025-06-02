@@ -37,7 +37,7 @@ export type AlbumData = {
 
 export type AlbumDataField = {
 	id: string;
-	value: string;
+	value: string | AlbumImage[];
 };
 
 export type AlbumSolveState = {
@@ -46,12 +46,24 @@ export type AlbumSolveState = {
 	image: string;
 };
 
+export type AlbumResponse = {
+	name: string;
+	artists: string;
+	images: AlbumImage[];
+};
+
+export type AlbumImage = {
+	url: string;
+	width?: number;
+	height?: number;
+};
+
 export type Player = {
 	id: string;
 	stage: number;
 	highscore: number;
 	playing: boolean;
-	albums: AlbumSolveState[];
+	albums: AlbumResponse[];
 };
 
 export interface TimeRemaining {

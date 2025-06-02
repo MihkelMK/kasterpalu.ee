@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AlbumDataField } from '$lib/types';
+	import type { AlbumDataField, AlbumImage } from '$lib/types';
 
 	import { onMount } from 'svelte';
 	import { flip } from 'svelte/animate';
@@ -16,6 +16,7 @@
 
 	import { truncate } from '$lib/utils';
 	import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
+	import SpotifyImage from './SpotifyImage.svelte';
 
 	let { items, image = false, type = 'default' } = $props();
 
@@ -59,8 +60,9 @@
 
 {#snippet card(item: AlbumDataField, i: number)}
 	{#if image}
-		<img class="aspect-square w-full object-cover" alt="Album Art" src={item.value} />
-		<input type="hidden" name="{type}_{i}" value={item.value} />
+		{@const images = item.value as AlbumImage[]}
+		<SpotifyImage {images} />
+		<input type="hidden" name="{type}_{i}" value={images?.at(0)?.url} />
 	{:else}
 		<p
 			class="p-2 text-center text-sm md:p-6 md:text-base {type === 'names'
@@ -70,9 +72,9 @@
 					: ''}"
 		>
 			{#if type === 'artists'}
-				{truncate(item.value, 30)}
+				{truncate(item.value as string, 30)}
 			{:else}
-				{truncate(item.value, 45)}
+				{truncate(item.value as string, 45)}
 			{/if}
 		</p>
 		<input type="hidden" name="{type}_{i}" value={item.value} />

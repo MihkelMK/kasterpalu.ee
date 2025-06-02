@@ -1,4 +1,4 @@
-import type { AlbumSolveState } from '$lib/types';
+import type { AlbumResponse } from '$lib/types';
 
 import { error, json } from '@sveltejs/kit';
 import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
@@ -8,7 +8,7 @@ const maxTries = 10;
 export async function GET({ params }) {
 	const count = Number(params.count) || 1;
 
-	const albums: AlbumSolveState[] = [];
+	const albums: AlbumResponse[] = [];
 	let tries = 0;
 
 	while (albums.length < count && tries++ < maxTries) {
@@ -23,7 +23,7 @@ export async function GET({ params }) {
 			albums.push({
 				name: album.name,
 				artists: album.artists.map((artist) => artist.name).join(', '),
-				image: image.url
+				images: album.images
 			});
 		}
 	}

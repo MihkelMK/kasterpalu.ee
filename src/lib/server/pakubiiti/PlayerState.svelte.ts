@@ -1,4 +1,4 @@
-import type { AlbumSolveState, Player } from '$lib/types';
+import type { AlbumResponse, AlbumSolveState, Player } from '$lib/types';
 
 export class PlayerState {
 	players = $state<Player[]>([]);
@@ -18,7 +18,7 @@ export class PlayerState {
 		return this.players.find((player) => player.id === id);
 	}
 
-	private checkSolution(solution: AlbumSolveState[], submission: AlbumSolveState[]) {
+	private checkSolution(solution: AlbumResponse[], submission: AlbumSolveState[]) {
 		if (!solution || !submission) {
 			return false;
 		}
@@ -36,7 +36,7 @@ export class PlayerState {
 				return false;
 			}
 
-			if (matching.image !== solve.image) {
+			if (!solve.images.some(({ url }) => url === matching.image)) {
 				return false;
 			}
 
@@ -114,7 +114,7 @@ export class PlayerState {
 		return player?.albums;
 	}
 
-	setAlbums(id: string, albums: AlbumSolveState[]) {
+	setAlbums(id: string, albums: AlbumResponse[]) {
 		const player = this.findPlayer(id);
 		if (player) {
 			player.albums = albums;

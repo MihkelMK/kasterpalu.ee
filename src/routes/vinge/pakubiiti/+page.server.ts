@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import type { AlbumSolveState } from '$lib/types';
+import type { AlbumResponse, AlbumSolveState } from '$lib/types';
 
 import { nanoid } from 'nanoid';
 import { shuffleArray } from '$lib/utils';
@@ -78,15 +78,15 @@ export const load: PageServerLoad = async (event) => {
 			return res.json();
 		})
 		.then((data) => {
-			const albumNames = data.albums.map((album: AlbumSolveState) => ({
+			const albumNames = data.albums.map((album: AlbumResponse) => ({
 				id: nanoid(),
 				value: album.name
 			}));
-			const albumImages = data.albums.map((album: AlbumSolveState) => ({
+			const albumImages = data.albums.map((album: AlbumResponse) => ({
 				id: nanoid(),
-				value: album.image
+				value: album.images
 			}));
-			const albumArtists = data.albums.map((album: AlbumSolveState) => ({
+			const albumArtists = data.albums.map((album: AlbumResponse) => ({
 				id: nanoid(),
 				value: album.artists
 			}));
