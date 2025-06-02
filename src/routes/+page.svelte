@@ -23,8 +23,7 @@
 			{tags}
 			eager
 			class="aspect-4/5 object-cover"
-			sizes="(min-width:1920px) 300px, (min-width:768px) 400px"
-		/>
+			sizes="(min-width:1920px) 300px, (min-width:768px) 400px" />
 		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
 			<div class="mt-1 pr-4">
 				<h3 class="text-lg leading-none font-medium">{name}</h3>

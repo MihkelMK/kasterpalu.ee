@@ -35,5 +35,5 @@
 		if (ev.detail.payload) {
 			value = ev.detail.payload;
 		}
-	}}
-></altcha-widget>
+	}}>
+</altcha-widget>

@@ -43,9 +43,9 @@
 <Card.Root>
 	<Card.Header>
 		<Card.Title>Küsi rahvalt</Card.Title>
-		<Card.Description
-			>Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.</Card.Description
-		>
+		<Card.Description>
+			Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.
+		</Card.Description>
 	</Card.Header>
 	{#if data.user.balance === 0 && (data.question || data.poolSize > 0)}
 		<Card.Content>

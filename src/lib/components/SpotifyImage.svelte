@@ -37,7 +37,6 @@
 			decoding="async"
 			width={thumbnail.width}
 			height={thumbnail.height}
-			{sizes}
-		/>
+			{sizes} />
 	</picture>
 {/if}

@@ -46,7 +46,7 @@
 			<img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
 		</a>
 
-		<a class="font-mono font-medium underline underline-offset-4" href="/vinge"> vinge värk </a>
+		<a class="font-mono font-medium underline underline-offset-4" href="/vinge">vinge värk</a>
 
 		<Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
 			{#if theme === 'dark'}
@@ -69,8 +69,7 @@
 		<a
 			href="https://koodi.lenn.uk/mihkelmk/portfolio_site"
 			target="_blank"
-			class="text-muted-foreground text-sm underline underline-offset-4"
-		>
+			class="text-muted-foreground text-sm underline underline-offset-4">
 			saidi kood
 		</a>
 
@@ -78,8 +77,7 @@
 			<a
 				href="mailto://{email}"
 				target="_blank"
-				class="text-muted-foreground text-right text-sm underline underline-offset-4"
-			>
+				class="text-muted-foreground text-right text-sm underline underline-offset-4">
 				{email}
 			</a>
 		{:else}

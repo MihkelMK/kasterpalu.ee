@@ -67,8 +67,7 @@
 							<Textarea
 								{...props}
 								bind:value={$formData.answer}
-								class="resize-none transition-colors"
-							/>
+								class="resize-none transition-colors" />
 						{/snippet}
 					</Form.Control>
 					<div class="flex justify-between">

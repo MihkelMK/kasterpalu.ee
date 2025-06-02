@@ -69,8 +69,7 @@
 				? 'text-red-900 dark:text-red-200'
 				: type === 'artists'
 					? 'text-purple-900 dark:text-purple-200'
-					: ''}"
-		>
+					: ''}">
 			{#if type === 'artists'}
 				{truncate(item.value as string, 30)}
 			{:else}
@@ -92,15 +91,13 @@
 	}}
 	onconsider={handleDndConsider}
 	onfinalize={handleDndFinalize}
-	class="grid grid-cols-3 items-center gap-2 rounded-xl p-2 px-3 transition-colors sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14"
->
+	class="grid grid-cols-3 items-center gap-2 rounded-xl p-2 px-3 transition-colors sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14">
 	{#each items as item, i (item.id)}
 		<div animate:flip={{ duration: flipDurationMs, easing: expoOut }} class="relative">
 			{#if item[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
 				<div
 					in:fade={{ duration: 200, easing: expoOut }}
-					class="{cardClass} visible border-transparent bg-transparent opacity-50 shadow-transparent"
-				>
+					class="{cardClass} visible border-transparent bg-transparent opacity-50 shadow-transparent">
 					{@render card(item, i)}
 				</div>
 			{:else}

@@ -42,8 +42,7 @@
 	{#if placeholder}
 		{#each { length: 3 }, i}
 			<section
-				class="grid grid-cols-3 gap-2 rounded-xl p-2 px-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14"
-			>
+				class="grid grid-cols-3 gap-2 rounded-xl p-2 px-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14">
 				{#each { length: 3 }}
 					{#if i < 2}
 						<Skeleton class="border-primary/5 h-20 w-full rounded-xl border" />
@@ -100,9 +99,12 @@
 <header class="font-title mb-16 flex flex-col items-center text-center">
 	<h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">Paku biiti</h1>
 	<p class="text-muted-foreground text-xl leading-7 font-semibold">
-		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>,
-		<span class="text-purple-600 dark:text-purple-400">artistid</span> ja
-		<span class="text-blue-600 dark:text-blue-400">pildid</span>.
+		Lohista kokku õiged albumi <span class="text-red-600 dark:text-red-400">nimed</span>
+		,
+		<span class="text-purple-600 dark:text-purple-400">artistid</span>
+		ja
+		<span class="text-blue-600 dark:text-blue-400">pildid</span>
+		.
 	</p>
 </header>
 <main class="w-full max-w-4xl">
@@ -118,15 +120,13 @@
 		}}
 		class="grid w-full transition-all {loading || data?.playing === false
 			? 'grayscale'
-			: ''} transition-colors"
-	>
+			: ''} transition-colors">
 		{#if data?.streamed?.albums}
 			{#await data.streamed.albums}
 				<div
 					class="grid w-full gap-4"
 					in:fade={{ duration: 150, easing: expoIn }}
-					out:fade={{ duration: 150, easing: expoOut }}
-				>
+					out:fade={{ duration: 150, easing: expoOut }}>
 					{@render playArea(undefined, true)}
 				</div>
 				{@render footer(true)}
@@ -139,7 +139,8 @@
 				{:else}
 					<p class="mx-auto mt-16 max-w-prose text-center text-lg text-red-500">
 						<strong>Serveris tekkis mingi error.</strong>
-						<br />No clue miks see katki on, sorry.
+						<br />
+						No clue miks see katki on, sorry.
 					</p>
 					<p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">
 						Proovi uuesti või kirjuta mulle.

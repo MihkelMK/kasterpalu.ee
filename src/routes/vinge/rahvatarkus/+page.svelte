@@ -54,14 +54,12 @@
 			perPage={data.pageSize}
 			page={data.page}
 			{siblingCount}
-			class="my-8"
-		>
+			class="my-8">
 			{#snippet children({ pages, currentPage })}
 				<Pagination.Content class="flex items-center">
 					<Pagination.Item>
 						<Pagination.PrevButton
-							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:mr-4"
-						>
+							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:mr-4">
 							<ChevronLeft class="size-4 sm:size-6" />
 						</Pagination.PrevButton>
 					</Pagination.Item>
@@ -82,8 +80,7 @@
 					</div>
 					<Pagination.Item>
 						<Pagination.NextButton
-							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:ml-4"
-						>
+							class="hover:bg-dark-10 disabled:text-muted-foreground inline-flex size-6 items-center justify-center rounded-lg bg-transparent active:scale-98 disabled:cursor-not-allowed hover:disabled:bg-transparent sm:size-10 md:ml-4">
 							<ChevronRight class="size-4 sm:size-6" />
 						</Pagination.NextButton>
 					</Pagination.Item>

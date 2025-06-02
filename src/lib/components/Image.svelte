@@ -48,8 +48,7 @@
 
 {#if image}
 	<div
-		class="projectCardImage bg-primary grid justify-items-center overflow-hidden rounded-md shadow-lg"
-	>
+		class="projectCardImage bg-primary grid justify-items-center overflow-hidden rounded-md shadow-lg">
 		{#if typeof image.src === 'string'}
 			<img src={image.src} alt={image.alt} class={className} {loading} {fetchpriority} {sizes} />
 		{:else}
@@ -59,8 +58,7 @@
 				class={className}
 				{loading}
 				{fetchpriority}
-				{sizes}
-			/>
+				{sizes} />
 		{/if}
 		{#if tags}
 			<div class="space-x-4 self-start p-4">
@@ -69,8 +67,9 @@
 						<HoverCard.Trigger>
 							<Badge
 								class="font-title text-base leading-relaxed font-semibold tracking-wide"
-								variant={badgeVariant}>{name}</Badge
-							>
+								variant={badgeVariant}>
+								{name}
+							</Badge>
 						</HoverCard.Trigger>
 						<HoverCard.Content>
 							{description}
@@ -83,8 +82,7 @@
 		{#if image.credit}
 			<div class="w-full self-end bg-black/50 text-center shadow-lg backdrop-blur-md">
 				<p
-					class="text-secondary/80 dark:text-primary/80 flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold"
-				>
+					class="text-secondary/80 dark:text-primary/80 flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold">
 					{#if image.credit.href}
 						<a class="w-full" href={image.credit.href}>
 							{@render creditText(

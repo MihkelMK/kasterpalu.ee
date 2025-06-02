@@ -34,8 +34,8 @@
 			? segWidth
 			: segLength * aspectRatio}rem; {position}; scale: {vertical || dot
 			? 1
-			: (segLength + segWidth / 1) / segLength} 1;"
-	></div>
+			: (segLength + segWidth / 1) / segLength} 1;">
+	</div>
 {/snippet}
 
 <div
@@ -43,8 +43,7 @@
 	style="width: {(segLength * aspectRatio + 2 * segWidth) * (1 + padding)}rem; height: {(segLength *
 		2 +
 		3 * segWidth) *
-		(1 + padding)}rem"
->
+		(1 + padding)}rem">
 	{#if pattern}
 		<!-- Segment A -->
 		{@render segment(0, `left: ${segWidth * (1 + 2 * padding)}rem; top: 0;`, false)}
