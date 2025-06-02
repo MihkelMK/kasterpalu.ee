@@ -18,7 +18,13 @@
 	link: string
 )}
 	<div class="mb-10 w-72 space-y-3 md:w-60">
-		<Image {image} {tags} class="aspect-[4/5] object-cover" />
+		<Image
+			{image}
+			{tags}
+			eager
+			class="aspect-4/5 object-cover"
+			sizes="(min-width:1920px) 300px, (min-width:768px) 400px"
+		/>
 		<div class="grid grid-cols-[1fr_auto] items-center text-sm">
 			<div class="mt-1 pr-4">
 				<h3 class="text-lg leading-none font-medium">{name}</h3>
@@ -51,7 +57,7 @@
 </header>
 
 <main class="flex w-full flex-wrap justify-center gap-x-8">
-	{#each projects as { name, description, image, tags, link }}
+	{#each projects as { name, description, image, tags, link } (name)}
 		{@render projectCard(name, description, image, tags, link)}
 	{/each}
 </main>

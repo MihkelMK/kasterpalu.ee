@@ -14,13 +14,23 @@
 	let {
 		image,
 		tags,
+		eager,
+		sizes,
 		class: className
-	}: { image: EnhancedImage | undefined; tags?: Tag[]; class?: string } = $props();
+	}: {
+		image: EnhancedImage | undefined;
+		tags?: Tag[];
+		class?: string;
+		eager?: boolean;
+		sizes?: string;
+	} = $props();
 
-	let badgeVariant: BadgeVariant = $derived($mode == 'dark' ? 'secondary' : 'default');
+	let badgeVariant: BadgeVariant = $derived(mode.current == 'dark' ? 'secondary' : 'default');
+	let loading: 'lazy' | 'eager' = $derived(eager ? 'eager' : 'lazy');
+	let fetchpriority: 'low' | 'high' | 'auto' = $derived(eager ? 'high' : 'auto');
 </script>
 
-{#snippet creditText(author: string, type: ImageCreditType, className: string)}
+{#snippet creditText(author: string, type: ImageCreditType | undefined, className: string)}
 	{#if type === 'instagram'}
 		<Instagram class={className} />
 	{:else if type === 'facebook'}
@@ -41,13 +51,20 @@
 		class="projectCardImage bg-primary grid justify-items-center overflow-hidden rounded-md shadow-lg"
 	>
 		{#if typeof image.src === 'string'}
-			<img src={image.src} alt={image.alt} class={className} />
+			<img src={image.src} alt={image.alt} class={className} {loading} {fetchpriority} {sizes} />
 		{:else}
-			<enhanced:img src={image.src} alt={image.alt} class={className} />
+			<enhanced:img
+				src={image.src}
+				alt={image.alt}
+				class={className}
+				{loading}
+				{fetchpriority}
+				{sizes}
+			/>
 		{/if}
 		{#if tags}
 			<div class="space-x-4 self-start p-4">
-				{#each tags as { name, description }}
+				{#each tags as { name, description } (name)}
 					<HoverCard.Root>
 						<HoverCard.Trigger>
 							<Badge
