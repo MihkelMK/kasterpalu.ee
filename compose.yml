@@ -1,15 +1,16 @@
 ---
-name: 'stuff.kasterpalu'
+name: 'kasterpalu.ee'
 services:
   web:
     container_name: 'kasterpalu-web'
-    build: .
+    build:
+      context: .
+        - CLIENT_ID=${CLIENT_ID}
+        - CLIENT_SECRET=${CLIENT_SECRET}
+        - SESH_SECRET=${SESH_SECRET}
+        - ALTCHA_HMAC=${ALTCHA_HMAC}
+        - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL}
+        - UPSTASH_REDIS_TOKEN=${UPSTASH_REDIS_TOKEN}
     restart: unless-stopped
     ports:
       - 9000:3000
-    labels:
-      - homepage.group=Websites
-      - homepage.name=Portfolio site
-      - homepage.icon=https://kasterpalu.ee/favicon-96x96.png
-      - homepage.href=https://kasterpalu.ee
-      - homepage.siteMonitor=https://kasterpalu.ee
