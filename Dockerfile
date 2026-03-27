@@ -7,8 +7,8 @@ WORKDIR /app
 # Install packages
 RUN yarn global add pnpm
 
-COPY package.json pnpm-workspace.yaml .
-RUN pnpm i
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
