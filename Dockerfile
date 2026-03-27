@@ -1,5 +1,5 @@
 # Use this image as the platform to build the app
-FROM node:20 AS build
+FROM node:24-alpine3.23 AS build
 
 # The WORKDIR instruction sets the working directory for everything that will happen next
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Install packages
 RUN yarn global add pnpm
 
-COPY package.json .
+COPY package.json pnpm-workspace.yaml .
 RUN pnpm i
 
 COPY . .
@@ -31,7 +31,7 @@ RUN pnpm drizzle-kit generate && \
   pnpm drizzle-kit push && \
   pnpm build
 
-FROM node:20
+FROM node:24-alpine3.23
 
 WORKDIR /app
 
