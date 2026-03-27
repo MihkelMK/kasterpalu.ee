@@ -72,14 +72,6 @@
 		"spotify-web-api-node": "^5.0.2",
 		"svelte-kit-sessions": "^0.4.0"
 	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@tailwindcss/oxide",
-			"better-sqlite3",
-			"esbuild",
-			"sharp"
-		]
-	},
 	"engines": {
 		"node": ">=24.0.0"
 	},
