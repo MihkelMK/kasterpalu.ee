@@ -1,23 +1,23 @@
 <script lang="ts">
-	import { baseURL, stuffSite } from '$lib/config.js';
+  import { baseURL, stuffSite } from '$lib/config.js';
 
-	import { Toaster } from '$lib/components/ui/sonner/index.js';
+  import { Toaster } from '$lib/components/ui/sonner/index.js';
 
-	let { children, data } = $props();
+  let { children, data } = $props();
 
-	const title = data?.name ? `${data.name} | ${stuffSite.name}` : stuffSite.name;
-	const description = data?.description || stuffSite.description;
-	const ogImage = data?.image || stuffSite.image;
+  const title = data?.name ? `${data.name} | ${stuffSite.name}` : stuffSite.name;
+  const description = data?.description || stuffSite.description;
+  const ogImage = data?.image || stuffSite.image;
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta property="og:title" content={title} />
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
 
-	<meta name="description" content={description} />
-	<meta property="og:description" content={description} />
+  <meta name="description" content={description} />
+  <meta property="og:description" content={description} />
 
-	<meta property="og:image" content={baseURL + ogImage} />
+  <meta property="og:image" content={baseURL + ogImage} />
 </svelte:head>
 
 <Toaster />
@@ -25,14 +25,14 @@
 {@render children()}
 
 {#if data?.name === 'Vau kui vali'}
-	<style global>
-		html {
-			--scrollbar-color-thumb: transparent;
-			--scrollbar-color-track: transparent;
-			--scrollbar-width: none;
-			--scrollbar-width-legacy: 0px;
+  <style global>
+    html {
+      --scrollbar-color-thumb: transparent;
+      --scrollbar-color-track: transparent;
+      --scrollbar-width: none;
+      --scrollbar-width-legacy: 0px;
 
-			-ms-overflow-style: none; /* Internet Explorer 10+ */
-		}
-	</style>
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+  </style>
 {/if}

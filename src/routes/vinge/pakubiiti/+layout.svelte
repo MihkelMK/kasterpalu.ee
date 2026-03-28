@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { setAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
+  import { setAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
 
-	let { children } = $props();
+  let { children } = $props();
 
-	setAlbumClientState();
+  setAlbumClientState();
 </script>
 
 {@render children()}

@@ -5,14 +5,14 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-	plugins: [
-		enhancedImages(),
-		tailwindcss(),
-		sveltekit(),
-		paraglideVitePlugin({
-			project: './project.inlang',
-			outdir: './src/lib/paraglide',
-			strategy: ['url', 'cookie']
-		})
-	]
+  plugins: [
+    enhancedImages(),
+    tailwindcss(),
+    sveltekit(),
+    paraglideVitePlugin({
+      project: './project.inlang',
+      outdir: './src/lib/paraglide',
+      strategy: ['url', 'cookie'],
+    }),
+  ],
 });

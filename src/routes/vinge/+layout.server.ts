@@ -4,25 +4,25 @@ import { site } from '$lib/config';
 import games from '$lib/data/games';
 
 export const load: LayoutServerLoad = async ({ url }) => {
-	if (!url?.pathname) {
-		return;
-	}
+  if (!url?.pathname) {
+    return;
+  }
 
-	const gameSlug = url.pathname.split('/').at(-1);
+  const gameSlug = url.pathname.split('/').at(-1);
 
-	if (!gameSlug) {
-		return;
-	}
+  if (!gameSlug) {
+    return;
+  }
 
-	const game = games[gameSlug];
+  const game = games[gameSlug];
 
-	if (!game) {
-		return;
-	}
+  if (!game) {
+    return;
+  }
 
-	return {
-		name: game.name(),
-		description: game.description() || site.description,
-		image: game.image || site.image
-	};
+  return {
+    name: game.name(),
+    description: game.description() || site.description,
+    image: game.image || site.image,
+  };
 };
