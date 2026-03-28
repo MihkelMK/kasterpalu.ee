@@ -1,5 +1,5 @@
 # Use this image as the platform to build the app
-FROM node:24-alpine3.23 AS build
+FROM node:24-alpine3.23@sha256:01743339035a5c3c11a373cd7c83aeab6ed1457b55da6a69e014a95ac4e4700b AS build
 
 # The WORKDIR instruction sets the working directory for everything that will happen next
 WORKDIR /app
@@ -31,7 +31,7 @@ RUN pnpm drizzle-kit generate && \
   pnpm drizzle-kit push && \
   pnpm build
 
-FROM node:24-alpine3.23
+FROM node:24-alpine3.23@sha256:01743339035a5c3c11a373cd7c83aeab6ed1457b55da6a69e014a95ac4e4700b
 
 WORKDIR /app
 
