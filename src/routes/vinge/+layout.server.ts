@@ -1,10 +1,9 @@
-import type { LayoutServerData } from './$types';
+import type { LayoutServerLoad } from './$types';
 
 import { site } from '$lib/config';
 import games from '$lib/data/games';
-import { m } from '$lib/paraglide/messages';
 
-export const load: LayoutServerData = async ({ url }) => {
+export const load: LayoutServerLoad = async ({ url }) => {
 	if (!url?.pathname) {
 		return;
 	}
