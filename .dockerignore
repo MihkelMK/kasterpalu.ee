@@ -1,5 +1,81 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Build output
+.next/
+out/
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# Strapi
+.strapi
+.strapi-updater.json
+.strapi-cloud.json
+public/
+
+# Paraglide
+src/lib/paraglide
+project.inlang/cache/plugins
+project.inlang/project_id
+
+# Version control
+.git/
+.gitignore
+
+# Environment
 .env
-.env.example
-Dockerfile
-compose.yml
+.env.*
+!.env.example
+!.env.test
+
+# Docker
+Dockerfile*
+compose*.yml
+.dockerignore
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# SQLite
+*.db
+*.sql
+*.sql.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+LICENSE
+CHANGELOG.md
+*.md
+
+# CI/CD
+.github/
+.forgejo/
+.gitlab-ci.yml
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+__tests__/
+*.test.*
+*.spec.*
