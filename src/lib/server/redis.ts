@@ -3,8 +3,8 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { env } from '$env/dynamic/private';
 
 const redis = new Redis({
-  url: env.UPSTASH_REDIS_URL,
-  token: env.UPSTASH_REDIS_TOKEN,
+  url: env.UPSTASH_REDIS_URL as string,
+  token: env.UPSTASH_REDIS_TOKEN as string,
 });
 
 export const ratelimit = {

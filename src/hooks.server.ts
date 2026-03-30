@@ -10,7 +10,7 @@ declare module 'svelte-kit-sessions' {
   }
 }
 
-const originalHandle: Handle = sveltekitSessionHandle({ secret: env.SESH_SECRET });
+const originalHandle: Handle = sveltekitSessionHandle({ secret: env.SESH_SECRET as string });
 
 const handleParaglide: Handle = ({ event, resolve }) =>
   paraglideMiddleware(event.request, ({ request, locale }) => {

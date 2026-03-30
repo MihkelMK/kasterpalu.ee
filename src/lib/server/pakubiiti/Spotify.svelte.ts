@@ -4,8 +4,8 @@ import { getRandomSearch } from '$lib/utils';
 
 class SpotifyAPI {
   private api = new SpotifyWebApi({
-    clientId: env.CLIENT_ID,
-    clientSecret: env.CLIENT_SECRET,
+    clientId: env.CLIENT_ID as string,
+    clientSecret: env.CLIENT_SECRET as string,
   });
   private exiresAt: Date = $state(new Date());
 
