@@ -1,6 +1,6 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { paraglideMiddleware } from '$lib/paraglide/server';
-import { SESH_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { Handle } from '@sveltejs/kit';
 import { sveltekitSessionHandle } from 'svelte-kit-sessions';
 
@@ -10,7 +10,7 @@ declare module 'svelte-kit-sessions' {
   }
 }
 
-const originalHandle: Handle = sveltekitSessionHandle({ secret: SESH_SECRET });
+const originalHandle: Handle = sveltekitSessionHandle({ secret: env.SESH_SECRET as string });
 
 const handleParaglide: Handle = ({ event, resolve }) =>
   paraglideMiddleware(event.request, ({ request, locale }) => {

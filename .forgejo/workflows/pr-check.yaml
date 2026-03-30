@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Create .env for type checking
-        run: '[ -f .env.example ] && cp .env.example .env || true'
-
       - name: Compile paraglide
         run: pnpm exec paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide
 

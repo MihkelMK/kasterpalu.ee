@@ -5,27 +5,13 @@ services:
     container_name: 'kasterpalu-web'
     build:
       context: .
-      secrets:
-        - CLIENT_ID
-        - CLIENT_SECRET
-        - SESH_SECRET
-        - ALTCHA_HMAC
-        - UPSTASH_REDIS_URL
-        - UPSTASH_REDIS_TOKEN
+    environment:
+      - CLIENT_ID
+      - CLIENT_SECRET
+      - SESH_SECRET
+      - ALTCHA_HMAC
+      - UPSTASH_REDIS_URL
+      - UPSTASH_REDIS_TOKEN
     restart: unless-stopped
     ports:
       - 9000:3000
-
-secrets:
-  CLIENT_ID:
-    environment: CLIENT_ID
-  CLIENT_SECRET:
-    environment: CLIENT_SECRET
-  SESH_SECRET:
-    environment: SESH_SECRET
-  ALTCHA_HMAC:
-    environment: ALTCHA_HMAC
-  UPSTASH_REDIS_URL:
-    environment: UPSTASH_REDIS_URL
-  UPSTASH_REDIS_TOKEN:
-    environment: UPSTASH_REDIS_TOKEN

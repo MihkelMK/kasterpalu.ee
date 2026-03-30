@@ -1,5 +1,5 @@
 # Use this image as the platform to build the app
-FROM node:24-alpine3.23@sha256:01743339035a5c3c11a373cd7c83aeab6ed1457b55da6a69e014a95ac4e4700b AS build
+FROM node:24-trixie@sha256:dcc3e56b82427ddc3b91ca2b18499450d670fc58251d944e5107d8ef2899f841 AS build
 
 # The WORKDIR instruction sets the working directory for everything that will happen next
 WORKDIR /app
@@ -12,26 +12,11 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-# Use secrets during build
-RUN --mount=type=secret,id=CLIENT_ID \
-  --mount=type=secret,id=CLIENT_SECRET \
-  --mount=type=secret,id=SESH_SECRET \
-  --mount=type=secret,id=ALTCHA_HMAC \
-  --mount=type=secret,id=UPSTASH_REDIS_URL \
-  --mount=type=secret,id=UPSTASH_REDIS_TOKEN \
-  CLIENT_ID="$(cat /run/secrets/CLIENT_ID)" && \
-  CLIENT_SECRET="$(cat /run/secrets/CLIENT_SECRET)" && \
-  SESH_SECRET="$(cat /run/secrets/SESH_SECRET)" && \
-  ALTCHA_HMAC="$(cat /run/secrets/ALTCHA_HMAC)" && \
-  UPSTASH_REDIS_URL="$(cat /run/secrets/UPSTASH_REDIS_URL || echo '')" && \
-  UPSTASH_REDIS_TOKEN="$(cat /run/secrets/UPSTASH_REDIS_TOKEN || echo '')" && \
-  printf "CLIENT_ID=%s\nCLIENT_SECRET=%s\nSESH_SECRET=%s\nALTCHA_HMAC=%s\nUPSTASH_REDIS_URL=%s\nUPSTASH_REDIS_TOKEN=%s" "$CLIENT_ID" "$CLIENT_SECRET" "$SESH_SECRET" "$ALTCHA_HMAC" "$UPSTASH_REDIS_URL" "$UPSTASH_REDIS_TOKEN" > .env
-
 RUN pnpm drizzle-kit generate && \
   pnpm drizzle-kit push && \
   pnpm build
 
-FROM node:24-alpine3.23@sha256:01743339035a5c3c11a373cd7c83aeab6ed1457b55da6a69e014a95ac4e4700b
+FROM node:24-trixie@sha256:dcc3e56b82427ddc3b91ca2b18499450d670fc58251d944e5107d8ef2899f841
 
 WORKDIR /app
 
