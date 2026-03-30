@@ -1,11 +1,11 @@
 import SpotifyWebApi from 'spotify-web-api-node';
-import { CLIENT_ID, CLIENT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { getRandomSearch } from '$lib/utils';
 
 class SpotifyAPI {
   private api = new SpotifyWebApi({
-    clientId: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
+    clientId: env.CLIENT_ID,
+    clientSecret: env.CLIENT_SECRET,
   });
   private exiresAt: Date = $state(new Date());
 

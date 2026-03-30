@@ -1,11 +1,11 @@
-import { ALTCHA_HMAC } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { json } from '@sveltejs/kit';
 
 import { createChallenge, verifySolution } from 'altcha-lib';
 
 export async function GET() {
   const challenge = await createChallenge({
-    hmacKey: ALTCHA_HMAC,
+    hmacKey: env.ALTCHA_HMAC,
     maxNumber: 100000, // the maximum random number
   });
   console.log('challange get');
@@ -16,7 +16,7 @@ export async function GET() {
 export async function POST({ request }) {
   const { payload }: { payload: string } = await request.json();
   console.log('challange done');
-  const ok = await verifySolution(payload, ALTCHA_HMAC);
+  const ok = await verifySolution(payload, env.ALTCHA_HMAC);
 
   return json({ ok });
 }
