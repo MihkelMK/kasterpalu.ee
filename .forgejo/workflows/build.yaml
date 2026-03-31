@@ -47,7 +47,9 @@ jobs:
 
       - name: Trigger deploy
         env:
-          KOMODO_SECRET: ${{ secrets.KOMODO_DEPLOY_SECRET }}
+          KOMODO_SECRET: ${{ secrets.KOMODO_WEBHOOK_SECRET }}
         run: |
           curl -fsS -X POST "${{ vars.KOMODO_DEPLOY_WEBHOOK }}" \
-            -H "X-Komodo-Secret: ${KOMODO_SECRET}"
+            -H "Content-Type: application/json" \
+            -H "X-Gitlab-Token: ${KOMODO_SECRET}" \
+            -d '{"ref":"${{ github.ref }}"}'
