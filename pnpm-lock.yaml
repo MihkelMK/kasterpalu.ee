@@ -31,7 +31,7 @@ importers:
         version: 2.0.2
       altcha-lib:
         specifier: ^1.2.0
-        version: 1.2.0
+        version: 1.4.1
       better-sqlite3:
         specifier: ^11.10.0
         version: 11.10.0
@@ -1373,8 +1373,8 @@ packages:
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
-  altcha-lib@1.2.0:
-    resolution: {integrity: sha512-S5WF8QLNRaM1hvK24XPhOLfu9is2EBCvH7+nv50sM5CaIdUCqQCd0WV/qm/ZZFGTdSoKLuDp+IapZxBLvC+SNg==}
+  altcha-lib@1.4.1:
+    resolution: {integrity: sha512-MAXP9tkQOA2SE9Gwoe3LAcZbcDpp3XzYc5GDVej/y3eMNaFG/eVnRY1/7SGFW0RPsViEjPf+hi5eANjuZrH1xA==}
 
   altcha@2.0.2:
     resolution: {integrity: sha512-I8gD4/qU1NRlnPsU0FguitvShtY4R3Vk4t1+bF09vXYnqbd0Jw/79NpbK6KdLz+wMsLBxD/vAkpj2ghFtO6QAg==}
@@ -3902,7 +3902,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  altcha-lib@1.2.0: {}
+  altcha-lib@1.4.1: {}
 
   altcha@2.0.2:
     dependencies:
