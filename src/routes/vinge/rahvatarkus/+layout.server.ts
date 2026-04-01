@@ -4,7 +4,7 @@ import { formSchema as questionSchema } from './question-schema';
 import { formSchema as answerSchema } from './answer-schema';
 
 import { superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 } from 'sveltekit-superforms/adapters';
 import { nanoid } from 'nanoid';
 import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
 
@@ -52,8 +52,8 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
     },
     question: question,
     poolSize,
-    question_form: await superValidate(zod(questionSchema)),
-    answer_form: await superValidate({ questionId: question?.id }, zod(answerSchema), {
+    question_form: await superValidate(zod4(questionSchema)),
+    answer_form: await superValidate({ questionId: question?.id }, zod4(answerSchema), {
       errors: false,
     }),
   };

@@ -3,7 +3,7 @@
   import type { Question } from '$lib/types';
 
   import { toast } from 'svelte-sonner';
-  import { zodClient } from 'sveltekit-superforms/adapters';
+  import { zod4Client } from 'sveltekit-superforms/adapters';
   import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 
   import * as Card from '$lib/components/ui/card/index.js';
@@ -23,7 +23,7 @@
   } = $props();
 
   const form = superForm(data.answer_form, {
-    validators: zodClient(formSchema),
+    validators: zod4Client(formSchema),
     invalidateAll: 'force',
     onUpdated: ({ form: f }) => {
       if (f.valid) {
