@@ -3,7 +3,7 @@ import { formSchema as questionSchema } from './question-schema';
 import { formSchema as answerSchema } from './answer-schema';
 
 import { superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import { ratelimit } from '$lib/server/redis';
 
@@ -38,7 +38,7 @@ export const actions: Actions = {
 
     const user = session.data.userId;
 
-    const form = await superValidate(event, zod(answerSchema));
+    const form = await superValidate(event, zod4(answerSchema));
 
     if (!form.valid) {
       return fail(400, {
@@ -154,7 +154,7 @@ export const actions: Actions = {
 
     const user = session.data.userId;
 
-    const form = await superValidate(event, zod(questionSchema));
+    const form = await superValidate(event, zod4(questionSchema));
 
     if (!form.valid) {
       return fail(400, {
