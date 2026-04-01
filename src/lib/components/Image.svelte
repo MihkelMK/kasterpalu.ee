@@ -4,8 +4,7 @@
   import { Badge, type BadgeVariant } from '$lib/components/ui/badge/index.js';
   import * as HoverCard from '$lib/components/ui/hover-card/index.js';
 
-  import Instagram from '@lucide/svelte/icons/instagram';
-  import Facebook from '@lucide/svelte/icons/facebook';
+  import { SiInstagram, SiFacebook } from '@icons-pack/svelte-simple-icons';
   import Globe from '@lucide/svelte/icons/globe';
   import Link from '@lucide/svelte/icons/link';
 
@@ -32,9 +31,9 @@
 
 {#snippet creditText(author: string, type: ImageCreditType | undefined, className: string)}
   {#if type === 'instagram'}
-    <Instagram class={className} />
+    <SiInstagram class={className} title="" />
   {:else if type === 'facebook'}
-    <Facebook class={className} />
+    <SiFacebook class={className} title="" />
   {:else if type === 'web'}
     <Globe class={className} />
   {:else}
@@ -77,7 +76,7 @@
         <p
           class="flex items-center justify-center px-4 py-2 font-mono text-xs font-semibold text-secondary/80 dark:text-primary/80">
           {#if image.credit.href}
-            <a class="w-full" href={image.credit.href}>
+            <a class="w-full" href={image.credit.href} rel="external" target="_blank">
               {@render creditText(image.credit.author, image.credit.type, 'w-4 inline align-[-0.65em]')}
             </a>
           {:else}
