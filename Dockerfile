@@ -1,5 +1,5 @@
 # Use this image as the platform to build the app
-FROM node:24-trixie@sha256:dcc3e56b82427ddc3b91ca2b18499450d670fc58251d944e5107d8ef2899f841 AS build
+FROM node:24-trixie@sha256:e4ceb04a1f1dd4823a1ab6ef8d2182c09d6299b507c70f20bd0eb9921a78354d AS build
 
 # The WORKDIR instruction sets the working directory for everything that will happen next
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN pnpm drizzle-kit generate && \
   pnpm drizzle-kit push && \
   pnpm build
 
-FROM node:24-trixie@sha256:dcc3e56b82427ddc3b91ca2b18499450d670fc58251d944e5107d8ef2899f841
+FROM node:24-trixie@sha256:e4ceb04a1f1dd4823a1ab6ef8d2182c09d6299b507c70f20bd0eb9921a78354d
 
 WORKDIR /app
 
