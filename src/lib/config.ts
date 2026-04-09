@@ -1,5 +1,5 @@
 export const site = {
-  name: 'Mihkel Martin Kasterpalu',
+  name: 'Kasterpalu',
   author: 'Mihkel Martin Kasterpalu',
   email: 'mihkel@kasterpalu.ee',
   description: 'Portfoolio - Arendaja, Disainer, Muusik, DJ, Ettevõtja.',

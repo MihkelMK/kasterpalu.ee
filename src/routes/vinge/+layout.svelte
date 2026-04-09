@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { baseURL, stuffSite } from '$lib/config.js';
+  import { baseURL, site, stuffSite } from '$lib/config.js';
 
   import { Toaster } from '$lib/components/ui/sonner/index.js';
 
   let { children, data } = $props();
 
-  const title = data?.name ? `${data.name} | ${stuffSite.name}` : stuffSite.name;
-  const description = data?.description || stuffSite.description;
-  const ogImage = data?.image || stuffSite.image;
+  const title = $derived(`${data.name || stuffSite.name} | ${site.name}`);
+  const description = $derived(data?.description || stuffSite.description);
+  const ogImage = $derived(data?.image || stuffSite.image);
 </script>
 
 <svelte:head>

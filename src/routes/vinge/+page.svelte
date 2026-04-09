@@ -1,19 +1,8 @@
 <script lang="ts">
-  import { site, baseURL } from '$lib/config';
   import games from '$lib/data/games';
   import { m } from '$lib/paraglide/messages';
   import { localizeHref } from '$lib/paraglide/runtime';
 </script>
-
-<svelte:head>
-  <title>{site.name}</title>
-  <meta property="og:title" content={site.name} />
-
-  <meta name="description" content={site.description} />
-  <meta property="og:description" content={site.description} />
-
-  <meta property="og:image" content={baseURL + site.image} />
-</svelte:head>
 
 <header class="flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">

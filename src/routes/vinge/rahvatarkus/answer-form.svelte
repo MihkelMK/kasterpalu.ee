@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { formSchema, type FormSchema } from './answer-schema';
   import type { Question } from '$lib/types';
+  import { formSchema, type FormSchema } from './answer-schema';
 
+  import { untrack } from 'svelte';
   import { toast } from 'svelte-sonner';
+  import { type Infer, superForm, type SuperValidated } from 'sveltekit-superforms';
   import { zod4Client } from 'sveltekit-superforms/adapters';
-  import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 
+  import Altcha from '$lib/components/Altcha.svelte';
   import * as Card from '$lib/components/ui/card/index.js';
   import * as Form from '$lib/components/ui/form/index.js';
   import { Input } from '$lib/components/ui/input/index.js';
   import { Textarea } from '$lib/components/ui/textarea/index.js';
-  import Altcha from '$lib/components/Altcha.svelte';
 
   let {
     data,
@@ -22,17 +23,20 @@
     };
   } = $props();
 
-  const form = superForm(data.answer_form, {
-    validators: zod4Client(formSchema),
-    invalidateAll: 'force',
-    onUpdated: ({ form: f }) => {
-      if (f.valid) {
-        toast.success('Vastus saadetud.');
-      } else {
-        toast.error('Vastamine nurjus, palun paranda vead.');
-      }
-    },
-  });
+  const form = superForm(
+    untrack(() => data.answer_form),
+    {
+      validators: zod4Client(formSchema),
+      invalidateAll: 'force',
+      onUpdated: ({ form: f }) => {
+        if (f.valid) {
+          toast.success('Vastus saadetud.');
+        } else {
+          toast.error('Vastamine nurjus, palun paranda vead.');
+        }
+      },
+    }
+  );
 
   const { form: formData, enhance, constraints } = form;
 </script>

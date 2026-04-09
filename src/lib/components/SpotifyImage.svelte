@@ -19,7 +19,7 @@
   );
 
   const sizes = '(max-width: 320px) 64px, 300px';
-  const thumbnail = images.at(-1);
+  const thumbnail = $derived(images.at(-1));
 
   const className = 'aspect-square w-full object-cover';
 </script>

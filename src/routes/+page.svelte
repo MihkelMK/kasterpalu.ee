@@ -27,8 +27,8 @@
 {/snippet}
 
 <svelte:head>
-  <title>{site.name}</title>
-  <meta property="og:title" content={site.name} />
+  <title>Hei! | {site.name}</title>
+  <meta property="og:title" content="Hei! | {site.name}" />
 
   <meta name="description" content={site.description} />
   <meta property="og:description" content={site.description} />
