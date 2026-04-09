@@ -4,14 +4,16 @@
 
 	let {
 		ref = $bindable(null),
+		value = $bindable(),
 		class: className,
 		...restProps
-	}: AccordionPrimitive.ItemProps = $props();
+	}: AccordionPrimitive.RootProps = $props();
 </script>
 
-<AccordionPrimitive.Item
+<AccordionPrimitive.Root
 	bind:ref
-	data-slot="accordion-item"
-	class={cn("not-last:border-b", className)}
+	bind:value={value as never}
+	data-slot="accordion"
+	class={cn("cn-accordion flex w-full flex-col", className)}
 	{...restProps}
 />

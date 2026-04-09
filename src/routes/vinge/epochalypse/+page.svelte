@@ -64,7 +64,7 @@
     {@render clockStage(60, timeUntil.seconds, m['time.second.multiple'](), false)}
   </div>
 
-  <Accordion.Root type="single" class="mx-auto mt-12 max-w-prose pb-4">
+  <Accordion.Root type="single" class="mx-auto mt-12 max-w-prose">
     <Accordion.Item value="item-1">
       <Accordion.Trigger>{m['games.epochalypse.explainer.title']()}</Accordion.Trigger>
       <Accordion.Content class="text-md">

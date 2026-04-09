@@ -58,7 +58,7 @@
           <HoverCard.Root>
             <HoverCard.Trigger>
               <Badge
-                class="font-title text-base leading-relaxed font-semibold tracking-wide transition-none"
+                class="rounded-md py-3 font-title text-base leading-relaxed font-semibold tracking-wide transition-none"
                 variant={badgeVariant}>
                 {name}
               </Badge>
