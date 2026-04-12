@@ -1,8 +1,8 @@
 <script lang="ts">
   import '../app.css';
 
-  import '@fontsource-variable/smooch-sans';
-  import '@fontsource-variable/kode-mono';
+  import '@fontsource-variable/smooch-sans/index.css';
+  import '@fontsource-variable/kode-mono/index.css';
 
   import { onMount } from 'svelte';
   import { site } from '$lib/config';
