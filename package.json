@@ -65,7 +65,7 @@
     "@inlang/paraglide-js": "^2.0.0",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.34.9",
-    "altcha": "^2.0.2",
+    "altcha": "^3.0.0",
     "altcha-lib": "^1.2.0",
     "better-sqlite3": "^12.0.0",
     "drizzle-orm": "^0.45.0",
