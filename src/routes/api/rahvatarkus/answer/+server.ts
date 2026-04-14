@@ -29,50 +29,57 @@ export async function POST({ locals, request }) {
     return json({ error: message }, { status: 429 });
   }
 
-  // Start transaction
-  return await db.transaction(async (tx) => {
-    // Get question and validate in one query
-    const question = await tx
+  // better-sqlite3 is synchronous — transaction callback must not be async
+  const result = db.transaction((tx) => {
+    const question = tx
       .select({
         creator: questions.creator,
         answerCount: questions.answerCount,
       })
       .from(questions)
       .where(eq(questions.id, questionId))
-      .limit(1);
+      .limit(1)
+      .all();
 
     if (!question.length) {
-      return json({ error: 'Seda küsimust ei leitud' }, { status: 400 });
+      return { error: 'Seda küsimust ei leitud', status: 400 } as const;
     }
 
     const [questionData] = question;
 
     if (questionData.creator === user) {
-      return json({ error: 'Iseendale vastamine ei ole produktiivne' }, { status: 400 });
+      return { error: 'Iseendale vastamine ei ole produktiivne', status: 400 } as const;
     }
 
     if (questionData.answerCount >= maxAnswers) {
-      return json({ error: 'Sellel küsimusel on juba piisavalt küsimusi' }, { status: 400 });
+      return { error: 'Sellel küsimusel on juba piisavalt vastuseid', status: 400 } as const;
     }
 
     // Insert answer and update count atomically
-    const [newAnswer] = await tx
+    const [newAnswer] = tx
       .insert(answers)
       .values({
         content,
         creator: userId,
         questionId,
       })
-      .returning();
+      .returning()
+      .all();
 
-    await tx
-      .update(questions)
+    tx.update(questions)
       .set({ answerCount: sql`${questions.answerCount} + 1` })
-      .where(eq(questions.id, questionId));
+      .where(eq(questions.id, questionId))
+      .run();
 
-    // Valid answer, allow this user to ask one question
+    // Valid answer — allow this user to ask one question
     questionBalanceStore.addQuestions(user);
 
-    return json(newAnswer);
+    return { data: newAnswer, status: 200 } as const;
   });
+
+  if ('error' in result) {
+    return json({ error: result.error }, { status: result.status });
+  }
+
+  return json(result.data);
 }

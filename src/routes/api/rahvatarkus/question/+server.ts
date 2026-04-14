@@ -83,26 +83,26 @@ export async function POST({ locals, request }) {
   const finalContent = normalizedContent.at(-1) === '?' ? normalizedContent.slice(0, -1) : normalizedContent;
 
   try {
-    // Use transaction to ensure data consistency
-    const [newQuestion] = await db.transaction(async (tx) => {
+    // better-sqlite3 is synchronous — transaction callback must not be async
+    const newQuestion = db.transaction((tx) => {
       // Check for duplicate questions first
-      const existingQuestion = await tx
+      const existingQuestion = tx
         .select({ id: questions.id })
         .from(questions)
         .where(eq(questions.content, finalContent))
-        .limit(1);
+        .limit(1)
+        .all();
 
       if (existingQuestion.length > 0) {
         throw new Error('Seda on juba küsitud');
       }
 
       // Check user's recent questions (optional rate limiting)
-      const recentQuestions = (await tx
-        .select({ count: sql`count(*)` })
+      const recentQuestions = tx
+        .select({ count: sql<number>`count(*)` })
         .from(questions)
-        .where(and(eq(questions.creator, userId), gt(questions.createdAt, sql`datetime('now', '-1 hour')`)))) as {
-        count: number;
-      }[];
+        .where(and(eq(questions.creator, userId), gt(questions.createdAt, sql`datetime('now', '-1 hour')`)))
+        .all();
 
       if (recentQuestions[0].count >= 10) {
         throw new Error('Rahu rahu! Oled tunni aja jooksul liiga palju küsimusi esitanud');
@@ -113,7 +113,7 @@ export async function POST({ locals, request }) {
       }
 
       // Insert the new question
-      return await tx
+      const [inserted] = tx
         .insert(questions)
         .values({
           content: finalContent,
@@ -121,7 +121,10 @@ export async function POST({ locals, request }) {
           answerCount: 0,
           createdAt: new Date(),
         })
-        .returning();
+        .returning()
+        .all();
+
+      return inserted;
     });
 
     return json(newQuestion);
