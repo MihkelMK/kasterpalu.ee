@@ -1,6 +1,18 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
 
+  "and": "ja",
+  "is": "on",
+  "at": "",
+
+  "next": "Järgmine",
+  "previous": "Eelmine",
+  "submit": "Saada",
+  "ask": "Küsi",
+  "answer": "Vasta",
+  "best": "Parim",
+  "score": "Skoor",
+
   "goto_next": "Mine järgmisele lehele",
   "goto_previous": "Mine eelmisele lehele",
   "goto_n": [
@@ -11,21 +23,6 @@
       }
     }
   ],
-
-  "next": "Järgmine",
-  "previous": "Eelmine",
-
-  "general": {
-    "and": "ja",
-    "is": "on",
-    "at": ""
-  },
-
-  "buttons": {
-    "submit": "Saada",
-    "ask": "Küsi",
-    "answer": "Vasta"
-  },
 
   "time": {
     "year": {
@@ -135,10 +132,6 @@
   },
 
   "games": {
-    "score": {
-      "best": "Parim",
-      "score": "Skoor"
-    },
     "pakubiiti": {
       "name": "Paku biiti",
       "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
@@ -151,6 +144,7 @@
         "and": "ja"
       }
     },
+
     "epochalypse": {
       "name": "Epochalypse",
       "description": "Varsti veel üks Y2K. Kui nostalgiline!",
@@ -194,10 +188,12 @@
         }
       }
     },
+
     "rahvatarkus": {
       "name": "Rahva tarkus",
       "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
     },
+
     "vaukuivali": {
       "name": "Vau kui vali",
       "description": "Intuitiivsem arusaam igapäevahelide tõelisest valjudusest.",

@@ -89,7 +89,7 @@
           </a>
           - {m['games.epochalypse.explainer.unix.outro']()}
           <i>{m['games.epochalypse.explainer.unix.epoch']()}</i>
-          {m['general.at']()}
+          {m.at()}
           00:00:00 19.01.1970 UTC.
         </p>
         <p class="leading-7 not-first:mt-6">
@@ -104,7 +104,7 @@
           .
           <br />
           {m['games.epochalypse.explainer.integer.lastDate']()}
-          {m['general.is']()} 03:14:07 19.01.2038 UTC (
+          {m.is()} 03:14:07 19.01.2038 UTC (
           <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
             UNIX epoch + 2
             <sup>31</sup>

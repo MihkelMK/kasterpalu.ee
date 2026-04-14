@@ -1,6 +1,18 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
 
+  "and": "and",
+  "is": "is",
+  "at": "at",
+
+  "next": "Next",
+  "previous": "Previous",
+  "submit": "Submit",
+  "ask": "Ask",
+  "answer": "Answer",
+  "best": "Parim",
+  "score": "Skoor",
+
   "goto_next": "Go to next page",
   "goto_previous": "Go to previous page",
   "goto_n": [
@@ -11,21 +23,6 @@
       }
     }
   ],
-
-  "next": "Next",
-  "previous": "Previous",
-
-  "general": {
-    "and": "and",
-    "is": "is",
-    "at": "at"
-  },
-
-  "buttons": {
-    "submit": "Submit",
-    "ask": "Ask",
-    "answer": "Answer"
-  },
 
   "time": {
     "year": {
@@ -135,10 +132,6 @@
   },
 
   "games": {
-    "score": {
-      "best": "Best",
-      "score": "Score"
-    },
     "pakubiiti": {
       "name": "Paku biiti",
       "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
@@ -151,6 +144,7 @@
         "and": "and"
       }
     },
+
     "epochalypse": {
       "name": "Epochalypse",
       "description": "Soon we'll have another Y2K. How nostalgic!",

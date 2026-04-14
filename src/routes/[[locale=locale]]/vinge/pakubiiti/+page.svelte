@@ -27,15 +27,15 @@
 
 {#snippet footer(loading: boolean)}
   <footer class="mt-8 flex items-center justify-evenly">
-    <p class="font-title text-lg font-semibold">{m['games.score.score']()}: {data.stage}</p>
+    <p class="font-title text-lg font-semibold">{m.score()}: {data.stage}</p>
     {#if loading || submitting}
       <Button disabled class="min-w-[4.4rem]">
         <LoaderCircle class="animate-spin" />
       </Button>
     {:else}
-      <Button type="submit" class="min-w-[4.4rem]">{m['buttons.submit']()}</Button>
+      <Button type="submit" class="min-w-[4.4rem]">{m.submit()}</Button>
     {/if}
-    <p class="font-title text-lg font-semibold">{m['games.score.best']()}: {data.highscore}</p>
+    <p class="font-title text-lg font-semibold">{m.best()}: {data.highscore}</p>
   </footer>
 {/snippet}
 

@@ -24,7 +24,7 @@
 
 {#snippet segment(index: number, position: string, vertical: boolean, dot: boolean = false)}
   <div
-    class="absolute {!dot ? 'rounded-[2px]' : 'rounded-[1.5px]'} transition-colors [transition-duration:50ms]
+    class="absolute {!dot ? 'rounded-xs' : 'rounded-[1.5px]'} transition-colors duration-50
         {digitPatterns[digit][index] ? 'bg-lime-500 shadow-2xl shadow-black drop-shadow' : 'bg-white/10'}"
     style="height: {vertical && !dot ? segLength : segWidth}rem; width: {vertical || dot
       ? segWidth
