@@ -31,6 +31,7 @@
       invalidateAll: false,
       onUpdated: async ({ form: f }) => {
         if (f.valid) {
+          $formData.altcha = '';
           toast.success('Vastus saadetud.');
           await invalidateAll();
         } else {

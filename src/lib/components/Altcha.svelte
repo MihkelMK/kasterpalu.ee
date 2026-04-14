@@ -1,12 +1,29 @@
 <script lang="ts">
   // Importing altcha package will introduce a new element <altcha-widget>
   import 'altcha';
+  import type { AltchaWidgetElement } from 'altcha';
   import 'altcha/i18n/et';
   import type {} from 'altcha/types/svelte';
-  import Input from './ui/input/input.svelte';
+
   import { getLocale } from '$lib/paraglide/runtime';
+  import Input from './ui/input/input.svelte';
 
   let { value = $bindable(), ...props } = $props();
+
+  // When the parent clears value (form reset after submission), reset the widget so
+  // the user must re-solve the challenge before submitting again.
+  function resetOnClear(el: AltchaWidgetElement, currentValue: string) {
+    if (!currentValue) {
+      (el as { reset?: () => void }).reset?.();
+    }
+    return {
+      update(newValue: string) {
+        if (!newValue) {
+          (el as { reset?: () => void }).reset?.();
+        }
+      },
+    };
+  }
 
   const style =
     '--altcha-color-base: transparent;' +
@@ -27,6 +44,7 @@
 <Input type="hidden" bind:value {...props} />
 
 <altcha-widget
+  use:resetOnClear={value}
   auto="onsubmit"
   language={getLocale()}
   challenge="/api/altcha/challenge"
