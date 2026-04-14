@@ -3,6 +3,7 @@
   import { formSchema, type FormSchema } from './answer-schema';
 
   import { invalidateAll } from '$app/navigation';
+  import { m } from '$lib/paraglide/messages';
   import { untrack } from 'svelte';
   import { toast } from 'svelte-sonner';
   import { type Infer, superForm, type SuperValidated } from 'sveltekit-superforms';
@@ -24,18 +25,21 @@
     };
   } = $props();
 
+  const toastSuccess = $derived(m['games.rahvatarkus.answer_toast_success']());
+  const toastError = $derived(m['games.rahvatarkus.answer_toast_error']());
+
   const form = superForm(
     untrack(() => data.answer_form),
     {
-      validators: zod4Client(formSchema),
+      validators: zod4Client(formSchema()),
       invalidateAll: false,
       onUpdated: async ({ form: f }) => {
         if (f.valid) {
           $formData.altcha = '';
-          toast.success('Vastus saadetud.');
+          toast.success(toastSuccess);
           await invalidateAll();
         } else {
-          toast.error('Vastamine nurjus, palun paranda vead.');
+          toast.error(toastError);
         }
       },
     }
@@ -46,20 +50,17 @@
 
 <Card.Root>
   <Card.Header>
-    {#if !data.question}
-      <Card.Title>Kõik vastatud</Card.Title>
-      <Card.Description>Rahval said kõik küsimused otsa!</Card.Description>
-    {:else}
-      <Card.Title>Vasta vajajale</Card.Title>
-      <Card.Description>Tänutäheks saad vastu ühe küsimuse küsida.</Card.Description>
-    {/if}
+    <Card.Title>{m['games.rahvatarkus.answer.title']({ question: data.question ? 'true' : 'false' })}</Card.Title>
+    <Card.Description>
+      {m['games.rahvatarkus.answer.description']({ question: data.question ? 'true' : 'false' })}
+    </Card.Description>
   </Card.Header>
   {#if !data.question}
     <Card.Content>
       {#if data.poolSize === 0}
-        <p class="text-sm leading-6">Sellise erandjuhuga saad ühe korra niisama küsida!</p>
+        <p class="text-sm leading-6">{m['games.rahvatarkus.question_pool_empty']()}</p>
       {:else}
-        <p class="text-sm leading-6">Äkki tahaksid su sõbrad vastata või on neil küsimusi?</p>
+        <p class="text-sm leading-6">{m['games.rahvatarkus.no_questions']()}</p>
       {/if}
     </Card.Content>
   {:else}
@@ -97,7 +98,7 @@
         </Form.Field>
       </Card.Content>
       <Card.Footer class="justify-center">
-        <Form.Button>Vasta</Form.Button>
+        <Form.Button>{m.answer()}</Form.Button>
       </Card.Footer>
     </form>
   {/if}

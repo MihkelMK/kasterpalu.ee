@@ -14,6 +14,9 @@ importers:
       '@inlang/paraglide-js':
         specifier: ^2.0.0
         version: 2.15.3
+      '@inlang/paraglide-js-svelte':
+        specifier: ^1.0.1
+        version: 1.0.1(@inlang/paraglide-js@2.15.3)(svelte@5.55.3(@typescript-eslint/types@8.58.1))
       '@upstash/ratelimit':
         specifier: ^2.0.5
         version: 2.0.8(@upstash/redis@1.37.0)
@@ -895,6 +898,12 @@ packages:
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [win32]
+
+  '@inlang/paraglide-js-svelte@1.0.1':
+    resolution: {integrity: sha512-mqtUaoMEz3rhLMGdkd9QC+9yeFhGSooCFcW4fw+0xKzqty7WLc9xSBTC24xmRastmxFy6zxutko7VH1W3JkHLQ==}
+    peerDependencies:
+      '@inlang/paraglide-js': '>=2.11.0 <3'
+      svelte: ^5.0.0
 
   '@inlang/paraglide-js@2.15.3':
     resolution: {integrity: sha512-gneANUhYEPnSjxbKp3QCwmMqQecG+1QWuJSAl3jiPprn2+LeaZu3BgnofRKpo8gkYzB6oE3AY2ecZBXu3UrpOw==}
@@ -3509,6 +3518,11 @@ snapshots:
 
   '@img/sharp-win32-x64@0.34.5':
     optional: true
+
+  '@inlang/paraglide-js-svelte@1.0.1(@inlang/paraglide-js@2.15.3)(svelte@5.55.3(@typescript-eslint/types@8.58.1))':
+    dependencies:
+      '@inlang/paraglide-js': 2.15.3
+      svelte: 5.55.3(@typescript-eslint/types@8.58.1)
 
   '@inlang/paraglide-js@2.15.3':
     dependencies:

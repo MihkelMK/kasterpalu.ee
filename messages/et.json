@@ -4,14 +4,20 @@
   "and": "ja",
   "is": "on",
   "at": "",
+  "music": "Muusika",
+  "web": "Veebileht",
+  "founder": "Asutaja",
 
   "next": "Järgmine",
   "previous": "Eelmine",
   "submit": "Saada",
-  "ask": "Küsi",
-  "answer": "Vasta",
   "best": "Parim",
   "score": "Skoor",
+  "try_again": "Proovi uuesti",
+  "ask": "Küsi",
+  "answer": "Vasta",
+  "answer_noun": "Vastus",
+  "question_noun": "Küsimus",
 
   "goto_next": "Mine järgmisele lehele",
   "goto_previous": "Mine eelmisele lehele",
@@ -24,102 +30,62 @@
     }
   ],
 
-  "time": {
-    "year": {
-      "single": "aasta",
-      "multiple": "aastat"
-    },
-    "month": {
-      "single": "kuu",
-      "multiple": "kuud"
-    },
-    "day": {
-      "single": "päev",
-      "multiple": "päevad"
-    },
-    "hour": {
-      "single": "tund",
-      "multiple": "tunnid"
-    },
-    "minute": {
-      "single": "minut",
-      "multiple": "minutit"
-    },
-    "second": {
-      "single": "sekund",
-      "multiple": "sekundit"
+  "years": "aastat",
+  "months": "kuud",
+  "days": "päeva",
+  "hours": "tundi",
+  "minutes": "minutit",
+  "seconds": "sekundit",
+
+  "nav_source": "saidi kood",
+  "nav_vinge": "vinge värk",
+
+  "server_error_title": "{#strong}Serveris tekkis mingi error.{/strong}{#br}{/br}No clue miks see katki on, sorry.",
+  "server_error_body": "Proovi uuesti või kirjuta mulle.",
+
+  "form_atleast_n_char": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} peab olema vähemalt {count} tähemärk pikk.",
+        "countPlural=other": "{field} peab olema vähemalt {count} tähemärki pikk."
+      }
     }
-  },
+  ],
+  "form_atmost_n_char": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} ei tohi olla pikem kui {count} tähemärk.",
+        "countPlural=other": "{field} ei tohi olla pikem kui {count} tähemärki."
+      }
+    }
+  ],
+
+  "rate_limit": [
+    {
+      "declarations": ["input seconds"],
+      "match": {
+        "seconds=*": "Võta veits rahulikumalt. Proovi {seconds}s pärast uuesti."
+      }
+    }
+  ],
+  "altcha_error": "Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.",
+
+  "change_theme": "Vaheta teemat",
+  "change_locale": [
+    {
+      "declarations": ["input locale"],
+      "match": {
+        "locale=et": "Muuda sait eesti keelseks",
+        "locale=en": "Muuda sait inglise keelseks"
+      }
+    }
+  ],
 
   "landing": {
     "title": "Hei! Mina olen Mihkel",
     "subtitle": "Peale selle toreda saidi on mul veel palju hobisid"
-  },
-
-  "projects": {
-    "SUPIKÖÖGIPOISID": {
-      "image": {
-        "credit": {
-          "author": "Mimmu",
-          "href": "https://www.instagram.com/musamimmu/"
-        },
-        "alt": "Pilt neljaliikmeliseslt räpibändist SUPIKÖÖGIPOISID. Pilt on tehtud pilves ilmaga õues. Pildil on 4 mees valgete triiksärkide, mustade lipsude ja mustade tagidega."
-      },
-      "description": "Räpikollektiiv. Alustasime 2019.",
-      "link": "https://skpoisid.bandcamp.com/"
-    },
-    "Dysaster Collective": {
-      "image": {
-        "credit": {
-          "author": "Mattias Mägi",
-          "href": "https://www.instagram.com/mattias.mix/"
-        },
-        "alt": "Sinakas digitaalne kollaž Dysaster Collective liigetest."
-      },
-      "description": "2022 asutatud mitmekülgne loomekollektiiv.",
-      "link": "https://dysaster.ee"
-    },
-    "monospac.ee": {
-      "image": {
-        "credit": {
-          "author": "Liisa Jõhvik",
-          "href": "https://www.instagram.com/liisajohvik.photo/"
-        },
-        "alt": "DJ duo monospacee nende Silent Disco setil Tartu Uus Teater saalis aastal 2024. Pilt on külje pealt, esiplaanil DJ Mimmu ja ta tagant paistab DJ Rx. Nad on valgustatud punasesega, taustal häguselt näha siniselt valgustatud kolmandat DJd."
-      },
-      "description": "DJ duo kaasliikmega Rx.",
-      "link": "https://monospac.ee"
-    },
-    "Saueaugu Teatritalu": {
-      "image": {
-        "alt": "Suvine Saueaugu teatrihoone. All paistab roheline muru ja katuse tagant paistab paari pilvega sinine taevas."
-      },
-      "description": "Taluteater Läänemaal. Tegin veebilehe.",
-      "link": "https://saueaugu.ee"
-    },
-    "Tartu Häkkerikoda": {
-      "image": {
-        "src": "/assets/hakkerikoda.svg",
-        "credit": {
-          "author": "treierxyz",
-          "href": "https://treier.xyz"
-        },
-        "alt": "Tartu Häkkerikoda logo"
-      },
-      "description": "Makerspace Tartus. Liige ning osa veebilehe loojatest.",
-      "link": "https://hakkerikoda.ee"
-    }
-  },
-
-  "badges": {
-    "music": { "name": "Muusika", "description": "Tegelen siin muusikaga" },
-    "web": { "name": "Veebileht", "description": "Disainisin/kirjutasin veebilehe" },
-    "founder": { "name": "Asutaja", "description": "Olin osa selle loomisest" }
-  },
-
-  "navigaton": {
-    "sourcecode": "saidi kood",
-    "vinge": "vinge värk"
   },
 
   "vinge": {
@@ -131,24 +97,60 @@
     }
   },
 
+  "badge_music": "Tegelen siin muusikaga",
+  "badge_web": "Disainisin/kirjutasin veebilehe",
+  "badge_founder": "Olin osa selle loomisest",
+
+  "projects": {
+    "SUPIKÖÖGIPOISID": {
+      "image_alt": "Pilt neljaliikmelisest räpibändist SUPIKÖÖGIPOISID. Pilt on tehtud pilves ilmaga õues. Pildil on 4 mees valgete triiksärkide, mustade lipsude ja mustade tagidega.",
+      "description": "Räpikollektiiv. Alustasime 2019."
+    },
+    "Dysaster Collective": {
+      "image_alt": "Sinakas digitaalne kollaž Dysaster Collective liigetest.",
+      "description": "2022 asutatud mitmekülgne loomekollektiiv."
+    },
+    "monospac.ee": {
+      "image_alt": "DJ duo monospacee nende Silent Disco setil Tartu Uus Teater saalis aastal 2024. Pilt on külje pealt, esiplaanil DJ Mimmu ja ta tagant paistab DJ Rx. Nad on valgustatud punasesega, taustal häguselt näha siniselt valgustatud kolmandat DJd.",
+      "description": "DJ duo kaasliikmega Rx."
+    },
+    "Saueaugu Teatritalu": {
+      "image_alt": "Suvine Saueaugu teatrihoone. All paistab roheline muru ja katuse tagant paistab paari pilvega sinine taevas.",
+      "description": "Taluteater Läänemaal. Tegin veebilehe."
+    },
+    "Tartu Häkkerikoda": {
+      "image_alt": "Tartu Häkkerikoda logo",
+      "description": "Makerspace Tartus. Liige ning osa veebilehe loojatest."
+    }
+  },
+
   "games": {
     "pakubiiti": {
       "name": "Paku biiti",
       "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
-      "title": "Paku biiti",
       "instructions": {
         "main": "Lohista kokku õiged albumi",
         "names": "nimed",
         "artists": "artistid",
-        "pictures": "pildid",
-        "and": "ja"
-      }
+        "pictures": "pildid"
+      },
+      "new_highscore": "Uus parim tulemus!",
+      "not_this_time": "Seekord ei vedanud",
+      "failed_on_first": "Põrusid esimesel katsel.",
+      "correct_answers": [
+        {
+          "declarations": ["input count", "local countPlural = count: plural"],
+          "match": {
+            "countPlural=one": "Vastasid õigesti {#strong}{count} korra{/strong}",
+            "countPlural=other": "Vastasid õigesti {#strong}{count} korda{/strong}"
+          }
+        }
+      ]
     },
 
     "epochalypse": {
       "name": "Epochalypse",
       "description": "Varsti veel üks Y2K. Kui nostalgiline!",
-      "title": "Epochalypse",
       "subtitle": "Ära muretse! Sul on veel aega:",
       "explainer": {
         "title": "Mis asi see on??",
@@ -191,13 +193,56 @@
 
     "rahvatarkus": {
       "name": "Rahva tarkus",
-      "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
+      "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents",
+
+      "what_do_the_people_know": "Mida rahvas teab?",
+      "no_questions": "Äkki tahaksid su sõbrad vastata või on neil küsimusi?",
+      "no_balance": "Enne küsimist pead kõigepealt vastama teistele!",
+      "question_pool_empty": "Sellise erandjuhuga saad ühe korra niisama küsida!",
+
+      "answer_toast_success": "Vastus saadetud",
+      "answer_toast_error": "Vastamine nurjus, palun paranda vead",
+      "question_toast_success": "Küsimus esitatud",
+      "question_toast_error": "Küsimine nurjus, palun paranda vead",
+
+      "ask": {
+        "title": "Küsi rahvalt",
+        "description": [
+          {
+            "declarations": ["input count", "local countPlural = count: plural"],
+            "match": {
+              "countPlural=one": "Sul on alles {count} küsimus",
+              "countPlural=other": "Sul on alles {count} küsimust"
+            }
+          }
+        ],
+        "label": "Küsimus rahvale"
+      },
+      "answer": {
+        "title": [
+          {
+            "declarations": ["input question"],
+            "match": {
+              "question=true": "Vasta vajajale",
+              "question=false": "Kõik vastatud"
+            }
+          }
+        ],
+        "description": [
+          {
+            "declarations": ["input question"],
+            "match": {
+              "question=true": "Tänutäheks saad vastu ühe küsimuse küsida.",
+              "question=false": "Rahval said kõik küsimused otsa!"
+            }
+          }
+        ]
+      }
     },
 
     "vaukuivali": {
-      "name": "Vau kui vali",
+      "name": "Vau kui vali!",
       "description": "Intuitiivsem arusaam igapäevahelide tõelisest valjudusest.",
-      "title": "Vau kui vali!",
       "intro": {
         "explainer": {
           "body": "Nagu paljud võivad teada, on detsibellide skaala logaritmiline.",
@@ -205,7 +250,7 @@
         },
         "problem": {
           "body": "See info ei jõudnud mulle eriti kohale.",
-          "footer": "Intuitiivsemaks arusaamiseks tegin selle lehe. "
+          "footer": "Intuitiivsemaks arusaamiseks tegin selle lehe."
         },
         "cta": "Proovi, keri alla."
       },
@@ -238,7 +283,7 @@
           "title": "Ma sain nurgad täis",
           "description": "Bingo õhtu Gennis (keset mängu)",
 
-          "alt": "Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesti klubi välialal."
+          "alt": "Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesi klubi välialal."
         },
         "70": {
           "title": "Pult on kadunud",

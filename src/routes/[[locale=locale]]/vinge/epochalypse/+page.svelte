@@ -47,7 +47,7 @@
 
 <header class="mb-24 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['games.epochalypse.title']()}
+    {m['games.epochalypse.name']()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
     {m['games.epochalypse.subtitle']()}
@@ -56,12 +56,12 @@
 <main class="w-full max-w-4xl">
   <div
     class="mx-auto grid w-full grid-cols-[auto_auto_auto] items-center justify-center gap-4 rounded-md bg-muted p-12 md:flex">
-    {@render clockStage(13, timeUntil.years, m['time.year.multiple']())}
-    {@render clockStage(13, timeUntil.months, m['time.month.multiple'](), false)}
-    {@render clockStage(31, timeUntil.days, m['time.day.multiple']())}
-    {@render clockStage(24, timeUntil.hours, m['time.hour.multiple'](), false)}
-    {@render clockStage(60, timeUntil.minutes, m['time.minute.multiple']())}
-    {@render clockStage(60, timeUntil.seconds, m['time.second.multiple'](), false)}
+    {@render clockStage(13, timeUntil.years, m.years())}
+    {@render clockStage(13, timeUntil.months, m.months(), false)}
+    {@render clockStage(31, timeUntil.days, m.days())}
+    {@render clockStage(24, timeUntil.hours, m.hours(), false)}
+    {@render clockStage(60, timeUntil.minutes, m.minutes())}
+    {@render clockStage(60, timeUntil.seconds, m.seconds(), false)}
   </div>
 
   <Accordion.Root type="single" class="mx-auto mt-12 max-w-prose">

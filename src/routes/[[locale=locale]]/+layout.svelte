@@ -20,7 +20,6 @@
   let { children } = $props();
   let email: string | undefined = $state(undefined);
   let otherLocale: 'en' | 'et' = $derived(getLocale() === 'en' ? 'et' : 'en');
-  const localeText = (locale: 'en' | 'et') => (locale === 'en' ? 'english' : 'estonian');
 
   const cycleTheme = () => {
     if (mode.current === 'dark') {
@@ -52,14 +51,14 @@
     <a
       class="font-mono font-medium underline underline-offset-4"
       href={resolve('/[[locale=locale]]/vinge', { locale: getLocale() })}>
-      {m['navigaton.vinge']()}
+      {m.nav_vinge()}
     </a>
 
     <div class="flex justify-self-end">
       <Button onclick={() => setLocale(otherLocale)} variant="ghost" size="icon" class="h-12 w-12">
         <p>{getLocale()}</p>
 
-        <span class="sr-only">Change language to {localeText(otherLocale)}</span>
+        <span class="sr-only">{m.change_locale({ locale: otherLocale })}</span>
       </Button>
       <Button onclick={() => cycleTheme()} variant="ghost" size="icon" class="h-12 w-12">
         {#if mode.current === 'dark'}
@@ -70,7 +69,7 @@
           <LaptopMinimal class="h-6! w-6!" />
         {/if}
 
-        <span class="sr-only">Toggle theme</span>
+        <span class="sr-only">{m.change_theme()}</span>
       </Button>
     </div>
   </header>
@@ -85,7 +84,7 @@
       target="_blank"
       rel="external"
       class="text-sm text-muted-foreground underline underline-offset-4">
-      {m['navigaton.sourcecode']()}
+      {m.nav_source()}
     </a>
 
     {#if email}

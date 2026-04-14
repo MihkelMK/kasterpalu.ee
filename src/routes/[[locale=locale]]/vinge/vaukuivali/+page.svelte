@@ -224,7 +224,7 @@
             class="flex flex-col items-center py-4 text-center font-title backdrop-blur-sm backdrop-grayscale md:bg-background/75 dark:md:bg-background/90">
             <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
               {#if currentCheckpoint === 0}
-                {m['games.vaukuivali.title']()}
+                {m['games.vaukuivali.name']()}
               {:else}
                 {soundCheckpoints[currentCheckpoint]?.title}
               {/if}

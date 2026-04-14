@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EnhancedImage, Tag } from '$lib/types';
+  import { m } from '$lib/paraglide/messages';
 
   import { Button } from '$lib/components/ui/button/index.js';
   import SquareArrowOutUpRight from '@lucide/svelte/icons/square-arrow-out-up-right';
@@ -8,7 +9,6 @@
 
   import { site, baseURL } from '$lib/config';
   import projects from '$lib/data/projects';
-  import { m } from '$lib/paraglide/messages';
 </script>
 
 {#snippet projectCard(name: string, description: string, image: EnhancedImage, tags: Tag[], link: string)}

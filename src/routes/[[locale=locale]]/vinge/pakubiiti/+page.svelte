@@ -1,21 +1,24 @@
 <script lang="ts">
-  import type { PageData } from './$types';
   import type { AlbumData } from '$lib/types';
+  import type { Snippet } from 'svelte';
+  import type { PageData } from './$types';
 
   import { enhance } from '$app/forms';
-  import { fade } from 'svelte/transition';
   import { expoIn, expoOut } from 'svelte/easing';
+  import { fade } from 'svelte/transition';
+
+  import { m } from '$lib/paraglide/messages';
+  import { ParaglideMessage } from '@inlang/paraglide-js-svelte';
 
   import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
-  import { Separator } from '$lib/components/ui/separator/index.js';
   import { Button } from '$lib/components/ui/button/index.js';
+  import { Separator } from '$lib/components/ui/separator/index.js';
   import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
   import LoaderCircle from '@lucide/svelte/icons/loader-circle';
 
-  import DndGroup from '$lib/components/DNDGroup.svelte';
   import { getAlbumClientState } from '$lib/client/pakubiiti/AlbumClientState.svelte';
-  import { m } from '$lib/paraglide/messages';
+  import DndGroup from '$lib/components/DNDGroup.svelte';
 
   let { data }: { data: PageData; form: FormData } = $props();
 
@@ -71,25 +74,29 @@
         {#if data.error}
           {data.error.title}
         {:else if data?.highscore && data?.stage && data.highscore === data.stage}
-          Uus parim tulemus!
+          {m['games.pakubiiti.new_highscore']()}
         {:else}
-          Seekord ei vedanud
+          {m['games.pakubiiti.not_this_time']()}
         {/if}
       </AlertDialog.Title>
       <AlertDialog.Description>
         {#if data.error}
           {data.error.message}
         {:else if data.stage === 0}
-          Põrusid esimesel katsel.
+          {m['games.pakubiiti.failed_on_first']()}
         {:else}
-          Vastasid õigesti <strong>{data.stage} korda.</strong>
+          <ParaglideMessage message={m['games.pakubiiti.correct_answers']} inputs={{ count: String(data.stage || 0) }}>
+            {#snippet strong({ children }: { children?: Snippet })}
+              <strong>{@render children?.()}</strong>
+            {/snippet}
+          </ParaglideMessage>
         {/if}
       </AlertDialog.Description>
     </AlertDialog.Header>
     {#if !data.error}
       <AlertDialog.Footer>
         <form action="?/restart" method="POST" use:enhance>
-          <AlertDialog.Action type="submit">Uuesti</AlertDialog.Action>
+          <AlertDialog.Action type="submit">{m.try_again()}</AlertDialog.Action>
         </form>
       </AlertDialog.Footer>
     {/if}
@@ -98,7 +105,7 @@
 
 <header class="mb-16 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['games.pakubiiti.title']()}
+    {m['games.pakubiiti.name']()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
     {m['games.pakubiiti.instructions.main']()}
@@ -111,7 +118,7 @@
     <span class="text-purple-600 dark:text-purple-400">
       {m['games.pakubiiti.instructions.artists']()}
     </span>
-    {m['games.pakubiiti.instructions.and']()}
+    {m.and()}
     <span class="text-[0px]">
       <span class="text-xl text-blue-600 dark:text-blue-400">
         {m['games.pakubiiti.instructions.pictures']()}
@@ -149,11 +156,16 @@
           {@render footer(false)}
         {:else}
           <p class="mx-auto mt-16 max-w-prose text-center text-lg text-red-500">
-            <strong>Serveris tekkis mingi error.</strong>
-            <br />
-            No clue miks see katki on, sorry.
+            <ParaglideMessage message={m.server_error_title} inputs={{}}>
+              {#snippet strong({ children }: { children?: Snippet })}
+                <strong>{@render children?.()}</strong>
+              {/snippet}
+              {#snippet br()}
+                <br />
+              {/snippet}
+            </ParaglideMessage>
           </p>
-          <p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">Proovi uuesti või kirjuta mulle.</p>
+          <p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">{m.server_error_body()}</p>
         {/if}
       {/await}
     {:else}

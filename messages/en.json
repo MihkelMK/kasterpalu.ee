@@ -4,14 +4,20 @@
   "and": "and",
   "is": "is",
   "at": "at",
+  "music": "Music",
+  "web": "Web",
+  "founder": "Founder",
 
   "next": "Next",
   "previous": "Previous",
   "submit": "Submit",
+  "best": "Best",
+  "score": "Score",
+  "try_again": "Try again",
   "ask": "Ask",
   "answer": "Answer",
-  "best": "Parim",
-  "score": "Skoor",
+  "answer_noun": "Answer",
+  "question_noun": "Question",
 
   "goto_next": "Go to next page",
   "goto_previous": "Go to previous page",
@@ -24,102 +30,62 @@
     }
   ],
 
-  "time": {
-    "year": {
-      "single": "year",
-      "multiple": "years"
-    },
-    "month": {
-      "single": "month",
-      "multiple": "months"
-    },
-    "day": {
-      "single": "day",
-      "multiple": "days"
-    },
-    "hour": {
-      "single": "hour",
-      "multiple": "hours"
-    },
-    "minute": {
-      "single": "minute",
-      "multiple": "minutes"
-    },
-    "second": {
-      "single": "second",
-      "multiple": "seconds"
+  "years": "years",
+  "months": "months",
+  "days": "days",
+  "hours": "hours",
+  "minutes": "minutes",
+  "seconds": "seconds",
+
+  "nav_source": "source code",
+  "nav_vinge": "vinge värk",
+
+  "server_error_title": "{#strong}Server returned an error.{/strong}{#br}{/br}No clue why it broke, sorry.",
+  "server_error_body": "Try again or send me a message.",
+
+  "form_atleast_n_char": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} has to have at least {count} character.",
+        "countPlural=other": "{field} has to be at least {count} characters long."
+      }
     }
-  },
+  ],
+  "form_atmost_n_char": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} can't be longer than {count} character.",
+        "countPlural=other": "{field} can't be longer than {count} characters."
+      }
+    }
+  ],
+
+  "rate_limit": [
+    {
+      "declarations": ["input seconds"],
+      "match": {
+        "seconds=*": "Slow down. Try again in {seconds}s."
+      }
+    }
+  ],
+  "altcha_error": "Altcha didn't like that. You're either acting too bot-like, or my implementation is terrible.",
+
+  "change_theme": "Switch theme",
+  "change_locale": [
+    {
+      "declarations": ["input locale"],
+      "match": {
+        "locale=et": "Switch site to Estonian",
+        "locale=en": "Switch site to English"
+      }
+    }
+  ],
 
   "landing": {
     "title": "Hi! I'm Mihkel",
-    "subtitle": "I have many hobbies beside this fantastic site"
-  },
-
-  "projects": {
-    "SUPIKÖÖGIPOISID": {
-      "image": {
-        "credit": {
-          "author": "Mimmu",
-          "href": "https://www.instagram.com/musamimmu/"
-        },
-        "alt": "Picture of a four-member rap band SUPIKÖÖGIPOISID. The picture is taken outdoors on a cloudy day. In the picture are 4 men wearing dress shirts with black ties and black pants."
-      },
-      "description": "Rap Collective. Started in 2019.",
-      "link": "https://skpoisid.bandcamp.com/"
-    },
-    "Dysaster Collective": {
-      "image": {
-        "credit": {
-          "author": "Mattias Mägi",
-          "href": "https://www.instagram.com/mattias.mix/"
-        },
-        "alt": "Bluish digital collage of Dysaster Collective members."
-      },
-      "description": "Multifaceted collective of creatives founded in 2022.",
-      "link": "https://dysaster.ee"
-    },
-    "monospac.ee": {
-      "image": {
-        "credit": {
-          "author": "Liisa Jõhvik",
-          "href": "https://www.instagram.com/liisajohvik.photo/"
-        },
-        "alt": "DJ duo monospacee at their Silent Disco set in Tartu New Theatre hall in 2024. The picture is taken from the side, with DJ Mimmu in the foreground and DJ Rx visible behind her. They are lit with red light, with a third DJ blurrily visible in blue light in the background."
-      },
-      "description": "DJ duo with Rx.",
-      "link": "https://monospac.ee/en"
-    },
-    "Saueaugu Teatritalu": {
-      "image": {
-        "alt": "Summer view of Saueaugu theatre building. Green grass is visible below and blue sky with a few clouds can be seen behind the roof."
-      },
-      "description": "Small theater in Läänemaa. I wrote the webpage.",
-      "link": "https://saueaugu.ee"
-    },
-    "Tartu Häkkerikoda": {
-      "image": {
-        "src": "/assets/hakkerikoda.svg",
-        "credit": {
-          "author": "treierxyz",
-          "href": "https://treier.xyz"
-        },
-        "alt": "Logo for Tartu Häkkerikoda"
-      },
-      "description": "Makerspace in Tartu. Member and part of the web team.",
-      "link": "https://hakkerikoda.ee/en"
-    }
-  },
-
-  "badges": {
-    "music": { "name": "Music", "description": "I perform and create music here" },
-    "web": { "name": "Web", "description": "Designed/wrote the web page" },
-    "founder": { "name": "Founder", "description": "I was part of the founders" }
-  },
-
-  "navigaton": {
-    "sourcecode": "source code",
-    "vinge": "vinge värk"
+    "subtitle": "I have many hobbies besides this fantastic site"
   },
 
   "vinge": {
@@ -131,29 +97,65 @@
     }
   },
 
+  "badge_music": "I perform and create music here",
+  "badge_web": "Designed/wrote the web page",
+  "badge_founder": "I was part of the founders",
+
+  "projects": {
+    "SUPIKÖÖGIPOISID": {
+      "image_alt": "Picture of a four-member rap band SUPIKÖÖGIPOISID. The picture is taken outdoors on a cloudy day. In the picture are 4 men wearing dress shirts with black ties and black pants.",
+      "description": "Rap Collective. Started in 2019."
+    },
+    "Dysaster Collective": {
+      "image_alt": "Bluish digital collage of Dysaster Collective members.",
+      "description": "Multifaceted collective of creatives founded in 2022."
+    },
+    "monospac.ee": {
+      "image_alt": "DJ duo monospacee at their Silent Disco set in Tartu New Theatre hall in 2024. The picture is taken from the side, with DJ Mimmu in the foreground and DJ Rx visible behind her. They are lit with red light, with a third DJ blurrily visible in blue light in the background.",
+      "description": "DJ duo with Rx."
+    },
+    "Saueaugu Teatritalu": {
+      "image_alt": "Summer view of Saueaugu theatre building. Green grass is visible below and blue sky with a few clouds can be seen behind the roof.",
+      "description": "Small theater in Läänemaa. I wrote the webpage."
+    },
+    "Tartu Häkkerikoda": {
+      "image_alt": "Logo for Tartu Häkkerikoda",
+      "description": "Makerspace in Tartu. Member and part of the web team."
+    }
+  },
+
   "games": {
     "pakubiiti": {
-      "name": "Paku biiti",
-      "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
-      "title": "Guess the album",
+      "name": "Guess the tracks",
+      "description": "Organize the title, artists and cover art of three random albums.",
       "instructions": {
-        "main": "Correctly rearange the album",
-        "names": "names",
+        "main": "Correctly rearrange the album",
+        "names": "titles",
         "artists": "artists",
-        "pictures": "pictures",
-        "and": "and"
-      }
+        "pictures": "cover art"
+      },
+      "new_highscore": "New highscore!",
+      "not_this_time": "Not your best",
+      "failed_on_first": "You failed on the first round.",
+      "correct_answers": [
+        {
+          "declarations": ["input count", "local countPlural = count: plural"],
+          "match": {
+            "countPlural=one": "You got {#strong}{count} answer{/strong} correct",
+            "countPlural=other": "You got {#strong}{count} answers{/strong} correct"
+          }
+        }
+      ]
     },
 
     "epochalypse": {
       "name": "Epochalypse",
       "description": "Soon we'll have another Y2K. How nostalgic!",
-      "title": "Epochalypse",
       "subtitle": "Don't worry! You still have time:",
       "explainer": {
         "title": "What is this??",
         "y2k": {
-          "intro": "Epochalypse is similar to the the hysteria at the end of the 1990s called",
+          "intro": "Epochalypse is similar to the hysteria at the end of the 1990s called",
           "linkText": "Y2K",
           "outro": "The system used to track time and date just",
           "emphasis": "runs out."
@@ -161,7 +163,7 @@
         "unix": {
           "intro": "Most Operating Systems based on Linux use",
           "linkText": "UNIX time",
-          "outro": "how many seconds have past from the UNIX",
+          "outro": "how many seconds have passed from the UNIX",
           "epoch": "epoch"
         },
         "integer": {
@@ -190,17 +192,60 @@
     },
 
     "rahvatarkus": {
-      "name": "Rahva tarkus",
-      "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
+      "name": "Crowd intelligence",
+      "description": "Crowdsource answers to your burning questions",
+
+      "what_do_the_people_know": "What do the people know?",
+      "no_questions": "Maybe your friends want to answer or have some burning questions?",
+      "no_balance": "You need to answer questions to unlock more questions!",
+      "question_pool_empty": "In this edgecase, you get a question for free!",
+
+      "answer_toast_success": "Answer sent",
+      "answer_toast_error": "Answering failed, please fix the errors",
+      "question_toast_success": "Question submitted",
+      "question_toast_error": "Submitting failed, please fix the errors",
+
+      "ask": {
+        "title": "Ask the crowd",
+        "description": [
+          {
+            "declarations": ["input count", "local countPlural = count: plural"],
+            "match": {
+              "countPlural=one": "You have {count} question left",
+              "countPlural=other": "You have {count} questions left"
+            }
+          }
+        ],
+        "label": "Question"
+      },
+      "answer": {
+        "title": [
+          {
+            "declarations": ["input question"],
+            "match": {
+              "question=true": "Answer to the crowd",
+              "question=false": "You have responded to all currently asked questions."
+            }
+          }
+        ],
+        "description": [
+          {
+            "declarations": ["input question"],
+            "match": {
+              "question=true": "As a thank you, you can ask one question in return.",
+              "question=false": "The crowd has no more questions to ask."
+            }
+          }
+        ]
+      }
     },
 
     "vaukuivali": {
-      "name": "Vau kui vali",
+      "name": "Wow, that's loud!",
       "description": "Get an intuitive understanding for the loudness of everyday life.",
-      "title": "Wow, that's loud!",
       "intro": {
         "explainer": {
-          "body": "As many know, the decibel scale is logarythmic.",
+          "body": "As many know, the decibel scale is logarithmic.",
           "footer": "60db is 2x louder compared to 50db."
         },
         "problem": {

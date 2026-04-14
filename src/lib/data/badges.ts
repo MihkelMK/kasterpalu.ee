@@ -2,9 +2,9 @@ import { m } from '$lib/paraglide/messages';
 import type { TagsObj } from '$lib/types';
 
 const badges: TagsObj = {
-  muusika: { name: m['badges.music.name'](), description: m['badges.music.description']() },
-  veeb: { name: m['badges.web.name'](), description: m['badges.web.description']() },
-  asutaja: { name: m['badges.founder.name'](), description: m['badges.founder.description']() },
+  muusika: { name: m.music(), description: m.badge_music() },
+  veeb: { name: m.web(), description: m.badge_web() },
+  asutaja: { name: m.founder(), description: m.badge_founder() },
 };
 
 export default badges;

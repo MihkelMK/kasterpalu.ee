@@ -3,6 +3,7 @@ import { formSchema as questionSchema } from '../question-schema';
 import type { Actions, PageServerLoad } from './$types';
 
 import { altcha } from '$lib/altcha';
+import { m } from '$lib/paraglide/messages';
 import { ratelimit } from '$lib/server/redis';
 import { fail } from '@sveltejs/kit';
 
@@ -34,7 +35,7 @@ export const actions: Actions = {
 
     const user = session.data.userId;
 
-    const form = await superValidate(event, zod4(answerSchema));
+    const form = await superValidate(event, zod4(answerSchema()));
 
     if (!form.valid) {
       return fail(400, {
@@ -57,7 +58,7 @@ export const actions: Actions = {
 
     if (!seshSuccess) {
       const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+      const message = m.rate_limit({ seconds: timeRemaining });
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -71,7 +72,7 @@ export const actions: Actions = {
 
     if (!ipSuccess) {
       const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+      const message = m.rate_limit({ seconds: timeRemaining });
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -86,8 +87,7 @@ export const actions: Actions = {
     const altchaResult = await altcha.verifyEvent(event);
 
     if (altchaResult.error) {
-      const message =
-        'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
+      const message = m.altcha_error();
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -143,7 +143,7 @@ export const actions: Actions = {
 
     const user = session.data.userId;
 
-    const form = await superValidate(event, zod4(questionSchema));
+    const form = await superValidate(event, zod4(questionSchema()));
 
     if (!form.valid) {
       return fail(400, {
@@ -166,7 +166,7 @@ export const actions: Actions = {
 
     if (!seshSuccess) {
       const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+      const message = m.rate_limit({ seconds: timeRemaining });
 
       if (form.errors.question) {
         form.errors.question.push(message);
@@ -180,7 +180,7 @@ export const actions: Actions = {
 
     if (!ipSuccess) {
       const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = `Võta veits rahulikumalt. Proovi ${timeRemaining}s pärast uuesti.`;
+      const message = m.rate_limit({ seconds: timeRemaining });
 
       if (form.errors.question) {
         form.errors.question.push(message);
@@ -195,8 +195,7 @@ export const actions: Actions = {
     const altchaResult = await altcha.verifyEvent(event);
 
     if (altchaResult.error) {
-      const message =
-        'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
+      const message = m.altcha_error();
 
       if (form.errors.question) {
         form.errors.question.push(message);
