@@ -8,15 +8,15 @@
 
 <header class="flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['vinge.title']()}
+    {m.vinge_title()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
-    {m['vinge.subtitle']()}
+    {m.vinge_subtitle()}
   </p>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
-    {m['vinge.credit.prefix']()}
+    {m.vinge_credit_prefix()}
     <a href="https://neal.fun" class="font-bold underline underline-offset-4">neal.fun</a>
-    {m['vinge.credit.suffix']()}
+    {m.vinge_credit_suffix()}
   </p>
 </header>
 

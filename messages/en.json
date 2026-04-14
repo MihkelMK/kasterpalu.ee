@@ -4,21 +4,23 @@
   "and": "and",
   "is": "is",
   "at": "at",
-  "music": "Music",
-  "web": "Web",
-  "founder": "Founder",
+  "best": "Best",
+  "score": "Score",
 
   "next": "Next",
   "previous": "Previous",
   "submit": "Submit",
-  "best": "Best",
-  "score": "Score",
   "try_again": "Try again",
-  "ask": "Ask",
-  "answer": "Answer",
-  "answer_noun": "Answer",
-  "question_noun": "Question",
-
+  "change_theme": "Switch theme",
+  "change_locale": [
+    {
+      "declarations": ["input locale"],
+      "match": {
+        "locale=et": "Switch site to Estonian",
+        "locale=en": "Switch site to English"
+      }
+    }
+  ],
   "goto_next": "Go to next page",
   "goto_previous": "Go to previous page",
   "goto_n": [
@@ -30,6 +32,11 @@
     }
   ],
 
+  "ask_verb": "Ask",
+  "ask_noun": "Question",
+  "answer_verb": "Answer",
+  "answer_noun": "Answer",
+
   "years": "years",
   "months": "months",
   "days": "days",
@@ -40,10 +47,25 @@
   "nav_source": "source code",
   "nav_vinge": "vinge värk",
 
-  "server_error_title": "{#strong}Server returned an error.{/strong}{#br}{/br}No clue why it broke, sorry.",
-  "server_error_body": "Try again or send me a message.",
+  "landing_hi": "Hi!",
+  "landing_title": "I'm Mihkel",
+  "landing_subtitle": "I have many hobbies besides this fantastic site",
 
-  "form_atleast_n_char": [
+  "vinge_title": "Vinge värk",
+  "vinge_subtitle": "Minigames and other interesting stuff.",
+  "vinge_credit_prefix": "Thank you",
+  "vinge_credit_suffix": "for the inspiration :)",
+
+  "badge_music_name": "Music",
+  "badge_music_desc": "I perform and create music here",
+  "badge_web_name": "Web",
+  "badge_web_desc": "Designed/wrote the web page",
+  "badge_founder_name": "Founder",
+  "badge_founder_desc": "I was part of the founders",
+
+  "error_server_title": "{#strong}Server returned an error.{/strong}{#br}{/br}No clue why it broke, sorry.",
+  "error_server_body": "Try again or send me a message.",
+  "error_form_min": [
     {
       "declarations": ["input field", "input count", "local countPlural = count: plural"],
       "match": {
@@ -52,7 +74,7 @@
       }
     }
   ],
-  "form_atmost_n_char": [
+  "error_form_max": [
     {
       "declarations": ["input field", "input count", "local countPlural = count: plural"],
       "match": {
@@ -61,8 +83,7 @@
       }
     }
   ],
-
-  "rate_limit": [
+  "error_rate_limit": [
     {
       "declarations": ["input seconds"],
       "match": {
@@ -70,36 +91,8 @@
       }
     }
   ],
-  "altcha_error": "Altcha didn't like that. You're either acting too bot-like, or my implementation is terrible.",
-
-  "change_theme": "Switch theme",
-  "change_locale": [
-    {
-      "declarations": ["input locale"],
-      "match": {
-        "locale=et": "Switch site to Estonian",
-        "locale=en": "Switch site to English"
-      }
-    }
-  ],
-
-  "landing": {
-    "title": "Hi! I'm Mihkel",
-    "subtitle": "I have many hobbies besides this fantastic site"
-  },
-
-  "vinge": {
-    "title": "Vinge värk",
-    "subtitle": "Minigames and other interesting stuff.",
-    "credit": {
-      "prefix": "Thank you",
-      "suffix": "for the inspiration :)"
-    }
-  },
-
-  "badge_music": "I perform and create music here",
-  "badge_web": "Designed/wrote the web page",
-  "badge_founder": "I was part of the founders",
+  "error_altcha": "Altcha didn't like that. You're either acting too bot-like, or my implementation is terrible.",
+  "error_form_submit": "Submission failed, please fix the errors.",
 
   "projects": {
     "SUPIKÖÖGIPOISID": {
@@ -124,204 +117,195 @@
     }
   },
 
-  "games": {
-    "pakubiiti": {
-      "name": "Guess the tracks",
-      "description": "Organize the title, artists and cover art of three random albums.",
-      "instructions": {
-        "main": "Correctly rearrange the album",
-        "names": "titles",
-        "artists": "artists",
-        "pictures": "cover art"
+  "pakubiiti": {
+    "name": "Guess the tracks",
+    "description": "Organize the title, artists and cover art of three random albums.",
+    "instructions": {
+      "main": "Correctly rearrange the album",
+      "names": "titles",
+      "artists": "artists",
+      "pictures": "cover art"
+    },
+    "new_highscore": "New highscore!",
+    "not_this_time": "Not your best",
+    "failed_on_first": "You failed on the first round.",
+    "correct_answers": [
+      {
+        "declarations": ["input count", "local countPlural = count: plural"],
+        "match": {
+          "countPlural=one": "You got {#strong}{count} answer{/strong} correct",
+          "countPlural=other": "You got {#strong}{count} answers{/strong} correct"
+        }
+      }
+    ]
+  },
+
+  "epochalypse": {
+    "name": "Epochalypse",
+    "description": "Soon we'll have another Y2K. How nostalgic!",
+    "subtitle": "Don't worry! You still have time:",
+    "explainer": {
+      "title": "What is this??",
+      "y2k": {
+        "intro": "Epochalypse is similar to the hysteria at the end of the 1990s called",
+        "linkText": "Y2K",
+        "outro": "The system used to track time and date just",
+        "emphasis": "runs out."
       },
-      "new_highscore": "New highscore!",
-      "not_this_time": "Not your best",
-      "failed_on_first": "You failed on the first round.",
-      "correct_answers": [
+      "unix": {
+        "intro": "Most Operating Systems based on Linux use",
+        "linkText": "UNIX time",
+        "outro": "how many seconds have passed from the UNIX",
+        "epoch": "epoch"
+      },
+      "integer": {
+        "intro": {
+          "part1": "These seconds are stored as a",
+          "32bit": "signed 32-bit",
+          "part2": "integer. The maximum value this type of integer can hold is"
+        },
+        "lastDate": "Therefore the last date"
+      },
+      "overflow": {
+        "intro": "Adding one more second to this last date will trigger an",
+        "linkText": "integer overflow",
+        "middle": "and the integer will be set to",
+        "outro": {
+          "part1": "the earliest possible moment for",
+          "linkText": "UNIX time",
+          "part2": "."
+        }
+      },
+      "aftermath": {
+        "intro": "Computers will then read that as",
+        "outro": "and suddenly go 137 years back in time."
+      }
+    }
+  },
+
+  "rahvatarkus": {
+    "name": "Crowd intelligence",
+    "description": "Crowdsource answers to your burning questions",
+
+    "what_do_the_people_know": "What do the people know?",
+    "no_questions": "Maybe your friends want to answer or have some burning questions?",
+    "no_balance": "You need to answer questions to unlock more questions!",
+    "question_pool_empty": "In this edgecase, you get a question for free!",
+
+    "answer_toast_success": "Answer sent",
+    "question_toast_success": "Question submitted",
+
+    "ask": {
+      "title": "Ask the crowd",
+      "description": [
         {
           "declarations": ["input count", "local countPlural = count: plural"],
           "match": {
-            "countPlural=one": "You got {#strong}{count} answer{/strong} correct",
-            "countPlural=other": "You got {#strong}{count} answers{/strong} correct"
+            "countPlural=one": "You have {count} question left",
+            "countPlural=other": "You have {count} questions left"
+          }
+        }
+      ],
+      "label": "Question"
+    },
+    "answer": {
+      "title": [
+        {
+          "declarations": ["input question"],
+          "match": {
+            "question=true": "Answer to the crowd",
+            "question=false": "You have responded to all currently asked questions."
+          }
+        }
+      ],
+      "description": [
+        {
+          "declarations": ["input question"],
+          "match": {
+            "question=true": "As a thank you, you can ask one question in return.",
+            "question=false": "The crowd has no more questions to ask."
           }
         }
       ]
-    },
+    }
+  },
 
-    "epochalypse": {
-      "name": "Epochalypse",
-      "description": "Soon we'll have another Y2K. How nostalgic!",
-      "subtitle": "Don't worry! You still have time:",
+  "vaukuivali": {
+    "name": "Wow, that's loud!",
+    "description": "Get an intuitive understanding for the loudness of everyday life.",
+    "intro": {
       "explainer": {
-        "title": "What is this??",
-        "y2k": {
-          "intro": "Epochalypse is similar to the hysteria at the end of the 1990s called",
-          "linkText": "Y2K",
-          "outro": "The system used to track time and date just",
-          "emphasis": "runs out."
-        },
-        "unix": {
-          "intro": "Most Operating Systems based on Linux use",
-          "linkText": "UNIX time",
-          "outro": "how many seconds have passed from the UNIX",
-          "epoch": "epoch"
-        },
-        "integer": {
-          "intro": {
-            "part1": "These seconds are stored as a",
-            "32bit": "signed 32-bit",
-            "part2": "integer. The maximum value this type of integer can hold is"
-          },
-          "lastDate": "Therefore the last date"
-        },
-        "overflow": {
-          "intro": "Adding one more second to this last date will trigger an",
-          "linkText": "integer overflow",
-          "middle": "and the integer will be set to",
-          "outro": {
-            "part1": "the earliest possible moment for",
-            "linkText": "UNIX time",
-            "part2": "."
-          }
-        },
-        "aftermath": {
-          "intro": "Computers will then read that as",
-          "outro": "and suddenly go 137 years back in time."
-        }
-      }
-    },
-
-    "rahvatarkus": {
-      "name": "Crowd intelligence",
-      "description": "Crowdsource answers to your burning questions",
-
-      "what_do_the_people_know": "What do the people know?",
-      "no_questions": "Maybe your friends want to answer or have some burning questions?",
-      "no_balance": "You need to answer questions to unlock more questions!",
-      "question_pool_empty": "In this edgecase, you get a question for free!",
-
-      "answer_toast_success": "Answer sent",
-      "answer_toast_error": "Answering failed, please fix the errors",
-      "question_toast_success": "Question submitted",
-      "question_toast_error": "Submitting failed, please fix the errors",
-
-      "ask": {
-        "title": "Ask the crowd",
-        "description": [
-          {
-            "declarations": ["input count", "local countPlural = count: plural"],
-            "match": {
-              "countPlural=one": "You have {count} question left",
-              "countPlural=other": "You have {count} questions left"
-            }
-          }
-        ],
-        "label": "Question"
+        "body": "As many know, the decibel scale is logarithmic.",
+        "footer": "60db is 2x louder compared to 50db."
       },
-      "answer": {
-        "title": [
-          {
-            "declarations": ["input question"],
-            "match": {
-              "question=true": "Answer to the crowd",
-              "question=false": "You have responded to all currently asked questions."
-            }
-          }
-        ],
-        "description": [
-          {
-            "declarations": ["input question"],
-            "match": {
-              "question=true": "As a thank you, you can ask one question in return.",
-              "question=false": "The crowd has no more questions to ask."
-            }
-          }
-        ]
-      }
-    },
-
-    "vaukuivali": {
-      "name": "Wow, that's loud!",
-      "description": "Get an intuitive understanding for the loudness of everyday life.",
-      "intro": {
-        "explainer": {
-          "body": "As many know, the decibel scale is logarithmic.",
-          "footer": "60db is 2x louder compared to 50db."
-        },
-        "problem": {
-          "body": "That didn't really make sense to me.",
-          "footer": "So I created this page to understand it more intuitively."
-        },
-        "cta": "Try it, scroll down."
+      "problem": {
+        "body": "That didn't really make sense to me.",
+        "footer": "So I created this page to understand it more intuitively."
       },
-      "sources": "Sources for loudness measurements:",
-      "speedrun": "You took your time...",
-      "checkpoints": {
-        "0": {
-          "title": "",
-          "description": "",
-          "alt": ""
-        },
-        "30": {
-          "title": "\"Silence\"",
-          "description": "aka passive noise in the living room",
-          "alt": "Modern and minimalist design interior room."
-        },
-        "40": {
-          "title": "Tick tock",
-          "description": "Ticking sounds from a mechanical watch",
-          "alt": "Disassembled old-fashioned wristwatch. The inside of the watch is visible, showing gears."
-        },
-        "50": {
-          "title": "Normal conversation",
-          "description": "Quiet conversation at home",
-          "alt": "Young couple in the kitchen. Man is cutting pancakes on a plate, woman sits next to him on the stove and watches."
-        },
-        "60": {
-          "title": "Bingo!",
-          "description": "Bingo night at a bar (in the middle of the game)",
-          "alt": "The Genialists club operates in Tartu on Magasini street. The picture is from evening time, with many people in the club's outdoor area."
-        },
-        "70": {
-          "title": "Where's the remote?",
-          "description": "TV that's playing a bit too loud",
-          "alt": "Someone is watching a movie on television. In the foreground in focus is the TV remote, in the background is a blurry room with a TV against the wall."
-        },
-        "80": {
-          "title": "It'd be worse in the USA",
-          "description": "Traffic on Riia hill (waiting for the bus in front of Kaubamaja)",
-          "alt": "Google Street View picture taken in 2012. Shows Tartu Kaubamaja and the bus stop on its Riia street side."
-        },
-        "90": {
-          "title": "It'd be in the USA",
-          "description": "A Harley driving past you",
-          "alt": "New-looking Harley-Davidson motorcycle quickly driving past on a highway."
-        },
-        "100": {
-          "title": "Terminal escape",
-          "description": "Boeing 707 1 nautical mile before landing",
-          "alt": "Continental Airlines Boeing 777 lands in foggy Houston IAH airport."
-        },
-        "110": {
-          "title": "Road rage",
-          "description": "Car horn 1m away",
-          "alt": "Dramatic car stunt for a movie. Collision between two cars."
-        },
-        "120": {
-          "title": "Chainsaw",
-          "description": "We reached the pain threshold. I recommend wearing earplugs.",
-          "alt": "Orange and black chainsaw is cutting a fallen tree into smaller pieces."
-        },
-        "130": {
-          "title": "How did you get so close?",
-          "description": "Turbojet fighter takeoff from 15m distance",
-          "alt": "Eight F-16 fighters fly together in formation in the sky."
-        },
-        "150": {
-          "title": "Ouch! My ears!",
-          "description": "Good job! Your eardrum burst!",
-          "alt": "Close-up of a person inserting a hearing aid into their ear."
-        }
+      "cta": "Try it, scroll down."
+    },
+    "sources": "Sources for loudness measurements:",
+    "speedrun": "You took your time...",
+    "checkpoints": {
+      "30": {
+        "title": "\"Silence\"",
+        "description": "aka passive noise in the living room",
+        "alt": "Modern and minimalist design interior room."
+      },
+      "40": {
+        "title": "Tick tock",
+        "description": "Ticking sounds from a mechanical watch",
+        "alt": "Disassembled old-fashioned wristwatch. The inside of the watch is visible, showing gears."
+      },
+      "50": {
+        "title": "Normal conversation",
+        "description": "Quiet conversation at home",
+        "alt": "Young couple in the kitchen. Man is cutting pancakes on a plate, woman sits next to him on the stove and watches."
+      },
+      "60": {
+        "title": "Bingo!",
+        "description": "Bingo night at a bar (in the middle of the game)",
+        "alt": "The Genialists club operates in Tartu on Magasini street. The picture is from evening time, with many people in the club's outdoor area."
+      },
+      "70": {
+        "title": "Where's the remote?",
+        "description": "TV that's playing a bit too loud",
+        "alt": "Someone is watching a movie on television. In the foreground in focus is the TV remote, in the background is a blurry room with a TV against the wall."
+      },
+      "80": {
+        "title": "It'd be worse in the USA",
+        "description": "Traffic on Riia hill (waiting for the bus in front of Kaubamaja)",
+        "alt": "Google Street View picture taken in 2012. Shows Tartu Kaubamaja and the bus stop on its Riia street side."
+      },
+      "90": {
+        "title": "It'd be in the USA",
+        "description": "A Harley driving past you",
+        "alt": "New-looking Harley-Davidson motorcycle quickly driving past on a highway."
+      },
+      "100": {
+        "title": "Terminal escape",
+        "description": "Boeing 707 1 nautical mile before landing",
+        "alt": "Continental Airlines Boeing 777 lands in foggy Houston IAH airport."
+      },
+      "110": {
+        "title": "Road rage",
+        "description": "Car horn 1m away",
+        "alt": "Dramatic car stunt for a movie. Collision between two cars."
+      },
+      "120": {
+        "title": "Chainsaw",
+        "description": "We reached the pain threshold. I recommend wearing earplugs.",
+        "alt": "Orange and black chainsaw is cutting a fallen tree into smaller pieces."
+      },
+      "130": {
+        "title": "How did you get so close?",
+        "description": "Turbojet fighter takeoff from 15m distance",
+        "alt": "Eight F-16 fighters fly together in formation in the sky."
+      },
+      "150": {
+        "title": "Ouch! My ears!",
+        "description": "Good job! Your eardrum burst!",
+        "alt": "Close-up of a person inserting a hearing aid into their ear."
       }
     }
   }

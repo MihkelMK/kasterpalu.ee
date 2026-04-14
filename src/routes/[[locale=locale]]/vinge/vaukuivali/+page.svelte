@@ -224,24 +224,24 @@
             class="flex flex-col items-center py-4 text-center font-title backdrop-blur-sm backdrop-grayscale md:bg-background/75 dark:md:bg-background/90">
             <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
               {#if currentCheckpoint === 0}
-                {m['games.vaukuivali.name']()}
+                {m['vaukuivali.name']()}
               {:else}
                 {soundCheckpoints[currentCheckpoint]?.title}
               {/if}
             </h1>
             {#if currentCheckpoint === 0}
               <p class="max-w-prose text-2xl leading-7 font-semibold text-muted-foreground">
-                {m['games.vaukuivali.intro.explainer.body']()}
+                {m['vaukuivali.intro.explainer.body']()}
                 <br />
-                {m['games.vaukuivali.intro.explainer.footer']()}
+                {m['vaukuivali.intro.explainer.footer']()}
               </p>
               <p class="max-w-prose text-2xl leading-7 font-semibold text-muted-foreground not-first:mt-6">
-                {m['games.vaukuivali.intro.problem.body']()}
+                {m['vaukuivali.intro.problem.body']()}
                 <br />
-                {m['games.vaukuivali.intro.problem.footer']()}
+                {m['vaukuivali.intro.problem.footer']()}
 
                 <br />
-                <strong>{m['games.vaukuivali.intro.cta']()}</strong>
+                <strong>{m['vaukuivali.intro.cta']()}</strong>
               </p>
             {:else}
               <p class="max-w-prose text-2xl leading-7 font-semibold text-primary/80">
@@ -261,7 +261,7 @@
 
   <Collapsible.Root class="w-full max-w-xs space-y-2">
     <div class="flex items-center justify-between px-4">
-      <h4 class="text-sm font-semibold">{m['games.vaukuivali.speedrun']()}</h4>
+      <h4 class="text-sm font-semibold">{m['vaukuivali.speedrun']()}</h4>
       <Collapsible.Trigger>
         {#snippet child({ props })}
           <Button variant="ghost" size="sm" class="w-9 p-0" {...props}>
@@ -281,7 +281,7 @@
 
   <div class="mt-24 flex w-full justify-between">
     <div>
-      <small class="text-sm leading-none font-medium">{m['games.vaukuivali.sources']()}</small>
+      <small class="text-sm leading-none font-medium">{m['vaukuivali.sources']()}</small>
       <ul class="my-4 ml-6 list-disc [&>li]:mt-2">
         <li class="max-w-prose text-sm leading-4 text-muted-foreground">
           Fastl, H., & Florentine, M. (2010). Loudness in Daily Environments. Springer Handbook of Auditory Research, 199–221.

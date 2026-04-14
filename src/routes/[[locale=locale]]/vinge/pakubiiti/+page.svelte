@@ -74,18 +74,18 @@
         {#if data.error}
           {data.error.title}
         {:else if data?.highscore && data?.stage && data.highscore === data.stage}
-          {m['games.pakubiiti.new_highscore']()}
+          {m['pakubiiti.new_highscore']()}
         {:else}
-          {m['games.pakubiiti.not_this_time']()}
+          {m['pakubiiti.not_this_time']()}
         {/if}
       </AlertDialog.Title>
       <AlertDialog.Description>
         {#if data.error}
           {data.error.message}
         {:else if data.stage === 0}
-          {m['games.pakubiiti.failed_on_first']()}
+          {m['pakubiiti.failed_on_first']()}
         {:else}
-          <ParaglideMessage message={m['games.pakubiiti.correct_answers']} inputs={{ count: String(data.stage || 0) }}>
+          <ParaglideMessage message={m['pakubiiti.correct_answers']} inputs={{ count: String(data.stage || 0) }}>
             {#snippet strong({ children }: { children?: Snippet })}
               <strong>{@render children?.()}</strong>
             {/snippet}
@@ -105,23 +105,23 @@
 
 <header class="mb-16 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['games.pakubiiti.name']()}
+    {m['pakubiiti.name']()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
-    {m['games.pakubiiti.instructions.main']()}
+    {m['pakubiiti.instructions.main']()}
     <span class="text-[0px]">
       <span class="text-xl text-red-600 dark:text-red-400">
-        {m['games.pakubiiti.instructions.names']()}
+        {m['pakubiiti.instructions.names']()}
       </span>
       <span class="text-xl">,</span>
     </span>
     <span class="text-purple-600 dark:text-purple-400">
-      {m['games.pakubiiti.instructions.artists']()}
+      {m['pakubiiti.instructions.artists']()}
     </span>
     {m.and()}
     <span class="text-[0px]">
       <span class="text-xl text-blue-600 dark:text-blue-400">
-        {m['games.pakubiiti.instructions.pictures']()}
+        {m['pakubiiti.instructions.pictures']()}
       </span>
       <span class="text-xl">.</span>
     </span>
@@ -156,7 +156,7 @@
           {@render footer(false)}
         {:else}
           <p class="mx-auto mt-16 max-w-prose text-center text-lg text-red-500">
-            <ParaglideMessage message={m.server_error_title} inputs={{}}>
+            <ParaglideMessage message={m.error_server_title} inputs={{}}>
               {#snippet strong({ children }: { children?: Snippet })}
                 <strong>{@render children?.()}</strong>
               {/snippet}
@@ -165,7 +165,7 @@
               {/snippet}
             </ParaglideMessage>
           </p>
-          <p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">{m.server_error_body()}</p>
+          <p class="mx-auto mt-6 max-w-prose text-center text-lg text-red-500">{m.error_server_body()}</p>
         {/if}
       {/await}
     {:else}

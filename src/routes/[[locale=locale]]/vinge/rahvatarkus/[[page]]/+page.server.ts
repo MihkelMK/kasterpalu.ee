@@ -58,7 +58,7 @@ export const actions: Actions = {
 
     if (!seshSuccess) {
       const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = m.rate_limit({ seconds: timeRemaining });
+      const message = m.error_rate_limit({ seconds: timeRemaining });
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -72,7 +72,7 @@ export const actions: Actions = {
 
     if (!ipSuccess) {
       const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = m.rate_limit({ seconds: timeRemaining });
+      const message = m.error_rate_limit({ seconds: timeRemaining });
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -87,7 +87,7 @@ export const actions: Actions = {
     const altchaResult = await altcha.verifyEvent(event);
 
     if (altchaResult.error) {
-      const message = m.altcha_error();
+      const message = m.error_altcha();
 
       if (form.errors.answer) {
         form.errors.answer.push(message);
@@ -166,7 +166,7 @@ export const actions: Actions = {
 
     if (!seshSuccess) {
       const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = m.rate_limit({ seconds: timeRemaining });
+      const message = m.error_rate_limit({ seconds: timeRemaining });
 
       if (form.errors.question) {
         form.errors.question.push(message);
@@ -180,7 +180,7 @@ export const actions: Actions = {
 
     if (!ipSuccess) {
       const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = m.rate_limit({ seconds: timeRemaining });
+      const message = m.error_rate_limit({ seconds: timeRemaining });
 
       if (form.errors.question) {
         form.errors.question.push(message);
@@ -195,7 +195,7 @@ export const actions: Actions = {
     const altchaResult = await altcha.verifyEvent(event);
 
     if (altchaResult.error) {
-      const message = m.altcha_error();
+      const message = m.error_altcha();
 
       if (form.errors.question) {
         form.errors.question.push(message);

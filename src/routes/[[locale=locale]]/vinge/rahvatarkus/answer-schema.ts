@@ -7,8 +7,8 @@ export function formSchema() {
     questionId: z.string().length(21),
     answer: z
       .string()
-      .min(2, m.form_atleast_n_char({ field, count: 2 }))
-      .max(200, m.form_atmost_n_char({ field, count: 200 })),
+      .min(2, m.error_form_min({ field, count: 2 }))
+      .max(200, m.error_form_max({ field, count: 200 })),
     altcha: z.string(),
   });
 }

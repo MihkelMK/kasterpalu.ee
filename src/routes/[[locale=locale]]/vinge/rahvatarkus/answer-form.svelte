@@ -25,8 +25,8 @@
     };
   } = $props();
 
-  const toastSuccess = $derived(m['games.rahvatarkus.answer_toast_success']());
-  const toastError = $derived(m['games.rahvatarkus.answer_toast_error']());
+  const toastSuccess = $derived(m['rahvatarkus.answer_toast_success']());
+  const toastError = $derived(m.error_form_submit());
 
   const form = superForm(
     untrack(() => data.answer_form),
@@ -50,17 +50,17 @@
 
 <Card.Root>
   <Card.Header>
-    <Card.Title>{m['games.rahvatarkus.answer.title']({ question: data.question ? 'true' : 'false' })}</Card.Title>
+    <Card.Title>{m['rahvatarkus.answer.title']({ question: data.question ? 'true' : 'false' })}</Card.Title>
     <Card.Description>
-      {m['games.rahvatarkus.answer.description']({ question: data.question ? 'true' : 'false' })}
+      {m['rahvatarkus.answer.description']({ question: data.question ? 'true' : 'false' })}
     </Card.Description>
   </Card.Header>
   {#if !data.question}
     <Card.Content>
       {#if data.poolSize === 0}
-        <p class="text-sm leading-6">{m['games.rahvatarkus.question_pool_empty']()}</p>
+        <p class="text-sm leading-6">{m['rahvatarkus.question_pool_empty']()}</p>
       {:else}
-        <p class="text-sm leading-6">{m['games.rahvatarkus.no_questions']()}</p>
+        <p class="text-sm leading-6">{m['rahvatarkus.no_questions']()}</p>
       {/if}
     </Card.Content>
   {:else}
@@ -98,7 +98,7 @@
         </Form.Field>
       </Card.Content>
       <Card.Footer class="justify-center">
-        <Form.Button>{m.answer()}</Form.Button>
+        <Form.Button>{m.answer_verb()}</Form.Button>
       </Card.Footer>
     </form>
   {/if}

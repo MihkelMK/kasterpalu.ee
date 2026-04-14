@@ -20,8 +20,8 @@
 
 <Tabs.Root bind:value={firstTab} class="flex w-full max-w-md flex-col items-center gap-1">
   <Tabs.List class="grid w-full grid-cols-2">
-    <Tabs.Trigger value="answer">{m.answer()}</Tabs.Trigger>
-    <Tabs.Trigger value="question">{m.ask()}</Tabs.Trigger>
+    <Tabs.Trigger value="answer">{m.answer_verb()}</Tabs.Trigger>
+    <Tabs.Trigger value="question">{m.ask_verb()}</Tabs.Trigger>
   </Tabs.List>
   <Tabs.Content value="answer" class="w-full">
     <AnswerForm {data} />
@@ -33,7 +33,7 @@
 
 <header class="mt-24 mb-12 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-    {m['games.rahvatarkus.what_do_the_people_know']()}
+    {m['rahvatarkus.what_do_the_people_know']()}
   </h1>
 </header>
 

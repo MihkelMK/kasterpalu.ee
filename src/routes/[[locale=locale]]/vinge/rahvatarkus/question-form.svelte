@@ -28,8 +28,8 @@
     };
   } = $props();
 
-  const toastSuccess = $derived(m['games.rahvatarkus.question_toast_success']());
-  const toastError = $derived(m['games.rahvatarkus.question_toast_error']());
+  const toastSuccess = $derived(m['rahvatarkus.question_toast_success']());
+  const toastError = $derived(m.error_form_submit());
 
   const form = superForm(
     untrack(() => data.question_form),
@@ -52,16 +52,16 @@
 
 <Card.Root>
   <Card.Header>
-    <Card.Title>{m['games.rahvatarkus.ask.title']()}</Card.Title>
+    <Card.Title>{m['rahvatarkus.ask.title']()}</Card.Title>
     <Card.Description>
-      {m['games.rahvatarkus.ask.description']({
+      {m['rahvatarkus.ask.description']({
         count: data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1,
       })}
     </Card.Description>
   </Card.Header>
   {#if data.user.balance === 0 && (data.question || data.poolSize > 0)}
     <Card.Content>
-      <p class="text-sm leading-6">{m['games.rahvatarkus.no_balance']()}</p>
+      <p class="text-sm leading-6">{m['rahvatarkus.no_balance']()}</p>
     </Card.Content>
   {:else}
     <form method="POST" use:enhance action="?/question">
@@ -69,7 +69,7 @@
         <Form.Field {form} name="question">
           <Form.Control>
             {#snippet children({ props })}
-              <Form.Label class="transition-colors">{m['games.rahvatarkus.ask.label']()}</Form.Label>
+              <Form.Label class="transition-colors">{m['rahvatarkus.ask.label']()}</Form.Label>
               <Input {...props} bind:value={$formData.question} class="transition-colors" />
             {/snippet}
           </Form.Control>
@@ -88,7 +88,7 @@
         </Form.Field>
       </Card.Content>
       <Card.Footer class="justify-center">
-        <Form.Button>{m.ask()}</Form.Button>
+        <Form.Button>{m.ask_verb()}</Form.Button>
       </Card.Footer>
     </form>
   {/if}
