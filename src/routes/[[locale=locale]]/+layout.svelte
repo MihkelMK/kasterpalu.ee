@@ -1,18 +1,21 @@
 <script lang="ts">
-  import '../app.css';
+  import '../../app.css';
 
-  import '@fontsource-variable/smooch-sans/index.css';
   import '@fontsource-variable/kode-mono/index.css';
+  import '@fontsource-variable/smooch-sans/index.css';
 
-  import { onMount } from 'svelte';
+  import { resolve } from '$app/paths';
   import { site } from '$lib/config';
-  import { ModeWatcher, setMode, mode } from 'mode-watcher';
-  import { Button } from '$lib/components/ui/button/index.js';
-  import Sun from '@lucide/svelte/icons/sun';
-  import Moon from '@lucide/svelte/icons/moon';
-  import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
+  import { mode, ModeWatcher, setMode } from 'mode-watcher';
+  import { onMount } from 'svelte';
+
   import { m } from '$lib/paraglide/messages';
-  import { getLocale, localizeHref, setLocale } from '$lib/paraglide/runtime';
+  import { getLocale, setLocale } from '$lib/paraglide/runtime';
+  import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
+
+  import { Button } from '$lib/components/ui/button/index.js';
+  import Moon from '@lucide/svelte/icons/moon';
+  import Sun from '@lucide/svelte/icons/sun';
 
   let { children } = $props();
   let email: string | undefined = $state(undefined);
@@ -42,11 +45,13 @@
 
 <div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
   <header class="container grid w-full grid-cols-[1fr_auto_1fr] items-center px-8 py-6">
-    <a href={localizeHref('/')}>
+    <a href={resolve('/[[locale=locale]]', { locale: getLocale() })}>
       <img src="/favicon.svg" alt="Mihkel Martin Kasterpalu logo" class="h-9" />
     </a>
 
-    <a class="font-mono font-medium underline underline-offset-4" href={localizeHref('/vinge')}>
+    <a
+      class="font-mono font-medium underline underline-offset-4"
+      href={resolve('/[[locale=locale]]/vinge', { locale: getLocale() })}>
       {m['navigaton.vinge']()}
     </a>
 
@@ -78,12 +83,17 @@
     <a
       href="https://github.com/MihkelMK/kasterpalu.ee"
       target="_blank"
+      rel="external"
       class="text-sm text-muted-foreground underline underline-offset-4">
       {m['navigaton.sourcecode']()}
     </a>
 
     {#if email}
-      <a href="mailto://{email}" target="_blank" class="text-right text-sm text-muted-foreground underline underline-offset-4">
+      <a
+        href="mailto://{email}"
+        rel="external"
+        target="_blank"
+        class="text-right text-sm text-muted-foreground underline underline-offset-4">
         {email}
       </a>
     {:else}

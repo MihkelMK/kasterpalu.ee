@@ -84,7 +84,8 @@ export type Game = {
 };
 
 // the key is the link href for the game
-export type GamesObj = Record<string, Game>;
+export type GameSlug = 'rahvatarkus' | 'vaukuivali' | 'epochalypse' | 'pakubiiti';
+export type GamesObj = Record<GameSlug, Game>;
 
 export type Project = {
   name: string;
