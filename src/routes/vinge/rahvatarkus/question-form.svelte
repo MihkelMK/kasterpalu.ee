@@ -2,6 +2,7 @@
   import type { Question } from '$lib/types';
   import { formSchema, type FormSchema } from './question-schema';
 
+  import { invalidateAll } from '$app/navigation';
   import { untrack } from 'svelte';
   import { toast } from 'svelte-sonner';
   import { type Infer, superForm, type SuperValidated } from 'sveltekit-superforms';
@@ -30,10 +31,11 @@
     untrack(() => data.question_form),
     {
       validators: zod4Client(formSchema),
-      resetForm: true,
-      onUpdated: ({ form: f }) => {
+      invalidateAll: false,
+      onUpdated: async ({ form: f }) => {
         if (f.valid) {
           toast.success('Küsimus esitatud.');
+          await invalidateAll();
         } else {
           toast.error('Küsimine nurjus, palun paranda vead.');
         }
