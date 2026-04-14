@@ -1,15 +1,32 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "goto_next": "Go to next page",
+  "goto_previous": "Go to previous page",
+  "goto_n": [
+    {
+      "declarations": ["input amount", "local formattedAmount = amount: number"],
+      "match": {
+        "amount=*": "Go to page {formattedAmount}"
+      }
+    }
+  ],
+
+  "next": "Next",
+  "previous": "Previous",
+
   "general": {
     "and": "and",
     "is": "is",
     "at": "at"
   },
+
   "buttons": {
     "submit": "Submit",
     "ask": "Ask",
     "answer": "Answer"
   },
+
   "time": {
     "year": {
       "single": "year",
@@ -36,10 +53,12 @@
       "multiple": "seconds"
     }
   },
+
   "landing": {
     "title": "Hi! I'm Mihkel",
     "subtitle": "I have many hobbies beside this fantastic site"
   },
+
   "projects": {
     "SUPIKÖÖGIPOISID": {
       "image": {
@@ -94,15 +113,18 @@
       "link": "https://hakkerikoda.ee/en"
     }
   },
+
   "badges": {
     "music": { "name": "Music", "description": "I perform and create music here" },
     "web": { "name": "Web", "description": "Designed/wrote the web page" },
     "founder": { "name": "Founder", "description": "I was part of the founders" }
   },
+
   "navigaton": {
     "sourcecode": "source code",
     "vinge": "vinge värk"
   },
+
   "vinge": {
     "title": "Vinge värk",
     "subtitle": "Minigames and other interesting stuff.",
@@ -111,6 +133,7 @@
       "suffix": "for the inspiration :)"
     }
   },
+
   "games": {
     "score": {
       "best": "Best",
@@ -171,10 +194,12 @@
         }
       }
     },
+
     "rahvatarkus": {
       "name": "Rahva tarkus",
       "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
     },
+
     "vaukuivali": {
       "name": "Vau kui vali",
       "description": "Get an intuitive understanding for the loudness of everyday life.",

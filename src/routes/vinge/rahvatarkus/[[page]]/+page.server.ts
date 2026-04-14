@@ -1,31 +1,27 @@
+import { formSchema as answerSchema } from '../answer-schema';
+import { formSchema as questionSchema } from '../question-schema';
 import type { Actions, PageServerLoad } from './$types';
-import { formSchema as questionSchema } from './question-schema';
-import { formSchema as answerSchema } from './answer-schema';
+
+import { altcha } from '$lib/altcha';
+import { ratelimit } from '$lib/server/redis';
+import { fail } from '@sveltejs/kit';
 
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import { fail } from '@sveltejs/kit';
-import { ratelimit } from '$lib/server/redis';
 
 const pageSize = 5;
 
-export const load: PageServerLoad = async ({ fetch, url }) => {
-  const page = Number(url.searchParams.get('leht')) || 1;
+export const load: PageServerLoad = async ({ fetch, params }) => {
+  const page = params.page ? Number(params.page) : 1;
 
-  const archiveRes = fetch(`/api/rahvatarkus/archive/${pageSize}/${(page - 1) * pageSize}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      return data;
-    });
+  const res = await fetch(`/api/rahvatarkus/archive/${pageSize}/${(page - 1) * pageSize}`);
+  const { data: answers, meta } = await res.json();
 
   return {
     page,
     pageSize,
-    streamed: {
-      archive: archiveRes,
-    },
+    answers,
+    meta,
   };
 };
 
@@ -87,16 +83,9 @@ export const actions: Actions = {
       });
     }
 
-    const altchaValid = await event
-      .fetch('/api/altcha', { method: 'POST', body: JSON.stringify({ payload: form.data.altcha }) })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        return data;
-      });
+    const altchaResult = await altcha.verifyEvent(event);
 
-    if (!altchaValid) {
+    if (altchaResult.error) {
       const message =
         'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
 
@@ -105,7 +94,7 @@ export const actions: Actions = {
       } else {
         form.errors.answer = [message];
       }
-      return fail(429, {
+      return fail(403, {
         form,
       });
     }
@@ -203,16 +192,9 @@ export const actions: Actions = {
       });
     }
 
-    const altchaValid = await event
-      .fetch('/api/altcha', { method: 'POST', body: JSON.stringify({ payload: form.data.altcha }) })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        return data;
-      });
+    const altchaResult = await altcha.verifyEvent(event);
 
-    if (!altchaValid) {
+    if (altchaResult.error) {
       const message =
         'Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.';
 
@@ -221,7 +203,7 @@ export const actions: Actions = {
       } else {
         form.errors.question = [message];
       }
-      return fail(429, {
+      return fail(403, {
         form,
       });
     }

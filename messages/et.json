@@ -1,15 +1,32 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "goto_next": "Mine järgmisele lehele",
+  "goto_previous": "Mine eelmisele lehele",
+  "goto_n": [
+    {
+      "declarations": ["input amount", "local formattedAmount = amount: number"],
+      "match": {
+        "amount=*": "Mine lehele {formattedAmount}"
+      }
+    }
+  ],
+
+  "next": "Järgmine",
+  "previous": "Eelmine",
+
   "general": {
     "and": "ja",
     "is": "on",
     "at": ""
   },
+
   "buttons": {
     "submit": "Saada",
     "ask": "Küsi",
     "answer": "Vasta"
   },
+
   "time": {
     "year": {
       "single": "aasta",
@@ -36,10 +53,12 @@
       "multiple": "sekundit"
     }
   },
+
   "landing": {
     "title": "Hei! Mina olen Mihkel",
     "subtitle": "Peale selle toreda saidi on mul veel palju hobisid"
   },
+
   "projects": {
     "SUPIKÖÖGIPOISID": {
       "image": {
@@ -94,15 +113,18 @@
       "link": "https://hakkerikoda.ee"
     }
   },
+
   "badges": {
     "music": { "name": "Muusika", "description": "Tegelen siin muusikaga" },
     "web": { "name": "Veebileht", "description": "Disainisin/kirjutasin veebilehe" },
     "founder": { "name": "Asutaja", "description": "Olin osa selle loomisest" }
   },
+
   "navigaton": {
     "sourcecode": "saidi kood",
     "vinge": "vinge värk"
   },
+
   "vinge": {
     "title": "Vinge värk",
     "subtitle": "Minu loodud minimängud ja muud huvitavat.",
@@ -111,6 +133,7 @@
       "suffix": "inspo eest :)"
     }
   },
+
   "games": {
     "score": {
       "best": "Parim",
