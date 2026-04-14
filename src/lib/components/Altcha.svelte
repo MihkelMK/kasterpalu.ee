@@ -1,38 +1,45 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import Input from './ui/input/input.svelte';
   // Importing altcha package will introduce a new element <altcha-widget>
-
-  onMount(async () => {
-    await import('altcha');
-  });
+  import 'altcha';
+  import 'altcha/i18n/et';
+  import type {} from 'altcha/types/svelte';
+  import Input from './ui/input/input.svelte';
+  import { getLocale } from '$lib/paraglide/runtime';
 
   let { value = $bindable(), ...props } = $props();
 
-  const estonianStrings = {
-    ariaLinkLabel: 'Külasta Altcha.org',
-    error: 'Kinnitus nurjus. Proovi hiljem uuesti.',
-    expired: 'Kinnitus aegus. Proovi uuesti.',
-    footer: 'Turvab <a href="https://altcha.org/" target="_blank" aria-label="Külasta Altcha.org">ALTCHA</a>',
-    label: 'Ma ei ole robot',
-    verified: 'Kõik ok!',
-    verifying: 'Kinntan...',
-    waitAlert: 'Kinnitan... palun oota.',
-  };
+  const style =
+    '--altcha-color-base: transparent;' +
+    '--altcha-color-base-content:  var(--card-foreground);' +
+    '--altcha-color-success: var(--color-lime-600);' +
+    '--altcha-padding: calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);' +
+    '--altcha-border-width: 1px;' +
+    '--altcha-border-color: var(--border);' +
+    '--altcha-border-radius: calc(var(--radius) * 0.8);' +
+    '--altcha-checkbox-size: calc(var(--spacing) * 4);' +
+    '--altcha-checkbox-border-width: 1px;' +
+    '--altcha-checkbox-border-radius: 4px;' +
+    '--altcha-checkbox-border-color: var(--input);' +
+    '--altcha-input-background-color: var(--input);' +
+    '--altcha-input-background-color: color-mix(in oklab, var(--input) 30%, transparent);';
 </script>
 
 <Input type="hidden" bind:value {...props} />
 
 <altcha-widget
-  strings={JSON.stringify(estonianStrings)}
-  challengeurl="/api/altcha"
-  spamfilter
-  blockspam
-  hidefooter
-  expire={180000}
-  onverified={(ev) => {
-    if (ev.detail.payload) {
-      value = ev.detail.payload;
+  auto="onsubmit"
+  language={getLocale()}
+  challenge="/api/altcha/challenge"
+  {style}
+  configuration={JSON.stringify({
+    hideFooter: true,
+  })}
+  onstatechange={(ev) => {
+    const { payload, state } = ev.detail;
+    if (state === 'verified' && payload) {
+      value = payload;
+    } else {
+      value = '';
     }
   }}>
 </altcha-widget>
