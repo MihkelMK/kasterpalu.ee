@@ -1,14 +1,14 @@
-import type { LayoutServerLoad } from './$types';
 import type { Question } from '$lib/types';
-import { formSchema as questionSchema } from './question-schema';
+import type { LayoutServerLoad } from './$types';
 import { formSchema as answerSchema } from './answer-schema';
+import { formSchema as questionSchema } from './question-schema';
 
+import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
+import { nanoid } from 'nanoid';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import { nanoid } from 'nanoid';
-import { questionBalanceStore } from '$lib/server/rahvatarkus/QuestionBalance';
 
-export const load: LayoutServerLoad = async ({ fetch, locals }) => {
+export const load: LayoutServerLoad = async ({ locals, fetch }) => {
   const { session } = locals;
 
   if (!session?.data?.userId) {
@@ -17,28 +17,18 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
   }
 
   const user = session.data.userId;
-
   const userBalance = questionBalanceStore.getBalance(user);
 
-  let question: Question | undefined = undefined;
-
   const poolSize = await fetch('/api/rahvatarkus/pool')
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      return data.size;
-    });
+    .then((res) => res.json())
+    .then((data) => data.size);
 
+  let question: Question | undefined = undefined;
   if (poolSize !== 0) {
-    const res = await fetch('/api/rahvatarkus/question')
-      .then(async (res) => {
-        const data = await res.json();
-        return { ok: res.ok, data: data };
-      })
-      .then((data) => {
-        return data;
-      });
+    const res = await fetch('/api/rahvatarkus/question').then(async (res) => {
+      const data = await res.json();
+      return { ok: res.ok, data };
+    });
 
     if (res.ok) {
       question = res.data;
@@ -50,7 +40,7 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
       id: user,
       balance: userBalance,
     },
-    question: question,
+    question,
     poolSize,
     question_form: await superValidate(zod4(questionSchema)),
     answer_form: await superValidate({ questionId: question?.id }, zod4(answerSchema), {

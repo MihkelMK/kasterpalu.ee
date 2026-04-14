@@ -1,11 +1,14 @@
 <script lang="ts">
+  import type { LayoutData } from './$types';
+  import type { Snippet } from 'svelte';
+
+  import { onMount } from 'svelte';
   import * as Tabs from '$lib/components/ui/tabs/index.js';
 
-  import QuestionForm from './question-form.svelte';
   import AnswerForm from './answer-form.svelte';
-  import { onMount } from 'svelte';
+  import QuestionForm from './question-form.svelte';
 
-  let { data, children } = $props();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
   let firstTab = $state('answer');
 
@@ -26,5 +29,9 @@
     <QuestionForm {data} />
   </Tabs.Content>
 </Tabs.Root>
+
+<header class="mt-24 mb-12 flex flex-col items-center text-center font-title">
+  <h1 class="mb-1 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Mida rahvas teab?</h1>
+</header>
 
 {@render children()}

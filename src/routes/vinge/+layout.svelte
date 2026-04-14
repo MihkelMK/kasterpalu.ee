@@ -20,7 +20,7 @@
   <meta property="og:image" content={baseURL + ogImage} />
 </svelte:head>
 
-<Toaster />
+<Toaster position="top-center" />
 
 {@render children()}
 
