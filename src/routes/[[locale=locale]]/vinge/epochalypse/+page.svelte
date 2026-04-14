@@ -47,55 +47,55 @@
 
 <header class="mb-24 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['games.epochalypse.title']()}
+    {m['epochalypse.name']()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
-    {m['games.epochalypse.subtitle']()}
+    {m['epochalypse.subtitle']()}
   </p>
 </header>
 <main class="w-full max-w-4xl">
   <div
     class="mx-auto grid w-full grid-cols-[auto_auto_auto] items-center justify-center gap-4 rounded-md bg-muted p-12 md:flex">
-    {@render clockStage(13, timeUntil.years, m['time.year.multiple']())}
-    {@render clockStage(13, timeUntil.months, m['time.month.multiple'](), false)}
-    {@render clockStage(31, timeUntil.days, m['time.day.multiple']())}
-    {@render clockStage(24, timeUntil.hours, m['time.hour.multiple'](), false)}
-    {@render clockStage(60, timeUntil.minutes, m['time.minute.multiple']())}
-    {@render clockStage(60, timeUntil.seconds, m['time.second.multiple'](), false)}
+    {@render clockStage(13, timeUntil.years, m.years())}
+    {@render clockStage(13, timeUntil.months, m.months(), false)}
+    {@render clockStage(31, timeUntil.days, m.days())}
+    {@render clockStage(24, timeUntil.hours, m.hours(), false)}
+    {@render clockStage(60, timeUntil.minutes, m.minutes())}
+    {@render clockStage(60, timeUntil.seconds, m.seconds(), false)}
   </div>
 
   <Accordion.Root type="single" class="mx-auto mt-12 max-w-prose">
     <Accordion.Item value="item-1">
-      <Accordion.Trigger>{m['games.epochalypse.explainer.title']()}</Accordion.Trigger>
+      <Accordion.Trigger>{m['epochalypse.explainer.title']()}</Accordion.Trigger>
       <Accordion.Content class="text-md">
         <p class="leading-7 not-first:mt-6">
-          {m['games.epochalypse.explainer.y2k.intro']()}
+          {m['epochalypse.explainer.y2k.intro']()}
           <a
             href="https://en.wikipedia.org/wiki/Year_2000_problem"
             class="font-medium text-primary underline underline-offset-4">
-            {m['games.epochalypse.explainer.y2k.linkText']()}
+            {m['epochalypse.explainer.y2k.linkText']()}
           </a>
           .
           <br />
-          {m['games.epochalypse.explainer.y2k.outro']()}
+          {m['epochalypse.explainer.y2k.outro']()}
           <strong>
-            {m['games.epochalypse.explainer.y2k.emphasis']()}
+            {m['epochalypse.explainer.y2k.emphasis']()}
           </strong>
         </p>
         <p class="leading-7 not-first:mt-6">
-          {m['games.epochalypse.explainer.unix.intro']()}
+          {m['epochalypse.explainer.unix.intro']()}
           <a href="https://en.wikipedia.org/wiki/Unix_time" class="font-medium text-primary underline underline-offset-4">
-            {m['games.epochalypse.explainer.unix.linkText']()}
+            {m['epochalypse.explainer.unix.linkText']()}
           </a>
-          - {m['games.epochalypse.explainer.unix.outro']()}
-          <i>{m['games.epochalypse.explainer.unix.epoch']()}</i>
-          {m['general.at']()}
+          - {m['epochalypse.explainer.unix.outro']()}
+          <i>{m['epochalypse.explainer.unix.epoch']()}</i>
+          {m.at()}
           00:00:00 19.01.1970 UTC.
         </p>
         <p class="leading-7 not-first:mt-6">
-          {m['games.epochalypse.explainer.integer.intro.part1']()}
-          <i>{m['games.epochalypse.explainer.integer.intro.32bit']()}</i>
-          {m['games.epochalypse.explainer.integer.intro.part2']()}
+          {m['epochalypse.explainer.integer.intro.part1']()}
+          <i>{m['epochalypse.explainer.integer.intro.32bit']()}</i>
+          {m['epochalypse.explainer.integer.intro.part2']()}
           <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
             2
             <sup>31</sup>
@@ -103,8 +103,8 @@
           </code>
           .
           <br />
-          {m['games.epochalypse.explainer.integer.lastDate']()}
-          {m['general.is']()} 03:14:07 19.01.2038 UTC (
+          {m['epochalypse.explainer.integer.lastDate']()}
+          {m.is()} 03:14:07 19.01.2038 UTC (
           <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
             UNIX epoch + 2
             <sup>31</sup>
@@ -113,28 +113,26 @@
           ).
         </p>
         <p class="leading-7 not-first:mt-6">
-          {m['games.epochalypse.explainer.overflow.intro']()}
+          {m['epochalypse.explainer.overflow.intro']()}
           <a
             href="https://en.wikipedia.org/wiki/Integer_overflow"
             class="font-medium text-primary underline underline-offset-4">
-            {m['games.epochalypse.explainer.overflow.linkText']()}
+            {m['epochalypse.explainer.overflow.linkText']()}
           </a>
-          {m['games.epochalypse.explainer.overflow.middle']()}
+          {m['epochalypse.explainer.overflow.middle']()}
           <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
             -2
             <sup>31</sup>
           </code>
           -
-          {m['games.epochalypse.explainer.overflow.outro.part1']()}
+          {m['epochalypse.explainer.overflow.outro.part1']()}
           <a href="https://en.wikipedia.org/wiki/Unix_time" class="font-medium text-primary underline underline-offset-4">
-            {m['games.epochalypse.explainer.overflow.outro.linkText']()}
+            {m['epochalypse.explainer.overflow.outro.linkText']()}
           </a>
-          {m['games.epochalypse.explainer.overflow.outro.part2']()}
+          {m['epochalypse.explainer.overflow.outro.part2']()}
 
           <br />
-          {m['games.epochalypse.explainer.aftermath.intro']()} 20:45:52 13.12.1901 UTC {m[
-            'games.epochalypse.explainer.aftermath.outro'
-          ]()}
+          {m['epochalypse.explainer.aftermath.intro']()} 20:45:52 13.12.1901 UTC {m['epochalypse.explainer.aftermath.outro']()}
         </p>
       </Accordion.Content>
     </Accordion.Item>

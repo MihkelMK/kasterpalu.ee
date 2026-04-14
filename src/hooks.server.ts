@@ -1,8 +1,11 @@
-import { sequence } from '@sveltejs/kit/hooks';
-import { paraglideMiddleware } from '$lib/paraglide/server';
 import { env } from '$env/dynamic/private';
+
 import type { Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
 import { sveltekitSessionHandle } from 'svelte-kit-sessions';
+
+import { getTextDirection } from '$lib/paraglide/runtime';
+import { paraglideMiddleware } from '$lib/paraglide/server';
 
 declare module 'svelte-kit-sessions' {
   interface SessionData {
@@ -12,13 +15,15 @@ declare module 'svelte-kit-sessions' {
 
 const originalHandle: Handle = sveltekitSessionHandle({ secret: env.SESH_SECRET as string });
 
-const handleParaglide: Handle = ({ event, resolve }) =>
-  paraglideMiddleware(event.request, ({ request, locale }) => {
-    event.request = request;
-
+// creating a handle to use the paraglide middleware
+const paraglideHandle: Handle = ({ event, resolve }) =>
+  paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
+    event.request = localizedRequest;
     return resolve(event, {
-      transformPageChunk: ({ html }) => html.replace('%paraglide.lang%', locale),
+      transformPageChunk: ({ html }) => {
+        return html.replace('%lang%', locale).replace('%dir%', getTextDirection(locale));
+      },
     });
   });
 
-export const handle = sequence(originalHandle, handleParaglide);
+export const handle = sequence(originalHandle, paraglideHandle);

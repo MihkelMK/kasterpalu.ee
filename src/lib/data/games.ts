@@ -3,23 +3,23 @@ import type { GamesObj } from '$lib/types';
 
 const games: GamesObj = {
   rahvatarkus: {
-    name: m['games.rahvatarkus.name'],
-    description: m['games.rahvatarkus.description'],
+    name: m['rahvatarkus.name'],
+    description: m['rahvatarkus.description'],
     image: '',
   },
   vaukuivali: {
-    name: m['games.vaukuivali.name'],
-    description: m['games.vaukuivali.description'],
+    name: m['vaukuivali.name'],
+    description: m['vaukuivali.description'],
     image: '',
   },
   epochalypse: {
-    name: m['games.epochalypse.name'],
-    description: m['games.epochalypse.description'],
+    name: m['epochalypse.name'],
+    description: m['epochalypse.description'],
     image: '',
   },
   pakubiiti: {
-    name: m['games.pakubiiti.name'],
-    description: m['games.pakubiiti.description'],
+    name: m['pakubiiti.name'],
+    description: m['pakubiiti.description'],
     image: '',
   },
 };

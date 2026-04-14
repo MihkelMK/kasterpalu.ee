@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EnhancedImage, Tag } from '$lib/types';
+  import { m } from '$lib/paraglide/messages';
 
   import { Button } from '$lib/components/ui/button/index.js';
   import SquareArrowOutUpRight from '@lucide/svelte/icons/square-arrow-out-up-right';
@@ -8,7 +9,6 @@
 
   import { site, baseURL } from '$lib/config';
   import projects from '$lib/data/projects';
-  import { m } from '$lib/paraglide/messages';
 </script>
 
 {#snippet projectCard(name: string, description: string, image: EnhancedImage, tags: Tag[], link: string)}
@@ -27,7 +27,7 @@
 {/snippet}
 
 <svelte:head>
-  <title>Hei! | {site.name}</title>
+  <title>{m.landing_hi()} | {site.name}</title>
   <meta property="og:title" content="Hei! | {site.name}" />
 
   <meta name="description" content={site.description} />
@@ -38,10 +38,11 @@
 
 <header class="mb-16 flex flex-col items-center text-center font-title">
   <h1 class="mb-1 scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl">
-    {m['landing.title']()}
+    {m.landing_hi()}
+    {m.landing_title()}
   </h1>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
-    {m['landing.subtitle']()}
+    {m.landing_subtitle()}
   </p>
 </header>
 

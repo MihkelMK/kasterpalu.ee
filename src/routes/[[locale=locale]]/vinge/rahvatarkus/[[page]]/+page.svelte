@@ -10,6 +10,7 @@
   import { resolve } from '$app/paths';
   import { m } from '$lib/paraglide/messages.js';
   import { MediaQuery } from 'svelte/reactivity';
+  import { getLocale } from '$lib/paraglide/runtime.js';
 
   let { data }: { data: PageData } = $props();
 
@@ -46,8 +47,9 @@
                 aria-label={m.goto_previous()}
                 data-sveltekit-noscroll
                 class="aria-disabled:pointer-events-none aria-disabled:opacity-50"
-                href={resolve('/vinge/rahvatarkus/[[page]]', {
+                href={resolve('/[[locale=locale]]/vinge/rahvatarkus/[[page]]', {
                   page: String(data.page - 1),
+                  locale: getLocale(),
                 })}>
                 <ChevronLeft />
                 <span class="xs:block hidden">{m.previous()}</span>
@@ -71,8 +73,9 @@
                       aria-current={props.isActive ? 'page' : undefined}
                       aria-label={m.goto_n({ amount: page.value })}
                       data-sveltekit-noscroll
-                      href={resolve('/vinge/rahvatarkus/[[page]]', {
+                      href={resolve('/[[locale=locale]]/vinge/rahvatarkus/[[page]]', {
                         page: String(page.value),
+                        locale: getLocale(),
                       })}>
                       {page.value}
                     </Button>
@@ -93,8 +96,9 @@
                 aria-label={m.goto_next()}
                 data-sveltekit-noscroll
                 class="aria-disabled:pointer-events-none aria-disabled:opacity-50"
-                href={resolve('/vinge/rahvatarkus/[[page]]', {
+                href={resolve('/[[locale=locale]]/vinge/rahvatarkus/[[page]]', {
                   page: String(data.page + 1),
+                  locale: getLocale(),
                 })}>
                 <ChevronRight />
                 <span class="xs:block hidden">{m.next()}</span>

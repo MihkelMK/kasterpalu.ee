@@ -42,8 +42,8 @@ export const load: LayoutServerLoad = async ({ locals, fetch }) => {
     },
     question,
     poolSize,
-    question_form: await superValidate(zod4(questionSchema)),
-    answer_form: await superValidate({ questionId: question?.id }, zod4(answerSchema), {
+    question_form: await superValidate(zod4(questionSchema())),
+    answer_form: await superValidate({ questionId: question?.id }, zod4(answerSchema()), {
       errors: false,
     }),
   };

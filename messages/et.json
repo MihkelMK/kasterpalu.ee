@@ -1,6 +1,26 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
 
+  "and": "ja",
+  "is": "on",
+  "at": "",
+  "best": "Parim",
+  "score": "Skoor",
+
+  "next": "Järgmine",
+  "previous": "Eelmine",
+  "submit": "Saada",
+  "try_again": "Proovi uuesti",
+  "change_theme": "Vaheta teemat",
+  "change_locale": [
+    {
+      "declarations": ["input locale"],
+      "match": {
+        "locale=et": "Muuda sait eesti keelseks",
+        "locale=en": "Muuda sait inglise keelseks"
+      }
+    }
+  ],
   "goto_next": "Mine järgmisele lehele",
   "goto_previous": "Mine eelmisele lehele",
   "goto_n": [
@@ -12,281 +32,280 @@
     }
   ],
 
-  "next": "Järgmine",
-  "previous": "Eelmine",
+  "ask_verb": "Küsi",
+  "ask_noun": "Küsimus",
+  "answer_verb": "Vasta",
+  "answer_noun": "Vastus",
 
-  "general": {
-    "and": "ja",
-    "is": "on",
-    "at": ""
-  },
+  "years": "aastat",
+  "months": "kuud",
+  "days": "päeva",
+  "hours": "tundi",
+  "minutes": "minutit",
+  "seconds": "sekundit",
 
-  "buttons": {
-    "submit": "Saada",
-    "ask": "Küsi",
-    "answer": "Vasta"
-  },
+  "nav_source": "saidi kood",
+  "nav_vinge": "vinge värk",
 
-  "time": {
-    "year": {
-      "single": "aasta",
-      "multiple": "aastat"
-    },
-    "month": {
-      "single": "kuu",
-      "multiple": "kuud"
-    },
-    "day": {
-      "single": "päev",
-      "multiple": "päevad"
-    },
-    "hour": {
-      "single": "tund",
-      "multiple": "tunnid"
-    },
-    "minute": {
-      "single": "minut",
-      "multiple": "minutit"
-    },
-    "second": {
-      "single": "sekund",
-      "multiple": "sekundit"
+  "landing_hi": "Hei!",
+  "landing_title": "Mina olen Mihkel",
+  "landing_subtitle": "Peale selle toreda saidi on mul veel palju hobisid",
+
+  "vinge_title": "Vinge värk",
+  "vinge_subtitle": "Minu loodud minimängud ja muud huvitavat.",
+  "vinge_credit_prefix": "Aitäh",
+  "vinge_credit_suffix": "inspo eest :)",
+
+  "badge_music_name": "Muusika",
+  "badge_music_desc": "Tegelen siin muusikaga",
+  "badge_web_name": "Veebileht",
+  "badge_web_desc": "Disainisin/kirjutasin veebilehe",
+  "badge_founder_name": "Asutaja",
+  "badge_founder_desc": "Olin osa selle loomisest",
+
+  "error_server_title": "{#strong}Serveris tekkis mingi error.{/strong}{#br}{/br}No clue miks see katki on, sorry.",
+  "error_server_body": "Proovi uuesti või kirjuta mulle.",
+  "error_form_min": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} peab olema vähemalt {count} tähemärk pikk.",
+        "countPlural=other": "{field} peab olema vähemalt {count} tähemärki pikk."
+      }
     }
-  },
-
-  "landing": {
-    "title": "Hei! Mina olen Mihkel",
-    "subtitle": "Peale selle toreda saidi on mul veel palju hobisid"
-  },
+  ],
+  "error_form_max": [
+    {
+      "declarations": ["input field", "input count", "local countPlural = count: plural"],
+      "match": {
+        "countPlural=one": "{field} ei tohi olla pikem kui {count} tähemärk.",
+        "countPlural=other": "{field} ei tohi olla pikem kui {count} tähemärki."
+      }
+    }
+  ],
+  "error_rate_limit": [
+    {
+      "declarations": ["input seconds"],
+      "match": {
+        "seconds=*": "Võta veits rahulikumalt. Proovi {seconds}s pärast uuesti."
+      }
+    }
+  ],
+  "error_altcha": "Altchale ei meeldinud see. Sa oled kas liiga boti laadse käitumisega või minu implementatsioon on kohutav.",
+  "error_form_submit": "Saatmine nurjus, palun paranda vead.",
 
   "projects": {
     "SUPIKÖÖGIPOISID": {
-      "image": {
-        "credit": {
-          "author": "Mimmu",
-          "href": "https://www.instagram.com/musamimmu/"
-        },
-        "alt": "Pilt neljaliikmeliseslt räpibändist SUPIKÖÖGIPOISID. Pilt on tehtud pilves ilmaga õues. Pildil on 4 mees valgete triiksärkide, mustade lipsude ja mustade tagidega."
-      },
-      "description": "Räpikollektiiv. Alustasime 2019.",
-      "link": "https://skpoisid.bandcamp.com/"
+      "image_alt": "Pilt neljaliikmelisest räpibändist SUPIKÖÖGIPOISID. Pilt on tehtud pilves ilmaga õues. Pildil on 4 mees valgete triiksärkide, mustade lipsude ja mustade tagidega.",
+      "description": "Räpikollektiiv. Alustasime 2019."
     },
     "Dysaster Collective": {
-      "image": {
-        "credit": {
-          "author": "Mattias Mägi",
-          "href": "https://www.instagram.com/mattias.mix/"
-        },
-        "alt": "Sinakas digitaalne kollaž Dysaster Collective liigetest."
-      },
-      "description": "2022 asutatud mitmekülgne loomekollektiiv.",
-      "link": "https://dysaster.ee"
+      "image_alt": "Sinakas digitaalne kollaž Dysaster Collective liigetest.",
+      "description": "2022 asutatud mitmekülgne loomekollektiiv."
     },
     "monospac.ee": {
-      "image": {
-        "credit": {
-          "author": "Liisa Jõhvik",
-          "href": "https://www.instagram.com/liisajohvik.photo/"
-        },
-        "alt": "DJ duo monospacee nende Silent Disco setil Tartu Uus Teater saalis aastal 2024. Pilt on külje pealt, esiplaanil DJ Mimmu ja ta tagant paistab DJ Rx. Nad on valgustatud punasesega, taustal häguselt näha siniselt valgustatud kolmandat DJd."
-      },
-      "description": "DJ duo kaasliikmega Rx.",
-      "link": "https://monospac.ee"
+      "image_alt": "DJ duo monospacee nende Silent Disco setil Tartu Uus Teater saalis aastal 2024. Pilt on külje pealt, esiplaanil DJ Mimmu ja ta tagant paistab DJ Rx. Nad on valgustatud punasesega, taustal häguselt näha siniselt valgustatud kolmandat DJd.",
+      "description": "DJ duo kaasliikmega Rx."
     },
     "Saueaugu Teatritalu": {
-      "image": {
-        "alt": "Suvine Saueaugu teatrihoone. All paistab roheline muru ja katuse tagant paistab paari pilvega sinine taevas."
-      },
-      "description": "Taluteater Läänemaal. Tegin veebilehe.",
-      "link": "https://saueaugu.ee"
+      "image_alt": "Suvine Saueaugu teatrihoone. All paistab roheline muru ja katuse tagant paistab paari pilvega sinine taevas.",
+      "description": "Taluteater Läänemaal. Tegin veebilehe."
     },
     "Tartu Häkkerikoda": {
-      "image": {
-        "src": "/assets/hakkerikoda.svg",
-        "credit": {
-          "author": "treierxyz",
-          "href": "https://treier.xyz"
-        },
-        "alt": "Tartu Häkkerikoda logo"
-      },
-      "description": "Makerspace Tartus. Liige ning osa veebilehe loojatest.",
-      "link": "https://hakkerikoda.ee"
+      "image_alt": "Tartu Häkkerikoda logo",
+      "description": "Makerspace Tartus. Liige ning osa veebilehe loojatest."
     }
   },
 
-  "badges": {
-    "music": { "name": "Muusika", "description": "Tegelen siin muusikaga" },
-    "web": { "name": "Veebileht", "description": "Disainisin/kirjutasin veebilehe" },
-    "founder": { "name": "Asutaja", "description": "Olin osa selle loomisest" }
-  },
-
-  "navigaton": {
-    "sourcecode": "saidi kood",
-    "vinge": "vinge värk"
-  },
-
-  "vinge": {
-    "title": "Vinge värk",
-    "subtitle": "Minu loodud minimängud ja muud huvitavat.",
-    "credit": {
-      "prefix": "Aitäh",
-      "suffix": "inspo eest :)"
-    }
-  },
-
-  "games": {
-    "score": {
-      "best": "Parim",
-      "score": "Skoor"
+  "pakubiiti": {
+    "name": "Paku biiti",
+    "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
+    "instructions": {
+      "main": "Lohista kokku õiged albumi",
+      "names": "nimed",
+      "artists": "artistid",
+      "pictures": "pildid"
     },
-    "pakubiiti": {
-      "name": "Paku biiti",
-      "description": "Sorteeri kolme suvalise muusika albumi pealkiri, artistid ja pilt.",
-      "title": "Paku biiti",
-      "instructions": {
-        "main": "Lohista kokku õiged albumi",
-        "names": "nimed",
-        "artists": "artistid",
-        "pictures": "pildid",
-        "and": "ja"
+    "new_highscore": "Uus parim tulemus!",
+    "not_this_time": "Seekord ei vedanud",
+    "failed_on_first": "Põrusid esimesel katsel.",
+    "correct_answers": [
+      {
+        "declarations": ["input count", "local countPlural = count: plural"],
+        "match": {
+          "countPlural=one": "Vastasid õigesti {#strong}{count} korra{/strong}",
+          "countPlural=other": "Vastasid õigesti {#strong}{count} korda{/strong}"
+        }
       }
-    },
-    "epochalypse": {
-      "name": "Epochalypse",
-      "description": "Varsti veel üks Y2K. Kui nostalgiline!",
-      "title": "Epochalypse",
-      "subtitle": "Ära muretse! Sul on veel aega:",
-      "explainer": {
-        "title": "Mis asi see on??",
-        "y2k": {
-          "intro": "Epochalypse nimeline probleem on sarnane 1990 lõpus toimunud",
-          "linkText": "Y2K-le",
-          "outro": "Laialdaselt kasutatud süsteem aja ja kuupäeva märkimiseks",
-          "emphasis": "saab otsa."
+    ]
+  },
+
+  "epochalypse": {
+    "name": "Epochalypse",
+    "description": "Varsti veel üks Y2K. Kui nostalgiline!",
+    "subtitle": "Ära muretse! Sul on veel aega:",
+    "explainer": {
+      "title": "Mis asi see on??",
+      "y2k": {
+        "intro": "Epochalypse nimeline probleem on sarnane 1990 lõpus toimunud",
+        "linkText": "Y2K-le",
+        "outro": "Laialdaselt kasutatud süsteem aja ja kuupäeva märkimiseks",
+        "emphasis": "saab otsa."
+      },
+      "unix": {
+        "intro": "Enamus Linuxi baasiga Operatsioonisüsteeme kasutab aja märkimiseks",
+        "linkText": "UNIX aega",
+        "outro": "mitu sekundit on möödunud UNIX",
+        "epoch": "epoch-ist"
+      },
+      "integer": {
+        "intro": {
+          "part1": "Neid sekundeid hoitaks",
+          "32bit": "signed 32-bit",
+          "part2": "täisarvuna. Selle andmetüübi maksimaalne väärtus on"
         },
-        "unix": {
-          "intro": "Enamus Linuxi baasiga Operatsioonisüsteeme kasutab aja märkimiseks",
-          "linkText": "UNIX aega",
-          "outro": "mitu sekundit on möödunud UNIX",
-          "epoch": "epoch-ist"
-        },
-        "integer": {
-          "intro": {
-            "part1": "Neid sekundeid hoitaks",
-            "32bit": "signed 32-bit",
-            "part2": "täisarvuna. Selle andmetüübi maksimaalne väärtus on"
-          },
-          "lastDate": "Seega viimane kuupäev"
-        },
-        "overflow": {
-          "intro": "Kui arvutid lisavad sellele ajale ühe sekundi juurde, toimub",
-          "linkText": "täisarvu ületäitumine",
-          "middle": "ja aja väärtuseks saab",
-          "outro": {
-            "part1": "varaseim võimalik aeg",
-            "linkText": "UNIX aja",
-            "part2": "järgi."
+        "lastDate": "Seega viimane kuupäev"
+      },
+      "overflow": {
+        "intro": "Kui arvutid lisavad sellele ajale ühe sekundi juurde, toimub",
+        "linkText": "täisarvu ületäitumine",
+        "middle": "ja aja väärtuseks saab",
+        "outro": {
+          "part1": "varaseim võimalik aeg",
+          "linkText": "UNIX aja",
+          "part2": "järgi."
+        }
+      },
+      "aftermath": {
+        "intro": "Arvutid loevad seda kui",
+        "outro": "ja on korraga 137 aastat ajast maas."
+      }
+    }
+  },
+
+  "rahvatarkus": {
+    "name": "Rahva tarkus",
+    "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents",
+
+    "what_do_the_people_know": "Mida rahvas teab?",
+    "no_questions": "Äkki tahaksid su sõbrad vastata või on neil küsimusi?",
+    "no_balance": "Enne küsimist pead kõigepealt vastama teistele!",
+    "question_pool_empty": "Sellise erandjuhuga saad ühe korra niisama küsida!",
+
+    "answer_toast_success": "Vastus saadetud",
+    "question_toast_success": "Küsimus esitatud",
+
+    "ask": {
+      "title": "Küsi rahvalt",
+      "description": [
+        {
+          "declarations": ["input count", "local countPlural = count: plural"],
+          "match": {
+            "countPlural=one": "Sul on alles {count} küsimus",
+            "countPlural=other": "Sul on alles {count} küsimust"
           }
-        },
-        "aftermath": {
-          "intro": "Arvutid loevad seda kui",
-          "outro": "ja on korraga 137 aastat ajast maas."
         }
-      }
+      ],
+      "label": "Küsimus rahvale"
     },
-    "rahvatarkus": {
-      "name": "Rahva tarkus",
-      "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents"
-    },
-    "vaukuivali": {
-      "name": "Vau kui vali",
-      "description": "Intuitiivsem arusaam igapäevahelide tõelisest valjudusest.",
-      "title": "Vau kui vali!",
-      "intro": {
-        "explainer": {
-          "body": "Nagu paljud võivad teada, on detsibellide skaala logaritmiline.",
-          "footer": "60dB on 2x valjem, kui 50dB."
-        },
-        "problem": {
-          "body": "See info ei jõudnud mulle eriti kohale.",
-          "footer": "Intuitiivsemaks arusaamiseks tegin selle lehe. "
-        },
-        "cta": "Proovi, keri alla."
+    "answer": {
+      "title": [
+        {
+          "declarations": ["input question"],
+          "match": {
+            "question=true": "Vasta vajajale",
+            "question=false": "Kõik vastatud"
+          }
+        }
+      ],
+      "description": [
+        {
+          "declarations": ["input question"],
+          "match": {
+            "question=true": "Tänutäheks saad vastu ühe küsimuse küsida.",
+            "question=false": "Rahval said kõik küsimused otsa!"
+          }
+        }
+      ]
+    }
+  },
+
+  "vaukuivali": {
+    "name": "Vau kui vali!",
+    "description": "Intuitiivsem arusaam igapäevahelide tõelisest valjudusest.",
+    "intro": {
+      "explainer": {
+        "body": "Nagu paljud võivad teada, on detsibellide skaala logaritmiline.",
+        "footer": "60dB on 2x valjem, kui 50dB."
       },
-      "sources": "Helitugevuste allikad:",
-      "speedrun": "Sul läks ikka kaua...",
-      "checkpoints": {
-        "0": {
-          "title": "",
-          "description": ""
-        },
-        "30": {
-          "title": "\"Vaikus\"",
-          "description": "ehk elutoa pasiivne müra",
-
-          "alt": "Modernse ja minimalistliku disainiga siseruum."
-        },
-        "40": {
-          "title": "Tikk takk",
-          "description": "Mehaanilise kella tiksumine (va täistundidel)",
-
-          "alt": "Lahti võetud vanamoodne käekell. Näha on kella sisemust, hammasrattaid."
-        },
-        "50": {
-          "title": "Tava jutt",
-          "description": "Rahulik vestlus kodus",
-
-          "alt": "Noor paar köögis. Mees lõikab taldriku peal pannkooki, naine istub ta kõrval pliidi peal ja vaatab."
-        },
-        "60": {
-          "title": "Ma sain nurgad täis",
-          "description": "Bingo õhtu Gennis (keset mängu)",
-
-          "alt": "Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesti klubi välialal."
-        },
-        "70": {
-          "title": "Pult on kadunud",
-          "description": "Telekas, mis mängib natuke liiga valjult",
-
-          "alt": "Keegi vaatab televiisorist filmi. Esiplaanil fookuses teleka pult, tagaplaanil udune tuba, mille seina vastas on telekas."
-        },
-        "80": {
-          "title": "USAs oleks hullem",
-          "description": "Riia mäe liiklus (ootad bussi Kaubamaja ees)",
-
-          "alt": "Aastal 2012 tehtud Google Street View pilt. Näha on Tartu Kaubamaja ning selle Riia tänava küljel olevat bussipeatust."
-        },
-        "90": {
-          "title": "USAs oleks rohkem",
-          "description": "Harley sõidab sinust mööda",
-
-          "alt": "Uue välimusega Harley-Davidson mootorrattas sõidab kiiresti mööda sirget maanteed."
-        },
-        "100": {
-          "title": "Põgenesid terminalist",
-          "description": "Boeing 707 1 meremiil enne maandumist",
-          "alt": "Continental Airlines Boeing 777 maandub uduses Houston IAH lennujaamas."
-        },
-        "110": {
-          "title": "Maanteeraev",
-          "description": "Autosignaal 1m kauguselt",
-          "alt": "Dramaatiline auto trikk filmi jaoks. Kahe auto kokkupõrge."
-        },
-        "120": {
-          "title": "Mootorsaag",
-          "description": "Nüüd on juba valus. Soovitan kanda kõrvatroppe.",
-          "alt": "Oranži ja musta värvi mootorsega lõigatakse langenud puud väiksemateks tükkideks."
-        },
-        "130": {
-          "title": "Kuidas sa nii lähedale said?",
-          "description": "Turboreaktiivmootoriga hävitaja lendutõus 15m kauguselt",
-          "alt": "Kaheksa F-16 hävitajat lendavad koos formatsioonis taevas."
-        },
-        "150": {
-          "title": "Aia mu kõrvad",
-          "description": "Tubli töö! Su trummikile rebenes!",
-          "alt": "Lähivõte inimesest sisestamas oma kõrva kuuldeaparaati."
-        }
+      "problem": {
+        "body": "See info ei jõudnud mulle eriti kohale.",
+        "footer": "Intuitiivsemaks arusaamiseks tegin selle lehe."
+      },
+      "cta": "Proovi, keri alla."
+    },
+    "sources": "Helitugevuste allikad:",
+    "speedrun": "Sul läks ikka kaua...",
+    "checkpoints": {
+      "30": {
+        "title": "\"Vaikus\"",
+        "description": "ehk elutoa pasiivne müra",
+        "alt": "Modernse ja minimalistliku disainiga siseruum."
+      },
+      "40": {
+        "title": "Tikk takk",
+        "description": "Mehaanilise kella tiksumine (va täistundidel)",
+        "alt": "Lahti võetud vanamoodne käekell. Näha on kella sisemust, hammasrattaid."
+      },
+      "50": {
+        "title": "Tava jutt",
+        "description": "Rahulik vestlus kodus",
+        "alt": "Noor paar köögis. Mees lõikab taldriku peal pannkooki, naine istub ta kõrval pliidi peal ja vaatab."
+      },
+      "60": {
+        "title": "Ma sain nurgad täis",
+        "description": "Bingo õhtu Gennis (keset mängu)",
+        "alt": "Genialistide klubi tegutseb Tartus Magasini tänavas. Pilt on õhtusest ajast, rohkelt inimesi klubi välialal."
+      },
+      "70": {
+        "title": "Pult on kadunud",
+        "description": "Telekas, mis mängib natuke liiga valjult",
+        "alt": "Keegi vaatab televiisorist filmi. Esiplaanil fookuses teleka pult, tagaplaanil udune tuba, mille seina vastas on telekas."
+      },
+      "80": {
+        "title": "USAs oleks hullem",
+        "description": "Riia mäe liiklus (ootad bussi Kaubamaja ees)",
+        "alt": "Aastal 2012 tehtud Google Street View pilt. Näha on Tartu Kaubamaja ning selle Riia tänava küljel olevat bussipeatust."
+      },
+      "90": {
+        "title": "USAs oleks rohkem",
+        "description": "Harley sõidab sinust mööda",
+        "alt": "Uue välimusega Harley-Davidson mootorrattas sõidab kiiresti mööda sirget maanteed."
+      },
+      "100": {
+        "title": "Põgenesid terminalist",
+        "description": "Boeing 707 1 meremiil enne maandumist",
+        "alt": "Continental Airlines Boeing 777 maandub uduses Houston IAH lennujaamas."
+      },
+      "110": {
+        "title": "Maanteeraev",
+        "description": "Autosignaal 1m kauguselt",
+        "alt": "Dramaatiline auto trikk filmi jaoks. Kahe auto kokkupõrge."
+      },
+      "120": {
+        "title": "Mootorsaag",
+        "description": "Nüüd on juba valus. Soovitan kanda kõrvatroppe.",
+        "alt": "Oranži ja musta värvi mootorsega lõigatakse langenud puud väiksemateks tükkideks."
+      },
+      "130": {
+        "title": "Kuidas sa nii lähedale said?",
+        "description": "Turboreaktiivmootoriga hävitaja lendutõus 15m kauguselt",
+        "alt": "Kaheksa F-16 hävitajat lendavad koos formatsioonis taevas."
+      },
+      "150": {
+        "title": "Aia mu kõrvad",
+        "description": "Tubli töö! Su trummikile rebenes!",
+        "alt": "Lähivõte inimesest sisestamas oma kõrva kuuldeaparaati."
       }
     }
   }

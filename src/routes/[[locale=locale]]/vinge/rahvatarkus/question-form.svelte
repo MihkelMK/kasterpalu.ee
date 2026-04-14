@@ -3,6 +3,7 @@
   import { formSchema, type FormSchema } from './question-schema';
 
   import { invalidateAll } from '$app/navigation';
+  import { m } from '$lib/paraglide/messages';
   import { untrack } from 'svelte';
   import { toast } from 'svelte-sonner';
   import { type Infer, superForm, type SuperValidated } from 'sveltekit-superforms';
@@ -27,17 +28,20 @@
     };
   } = $props();
 
+  const toastSuccess = $derived(m['rahvatarkus.question_toast_success']());
+  const toastError = $derived(m.error_form_submit());
+
   const form = superForm(
     untrack(() => data.question_form),
     {
-      validators: zod4Client(formSchema),
+      validators: zod4Client(formSchema()),
       invalidateAll: false,
       onUpdated: async ({ form: f }) => {
         if (f.valid) {
-          toast.success('Küsimus esitatud.');
+          toast.success(toastSuccess);
           await invalidateAll();
         } else {
-          toast.error('Küsimine nurjus, palun paranda vead.');
+          toast.error(toastError);
         }
       },
     }
@@ -48,14 +52,16 @@
 
 <Card.Root>
   <Card.Header>
-    <Card.Title>Küsi rahvalt</Card.Title>
+    <Card.Title>{m['rahvatarkus.ask.title']()}</Card.Title>
     <Card.Description>
-      Sul on alles {data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1} küsimust.
+      {m['rahvatarkus.ask.description']({
+        count: data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1,
+      })}
     </Card.Description>
   </Card.Header>
   {#if data.user.balance === 0 && (data.question || data.poolSize > 0)}
     <Card.Content>
-      <p class="text-sm leading-6">Enne küsimist pead kõigepealt vastama teistele!</p>
+      <p class="text-sm leading-6">{m['rahvatarkus.no_balance']()}</p>
     </Card.Content>
   {:else}
     <form method="POST" use:enhance action="?/question">
@@ -63,7 +69,7 @@
         <Form.Field {form} name="question">
           <Form.Control>
             {#snippet children({ props })}
-              <Form.Label class="transition-colors">Küsimus rahvale</Form.Label>
+              <Form.Label class="transition-colors">{m['rahvatarkus.ask.label']()}</Form.Label>
               <Input {...props} bind:value={$formData.question} class="transition-colors" />
             {/snippet}
           </Form.Control>
@@ -82,7 +88,7 @@
         </Form.Field>
       </Card.Content>
       <Card.Footer class="justify-center">
-        <Form.Button>Küsi</Form.Button>
+        <Form.Button>{m.ask_verb()}</Form.Button>
       </Card.Footer>
     </form>
   {/if}

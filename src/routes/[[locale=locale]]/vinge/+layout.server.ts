@@ -2,6 +2,7 @@ import type { LayoutServerLoad } from './$types';
 
 import { site } from '$lib/config';
 import games from '$lib/data/games';
+import type { GameSlug } from '$lib/types';
 
 export const load: LayoutServerLoad = async ({ url }) => {
   if (!url?.pathname) {
@@ -14,7 +15,7 @@ export const load: LayoutServerLoad = async ({ url }) => {
     return;
   }
 
-  const game = games[gameSlug];
+  const game = games[gameSlug as GameSlug];
 
   if (!game) {
     return;
