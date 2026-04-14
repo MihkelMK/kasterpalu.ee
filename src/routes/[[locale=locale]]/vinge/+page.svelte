@@ -15,7 +15,7 @@
   </p>
   <p class="text-xl leading-7 font-semibold text-muted-foreground">
     {m.vinge_credit_prefix()}
-    <a href="https://neal.fun" class="font-bold underline underline-offset-4">neal.fun</a>
+    <a href="https://neal.fun" rel="external" target="_blank" class="font-bold underline underline-offset-4">neal.fun</a>
     {m.vinge_credit_suffix()}
   </p>
 </header>
