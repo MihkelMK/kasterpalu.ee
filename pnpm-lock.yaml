@@ -15,8 +15,8 @@ importers:
         specifier: 2.16.0
         version: 2.16.0
       '@inlang/paraglide-js-svelte':
-        specifier: 1.0.1
-        version: 1.0.1(@inlang/paraglide-js@2.16.0)(svelte@5.55.4(@typescript-eslint/types@8.59.0))
+        specifier: 1.0.2
+        version: 1.0.2(@inlang/paraglide-js@2.16.0)(svelte@5.55.4(@typescript-eslint/types@8.59.0))
       '@upstash/ratelimit':
         specifier: 2.0.8
         version: 2.0.8(@upstash/redis@1.37.0)
@@ -27,8 +27,8 @@ importers:
         specifier: 3.0.4
         version: 3.0.4
       altcha-lib:
-        specifier: 2.0.1
-        version: 2.0.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.4(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))
+        specifier: 2.0.3
+        version: 2.0.3(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.4(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))
       better-sqlite3:
         specifier: 12.9.0
         version: 12.9.0
@@ -902,8 +902,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inlang/paraglide-js-svelte@1.0.1':
-    resolution: {integrity: sha512-mqtUaoMEz3rhLMGdkd9QC+9yeFhGSooCFcW4fw+0xKzqty7WLc9xSBTC24xmRastmxFy6zxutko7VH1W3JkHLQ==}
+  '@inlang/paraglide-js-svelte@1.0.2':
+    resolution: {integrity: sha512-x/lfbKKp3tvqRJt1Y8ljCHH5Lchw8LH6ShDJckoIbFG43SgcUFzLizn2rt0xLUeeePo7uyw5k985XLXhfss5pA==}
     peerDependencies:
       '@inlang/paraglide-js': '>=2.11.0 <3'
       svelte: ^5.0.0
@@ -1556,8 +1556,8 @@ packages:
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
-  altcha-lib@2.0.1:
-    resolution: {integrity: sha512-VA+ZNHRKYymM62XlzCkLhmVGSZ6GHZEpTqU5AL5DMNiNMqA8Wfl2MpC5f2olCuBWHzrYjV5NoXYPJt4zKWkJkA==}
+  altcha-lib@2.0.3:
+    resolution: {integrity: sha512-rbBOrVcg5DiBPfn5dfhT+7J5k/Dqtj4seR5m1BB+w0QK4pZOBSS0ZpZ5PkolypmR315/SVbpXHM/QuL0kH5Seg==}
     hasBin: true
     peerDependencies:
       '@fastify/cookie': ^11.0.0
@@ -3531,7 +3531,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.5':
     optional: true
 
-  '@inlang/paraglide-js-svelte@1.0.1(@inlang/paraglide-js@2.16.0)(svelte@5.55.4(@typescript-eslint/types@8.59.0))':
+  '@inlang/paraglide-js-svelte@1.0.2(@inlang/paraglide-js@2.16.0)(svelte@5.55.4(@typescript-eslint/types@8.59.0))':
     dependencies:
       '@inlang/paraglide-js': 2.16.0
       svelte: 5.55.4(@typescript-eslint/types@8.59.0)
@@ -4118,7 +4118,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  altcha-lib@2.0.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.4(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0))):
+  altcha-lib@2.0.3(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.4(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0))):
     optionalDependencies:
       '@sveltejs/kit': 2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.4(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0))
 
