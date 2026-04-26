@@ -63,7 +63,7 @@
   "dependencies": {
     "@icons-pack/svelte-simple-icons": "7.2.0",
     "@inlang/paraglide-js": "2.16.0",
-    "@inlang/paraglide-js-svelte": "1.0.1",
+    "@inlang/paraglide-js-svelte": "1.0.2",
     "@upstash/ratelimit": "2.0.8",
     "@upstash/redis": "1.37.0",
     "altcha": "3.0.4",
