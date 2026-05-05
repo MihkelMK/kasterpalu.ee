@@ -24,8 +24,8 @@ importers:
         specifier: 1.37.0
         version: 1.37.0
       altcha:
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       altcha-lib:
         specifier: 2.0.3
         version: 2.0.3(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.5(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))
@@ -139,8 +139,8 @@ importers:
         specifier: 5.55.5
         version: 5.55.5(@typescript-eslint/types@8.59.0)
       svelte-check:
-        specifier: 4.4.6
-        version: 4.4.6(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3)
+        specifier: 4.4.7
+        version: 4.4.7(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3)
       svelte-dnd-action:
         specifier: 0.9.69
         version: 0.9.69(svelte@5.55.5(@typescript-eslint/types@8.59.0))
@@ -1601,8 +1601,8 @@ packages:
       hono:
         optional: true
 
-  altcha@3.0.4:
-    resolution: {integrity: sha512-TA1N0vnKR7aI/usDN2y3dPDcg9DdsDQKvRuCwApMtw3kJHjxH7NRtt+hSV8NZ01tkfHqXEJOtCYRFr8sxw8Fbg==}
+  altcha@3.0.5:
+    resolution: {integrity: sha512-CJgV8l9/GoUuiv4qgu0V6HUo1PQVFd6eNZX/MDsL+8d+ald+xasUClcwXZwpNd/lM189W436hTvl8BjL8y3yxg==}
 
   aria-query@5.3.1:
     resolution: {integrity: sha512-Z/ZeOgVl7bcSYZ/u/rh0fOpvEpq//LZmdbkXyc7syVzjPAhfOa9ebsdTSjEBDU4vs5nC98Kfduj1uFo0qyET3g==}
@@ -2788,8 +2788,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte-check@4.4.6:
-    resolution: {integrity: sha512-kP1zG81EWaFe9ZyTv4ZXv44Csi6Pkdpb7S3oj6m+K2ec/IcDg/a8LsFsnVLqm2nxtkSwsd5xPj/qFkTBgXHXjg==}
+  svelte-check@4.4.7:
+    resolution: {integrity: sha512-JRafFTRmaPUOqmri4u1WuIKgBLiHi6wIaB57i99pmHq5BAc3ioIpzdUN/RX32ij9GhI6ALMHKvnVxu68sFZlag==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
@@ -4122,7 +4122,7 @@ snapshots:
     optionalDependencies:
       '@sveltejs/kit': 2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.5(@typescript-eslint/types@8.59.0))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0))
 
-  altcha@3.0.4:
+  altcha@3.0.5:
     dependencies:
       hash-wasm: 4.12.0
 
@@ -5240,7 +5240,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.4.6(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3):
+  svelte-check@4.4.7(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.0))(typescript@6.0.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       chokidar: 4.0.3
