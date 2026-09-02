@@ -24,8 +24,8 @@ importers:
         specifier: 1.37.0
         version: 1.37.0
       altcha:
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.2.2
+        version: 3.2.2
       altcha-lib:
         specifier: 2.0.3
         version: 2.0.3(@sveltejs/kit@2.59.0(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.7(@typescript-eslint/types@8.59.2))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.7(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))
@@ -1606,8 +1606,8 @@ packages:
       hono:
         optional: true
 
-  altcha@3.0.5:
-    resolution: {integrity: sha512-CJgV8l9/GoUuiv4qgu0V6HUo1PQVFd6eNZX/MDsL+8d+ald+xasUClcwXZwpNd/lM189W436hTvl8BjL8y3yxg==}
+  altcha@3.2.2:
+    resolution: {integrity: sha512-yNITQaRSkRe0u/hMxdzoXFFqxqn9iDt1rJ0reREU3D3uDD3w1oFz6v5C2PMww2XnGThtYUwe8MW+PxsiBglNqw==}
 
   aria-query@5.3.1:
     resolution: {integrity: sha512-Z/ZeOgVl7bcSYZ/u/rh0fOpvEpq//LZmdbkXyc7syVzjPAhfOa9ebsdTSjEBDU4vs5nC98Kfduj1uFo0qyET3g==}
@@ -4128,7 +4128,7 @@ snapshots:
     optionalDependencies:
       '@sveltejs/kit': 2.59.0(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.7(@typescript-eslint/types@8.59.2))(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)))(svelte@5.55.7(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0))
 
-  altcha@3.0.5:
+  altcha@3.2.2:
     dependencies:
       hash-wasm: 4.12.0
 
