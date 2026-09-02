@@ -5,6 +5,8 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'sqlite',
   dbCredentials: {
-    url: 'local.db',
+    // drizzle-kit is a dev dependency and only ever runs against the local file.
+    // The production image applies the generated SQL with scripts/migrate.js instead.
+    url: process.env.DATABASE_URL || 'local.db',
   },
 });

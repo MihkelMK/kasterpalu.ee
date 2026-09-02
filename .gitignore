@@ -47,6 +47,8 @@ vite.config.ts.timestamp-*
 *.db
 *.sql
 *.sql.gz
+# Generated migrations are applied at container startup, so they have to be tracked
+!drizzle/**/*.sql
 
 # IDE
 .vscode/
