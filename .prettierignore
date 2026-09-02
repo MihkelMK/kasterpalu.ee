@@ -19,3 +19,6 @@ src/lib/components/ui
 
 # drizzle-kit generated migration metadata
 /drizzle/meta
+
+# paraglide.js generated files
+project.inlang/

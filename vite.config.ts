@@ -5,12 +5,16 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // altcha-lib is pure ESM and lists @sveltejs/kit as an optional peer. Left external it
-  // has to be a runtime dependency, and pnpm then links that peer. This pulls kit, svelte,
-  // vite, esbuild and typescript into the production image. Bundling it keeps it a dev
-  // dependency instead.
+  // Vite externalises node_modules by default, so anything left external has to be a
+  // runtime dependency and ship in the production image. Bundling these keeps them dev
+  // dependencies instead.
+  //
+  // altcha-lib is pure ESM and lists @sveltejs/kit as an optional peer, which pnpm then
+  // links, pulling kit, svelte, vite, esbuild and typescript into the image.
+  // @spotify/web-api-ts-sdk has no runtime dependencies of its own; bundling it just drops
+  // one more package from the image.
   ssr: {
-    noExternal: ['altcha-lib'],
+    noExternal: ['altcha-lib', '@spotify/web-api-ts-sdk'],
   },
   plugins: [
     enhancedImages(),
