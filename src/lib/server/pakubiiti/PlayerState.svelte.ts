@@ -1,8 +1,9 @@
+import { SvelteMap } from 'svelte/reactivity';
 import type { AlbumResponse, AlbumSolveState, Player } from '$lib/types';
 
 export class PlayerState {
   players = $state<Player[]>([]);
-  private lastAccessed: Map<string, number> = new Map();
+  private lastAccessed: SvelteMap<string, number> = new SvelteMap();
 
   constructor() {
     // Clean up expired sessions every hour

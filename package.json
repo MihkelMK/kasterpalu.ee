@@ -25,6 +25,7 @@
     "@inlang/paraglide-js": "2.18.0",
     "@inlang/paraglide-js-svelte": "1.0.2",
     "@lucide/svelte": "1.14.0",
+    "@spotify/web-api-ts-sdk": "1.2.0",
     "@sveltejs/adapter-node": "5.5.4",
     "@sveltejs/enhanced-img": "0.10.4",
     "@sveltejs/kit": "2.70.2",
@@ -32,7 +33,6 @@
     "@tailwindcss/forms": "0.5.11",
     "@tailwindcss/vite": "4.2.4",
     "@types/better-sqlite3": "7.6.13",
-    "@types/spotify-web-api-node": "5.0.11",
     "altcha": "3.2.2",
     "altcha-lib": "2.0.3",
     "bits-ui": "2.18.0",
@@ -69,8 +69,7 @@
     "@upstash/redis": "1.37.0",
     "better-sqlite3": "12.9.0",
     "drizzle-orm": "0.45.2",
-    "nanoid": "5.1.16",
-    "spotify-web-api-node": "5.0.2"
+    "nanoid": "5.1.16"
   },
   "engines": {
     "node": "^24.0.0"

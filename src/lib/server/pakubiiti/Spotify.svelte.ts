@@ -1,53 +1,18 @@
-import SpotifyWebApi from 'spotify-web-api-node';
 import { env } from '$env/dynamic/private';
 import { getRandomSearch } from '$lib/utils';
+import { SpotifyApi } from '@spotify/web-api-ts-sdk';
 
 class SpotifyAPI {
-  private api = new SpotifyWebApi({
-    clientId: env.CLIENT_ID as string,
-    clientSecret: env.CLIENT_SECRET as string,
-  });
-  private exiresAt: Date = $state(new Date());
-
-  async refreshAccessToken() {
-    // If current token is valid for at least 100ms more
-    if (this.exiresAt.getTime() - new Date().getTime() > 10) {
-      return true;
-    }
-
-    return await this.api.clientCredentialsGrant().then(
-      (data) => {
-        if (!data.body['expires_in'] || !data.body['access_token']) {
-          return false;
-        }
-
-        const new_date = new Date();
-        new_date.setSeconds(new_date.getSeconds() + Number(data.body['expires_in']));
-
-        this.exiresAt = new_date;
-        this.api.setAccessToken(data.body['access_token']);
-
-        return true;
-      },
-      function (err) {
-        console.log('Something went wrong when retrieving an access token', err);
-        return false;
-      }
-    );
-  }
+  private api = SpotifyApi.withClientCredentials(env.CLIENT_ID as string, env.CLIENT_SECRET as string, []);
 
   async getRandomAlbum() {
-    if (!(await this.refreshAccessToken())) {
-      return undefined;
-    }
-
-    const randomSearch = getRandomSearch();
+    const seed = getRandomSearch();
     const randomOffset = Math.floor(Math.random() * 1000);
 
-    return await this.api.search(randomSearch, ['album'], { limit: 1, offset: randomOffset }).then(
+    return await this.api.search(seed, ['album'], 'EE', 1, randomOffset).then(
       function (data) {
-        if (data.body.albums?.items?.at(0)) {
-          return data.body.albums.items.at(0);
+        if (data.albums?.items?.at(0)) {
+          return data.albums.items.at(0);
         }
       },
       (err) => {
