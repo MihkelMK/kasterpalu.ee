@@ -54,8 +54,9 @@
   <Card.Header>
     <Card.Title>{m['rahvatarkus.ask.title']()}</Card.Title>
     <Card.Description>
+      {@const noBalanceSize = data.poolSize > 0 ? 0 : 1}
       {m['rahvatarkus.ask.description']({
-        count: data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1,
+        count: data.user.balance > 0 ? data.user.balance : noBalanceSize,
       })}
     </Card.Description>
   </Card.Header>

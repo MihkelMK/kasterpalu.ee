@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private';
-import { getRandomSearch } from '$lib/utils';
+import { getRandomSearch, secureRandomInt } from '$lib/utils';
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
 
 class SpotifyAPI {
@@ -7,7 +7,7 @@ class SpotifyAPI {
 
   async getRandomAlbum() {
     const seed = getRandomSearch();
-    const randomOffset = Math.floor(Math.random() * 1000);
+    const randomOffset = secureRandomInt(1000);
 
     return await this.api.search(seed, ['album'], 'EE', 1, randomOffset).then(
       function (data) {

@@ -5,10 +5,40 @@ import type { Actions, PageServerLoad } from './$types';
 import { altcha } from '$lib/altcha';
 import { m } from '$lib/paraglide/messages';
 import { ratelimit } from '$lib/server/redis';
-import { fail } from '@sveltejs/kit';
+import { fail, type RequestEvent } from '@sveltejs/kit';
 
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
+
+const handleRatelimit = async (user: string, useragent: string, ip: string) => {
+  const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaAnswer.limit(user, {
+    userAgent: useragent,
+    ip: ip,
+  });
+
+  const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaAnswerIP.limit(ip, {
+    userAgent: useragent,
+    ip: ip,
+  });
+
+  if (seshSuccess && ipSuccess) return null;
+
+  const resetAt = seshSuccess ? ipReset : seshReset;
+  const timeRemaining = Math.floor((resetAt - Date.now()) / 1000);
+  const message = m.error_rate_limit({ seconds: timeRemaining });
+  return message;
+};
+
+const validateRequest = async (event: RequestEvent, user: string) => {
+  const useragent = event.request.headers.get('user-agent') || '';
+  const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+  const limit_hit_message = await handleRatelimit(user, useragent, ip);
+  if (limit_hit_message) return { code: 429, message: limit_hit_message };
+
+  const altchaResult = await altcha.verifyEvent(event);
+  if (altchaResult.error) return { code: 403, message: m.error_altcha() };
+  return undefined;
+};
 
 const pageSize = 5;
 
@@ -33,68 +63,23 @@ export const actions: Actions = {
       return;
     }
 
-    const user = session.data.userId;
-
     const form = await superValidate(event, zod4(answerSchema()));
-
     if (!form.valid) {
       return fail(400, {
         form,
       });
     }
 
-    const useragent = event.request.headers.get('user-agent') || '';
-    const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+    const user = session.data.userId;
+    const validation_failed = await validateRequest(event, user);
 
-    const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaAnswer.limit(user, {
-      userAgent: useragent,
-      ip: ip,
-    });
-
-    const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaAnswerIP.limit(ip, {
-      userAgent: useragent,
-      ip: ip,
-    });
-
-    if (!seshSuccess) {
-      const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = m.error_rate_limit({ seconds: timeRemaining });
-
+    if (validation_failed) {
       if (form.errors.answer) {
-        form.errors.answer.push(message);
+        form.errors.answer.push(validation_failed.message);
       } else {
-        form.errors.answer = [message];
+        form.errors.answer = [validation_failed.message];
       }
-      return fail(429, {
-        form,
-      });
-    }
-
-    if (!ipSuccess) {
-      const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = m.error_rate_limit({ seconds: timeRemaining });
-
-      if (form.errors.answer) {
-        form.errors.answer.push(message);
-      } else {
-        form.errors.answer = [message];
-      }
-      return fail(429, {
-        form,
-      });
-    }
-
-    const altchaResult = await altcha.verifyEvent(event);
-
-    if (altchaResult.error) {
-      const message = m.error_altcha();
-
-      if (form.errors.answer) {
-        form.errors.answer.push(message);
-      } else {
-        form.errors.answer = [message];
-      }
-      return fail(403, {
+      return fail(validation_failed.code, {
         form,
       });
     }
@@ -141,68 +126,23 @@ export const actions: Actions = {
       return;
     }
 
-    const user = session.data.userId;
-
     const form = await superValidate(event, zod4(questionSchema()));
-
     if (!form.valid) {
       return fail(400, {
         form,
       });
     }
 
-    const useragent = event.request.headers.get('user-agent') || '';
-    const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
+    const user = session.data.userId;
+    const validation_failed = await validateRequest(event, user);
 
-    const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaQuestion.limit(user, {
-      userAgent: useragent,
-      ip: ip,
-    });
-
-    const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaQuestionIP.limit(ip, {
-      userAgent: useragent,
-      ip: ip,
-    });
-
-    if (!seshSuccess) {
-      const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-      const message = m.error_rate_limit({ seconds: timeRemaining });
-
+    if (validation_failed) {
       if (form.errors.question) {
-        form.errors.question.push(message);
+        form.errors.question.push(validation_failed.message);
       } else {
-        form.errors.question = [message];
+        form.errors.question = [validation_failed.message];
       }
-      return fail(429, {
-        form,
-      });
-    }
-
-    if (!ipSuccess) {
-      const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-      const message = m.error_rate_limit({ seconds: timeRemaining });
-
-      if (form.errors.question) {
-        form.errors.question.push(message);
-      } else {
-        form.errors.question = [message];
-      }
-      return fail(429, {
-        form,
-      });
-    }
-
-    const altchaResult = await altcha.verifyEvent(event);
-
-    if (altchaResult.error) {
-      const message = m.error_altcha();
-
-      if (form.errors.question) {
-        form.errors.question.push(message);
-      } else {
-        form.errors.question = [message];
-      }
-      return fail(403, {
+      return fail(validation_failed.code, {
         form,
       });
     }

@@ -13,17 +13,35 @@ export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, 'childre
 export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
 
+// Returns a cryptographically secure random integer in [0, maxExclusive).
+// Uses rejection sampling to avoid modulo bias.
+export function secureRandomInt(maxExclusive: number): number {
+  if (maxExclusive <= 0) return 0;
+
+  const maxUint32 = 0xffffffff;
+  const limit = maxUint32 - (maxUint32 % maxExclusive);
+  const buf = new Uint32Array(1);
+
+  let x: number;
+  do {
+    crypto.getRandomValues(buf);
+    x = buf[0];
+  } while (x >= limit); // discard values that would cause bias
+
+  return x % maxExclusive;
+}
+
 // https://perryjanssen.medium.com/getting-random-tracks-using-the-spotify-api-61889b0c0c27
 export function getRandomSearch() {
   // A list of all characters that can be chosen.
   const characters = 'abcdefghijklmnopqrstuvwxyz';
 
   // Gets a random character from the characters string.
-  const randomCharacter = characters.charAt(Math.floor(Math.random() * characters.length));
+  const randomCharacter = characters.charAt(secureRandomInt(characters.length));
   let randomSearch = '';
 
   // Places the wildcard character at the beginning, or both beginning and end, randomly.
-  switch (Math.round(Math.random())) {
+  switch (secureRandomInt(2)) {
     case 0:
       randomSearch = randomCharacter + '%';
       break;
@@ -35,37 +53,10 @@ export function getRandomSearch() {
   return randomSearch;
 }
 
-// Created using Claude 3.5 Sonett
-export function shuffleObjectValues<T extends object>(arr: Array<T>): Array<T> {
-  // Create a copy of the array
-  const copy = structuredClone(arr);
-
-  // Get all keys from the first object
-  const keys = Object.keys(copy[0] as object);
-
-  keys.forEach((key: string) => {
-    // Get all values for this key with proper type assertion
-    const values = copy.map((obj) => (obj as { [key: string]: unknown })[key]);
-
-    // Fisher-Yates shuffle algorithm
-    for (let i = values.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [values[i], values[j]] = [values[j], values[i]];
-    }
-
-    // Reassign shuffled values back to objects
-    copy.forEach((obj, index) => {
-      (obj as { [key: string]: unknown })[key] = values[index];
-    });
-  });
-
-  return copy;
-}
-
 // https://stackoverflow.com/a/12646864
 export function shuffleArray<T>(array: T[]): T[] {
   for (let i = array.length - 1; i >= 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = secureRandomInt(i + 1);
     [array[i], array[j]] = [array[j], array[i]];
   }
 
