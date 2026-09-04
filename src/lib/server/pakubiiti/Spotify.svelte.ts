@@ -5,6 +5,7 @@ import { getRandomSearch, secureRandomInt } from '$lib/utils';
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
 
 const maxTries = 10;
+const batchSize = 4;
 
 class SpotifyAPI {
   private api = SpotifyApi.withClientCredentials(env.CLIENT_ID as string, env.CLIENT_SECRET as string, []);
@@ -28,15 +29,23 @@ class SpotifyAPI {
 
   async getAlbums(count: number): Promise<AlbumResponse[]> {
     const albums: AlbumResponse[] = [];
-    let tries = 0;
+    const seenIds: string[] = [];
+    let attemptsUsed = 0;
 
-    while (albums.length < count && tries++ < maxTries) {
-      const album = await this.getRandomAlbum();
+    while (albums.length < count && attemptsUsed < maxTries) {
+      const roundSize = Math.min(batchSize, maxTries - attemptsUsed);
+      attemptsUsed += roundSize;
 
-      if (album) {
+      const results = await Promise.all(Array.from({ length: roundSize }, () => this.getRandomAlbum()));
+
+      for (const album of results) {
+        if (albums.length >= count) break;
+        if (!album || seenIds.includes(album.id)) continue;
+
         const image = album.images.at(0);
         if (!image?.url) continue;
 
+        seenIds.push(album.id);
         albums.push({
           name: album.name,
           artists: album.artists.map((artist) => artist.name).join(', '),
