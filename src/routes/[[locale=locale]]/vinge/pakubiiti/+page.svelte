@@ -139,8 +139,8 @@
       };
     }}
     class="grid w-full transition-all {loading || data?.playing === false ? 'grayscale' : ''} transition-colors">
-    {#if data?.streamed?.albums}
-      {#await data.streamed.albums}
+    {#if data.albums}
+      {#await data.albums}
         <div
           class="grid w-full gap-4"
           in:fade={{ duration: 150, easing: expoIn }}

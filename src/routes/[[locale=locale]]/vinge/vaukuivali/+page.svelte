@@ -37,9 +37,7 @@
   }
 
   function getElapsedTime(start: Date | undefined, end: Date | undefined) {
-    if (!start || !end) {
-      return '00:00.000';
-    }
+    if (!start || !end) return '00:00.000';
 
     const remaining = getTimeRemaining(start, end);
     const remMinutes = String(remaining.minutes).padStart(2, '0');
@@ -74,9 +72,7 @@
     const clampedValue = Math.min(999.99, Math.max(0, currentDecibel));
     const integerPart = Math.floor(clampedValue);
 
-    if (!displayDecimals) {
-      return String(integerPart).padStart(3, '0').split('').map(Number);
-    }
+    if (!displayDecimals) return String(integerPart).padStart(3, '0').split('').map(Number);
 
     const decimalPart = Math.floor((clampedValue - integerPart) * 10);
 
@@ -132,9 +128,7 @@
   watch.pre(
     () => scrollY.current,
     () => {
-      if (!startTime) return;
-      if (firstScroll) return;
-
+      if (!startTime || firstScroll) return;
       firstScroll = new Date();
       checkpointTimes[checkpointDecibels[0]] = firstScroll;
     }
@@ -142,7 +136,6 @@
 
   onMount(() => {
     scrollY.set(0, { duration: 0 });
-
     startTime = new Date();
   });
 </script>

@@ -2,56 +2,31 @@ import { formSchema as answerSchema } from '../answer-schema';
 import { formSchema as questionSchema } from '../question-schema';
 import type { Actions, PageServerLoad } from './$types';
 
-import { altcha } from '$lib/altcha';
-import { m } from '$lib/paraglide/messages';
-import { ratelimit } from '$lib/server/redis';
-import { fail, type RequestEvent } from '@sveltejs/kit';
+import { addErrorMessage, verifyAltcha, verifyRatelimit } from '$lib/server/forms';
+import getArchive from '$lib/server/rahvatarkus/getArchive';
 
+import addAnswer from '$lib/server/rahvatarkus/addAnswer';
+import addQuestion from '$lib/server/rahvatarkus/addQuestion';
+import type { RatelimitRegion } from '$lib/server/redis';
+import { getActiveUser } from '$lib/server/session';
+import { fail, type RequestEvent } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 
-const handleRatelimit = async (user: string, useragent: string, ip: string) => {
-  const { success: seshSuccess, reset: seshReset } = await ratelimit.rahvaAnswer.limit(user, {
-    userAgent: useragent,
-    ip: ip,
-  });
-
-  const { success: ipSuccess, reset: ipReset } = await ratelimit.rahvaAnswerIP.limit(ip, {
-    userAgent: useragent,
-    ip: ip,
-  });
-
-  if (seshSuccess && ipSuccess) return null;
-
-  const resetAt = seshSuccess ? ipReset : seshReset;
-  const timeRemaining = Math.floor((resetAt - Date.now()) / 1000);
-  const message = m.error_rate_limit({ seconds: timeRemaining });
-  return message;
-};
-
-const validateRequest = async (event: RequestEvent, user: string) => {
-  const useragent = event.request.headers.get('user-agent') || '';
-  const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
-  const limit_hit_message = await handleRatelimit(user, useragent, ip);
-  if (limit_hit_message) return { code: 429, message: limit_hit_message };
-
-  const altchaResult = await altcha.verifyEvent(event);
-  if (altchaResult.error) return { code: 403, message: m.error_altcha() };
-  return undefined;
-};
-
 const pageSize = 5;
 
-export const load: PageServerLoad = async ({ fetch, params }) => {
-  const page = params.page ? Number(params.page) : 1;
+async function verifySubmission(event: RequestEvent, seshRegion: RatelimitRegion, ipRegion: RatelimitRegion) {
+  return (await verifyRatelimit(event, seshRegion, ipRegion)) ?? (await verifyAltcha(event));
+}
 
-  const res = await fetch(`/api/rahvatarkus/archive/${pageSize}/${(page - 1) * pageSize}`);
-  const { data: answers, meta } = await res.json();
+export const load: PageServerLoad = async ({ params }) => {
+  const page = params.page ? Number(params.page) : 1;
+  const { data: archive, meta } = await getArchive(pageSize, (page - 1) * pageSize);
 
   return {
     page,
     pageSize,
-    answers,
+    archive,
     meta,
   };
 };
@@ -59,123 +34,47 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 export const actions: Actions = {
   answer: async (event) => {
     const { session } = event.locals;
-    if (!session?.data?.userId) {
-      return;
-    }
+    const activeUser = getActiveUser(session);
+    if (!activeUser) return;
 
     const form = await superValidate(event, zod4(answerSchema()));
-    if (!form.valid) {
-      return fail(400, {
-        form,
-      });
+    if (!form.valid) return fail(400, { form });
+
+    const validationFailed = await verifySubmission(event, 'rahvaAnswer', 'rahvaAnswerIP');
+    if (validationFailed) {
+      form.errors.answer = addErrorMessage(form.errors.answer, validationFailed.message);
+      return fail(validationFailed.code, { form });
     }
 
-    const user = session.data.userId;
-    const validation_failed = await validateRequest(event, user);
-
-    if (validation_failed) {
-      if (form.errors.answer) {
-        form.errors.answer.push(validation_failed.message);
-      } else {
-        form.errors.answer = [validation_failed.message];
-      }
-      return fail(validation_failed.code, {
-        form,
-      });
+    const { error: errorMessage } = await addAnswer(activeUser, form.data.answer, form.data.questionId);
+    if (errorMessage) {
+      form.errors.answer = addErrorMessage(form.errors.answer, errorMessage);
+      return fail(400, { form });
     }
 
-    const response = await event
-      .fetch('/api/rahvatarkus/answer', {
-        method: 'POST',
-        body: JSON.stringify({
-          userId: user,
-          content: form.data.answer,
-          questionId: form.data.questionId,
-        }),
-      })
-      .then(async (res) => {
-        const data = await res.json();
-        return { ok: res.ok, data: data };
-      })
-      .then((data) => {
-        return data;
-      });
-
-    if (!response.ok) {
-      if (response.data?.error) {
-        if (form.errors.answer) {
-          form.errors.answer.push(response.data.error);
-        } else {
-          form.errors.answer = [response.data.error];
-        }
-      }
-
-      return fail(400, {
-        form,
-      });
-    }
-
-    return {
-      form,
-    };
+    return { form };
   },
 
   question: async (event) => {
     const { session } = event.locals;
-    if (!session?.data?.userId) {
-      return;
-    }
+    const activeUser = getActiveUser(session);
+    if (!activeUser) return;
 
     const form = await superValidate(event, zod4(questionSchema()));
-    if (!form.valid) {
-      return fail(400, {
-        form,
-      });
+    if (!form.valid) return fail(400, { form });
+
+    const verifyFailed = await verifySubmission(event, 'rahvaQuestion', 'rahvaQuestionIP');
+    if (verifyFailed) {
+      form.errors.question = addErrorMessage(form.errors.question, verifyFailed.message);
+      return fail(verifyFailed.code, { form });
     }
 
-    const user = session.data.userId;
-    const validation_failed = await validateRequest(event, user);
-
-    if (validation_failed) {
-      if (form.errors.question) {
-        form.errors.question.push(validation_failed.message);
-      } else {
-        form.errors.question = [validation_failed.message];
-      }
-      return fail(validation_failed.code, {
-        form,
-      });
+    const { error: errorMessage } = await addQuestion(activeUser, form.data.question);
+    if (errorMessage) {
+      form.errors.question = addErrorMessage(form.errors.question, errorMessage);
+      return fail(400, { form });
     }
 
-    const response = await event
-      .fetch('/api/rahvatarkus/question', {
-        method: 'POST',
-        body: JSON.stringify({ userId: user, content: form.data.question }),
-      })
-      .then(async (res) => {
-        const data = await res.json();
-        return { ok: res.ok, data: data };
-      })
-      .then((data) => {
-        return data;
-      });
-
-    if (!response.ok) {
-      if (response.data?.error) {
-        if (form.errors.question) {
-          form.errors.question.push(response.data.error);
-        } else {
-          form.errors.question = [response.data.error];
-        }
-      }
-
-      return fail(400, {
-        form,
-      });
-    }
-
-    return {
-      form,
-    };
+    return { form };
   },
 };

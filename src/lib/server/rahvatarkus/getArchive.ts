@@ -1,16 +1,12 @@
-import { json } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { questions, answers } from '$lib/server/db/schema';
 import { desc, eq, gt, sql } from 'drizzle-orm';
 
-export async function GET({ params }) {
-  const limit = Math.min(parseInt(params.limit) || 10, 10);
-  const offset = params.offset ? parseInt(params.offset) : 0;
-
+export default async (limit: number = 10, offset: number = 0) => {
   // Get total in parallel with data
   const totalPromise = db
     .select({
-      count: sql`count(*)`,
+      count: sql<number>`count(*)`,
     })
     .from(questions)
     .where(gt(questions.answerCount, 0));
@@ -38,11 +34,11 @@ export async function GET({ params }) {
 
   const [total, curr_questions] = await Promise.all([totalPromise, questionsPromise]);
 
-  return json({
+  return {
     data: curr_questions.map((q) => ({
       ...q,
       answers: JSON.parse(q.answers as string),
     })),
     meta: { limit, offset, total: total[0].count },
-  });
-}
+  };
+};

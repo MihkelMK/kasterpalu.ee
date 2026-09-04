@@ -1,5 +1,5 @@
 import { SvelteMap } from 'svelte/reactivity';
-import type { AlbumResponse, AlbumSolveState, Player } from '$lib/types';
+import type { AlbumImage, AlbumResponse, AlbumSolveState, Player } from '$lib/types';
 
 export class PlayerState {
   players = $state<Player[]>([]);
@@ -20,30 +20,18 @@ export class PlayerState {
   }
 
   private checkSolution(solution: AlbumResponse[], submission: AlbumSolveState[]) {
-    if (!solution || !submission) {
-      return false;
-    }
+    if (!solution || !submission) return false;
 
     for (const solve of solution) {
       const search = submission.filter((album) => album.name === solve.name);
-
-      if (!search) {
-        return false;
-      }
+      if (!search) return false;
 
       const matching = search.at(0);
+      if (!matching) return false;
 
-      if (!matching) {
-        return false;
-      }
+      if (!solve.images.some(({ url }: AlbumImage): boolean => url === matching.image)) return false;
 
-      if (!solve.images.some(({ url }) => url === matching.image)) {
-        return false;
-      }
-
-      if (matching.artists !== solve.artists) {
-        return false;
-      }
+      if (matching.artists !== solve.artists) return false;
     }
 
     return true;
@@ -80,11 +68,11 @@ export class PlayerState {
       return true;
     }
 
-    player.playing = false;
     if (player.stage > player.highscore) {
       player.highscore = player.stage;
     }
 
+    player.playing = false;
     return true;
   }
 
@@ -105,9 +93,7 @@ export class PlayerState {
 
   setPlaying(id: string, playing: boolean) {
     const player = this.findPlayer(id);
-    if (player) {
-      player.playing = playing;
-    }
+    if (player) player.playing = playing;
   }
 
   getAlbums(id: string) {
@@ -117,9 +103,7 @@ export class PlayerState {
 
   setAlbums(id: string, albums: AlbumResponse[]) {
     const player = this.findPlayer(id);
-    if (player) {
-      player.albums = albums;
-    }
+    if (player) player.albums = albums;
   }
 
   // Clean up players that haven't been accessed in 24 hours

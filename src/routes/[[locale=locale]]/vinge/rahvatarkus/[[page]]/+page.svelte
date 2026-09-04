@@ -20,7 +20,7 @@
 
 <div class="h-full w-full max-w-prose">
   <Accordion.Root type="multiple" class="space-y-6">
-    {#each data.answers as question (question.id)}
+    {#each data.archive as question (question.id)}
       <Accordion.Item disabled={question.answers?.length === 0} value={question.id}>
         <Accordion.Trigger>{question.content}?</Accordion.Trigger>
         <Accordion.Content>

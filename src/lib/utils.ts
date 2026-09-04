@@ -66,9 +66,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 // Created using Claude 3.5 Sonett
 export function truncate(text: string, maxLength: number): string {
   // Return original text if it's shorter than or equal to maxLength
-  if (text.length <= maxLength) {
-    return text;
-  }
+  if (text.length <= maxLength) return text;
 
   const ellipsis = '…';
   const tolerance = 5;

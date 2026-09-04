@@ -26,6 +26,18 @@ export const ratelimit = {
     limiter: Ratelimit.slidingWindow(5, '15s'),
     enableProtection: true,
   }),
+  rahvaLoad: new Ratelimit({
+    redis,
+    prefix: 'ratelimit:rahvaLoad',
+    limiter: Ratelimit.slidingWindow(15, '15s'),
+    enableProtection: true,
+  }),
+  rahvaLoadIP: new Ratelimit({
+    redis,
+    prefix: 'ratelimit:rahvaLoadIP',
+    limiter: Ratelimit.slidingWindow(15, '15s'),
+    enableProtection: true,
+  }),
   rahvaAnswer: new Ratelimit({
     redis,
     prefix: 'ratelimit:rahvaAnswer',
@@ -50,9 +62,6 @@ export const ratelimit = {
     limiter: Ratelimit.slidingWindow(8, '15s'),
     enableProtection: true,
   }),
-  rahvaQuestionAPI: new Ratelimit({
-    redis,
-    prefix: 'ratelimit:rahvaQuestionAPI',
-    limiter: Ratelimit.slidingWindow(15, '15s'),
-  }),
 };
+
+export type RatelimitRegion = keyof typeof ratelimit;
