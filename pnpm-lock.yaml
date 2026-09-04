@@ -19,7 +19,7 @@ importers:
         version: 12.9.0
       drizzle-orm:
         specifier: 0.45.2
-        version: 0.45.2(@types/better-sqlite3@7.6.13)(@upstash/redis@1.37.0)(better-sqlite3@12.9.0)(kysely@0.28.16)
+        version: 0.45.2(@types/better-sqlite3@7.6.13)(@upstash/redis@1.37.0)(better-sqlite3@12.9.0)(kysely@0.28.17)
       nanoid:
         specifier: 5.1.16
         version: 5.1.16
@@ -105,6 +105,9 @@ importers:
       globals:
         specifier: 17.6.0
         version: 17.6.0
+      kysely:
+        specifier: ^0.28.17
+        version: 0.28.17
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.55.7(@typescript-eslint/types@8.59.2))
@@ -2175,8 +2178,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  kysely@0.28.16:
-    resolution: {integrity: sha512-3i5pmOiZvMDj00qhrIVbH0AnioVTx22DMP7Vn5At4yJO46iy+FM8Y/g61ltenLVSo3fiO8h8Q3QOFgf/gQ72ww==}
+  kysely@0.28.17:
+    resolution: {integrity: sha512-nbD8lB9EB3wNdMhOCdx5Li8DxnLbvKByylRLcJ1h+4SkrowVeECAyZlyiKMThF7xFdRz0jSQ2MoJr+wXux2y0Q==}
     engines: {node: '>=20.0.0'}
 
   levn@0.4.1:
@@ -3443,7 +3446,7 @@ snapshots:
     dependencies:
       '@lix-js/sdk': 0.12.3
       '@sinclair/typebox': 0.31.28
-      kysely: 0.28.16
+      kysely: 0.28.17
       uuid: 14.0.0
 
   '@internationalized/date@3.12.1':
@@ -4148,12 +4151,12 @@ snapshots:
       esbuild: 0.25.12
       tsx: 4.21.0
 
-  drizzle-orm@0.45.2(@types/better-sqlite3@7.6.13)(@upstash/redis@1.37.0)(better-sqlite3@12.9.0)(kysely@0.28.16):
+  drizzle-orm@0.45.2(@types/better-sqlite3@7.6.13)(@upstash/redis@1.37.0)(better-sqlite3@12.9.0)(kysely@0.28.17):
     optionalDependencies:
       '@types/better-sqlite3': 7.6.13
       '@upstash/redis': 1.37.0
       better-sqlite3: 12.9.0
-      kysely: 0.28.16
+      kysely: 0.28.17
 
   effect@3.21.0:
     dependencies:
@@ -4538,7 +4541,7 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  kysely@0.28.16: {}
+  kysely@0.28.17: {}
 
   levn@0.4.1:
     dependencies:
