@@ -1,131 +1,76 @@
-import type { PageServerLoad } from './$types';
 import type { AlbumResponse, AlbumSolveState } from '$lib/types';
+import type { PageServerLoad } from './$types';
 
-import { nanoid } from 'nanoid';
 import { shuffleArray } from '$lib/utils';
+import { nanoid } from 'nanoid';
 
+import { m } from '$lib/paraglide/messages';
+import { verifyRatelimit } from '$lib/server/forms';
 import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
-import { ratelimit } from '$lib/server/redis';
+import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
+import { getActiveUser, getOrCreateUser } from '$lib/server/session';
 
 const count = 3;
 
-export const load: PageServerLoad = async (event) => {
-  const { session } = event.locals;
+const getFieldWithId = (albums: AlbumResponse[], key: keyof AlbumResponse) => {
+  return albums.map((album: AlbumResponse) => ({
+    id: nanoid(),
+    value: album[key],
+  }));
+};
 
-  if (!session?.data?.userId) {
-    await session.setData({ userId: nanoid() });
-    await session.save();
-  }
+const loadAlbums = async (user: string) => {
+  const albums = await spotifyAPI.getAlbums(count).catch(() => null);
+  if (!albums) return undefined;
 
-  const user = session.data.userId;
-  let stage = playerState.getStage(user);
-
-  if (!stage) {
-    playerState.newPlayer(user);
-    stage = playerState.getStage(user);
-  }
-
-  const highscore = playerState.getHighscore(user);
-
-  if (!playerState.getPlaying(user)) {
-    return {
-      stage: stage,
-      highscore: highscore,
-      playing: false,
-    };
-  }
-
-  const useragent = event.request.headers.get('user-agent') || '';
-  const ip = event.request.headers.get('cf-connecting-ip') || event.getClientAddress();
-
-  const { success: seshSuccess, reset: seshReset } = await ratelimit.pakubiiti.limit(user, {
-    userAgent: useragent,
-    ip: ip,
-  });
-
-  const { success: ipSuccess, reset: ipReset } = await ratelimit.pakubiitiIP.limit(ip, {
-    userAgent: useragent,
-    ip: ip,
-  });
-
-  if (!seshSuccess) {
-    const timeRemaining = Math.floor((seshReset - Date.now()) / 1000);
-    const message = `Proovi ${timeRemaining}s pärast uuesti.`;
-
-    return {
-      stage: stage,
-      highscore: highscore,
-      playing: true,
-      error: { title: 'Võta veits rahulikumalt', message },
-    };
-  }
-
-  if (!ipSuccess) {
-    const timeRemaining = Math.floor((ipReset - Date.now()) / 1000);
-    const message = `Proovi ${timeRemaining}s pärast uuesti.`;
-
-    return {
-      stage: stage,
-      highscore: highscore,
-      playing: true,
-      error: { title: 'Võta veits rahulikumalt', message },
-    };
-  }
-
-  const albumData = event
-    .fetch(`/api/pakubiiti/getAlbums/${count}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      const albumNames = data.albums.map((album: AlbumResponse) => ({
-        id: nanoid(),
-        value: album.name,
-      }));
-      const albumImages = data.albums.map((album: AlbumResponse) => ({
-        id: nanoid(),
-        value: album.images,
-      }));
-      const albumArtists = data.albums.map((album: AlbumResponse) => ({
-        id: nanoid(),
-        value: album.artists,
-      }));
-
-      playerState.setAlbums(user, data.albums);
-
-      return {
-        names: shuffleArray(albumNames),
-        images: shuffleArray(albumImages),
-        artists: shuffleArray(albumArtists),
-      };
-    })
-    .catch((err) => {
-      console.log(err);
-
-      return undefined;
-    });
+  playerState.setAlbums(user, albums);
+  const albumNames = getFieldWithId(albums, 'name');
+  const albumImages = getFieldWithId(albums, 'images');
+  const albumArtists = getFieldWithId(albums, 'artists');
 
   return {
-    stage: stage,
-    highscore: highscore,
-    playing: true,
-    streamed: { albums: albumData },
+    names: shuffleArray(albumNames),
+    images: shuffleArray(albumImages),
+    artists: shuffleArray(albumArtists),
+  };
+};
+
+export const load: PageServerLoad = async (event) => {
+  const { session } = event.locals;
+  const activeUser = await getOrCreateUser(session);
+
+  if (!playerState.getStage(activeUser)) playerState.newPlayer(activeUser);
+  const gameState = {
+    stage: playerState.getStage(activeUser),
+    highscore: playerState.getHighscore(activeUser),
+    playing: playerState.getPlaying(activeUser),
+  };
+  if (!gameState.playing) return gameState;
+
+  const verifyFailed = await verifyRatelimit(event, 'pakubiiti', 'pakubiitiIP');
+  if (verifyFailed) {
+    return { ...gameState, error: { title: m.error_rate_limit_title(), message: verifyFailed?.message } };
+  }
+
+  return {
+    ...gameState,
+    albums: loadAlbums(activeUser),
   };
 };
 
 export const actions = {
-  submit: async ({ request, locals }) => {
-    const { session } = locals;
-    if (!session?.data?.userId) {
-      return;
+  submit: async (event) => {
+    const { session } = event.locals;
+    const activeUser = getActiveUser(session);
+    if (!activeUser) return;
+
+    const verifyFailed = await verifyRatelimit(event, 'pakubiiti', 'pakubiitiIP');
+    if (verifyFailed) {
+      return { error: { title: m.error_rate_limit_title(), message: verifyFailed?.message } };
     }
 
-    const user = session.data.userId;
-
-    const data = await request.formData();
-
+    const data = await event.request.formData();
     const state: AlbumSolveState[] = [];
-
     for (let i = 0; i < count; i++) {
       const name = data.get(`names_${i}`) as string;
       const image = data.get(`images_${i}`) as string;
@@ -134,21 +79,20 @@ export const actions = {
       state.push({ name: name, image: image, artists: artists });
     }
 
-    const solved = playerState.score(user, state);
-
-    return { solved: solved };
+    return { solved: playerState.score(activeUser, state) };
   },
 
-  restart: async ({ locals }) => {
-    const { session } = locals;
-    if (!session?.data?.userId) {
-      return;
+  restart: async (event) => {
+    const { session } = event.locals;
+    const activeUser = getActiveUser(session);
+    if (!activeUser) return;
+
+    const verifyFailed = await verifyRatelimit(event, 'pakubiiti', 'pakubiitiIP');
+    if (verifyFailed) {
+      return { error: { title: m.error_rate_limit_title(), message: verifyFailed?.message } };
     }
 
-    const user = session.data.userId;
-
-    playerState.restart(user);
-
+    playerState.restart(activeUser);
     return { solved: undefined };
   },
 };

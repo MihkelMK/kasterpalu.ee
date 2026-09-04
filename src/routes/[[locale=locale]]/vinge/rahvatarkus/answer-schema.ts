@@ -7,6 +7,7 @@ export function formSchema() {
     questionId: z.string().length(21),
     answer: z
       .string()
+      .trim()
       .min(2, m.error_form_min({ field, count: 2 }))
       .max(200, m.error_form_max({ field, count: 200 })),
     altcha: z.string(),

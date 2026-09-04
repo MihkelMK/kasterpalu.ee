@@ -83,6 +83,7 @@
       }
     }
   ],
+  "error_rate_limit_title": "You're doing too much",
   "error_rate_limit": [
     {
       "declarations": ["input seconds"],
@@ -188,12 +189,18 @@
     "description": "Crowdsource answers to your burning questions",
 
     "what_do_the_people_know": "What do the people know?",
-    "no_questions": "Maybe your friends want to answer or have some burning questions?",
-    "no_balance": "You need to answer questions to unlock more questions!",
     "question_pool_empty": "In this edgecase, you get a question for free!",
 
     "answer_toast_success": "Answer sent",
     "question_toast_success": "Question submitted",
+
+    "error_question_not_found": "This question can not be found.",
+    "error_question_exists": "The crowd has already answered this question.",
+    "error_question_ratelimit": "Relax! You've submitted too many questions recently!",
+    "error_answer_to_self": "Answering to your own questions is counterproductive.",
+    "error_answer_max": "This question has enough answers already.",
+    "error_no_questions": "Maybe your friends want to answer or have some burning questions?",
+    "error_no_balance": "You need to answer questions to unlock more questions!",
 
     "ask": {
       "title": "Ask the crowd",

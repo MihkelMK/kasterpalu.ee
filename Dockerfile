@@ -14,17 +14,18 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Fetch deps with caching.
+# Fetch into the pnpm store and install prod deps from it.
 # --prod matters: `pnpm fetch` materialises node_modules/.pnpm straight from the
 # lockfile and ignores the manifest, so without it the virtual store keeps every dev
 # package. `pnpm install --prod` then only drops the top-level links, and the dev
 # packages ride along into the runtime image.
+#
+# These must stay in a single RUN: the store lives in a BuildKit cache mount whose
+# contents are not part of the image layer, so a cached `pnpm fetch` layer can be
+# replayed against an empty store.
 RUN --mount=type=cache,id=kasterpalu-pnpm-store,target=/root/.local/share/pnpm/store \
-  pnpm fetch --prod --frozen-lockfile
-
-# Install prod deps with caching
-RUN --mount=type=cache,id=kasterpalu-pnpm-store,target=/root/.local/share/pnpm/store \
-  pnpm install --frozen-lockfile --prod
+  pnpm fetch --prod --frozen-lockfile \
+  && pnpm install --frozen-lockfile --prod
 
 #
 # BUILD STAGE
@@ -37,12 +38,10 @@ RUN corepack enable && \
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-# Fetch deps with caching
+# Fetch into the pnpm store and install all deps from it (see note above).
 RUN --mount=type=cache,id=kasterpalu-pnpm-store,target=/root/.local/share/pnpm/store \
-  pnpm fetch --frozen-lockfile
-# Install all deps with caching
-RUN --mount=type=cache,id=kasterpalu-pnpm-store,target=/root/.local/share/pnpm/store \
-  pnpm install --frozen-lockfile
+  pnpm fetch --frozen-lockfile \
+  && pnpm install --frozen-lockfile
 
 # Copy only files needed for build (layer caching optimization)
 # Config files change less frequently

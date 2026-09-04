@@ -16,20 +16,20 @@
   import { Textarea } from '$lib/components/ui/textarea/index.js';
 
   let {
-    data,
+    answerForm,
+    question,
+    poolSize,
   }: {
-    data: {
-      answer_form: SuperValidated<Infer<FormSchema>>;
-      question: Question | undefined;
-      poolSize: number;
-    };
+    answerForm: SuperValidated<Infer<FormSchema>>;
+    question: Pick<Question, 'id' | 'content' | 'answerCount'> | undefined;
+    poolSize: number;
   } = $props();
 
   const toastSuccess = $derived(m['rahvatarkus.answer_toast_success']());
   const toastError = $derived(m.error_form_submit());
 
   const form = superForm(
-    untrack(() => data.answer_form),
+    untrack(() => answerForm),
     {
       validators: zod4Client(formSchema()),
       invalidateAll: false,
@@ -50,17 +50,17 @@
 
 <Card.Root>
   <Card.Header>
-    <Card.Title>{m['rahvatarkus.answer.title']({ question: data.question ? 'true' : 'false' })}</Card.Title>
+    <Card.Title>{m['rahvatarkus.answer.title']({ question: question ? 'true' : 'false' })}</Card.Title>
     <Card.Description>
-      {m['rahvatarkus.answer.description']({ question: data.question ? 'true' : 'false' })}
+      {m['rahvatarkus.answer.description']({ question: question ? 'true' : 'false' })}
     </Card.Description>
   </Card.Header>
-  {#if !data.question}
+  {#if !question}
     <Card.Content>
-      {#if data.poolSize === 0}
+      {#if poolSize === 0}
         <p class="text-sm leading-6">{m['rahvatarkus.question_pool_empty']()}</p>
       {:else}
-        <p class="text-sm leading-6">{m['rahvatarkus.no_questions']()}</p>
+        <p class="text-sm leading-6">{m['rahvatarkus.error_no_questions']()}</p>
       {/if}
     </Card.Content>
   {:else}
@@ -69,8 +69,8 @@
         <Form.Field {form} name="answer">
           <Form.Control>
             {#snippet children({ props })}
-              {#if data.question}
-                <Form.Label class="transition-colors">{data.question.content}?</Form.Label>
+              {#if question}
+                <Form.Label class="transition-colors">{question.content}?</Form.Label>
               {/if}
               <Textarea {...props} bind:value={$formData.answer} class="resize-none transition-colors" />
             {/snippet}

@@ -37,9 +37,7 @@
   }
 
   function getElapsedTime(start: Date | undefined, end: Date | undefined) {
-    if (!start || !end) {
-      return '00:00.000';
-    }
+    if (!start || !end) return '00:00.000';
 
     const remaining = getTimeRemaining(start, end);
     const remMinutes = String(remaining.minutes).padStart(2, '0');
@@ -74,9 +72,7 @@
     const clampedValue = Math.min(999.99, Math.max(0, currentDecibel));
     const integerPart = Math.floor(clampedValue);
 
-    if (!displayDecimals) {
-      return String(integerPart).padStart(3, '0').split('').map(Number);
-    }
+    if (!displayDecimals) return String(integerPart).padStart(3, '0').split('').map(Number);
 
     const decimalPart = Math.floor((clampedValue - integerPart) * 10);
 
@@ -89,42 +85,39 @@
     }
   }
 
+  const computeCheckpointTime = (i: number) => {
+    // If the next closest previous time is page load
+    // use first scroll for a more accurate prediction (if possible)
+    const prevIndex = Math.max(i - 1, 0);
+    const prevStep = checkpointDecibels[prevIndex];
+    const prevTime = prevStep === 0 && firstScroll ? firstScroll : checkpointTimes[prevStep];
+
+    if (!prevTime) return firstScroll ? firstScroll : checkpointTimes[0];
+
+    const nextIndex = Math.min(i + 1, checkpointDecibels.length - 1);
+    const nextStep = checkpointDecibels[nextIndex];
+    const nextTime = checkpointTimes[nextStep];
+
+    if (!nextTime) return prevTime;
+
+    const linearTimeBetween = (prevTime.getTime() + nextTime.getTime()) / 2;
+    return new Date(linearTimeBetween);
+  };
+
   watch.pre(
     () => currentCheckpoint,
-    (curr, prev) => {
-      if (!curr || curr === prev) return;
-
-      if (checkpointTimes[curr]) return;
-
-      checkpointTimes[curr] = new Date();
+    (current, previous) => {
+      if (!current || current === previous || !checkpointTimes[current]) return;
+      checkpointTimes[current] = new Date();
 
       // We reached the end
-      // Fill out any checkpoint times we missed with crude predictions
-      if (curr === checkpointDecibels.at(-1) && checkpointDecibels.length > 1) {
+      // Fill out any checkpoint times we missed with crude (linear) predictions
+      if (current === checkpointDecibels.at(-1) && checkpointDecibels.length > 1) {
         for (let i = 0; i < checkpointDecibels.length; i++) {
-          const db = checkpointDecibels[i];
-          const capturedTime = checkpointTimes[db];
+          const step = checkpointDecibels[i];
 
-          if (!capturedTime) {
-            // If the next closest previous time is page load
-            // use first scroll for a more accurate prediction (if possible)
-            const prevDb = checkpointDecibels[Math.max(i - 1, 0)];
-            const prevTime = prevDb === 0 && firstScroll ? firstScroll : checkpointTimes[prevDb];
-
-            if (!prevTime) {
-              checkpointTimes[db] = firstScroll ? firstScroll : checkpointTimes[0];
-              continue;
-            }
-
-            const nextDb = checkpointDecibels[Math.min(i + 1, checkpointDecibels.length - 1)];
-            const nextTime = checkpointTimes[nextDb];
-
-            if (!nextTime) {
-              checkpointTimes[db] = prevTime;
-              continue;
-            }
-
-            checkpointTimes[db] = new Date((prevTime.getTime() + nextTime.getTime()) / 2);
+          if (!checkpointTimes[step]) {
+            checkpointTimes[step] = computeCheckpointTime(i);
           }
         }
       }
@@ -135,9 +128,7 @@
   watch.pre(
     () => scrollY.current,
     () => {
-      if (!startTime) return;
-      if (firstScroll) return;
-
+      if (!startTime || firstScroll) return;
       firstScroll = new Date();
       checkpointTimes[checkpointDecibels[0]] = firstScroll;
     }
@@ -145,7 +136,6 @@
 
   onMount(() => {
     scrollY.set(0, { duration: 0 });
-
     startTime = new Date();
   });
 </script>

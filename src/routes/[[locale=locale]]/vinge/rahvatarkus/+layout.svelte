@@ -14,20 +14,22 @@
   let firstTab = $state('answer');
 
   onMount(() => {
-    firstTab = data?.question ? 'answer' : 'question';
+    firstTab = data.question ? 'answer' : 'question';
   });
 </script>
 
 <Tabs.Root bind:value={firstTab} class="flex w-full max-w-md flex-col items-center gap-1">
   <Tabs.List class="grid w-full grid-cols-2">
-    <Tabs.Trigger value="answer">{m.answer_verb()}</Tabs.Trigger>
+    <Tabs.Trigger value="answer" disabled={!data.answerForm}>{m.answer_verb()}</Tabs.Trigger>
     <Tabs.Trigger value="question">{m.ask_verb()}</Tabs.Trigger>
   </Tabs.List>
-  <Tabs.Content value="answer" class="w-full">
-    <AnswerForm {data} />
-  </Tabs.Content>
+  {#if data.answerForm}
+    <Tabs.Content value="answer" class="w-full">
+      <AnswerForm answerForm={data.answerForm} question={data.question} poolSize={data.poolSize} />
+    </Tabs.Content>
+  {/if}
   <Tabs.Content value="question" class="w-full">
-    <QuestionForm {data} />
+    <QuestionForm questionForm={data.questionForm} question={data.question} poolSize={data.poolSize} user={data.user} />
   </Tabs.Content>
 </Tabs.Root>
 

@@ -15,16 +15,17 @@
   import { Input } from '$lib/components/ui/input/index.js';
 
   let {
-    data,
+    questionForm,
+    question,
+    poolSize,
+    user,
   }: {
-    data: {
-      question_form: SuperValidated<Infer<FormSchema>>;
-      question: Question | undefined;
-      poolSize: number;
-      user: {
-        id: string;
-        balance: number;
-      };
+    questionForm: SuperValidated<Infer<FormSchema>>;
+    question: Pick<Question, 'id' | 'content' | 'answerCount'> | undefined;
+    poolSize: number;
+    user: {
+      id: string;
+      balance: number;
     };
   } = $props();
 
@@ -32,7 +33,7 @@
   const toastError = $derived(m.error_form_submit());
 
   const form = superForm(
-    untrack(() => data.question_form),
+    untrack(() => questionForm),
     {
       validators: zod4Client(formSchema()),
       invalidateAll: false,
@@ -54,14 +55,15 @@
   <Card.Header>
     <Card.Title>{m['rahvatarkus.ask.title']()}</Card.Title>
     <Card.Description>
+      {@const noBalanceSize = poolSize > 0 ? 0 : 1}
       {m['rahvatarkus.ask.description']({
-        count: data.user.balance > 0 ? data.user.balance : data.poolSize > 0 ? 0 : 1,
+        count: user.balance > 0 ? user.balance : noBalanceSize,
       })}
     </Card.Description>
   </Card.Header>
-  {#if data.user.balance === 0 && (data.question || data.poolSize > 0)}
+  {#if user.balance === 0 && (question || poolSize > 0)}
     <Card.Content>
-      <p class="text-sm leading-6">{m['rahvatarkus.no_balance']()}</p>
+      <p class="text-sm leading-6">{m['rahvatarkus.error_no_balance']()}</p>
     </Card.Content>
   {:else}
     <form method="POST" use:enhance action="?/question">

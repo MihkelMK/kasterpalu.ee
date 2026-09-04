@@ -6,6 +6,7 @@ export function formSchema() {
   return z.object({
     question: z
       .string()
+      .trim()
       .min(2, m.error_form_min({ field, count: 2 }))
       .max(75, m.error_form_max({ field, count: 75 })),
     altcha: z.string(),

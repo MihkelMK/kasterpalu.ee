@@ -5,21 +5,13 @@ import games from '$lib/data/games';
 import type { GameSlug } from '$lib/types';
 
 export const load: LayoutServerLoad = async ({ url }) => {
-  if (!url?.pathname) {
-    return;
-  }
+  if (!url?.pathname) return;
 
   const gameSlug = url.pathname.split('/').at(-1);
-
-  if (!gameSlug) {
-    return;
-  }
+  if (!gameSlug) return;
 
   const game = games[gameSlug as GameSlug];
-
-  if (!game) {
-    return;
-  }
+  if (!game) return;
 
   return {
     name: game.name(),

@@ -83,6 +83,7 @@
       }
     }
   ],
+  "error_rate_limit_title": "Sa teed liiga palju korraga",
   "error_rate_limit": [
     {
       "declarations": ["input seconds"],
@@ -188,12 +189,18 @@
     "description": "Rahvas teab, sest mitu pead on mitu pead - hajusintelligents",
 
     "what_do_the_people_know": "Mida rahvas teab?",
-    "no_questions": "Äkki tahaksid su sõbrad vastata või on neil küsimusi?",
-    "no_balance": "Enne küsimist pead kõigepealt vastama teistele!",
     "question_pool_empty": "Sellise erandjuhuga saad ühe korra niisama küsida!",
 
     "answer_toast_success": "Vastus saadetud",
     "question_toast_success": "Küsimus esitatud",
+
+    "error_question_not_found": "Sellist küsimust ei leitud.",
+    "error_question_exists": "Rahvas on sellele küsimusele juba vastuse leidnud.",
+    "error_question_ratelimit": "Rahu rahu! Oled tunni aja jooksul liiga palju küsimusi esitanud!",
+    "error_answer_max": "Sellele küsimusele on juba piisavalt vastatud.",
+    "error_answer_to_self": "Iseenda küsimustele vastamine pole sugugi produktiivne.",
+    "error_no_questions": "Äkki tahaksid su sõbrad vastata või on neil küsimusi?",
+    "error_no_balance": "Enne küsimist pead kõigepealt vastama teistele!",
 
     "ask": {
       "title": "Küsi rahvalt",

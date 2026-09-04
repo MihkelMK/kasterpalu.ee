@@ -38,11 +38,17 @@
     card.classList.add('shadow-foreground/25');
   }
 
-  let cardClass = $derived(
-    `hover select-none overflow-hidden rounded-xl border bg-card text-card-foreground shadow shadow-foreground/15  ${
-      type === 'names' ? 'border-red-400 ' : type === 'artists' ? 'border-purple-400 ' : 'border-blue-400'
-    }`
-  );
+  let cardBorderColor = $derived.by(() => {
+    if (type === 'names') return 'border-red-400';
+    if (type === 'artists') return 'border-purple-400';
+    return 'border-blue-400';
+  });
+
+  let cardTitleColor = $derived.by(() => {
+    if (type === 'names') return 'text-red-900 dark:text-red-200';
+    if (type === 'artists') return 'text-purple-900 dark:text-purple-200';
+    return '';
+  });
 
   onMount(() => {
     clientState.update(items as AlbumDataField[], type);
@@ -55,12 +61,7 @@
     <SpotifyImage {images} />
     <input type="hidden" name="{type}_{i}" value={images?.at(0)?.url} />
   {:else}
-    <p
-      class="p-2 text-center text-sm md:p-6 md:text-base {type === 'names'
-        ? 'text-red-900 dark:text-red-200'
-        : type === 'artists'
-          ? 'text-purple-900 dark:text-purple-200'
-          : ''}">
+    <p class="p-2 text-center text-sm md:p-6 md:text-base {cardTitleColor}">
       {#if type === 'artists'}
         {truncate(item.value as string, 30)}
       {:else}
@@ -84,6 +85,7 @@
   onfinalize={handleDndFinalize}
   class="grid grid-cols-3 items-center gap-2 rounded-xl p-2 px-3 transition-colors sm:gap-6 md:gap-8 lg:gap-12 xl:gap-14">
   {#each items as item, i (item.id)}
+    {@const cardClass = `hover select-none overflow-hidden rounded-xl border bg-card text-card-foreground shadow shadow-foreground/15 ${cardBorderColor}`}
     <div animate:flip={{ duration: flipDurationMs, easing: expoOut }} class="relative">
       {#if item[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
         <div
