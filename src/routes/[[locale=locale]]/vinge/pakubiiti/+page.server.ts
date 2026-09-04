@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import { shuffleArray } from '$lib/utils';
 
 import { playerState } from '$lib/server/pakubiiti/PlayerState.svelte';
+import { spotifyAPI } from '$lib/server/pakubiiti/Spotify.svelte';
 import { ratelimit } from '$lib/server/redis';
 
 const count = 3;
@@ -72,26 +73,23 @@ export const load: PageServerLoad = async (event) => {
     };
   }
 
-  const albumData = event
-    .fetch(`/api/pakubiiti/getAlbums/${count}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      const albumNames = data.albums.map((album: AlbumResponse) => ({
+  const albumData = spotifyAPI
+    .getAlbums(count)
+    .then((albums) => {
+      const albumNames = albums.map((album: AlbumResponse) => ({
         id: nanoid(),
         value: album.name,
       }));
-      const albumImages = data.albums.map((album: AlbumResponse) => ({
+      const albumImages = albums.map((album: AlbumResponse) => ({
         id: nanoid(),
         value: album.images,
       }));
-      const albumArtists = data.albums.map((album: AlbumResponse) => ({
+      const albumArtists = albums.map((album: AlbumResponse) => ({
         id: nanoid(),
         value: album.artists,
       }));
 
-      playerState.setAlbums(user, data.albums);
+      playerState.setAlbums(user, albums);
 
       return {
         names: shuffleArray(albumNames),
