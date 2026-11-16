@@ -106,7 +106,7 @@ importers:
         specifier: 17.6.0
         version: 17.6.0
       kysely:
-        specifier: ^0.28.17
+        specifier: 0.28.17
         version: 0.28.17
       mode-watcher:
         specifier: 1.1.0
