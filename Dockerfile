@@ -32,8 +32,9 @@ RUN --mount=type=cache,id=kasterpalu-pnpm-store,target=/root/.local/share/pnpm/s
 #
 FROM base AS build
 
+# git: @websites/eslint-config is a git dependency, and pnpm clones it for a host it does not know
 RUN corepack enable && \
-  apk add --no-cache build-base python3
+  apk add --no-cache build-base python3 git
 
 WORKDIR /app
 
