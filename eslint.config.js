@@ -11,7 +11,7 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 export default ts.config(
   includeIgnoreFile(gitignorePath),
   // shadcn-svelte generated components, edited only via the CLI
-  { ignores: ['src/lib/components/ui/**'] },
+  { ignores: ['src/lib/components/ui/**', 'project.inlang/**'] },
   js.configs.recommended,
   ...ts.configs.recommended,
   ...svelte.configs['flat/recommended'],
