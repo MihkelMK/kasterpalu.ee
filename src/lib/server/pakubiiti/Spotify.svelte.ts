@@ -15,11 +15,7 @@ class SpotifyAPI {
     const randomOffset = secureRandomInt(1000);
 
     return await this.api.search(seed, ['album'], 'EE', 1, randomOffset).then(
-      function (data) {
-        if (data.albums?.items?.at(0)) {
-          return data.albums.items.at(0);
-        }
-      },
+      (data) => data.albums?.items?.at(0),
       (err) => {
         console.log(err);
         return undefined;
